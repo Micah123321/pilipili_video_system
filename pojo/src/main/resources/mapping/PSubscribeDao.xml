@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shield.pilipili.PSubscribeDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.PSubscribe">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="subscribe_id" jdbcType="INTEGER" property="subscribeId" />
+    <result column="subscribed_id" jdbcType="INTEGER" property="subscribedId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, subscribe_id, subscribed_id, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_subscribe
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p_subscribe
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PSubscribe" useGeneratedKeys="true">
+    insert into p_subscribe (subscribe_id, subscribed_id, createTime
+      )
+    values (#{subscribeId,jdbcType=INTEGER}, #{subscribedId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PSubscribe" useGeneratedKeys="true">
+    insert into p_subscribe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subscribeId != null">
+        subscribe_id,
+      </if>
+      <if test="subscribedId != null">
+        subscribed_id,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subscribeId != null">
+        #{subscribeId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribedId != null">
+        #{subscribedId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PSubscribe">
+    update p_subscribe
+    <set>
+      <if test="subscribeId != null">
+        subscribe_id = #{subscribeId,jdbcType=INTEGER},
+      </if>
+      <if test="subscribedId != null">
+        subscribed_id = #{subscribedId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PSubscribe">
+    update p_subscribe
+    set subscribe_id = #{subscribeId,jdbcType=INTEGER},
+      subscribed_id = #{subscribedId,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
