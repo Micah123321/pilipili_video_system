@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PVideosThumbsupDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PVideosThumbsup">
+<mapper namespace="com.shield.pilipili.dao.PVideosThumbsupDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PVideosThumbsup">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
@@ -19,11 +19,11 @@
     delete from p_videos_thumbsup
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PVideosThumbsup" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PVideosThumbsup" useGeneratedKeys="true">
     insert into p_videos_thumbsup (user_id, video_id)
     values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PVideosThumbsup" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PVideosThumbsup" useGeneratedKeys="true">
     insert into p_videos_thumbsup
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -42,7 +42,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PVideosThumbsup">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PVideosThumbsup">
     update p_videos_thumbsup
     <set>
       <if test="userId != null">
@@ -54,7 +54,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PVideosThumbsup">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PVideosThumbsup">
     update p_videos_thumbsup
     set user_id = #{userId,jdbcType=INTEGER},
       video_id = #{videoId,jdbcType=INTEGER}

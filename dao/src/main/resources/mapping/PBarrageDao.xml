@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PBarrageDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PBarrage">
+<mapper namespace="com.shield.pilipili.dao.PBarrageDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PBarrage">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
@@ -22,13 +22,13 @@
     delete from p_barrage
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PBarrage" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage" useGeneratedKeys="true">
     insert into p_barrage (user_id, video_id, content, 
       videotime, createTime)
     values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
       #{videotime,jdbcType=TIME}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PBarrage" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage" useGeneratedKeys="true">
     insert into p_barrage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -65,7 +65,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PBarrage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PBarrage">
     update p_barrage
     <set>
       <if test="userId != null">
@@ -86,7 +86,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PBarrage">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PBarrage">
     update p_barrage
     set user_id = #{userId,jdbcType=INTEGER},
       video_id = #{videoId,jdbcType=INTEGER},

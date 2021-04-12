@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PCommentDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PComment">
+<mapper namespace="com.shield.pilipili.dao.PCommentDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PComment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -23,7 +23,7 @@
     delete from p_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PComment" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment" useGeneratedKeys="true">
     insert into p_comment (video_id, user_id, parent_id, 
       thumbs_up_num, content, createTime
       )
@@ -31,7 +31,7 @@
       #{thumbsUpNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PComment" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment" useGeneratedKeys="true">
     insert into p_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="videoId != null">
@@ -74,7 +74,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PComment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PComment">
     update p_comment
     <set>
       <if test="videoId != null">
@@ -98,7 +98,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PComment">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PComment">
     update p_comment
     set video_id = #{videoId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},

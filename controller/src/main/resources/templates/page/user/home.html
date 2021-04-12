@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet"
+          media="all">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/nav.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/index.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/index-vue.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/app.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/video.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/fav.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/draft.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/notice.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/info.css" type="text/css" rel="stylesheet" media="all">
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <style>.h-avatar {
+        position: relative;
+        float: left;
+        width: 64px;
+        height: 64px;
+        border: 2px solid hsla(0, 0%, 100%, .4);
+        border-radius: 52px;
+    }
+
+    #h-avatar {
+        width: 64px;
+        height: 64px;
+        background: #fff;
+        border-radius: 48px;
+    }
+
+    #h-name {
+        display: inline-block;
+        margin-right: 5px;
+        font-weight: 700;
+        line-height: 18px;
+        font-size: 18px;
+        vertical-align: middle;
+    }
+
+    .h-inner {
+        background-position: 50%;
+        background-size: cover;
+        transition: background-image .2s ease, background-size 1s ease;
+        padding-top: 116px;
+        position: relative;
+    }
+
+    .h-basic {
+        float: left;
+        color: #fff;
+        font-size: 0;
+        margin: 10px 0 0 20px;
+    }
+
+    .m-level[lvl="5"] {
+        background-position: -21px -190px;
+    }
+
+    .m-level {
+        display: inline-block;
+        width: 28px;
+        height: 16px;
+        margin-right: 5px;
+        vertical-align: middle;
+        background-image: url(//s1.hdslb.com/bfs/static/jinkela/space/assets/level.png);
+        background-repeat: no-repeat;
+        background-position: 999px 999px;
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="wrapper">
+            <div class="h-forbid" style="display: none;">
+                <div class="f-wrap"><i class="f-icon"></i><span class="f-txt">该账号封禁中</span></div>
+            </div>
+            <div class="h-inner" style="background-image: url(images/home.webp);">
+                <div class="h-gradient"></div>
+                <div class="h-user">
+                    <div class="h-info clearfix">
+                        <div class="h-avatar"><img src="images/pic.webp" id="h-avatar"></div>
+                        <div class="h-basic">
+                            <div><span id="h-name">叫Micah吖</span><span id="h-ceritification" class="icon"></span><span
+                                    id="h-gender" class="icon gender"></span>
+                                <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="5"
+                                   class="h-level m-level"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="navigator" class="n">
+            <div class="wrapper">
+                <div class="n-inner clearfix">
+                    <div class="n-tab-links"><a href="/91801122"
+                                                class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span
+                            class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
+                            href="/91801122/dynamic" class="n-btn n-dynamic"><span
+                            class="iconfont icon-ic_following"></span><span class="n-text">动态</span></a><a
+                            href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
+                            class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">
+            26
+          </span></a><!----><a href="/91801122/channel/index" class="n-btn n-channel"><span
+                            class="iconfont icon-ic_channel"></span><span class="n-text">频道</span><span class="n-num">
+            0
+          </span></a><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span
+                            class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
+            6
+          </span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span
+                            class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a><a
+                            href="/91801122/setting" class="n-btn n-setting"><span
+                            class="iconfont icon-ic_setting"></span><span class="n-text">设置</span></a></div>
+                    <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
+                                                                           class="space_input"><span
+                            class="icon search-btn"></span></div>
+                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p
+                            class="n-data-k">关注数</p>
+                        <p id="n-gz" class="n-data-v space-attention">
+                            149
+                        </p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">
+                        粉丝数</p>
+                        <p id="n-fs" class="n-data-v space-fans">
+                            964
+                        </p></a>
+                        <div title="视频、动态、专栏累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
+                            <p id="n-bf" class="n-data-v">699</p></div>
+                        <div title="截止昨天，播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
+                            <p id="n-bf" class="n-data-v">11.6万</p></div>
+                        <div title="截止昨天，阅读数总计为339" class="n-data n-bf"><p class="n-data-k">阅读数</p>
+                            <p id="n-bf" class="n-data-v">339</p></div>
+                    </div>
+                </div>
+                <div class="n-cursor" style="width: 50px; left: 20px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div id="page-index" class="wrapper clearfix">
+            <div class="col-1">
+                <div class="section video full-rows host">
+                    <h3 class="section-title"><a href="/91801122/video" class="t">我的视频</a><span
+                            class="count">15</span><a href="/91801122/video" class="more">更多</a>
+                        <div class="be-tab">
+                            <ul class="be-tab-inner clearfix">
+                                <li class="be-tab-item is-active"><input type="radio" name="be-tab-0"
+                                                                         class="be-tab-input"
+                                                                         value="pubdate"><span>最新发布</span></li>
+                                <li class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
+                                                               value="click"><span>最多播放</span></li>
+                                <li class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
+                                                               value="stow"><span>最多收藏</span></li>
+                            </ul>
+                            <div class="be-tab-cursor" style="transform: translateX(0px); width: 48px;"></div>
+                        </div><!----></h3>
+                    <div class="content clearfix">
+                        <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
+                                href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
+                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
+                                class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
+                                                                          target="_blank"
+                                                                          title="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"
+                                                                          class="title">这是迷你世界做不到的操作，我的世界vape蒙太奇 ①
+                            超热血！！</a>
+                            <div class="meta"><span class="play"><i class="icon"></i>2254
+        </span><span class="time"><i class="icon"></i>2018-8-15
+        </span></div>
+                        </div>
+                        <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
+                                href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
+                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
+                                class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
+                                                                          target="_blank"
+                                                                          title="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"
+                                                                          class="title">这是迷你世界做不到的操作，我的世界vape蒙太奇 ①
+                            超热血！！</a>
+                            <div class="meta"><span class="play"><i class="icon"></i>2254
+        </span><span class="time"><i class="icon"></i>2018-8-15
+        </span></div>
+                        </div>
+                        <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
+                                href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
+                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
+                                class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
+                                                                          target="_blank"
+                                                                          title="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"
+                                                                          class="title">这是迷你世界做不到的操作，我的世界vape蒙太奇 ①
+                            超热血！！</a>
+                            <div class="meta"><span class="play"><i class="icon"></i>2254
+        </span><span class="time"><i class="icon"></i>2018-8-15
+        </span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section fav"><h3 class="section-title"><a href="/91801122/favlist" class="t">我的收藏夹</a><span
+                        class="count">6</span><a href="/91801122/favlist" class="more">更多</a><span class="private-hint"
+                                                                                                   style="display: none;"><span
+                        class="icon"></span><span>仅自己可见</span></span></h3>
+                    <div class="content clearfix">
+                        <div data-count="http://i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg"
+                             class="fav-item"><a href="/91801122/favlist?fid=134985522&amp;ftype=create"
+                                                 class="fav-covers"><img
+                                src="//i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg@152w_152h_100Q_1c.webp"
+                                alt=""></a><span class="fav-count">50</span>
+                            <div class="m"><span class="state">
+          公开
+        </span><a href="/91801122/favlist?fid=134985522&amp;ftype=create" class="name" title="默认收藏夹">
+                                默认收藏夹
+                            </a></div>
+                        </div>
+                        <div data-count="http://i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg"
+                             class="fav-item"><a href="/91801122/favlist?fid=134985522&amp;ftype=create"
+                                                 class="fav-covers"><img
+                                src="//i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg@152w_152h_100Q_1c.webp"
+                                alt=""></a><span class="fav-count">50</span>
+                            <div class="m"><span class="state">
+          公开
+        </span><a href="/91801122/favlist?fid=134985522&amp;ftype=create" class="name" title="默认收藏夹">
+                                默认收藏夹
+                            </a></div>
+                        </div>
+                    </div>
+                </div><!----></div>
+            <div class="col-2">
+                <div class="section shop" style="display: none;"><h3 class="section-title">商家中心</h3><a href=""
+                                                                                                       target="_blank"
+                                                                                                       class="shop-link">进入
+                    &gt;</a>
+                    <div class="info">
+                        <div class="content">
+                            <div class="detail clearfix">
+                                <div class="item"><span class="title">在售商品</span><span class="number">0</span></div>
+                                <div class="item"><span class="title">本月销量</span><span class="number">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div><!---->
+                    <div class="section">
+                        <div class="row user-auth no-auth"><img
+                                src="//s1.hdslb.com/bfs/static/jinkela/space/assets/icon-auth.png"
+                                alt="获得 bilibili 认证，享受多重认证福利！" class="icon-auth">
+                            <div class="no-auth-title"><a href="//account.bilibili.com/account/official/home"
+                                                          title="点此申请 bilibili 认证" target="_blank" class="goto-auth">点此申请
+                                bilibili 认证<em class="icon i-m-ra"></em></a><span>获得 bilibili 认证，享受多重认证福利！</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section i-m">
+                    <div class="i-m-r1"><a href="https://member.bilibili.com/platform/home" target="_blank"
+                                           class="i-m-title"><span class="icon-i-title"></span><span
+                            class="icon-m-ra"></span></a></div>
+                    <div class="i-m-r2 clearfix"><a href="https://member.bilibili.com/platform/upload/video/frame"
+                                                    target="_blank" class="i-m-btn i-m-upload"><span
+                            class="i-m-u-icon icon"></span><span class="i-m-text">视频投稿</span></a><a
+                            href="https://member.bilibili.com/platform/upload-manager/article" target="_blank"
+                            class="i-m-btn i-m-v"><span class="i-m-v-icon icon"></span><span
+                            class="i-m-text">内容管理</span></a></div>
+                </div>
+                <div class="section i-ann"><h3 class="section-title">公告</h3>
+                    <div class="content">
+                        <div class="be-textarea be-input--append" id="i-ann-content"><!----><textarea rows="4"
+                                                                                                      type="textarea"
+                                                                                                      placeholder="编辑我的空间公告"
+                                                                                                      maxlength="150"
+                                                                                                      class="be-textarea_inner"></textarea>
+                            <div class="be-input-word-counter">47/150</div><!----></div>
+                    </div>
+                </div>
+                <div class="section user">
+                    <div class="section-title" style="display: none;">
+                        <div class="private-hint"><span class="icon"></span><span>仅自己可见</span></div>
+                    </div>
+                    <div class="info">
+                        <div class="content">
+                            <div class="meta">
+                                <div class="row">
+                                    <div class="item uid"><span class="icon"></span><span class="text">91801122</span>
+                                    </div>
+                                    <div class="item birthday"><span class="icon"></span><a
+                                            href="//account.bilibili.com/site/setting" target="_blank" class="text">
+                                        12-26
+                                    </a></div>
+                                </div>
+                            </div>
+                        </div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

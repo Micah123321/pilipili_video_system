@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PUserDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PUser">
+<mapper namespace="com.shield.pilipili.dao.PUserDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PUser">
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <result column="userName" jdbcType="VARCHAR" property="userName" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -21,13 +21,13 @@
     delete from p_user
     where `uid` = #{uid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="com.shield.pilipili.PUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="com.shield.pilipili.pojo.PUser" useGeneratedKeys="true">
     insert into p_user (userName, phone, upwd, 
       utype)
     values (#{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
       #{utype,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="com.shield.pilipili.PUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="com.shield.pilipili.pojo.PUser" useGeneratedKeys="true">
     insert into p_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -58,7 +58,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PUser">
     update p_user
     <set>
       <if test="username != null">
@@ -76,7 +76,7 @@
     </set>
     where `uid` = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PUser">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PUser">
     update p_user
     set userName = #{username,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

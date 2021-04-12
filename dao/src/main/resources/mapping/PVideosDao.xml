@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PVideosDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PVideos">
+<mapper namespace="com.shield.pilipili.dao.PVideosDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PVideos">
     <id column="video_pv" jdbcType="INTEGER" property="videoPv" />
     <result column="video_userid" jdbcType="INTEGER" property="videoUserid" />
     <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
@@ -32,7 +32,7 @@
     delete from p_videos
     where video_pv = #{videoPv,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.PVideos" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
     insert into p_videos (video_userid, video_title, video_url, 
       video_play, video_like, video_collect, 
       video_desc, video_state, video_updatetime, 
@@ -44,7 +44,7 @@
       #{videoCheckuid,jdbcType=INTEGER}, #{videoChecktime,jdbcType=TIMESTAMP}, #{videoReleasetime,jdbcType=TIMESTAMP}, 
       #{videoType,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.PVideos" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
     insert into p_videos
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="videoUserid != null">
@@ -129,7 +129,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PVideos">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PVideos">
     update p_videos
     <set>
       <if test="videoUserid != null">
@@ -174,7 +174,7 @@
     </set>
     where video_pv = #{videoPv,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PVideos">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PVideos">
     update p_videos
     set video_userid = #{videoUserid,jdbcType=INTEGER},
       video_title = #{videoTitle,jdbcType=VARCHAR},

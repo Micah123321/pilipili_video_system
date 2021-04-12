@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>pilipili 视频弹幕网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+        var init = function () {
+            var _bg3width = $("#content-sec3-adjust").width();
+            $("#content-sec3-adjust").css("margin-left", _bg3width * -1 / 2 + "px");
+        };
+    </script>
+    <!-- Custom Theme files -->
+    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet"
+          media="all">
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen"/>
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script src="../js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Playball" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+    <!-- //web-fonts -->
+    <style>
+        ul.nav-pills {
+            top: 25%;
+            position: fixed;
+            border: black 1px solid;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+<!-- banner -->
+<div class="banner-w3layouts">
+    <div class="flexslider">
+        <ul class="slides">
+            <li>
+                <div class="banner-w3text banner-img1">
+                    <h4>广告页①</h4>
+                </div>
+            </li>
+            <li>
+                <div class="banner-w3text banner-img2">
+                    <h4>广告页②</h4>
+                </div>
+            </li>
+            <li>
+                <div class="banner-w3text banner-img3">
+                    <h4>广告页③</h4>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- FlexSlider -->
+    <script defer src="../js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+        function onKeyDown(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==27){ // 按 Esc
+                //要做的事情
+            }
+            if(e && e.keyCode==113){ // 按 F2
+                //要做的事情
+            }
+            if(e && e.keyCode==13){ // enter 键
+                alert("此处回车触发搜索事件");
+            }
+        }
+
+    </script>
+    <!-- //FlexSlider -->
+    <!-- banner-info -->
+    <nav class="" id="myScrollspy">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#hotvideo">热门视频</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#newvideo">最新视频</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#gamevideo">游戏视频</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="banner-agileinfo">
+        <div class="container">
+
+            <div class="w3header">
+                <!--header-->
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1><a href="index.html">pilipili视频</a></h1>
+                    </div>
+                    <!-- navbar-header -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div style="padding-left: 3em;margin-left: 0em;" class="col-sm-3 text-center">
+                            <div class="input-group">
+                                <input type="text" class="form-control" onkeydown="onKeyDown(event)"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-search">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="navbar-default navbar-nav navbar-right">
+                            <li><a href="index.html" class="active">首页</a></li>
+                            <li><a href="about.html">关于</a></li>
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="icons.html">生活</a></li>
+                                    <li><a href="codes.html">游戏</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="portfolio.html">个人主页</a></li>
+                            <li><a href="contact.html">收藏列表</a></li>
+                            <li><a href="contact.html">登录</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //stats -->
+<!-- Popular -->
+<!-- news -->
+<div id="news" class="w3ls-section services news">
+    <div class="container">
+        <h3 id="hotvideo" class="agileits-title">
+            <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                 class="bi bi-easel" viewBox="0 0 16 16">
+                <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+            </svg>&nbsp;热门视频
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 更多 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward" viewBox="0 0 16 16">
+                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+            </svg></button>
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 换一组<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+            </svg> </button>
+        </h3>
+        <div class="news-agileinfo">
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <h3 id="newvideo" class="agileits-title">
+            <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                 class="bi bi-easel" viewBox="0 0 16 16">
+                <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+            </svg>&nbsp;最新视频
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 更多 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward" viewBox="0 0 16 16">
+                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+            </svg></button>
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 换一组<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+            </svg> </button>
+        </h3>
+        <div class="news-agileinfo">
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <h3 id="gamevideo" class="agileits-title">
+            <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                 class="bi bi-easel" viewBox="0 0 16 16">
+                <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+            </svg>&nbsp;游戏视频
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 更多 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward" viewBox="0 0 16 16">
+                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+            </svg></button>
+
+            <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"data-toggle="button"> 换一组<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+            </svg> </button>
+        </h3>
+        <div class="news-agileinfo">
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="col-sm-3 news-w3lgrids">
+                <div class="news-w3img">
+                    <img src="../images/g9.jpg" class="img-responsive zoom-img" alt=""/>
+                </div>
+                <div class="news-w3imgtext ">
+                    <p>这是简介</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!-- //news -->
+<!-- about-slid -->
+<div class="about-w3slid">
+    <div class="container">
+        <h2>欢迎来到pilipili</h2>
+        <a href="#" data-toggle="modal" data-target="#myModal" class="agile-more">模态框</a>
+    </div>
+</div>
+<!-- //about-slid -->
+
+
+<!-- //contact -->
+<div class="w3_agile-copyright text-center">
+    <p>营业执照 信息网络传播视听节目许可证：0910417 网络文化经营许可证 沪网文【2019】3804-274号 网页：<a href="//w3layouts.com/">xmoban.cn</a></p>
+</div>
+<!-- Tooltip -->
+<div class="tooltip-content">
+    <div class="modal fade features-modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">passion</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="images/1.jpg" class="img-responsive" alt="image">
+                    <p>模态框</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Numscroller -->
+<script type="text/javascript" src="../js/numscroller-1.0.js"></script>
+<!-- //Numscroller -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.js"></script>
+</body>
+</html>

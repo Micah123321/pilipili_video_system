@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PCollectInfoDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PCollectInfo">
+<mapper namespace="com.shield.pilipili.dao.PCollectInfoDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCollectInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="collect_id" jdbcType="BIGINT" property="collectId" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
@@ -20,13 +20,13 @@
     delete from p_collect_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PCollectInfo" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollectInfo" useGeneratedKeys="true">
     insert into p_collect_info (collect_id, video_id, addTime
       )
     values (#{collectId,jdbcType=BIGINT}, #{videoId,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PCollectInfo" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollectInfo" useGeneratedKeys="true">
     insert into p_collect_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="collectId != null">
@@ -51,7 +51,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PCollectInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCollectInfo">
     update p_collect_info
     <set>
       <if test="collectId != null">
@@ -66,7 +66,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PCollectInfo">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCollectInfo">
     update p_collect_info
     set collect_id = #{collectId,jdbcType=BIGINT},
       video_id = #{videoId,jdbcType=INTEGER},

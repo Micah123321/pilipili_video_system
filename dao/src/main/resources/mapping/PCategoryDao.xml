@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shield.pilipili.PCategoryDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.PCategory">
+<mapper namespace="com.shield.pilipili.dao.PCategoryDao">
+  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCategory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
     <result column="parentId" jdbcType="BIGINT" property="parentId" />
@@ -23,7 +23,7 @@
     delete from p_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PCategory" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCategory" useGeneratedKeys="true">
     insert into p_category (categoryName, parentId, createdBy, 
       creationTime, modifyBy, modifyDate
       )
@@ -31,7 +31,7 @@
       #{creationtime,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.PCategory" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCategory" useGeneratedKeys="true">
     insert into p_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="categoryname != null">
@@ -74,7 +74,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.PCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCategory">
     update p_category
     <set>
       <if test="categoryname != null">
@@ -98,7 +98,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.PCategory">
+  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCategory">
     update p_category
     set categoryName = #{categoryname,jdbcType=VARCHAR},
       parentId = #{parentid,jdbcType=BIGINT},
