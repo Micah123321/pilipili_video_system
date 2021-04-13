@@ -1,18 +1,39 @@
 package com.shield.pilipili.user;
 
+import com.shield.pilipili.PUserService;
+import com.shield.pilipili.pojo.PUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @GetMapping("/admin")
-    public String toAdmin(){
-        return "page/admin/homePage";
-    }
+
+    @Resource
+    private PUserService pUserService;
+
     @GetMapping("/login")
     public String toLogin(){
-        return "page/user/index";
+        return "page/user/userlogin";
     }
+
+    @ResponseBody
+    @PostMapping("/log")
+    public PUser login(@RequestParam String userName,@RequestParam String upwd, HttpSession session){
+        PUser pUser=pUserService.login(userName,upwd);
+        if (pUser!=null){
+            session.setAttribute("pUser",pUser);
+        }else {
+            return new PUser();
+        }
+        return pUser;
+
+    }
+
 }

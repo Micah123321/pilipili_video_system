@@ -50,6 +50,19 @@ public class PUserInfo implements Serializable {
      */
     private String upDesc;
 
+    /**
+     * 用户名称
+     */
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

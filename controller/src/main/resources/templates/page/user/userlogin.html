@@ -8,11 +8,50 @@
     <link href="/css/style.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/login.css" type="text/css" rel="stylesheet" media="all">
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script>
+        function log() {
+            var userName=$("#login-username").val();
+            var upwd=$("#login-passwd").val();
+            if (userName==""){
+               alert("不能为空")
+               return false;
+
+
+            }
+            if (upwd==""){
+                alert("不能为空")
+                return false;
+            }
+            else{
+                $.ajax({
+                    type:"post",
+                    url:"/user/log",
+                    dataType:"json",
+                    data:{
+                        "userName":userName,
+                        "upwd":upwd
+                    },
+                    async: true,
+                    success:function(data){
+                        var upwd = data.upwd;
+                        if(upwd != upwd){
+                            alert("账号或密码错误");
+                        }else{
+                            window.location.href="/index/";
+                    }
+                    }
+                });
+            }
+        }
+
+    </script>
+
+
 </head>
 <body>
 <div class="container">
     <div class="top-banner"><img src="/images/login_top.png"></div>
-    <div class="title-line"><span class="tit" style="font-size: 38px;">登录</span></div>
+    <div class="title-line"><span class="tit" style="font-size: 38px;"  >登录</span></div>
     <div data-v-2c844fd9="" class="login-box clearfix">
         <div data-v-2c844fd9="" class="login-left">
             <div data-v-2c844fd9="" class="qrcode-login">
@@ -57,9 +96,10 @@
                                                                              href="//www.bilibili.com/blackboard/help.html#%E8%B4%A6%E5%8F%B7%E7%9B%B8%E5%85%B3"
                                                                              class="not-checkout">无法验证?</a></div>
                             </div> <!----> <!----></div>
-                        <div class="btn-box"><a class="btn btn-login">登录</a> <a
+                        <div class="btn-box"><a onclick="log()" class="btn btn-login">登录</a> <a
                                 href="https://passport.bilibili.com/register/phone.html#/phone"
                                 class="btn btn-reg">注册</a></div>
+                        <font color="red"><label id="tip" class="tip"></label></font>
                         <div class="sns"><a class="btn qq">QQ账号登录</a></div> <!----></div>
                 </div> <!----></div>
         </div>
