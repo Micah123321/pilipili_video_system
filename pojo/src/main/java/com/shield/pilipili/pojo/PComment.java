@@ -46,6 +46,8 @@ public class PComment implements Serializable {
      */
     private Date createTime;
 
+    private Integer commentCount;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

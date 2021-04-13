@@ -31,6 +31,8 @@ public class PCollectInfo implements Serializable {
      */
     private Date addTime;
 
+    private Integer collectCount;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

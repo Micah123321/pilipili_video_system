@@ -3,6 +3,7 @@ package com.shield.pilipili.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * p_videos_thumbsup
@@ -24,6 +25,10 @@ public class PVideosThumbsup implements Serializable {
      * 视频id（来源于p_video视频表的视频id）
      */
     private Integer videoId;
+
+    private Integer likeCount;
+
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 

@@ -32,11 +32,11 @@ CREATE TABLE `p_barrage` (
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_barrage_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_barrage_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='弹幕表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='弹幕表';
 
 /*Data for the table `p_barrage` */
 
-insert  into `p_barrage`(`id`,`user_id`,`video_id`,`content`,`videotime`,`createTime`) values (1,1,10000,'我是up主，欢迎大家发布弹幕','00:05:00','2021-04-09 10:46:28'),(2,2,10000,'我是张三，我发弹幕','00:07:00','2021-04-09 10:47:56');
+insert  into `p_barrage`(`id`,`user_id`,`video_id`,`content`,`videotime`,`createTime`) values (1,1,10000,'我是up主，欢迎大家发布弹幕','00:05:00','2021-04-09 10:46:28'),(2,2,10000,'我是张三，我发弹幕','00:07:00','2021-04-09 10:47:56'),(3,3,10001,'cpdd','00:01:00','2021-04-10 10:40:28'),(4,3,10002,'cpdd','00:11:00','2021-04-10 14:29:11');
 
 /*Table structure for table `p_category` */
 
@@ -116,11 +116,11 @@ CREATE TABLE `p_comment` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `p_comment_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`),
   CONSTRAINT `p_comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='评论表';
 
 /*Data for the table `p_comment` */
 
-insert  into `p_comment`(`id`,`video_id`,`user_id`,`parent_id`,`thumbs_up_num`,`content`,`createTime`) values (1,10000,1,0,2,'你好，这是本视频第一个评论','2021-04-09 10:44:11'),(2,10000,2,1,0,'你好，admin，我是张三','2021-04-09 10:44:29'),(3,10000,3,1,0,'admin，我是李四','2021-04-09 10:44:49'),(4,10000,3,2,0,'张三，我是李四','2021-04-09 10:45:07');
+insert  into `p_comment`(`id`,`video_id`,`user_id`,`parent_id`,`thumbs_up_num`,`content`,`createTime`) values (1,10000,1,0,2,'你好，这是本视频第一个评论','2021-04-09 10:44:11'),(2,10000,2,1,0,'你好，admin，我是张三','2021-04-09 10:44:29'),(3,10000,3,1,0,'admin，我是李四','2021-04-09 10:44:49'),(4,10000,3,2,0,'张三，我是李四','2021-04-09 10:45:07'),(5,10001,1,0,0,'火钳刘明','2021-04-12 10:27:22'),(6,10002,2,0,0,'火钳刘明','2021-04-12 10:28:22'),(7,10000,1,0,0,'谢谢大家观看','2021-04-12 14:01:11');
 
 /*Table structure for table `p_comment_thumbsup` */
 
@@ -175,11 +175,11 @@ CREATE TABLE `p_subscribe` (
   KEY `subscribed_id` (`subscribed_id`),
   CONSTRAINT `p_subscribe_ibfk_1` FOREIGN KEY (`subscribe_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_subscribe_ibfk_2` FOREIGN KEY (`subscribed_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
 
 /*Data for the table `p_subscribe` */
 
-insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11');
+insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11'),(3,4,1,'2021-04-06 14:27:17');
 
 /*Table structure for table `p_user` */
 
@@ -192,11 +192,11 @@ CREATE TABLE `p_user` (
   `upwd` varchar(50) NOT NULL COMMENT '密码',
   `utype` int(11) NOT NULL DEFAULT '1' COMMENT '用户类型 1-用户 2-up主 3-管理员',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 /*Data for the table `p_user` */
 
-insert  into `p_user`(`uid`,`userName`,`phone`,`upwd`,`utype`) values (1,'admin','18388883333','123456',3),(2,'zhangsan','13323232323','123456',2),(3,'lisi','15553212345','123456',1);
+insert  into `p_user`(`uid`,`userName`,`phone`,`upwd`,`utype`) values (1,'admin','18388883333','123456',3),(2,'zhangsan','13323232323','123456',2),(3,'lisi','15553212345','123456',1),(4,'wangwu','14423231234','123456',1);
 
 /*Table structure for table `p_user_info` */
 
@@ -211,14 +211,15 @@ CREATE TABLE `p_user_info` (
   `experience` int(11) NOT NULL DEFAULT '0' COMMENT '用户经验',
   `user_pic` varchar(200) NOT NULL DEFAULT '/static/uploads/defaultpic.png' COMMENT '用户头像地址',
   `up_desc` varchar(500) DEFAULT NULL COMMENT '用户简介',
+  `username` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `p_user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`) values (1,1,0,2,1,1,'/static/upload/xx.png','这是本站第一个用户'),(2,2,1,0,1,0,'/static/upload/xxx.png','你好，我是张三'),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`username`) values (1,1,0,3,1,1,'/static/upload/xx.png','这是本站第一个用户',''),(2,2,1,0,1,0,'/static/upload/xxx.png','你好，我是张三',''),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四',''),(4,4,1,0,1,0,'/static/uploads/defaultpic.png',NULL,'');
 
 /*Table structure for table `p_videos` */
 
@@ -239,6 +240,8 @@ CREATE TABLE `p_videos` (
   `video_checktime` datetime DEFAULT NULL COMMENT '视频审核时间',
   `video_releasetime` datetime DEFAULT NULL COMMENT '视频发布时间',
   `video_type` bigint(30) NOT NULL COMMENT '视频分类（来源于p_category分类表的类型id）',
+  `video_time` bigint(20) NOT NULL,
+  `video_image` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`video_pv`),
   KEY `video_userid` (`video_userid`),
   KEY `video_checkuid` (`video_checkuid`),
@@ -246,11 +249,11 @@ CREATE TABLE `p_videos` (
   CONSTRAINT `p_videos_ibfk_1` FOREIGN KEY (`video_userid`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_ibfk_2` FOREIGN KEY (`video_checkuid`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_ibfk_3` FOREIGN KEY (`video_type`) REFERENCES `p_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 COMMENT='视频信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8 COMMENT='视频信息表';
 
 /*Data for the table `p_videos` */
 
-insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`) values (10000,1,'第一个视频','xxxx.com',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12),(10001,2,'张三的犯罪视频','xxxx.com',1000,1,1,'-----',1,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6);
+insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`) values (10000,1,'第一个视频','xxxx.com',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,0,NULL),(10001,2,'张三的犯罪视频','xxxx.com',1000,1,1,'-----',1,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,0,NULL),(10002,1,'全站第三个视频','xxx.com',200,0,0,'---',1,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,0,NULL);
 
 /*Table structure for table `p_videos_thumbsup` */
 
@@ -260,6 +263,7 @@ CREATE TABLE `p_videos_thumbsup` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `user_id` int(11) NOT NULL COMMENT '点赞人（来源于pili_user用户表的用户id）',
   `video_id` int(11) NOT NULL COMMENT '视频id（来源于p_video视频表的视频id）',
+  `createTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `video_id` (`video_id`),
@@ -269,7 +273,7 @@ CREATE TABLE `p_videos_thumbsup` (
 
 /*Data for the table `p_videos_thumbsup` */
 
-insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`) values (1,1,10000),(2,2,10000),(3,3,10000),(4,2,10001);
+insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (1,1,10000,'2021-04-12 14:11:41'),(2,2,10000,'2021-04-12 14:11:43'),(3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

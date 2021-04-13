@@ -28,6 +28,42 @@
     from p_videos
     where video_pv = #{videoPv,jdbcType=INTEGER}
   </select>
+  <select id="getPlayCountById" resultType="java.lang.Integer">
+    SELECT
+      SUM(video_play) video_play
+    FROM
+      `pili`.`p_videos`
+    WHERE video_userid=#{id}
+    GROUP BY `video_userid`
+  </select>
+  <select id="getLikeCountById" resultType="java.lang.Integer">
+    SELECT
+      SUM(video_like) video_like
+    FROM
+      `pili`.`p_videos`
+    WHERE video_userid=#{id}
+    GROUP BY `video_userid`
+  </select>
+  <select id="getCollectCountById" resultType="java.lang.Integer">
+    SELECT
+      SUM(video_collect) video_collect
+    FROM
+      `pili`.`p_videos`
+    WHERE video_userid=#{id}
+    GROUP BY `video_userid`
+  </select>
+  <select id="getCollectByDate" resultType="com.shield.pilipili.pojo.PCollectInfo">
+    SELECT
+      `addTime`,COUNT(ci.id) AS collectCount  FROM p_collect_info ci,p_videos v
+    WHERE v.`video_pv`=ci.`video_id` AND v.`video_userid`=#{userId}
+    GROUP BY DATE_FORMAT(`addTime`,'%Y-%m-%d')
+  </select>
+  <select id="getLikeByDate" resultType="com.shield.pilipili.pojo.PVideosThumbsup">
+    SELECT
+      ci.`createTime`,COUNT(ci.id) AS likeCount  FROM p_videos_thumbsup ci,p_videos v
+    WHERE v.`video_pv`=ci.`video_id` AND v.`video_userid`=#{userId}
+    GROUP BY DATE_FORMAT(`createTime`,'%Y-%m-%d')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from p_videos
     where video_pv = #{videoPv,jdbcType=INTEGER}

@@ -1,16 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script>
+    <script th:inline="javascript">
         var myChart;
         $(function () {
-            $.getJSON('/res/js/basicTheme.json', function (themeJSON) {
+            $.getJSON('/js/basicTheme.json', function (themeJSON) {
                 echarts.registerTheme('basicTheme', themeJSON);
                 // 基于准备好的dom，初始化eCharts实例
                 myChart = echarts.init($("#chartDiv")[0], "basicTheme");
                 // 指定图表的配置项和数据
                 var option = {
                     title: {
-                        text: '商城订单交易额'
+                        text: 'up数据趋势图表'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -22,7 +22,7 @@
                         }
                     },
                     legend: {
-                        data: ['总交易额', '交易完成', '等待买家确认', '等待卖家发货', '等待买家付款']
+                        data: ['粉丝数', '收藏数', '评论数', '点赞数', '弹幕数']
                     },
                     grid: {
                         left: '3%',
@@ -40,7 +40,7 @@
                     },
                     series: [
                         {
-                            name: '总交易额',
+                            name: '粉丝数',
                             type: 'line',
                             label: {
                                 normal: {
@@ -51,22 +51,22 @@
                             data: []
                         },
                         {
-                            name: '交易完成',
+                            name: '收藏数',
                             type: 'line',
                             data: []
                         },
                         {
-                            name: '等待买家确认',
+                            name: '评论数',
                             type: 'line',
                             data: []
                         },
                         {
-                            name: '等待卖家发货',
+                            name: '点赞数',
                             type: 'line',
                             data: []
                         },
                         {
-                            name: '等待买家付款',
+                            name: '弹幕数',
                             type: 'line',
                             data: []
                         }
@@ -124,7 +124,7 @@
         function getChartData(beginDate, endDate, jsonObject) {
             if (jsonObject == null) {
                 $.ajax({
-                    url: "/admin/home/charts",
+                    url: "home/charts",
                     type: "get",
                     data: {"beginDate": beginDate, "endDate": endDate},
                     dataType: "json",
@@ -137,19 +137,19 @@
                                 data: data.dateStr
                             },
                             series: [{
-                                name: "总交易额",
+                                name: "粉丝数",
                                 data: data.orderTotalArray
                             }, {
-                                name: "交易完成",
+                                name: "收藏数",
                                 data: data.orderSuccessArray
                             }, {
-                                name: "等待买家确认",
+                                name: "评论数",
                                 data: data.orderUnconfirmedArray
                             }, {
-                                name: "等待卖家发货",
+                                name: "点赞数",
                                 data: data.orderNotShippedArray
                             }, {
-                                name: "等待买家付款",
+                                name: "弹幕数",
                                 data: data.orderUnpaidArray
                             }]
                         });
@@ -166,19 +166,19 @@
                         data: jsonObject.dateStr
                     },
                     series: [{
-                        name: "总交易额",
+                        name: "粉丝数",
                         data: jsonObject.orderTotalArray
                     }, {
-                        name: "交易完成",
+                        name: "收藏数",
                         data: jsonObject.orderSuccessArray
                     }, {
-                        name: "等待买家确认",
+                        name: "评论数",
                         data: jsonObject.orderUnconfirmedArray
                     }, {
-                        name: "等待卖家发货",
+                        name: "点赞数",
                         data: jsonObject.orderNotShippedArray
                     }, {
-                        name: "等待买家付款",
+                        name: "弹幕数",
                         data: jsonObject.orderUnpaidArray
                     }]
                 });
@@ -227,14 +227,10 @@
             cursor: pointer;
         }
 
-        #chartTotal > li + li {
+        #chartTotal > li  {
             border-left: 2px solid #eee;
         }
 
-        #chartTotal > li:first-child {
-            width: 31.5%;
-            padding-left: 0;
-        }
 
         #chartTotal > li:last-child {
             width: 31.5%;
@@ -322,34 +318,46 @@
     </style>
 </head>
 <body>
-<ul id="chartByDate">
-    <li><span class="chartDateBtn text_info select">最近一周</span></li>
-    <li class="chartDateBtn"><input class="chartDateInput" id="input_beginDate" type="date" title="开始日期"/><span
-            class="split">—</span> <input class="chartDateInput details_unit" id="input_endDate" type="date"
-                                          title="结束日期"/></li>
-    <li><input class="frm_btn" id="btn_chart_search" type="button" value="查询"/></li>
-</ul>
 <ul id="chartTotal">
-    <li id="productTotal">
-        <p class="chartTotalTitle"><span class="chartTitleText">上架产品数量</span><span class="chartTitleUnit">(单位：件)</span>
+    <li id="orderTotal">
+        <p class="chartTotalTitle"><span class="chartTitleText">粉丝数</span><span class="chartTitleUnit"></span>
         </p>
-        <span class="chartTotalValue" ></span>
+        <span class="chartTotalValue" th:text="${fansCount}" ></span>
         <div class="chartTotalStyle" style="background-color: #f89e9e"></div>
     </li>
     <li id="userTotal">
-        <p class="chartTotalTitle"><span class="chartTitleText">注册用户数量</span><span class="chartTitleUnit">(单位：人)</span>
+        <p class="chartTotalTitle"><span class="chartTitleText">视频播放</span><span class="chartTitleUnit"></span>
         </p>
-        <span class="chartTotalValue" >${requestScope.productTotal}</span>
+        <span class="chartTotalValue" th:text="${playCount}" ></span>
         <div class="chartTotalStyle" style="background-color: #9ea7f5"></div>
     </li>
     <li id="orderTotal">
-        <p class="chartTotalTitle"><span class="chartTitleText">成交订单数量</span><span class="chartTitleUnit">(单位：件)</span>
+        <p class="chartTotalTitle"><span class="chartTitleText">评论数</span><span class="chartTitleUnit"></span>
         </p>
-        <span class="chartTotalValue">${requestScope.productTotal}</span>
+        <span class="chartTotalValue" th:text="${comCount}"></span>
+        <div class="chartTotalStyle" style="background-color: #ffdea4"></div>
+    </li>
+    <li id="productTotal">
+        <p class="chartTotalTitle"><span class="chartTitleText">点赞数</span><span class="chartTitleUnit"></span>
+        </p>
+        <span class="chartTotalValue" th:text="${likeCount}"></span>
+        <div class="chartTotalStyle" style="background-color: #f89e9e"></div>
+    </li>
+    <li id="userTotal">
+        <p class="chartTotalTitle"><span class="chartTitleText">收藏数</span><span class="chartTitleUnit"></span>
+        </p>
+        <span class="chartTotalValue" th:text="${collectCount}" ></span>
+        <div class="chartTotalStyle" style="background-color: #9ea7f5"></div>
+    </li>
+    <li id="orderTotal">
+        <p class="chartTotalTitle"><span class="chartTitleText">弹幕数</span><span class="chartTitleUnit"></span>
+        </p>
+        <span class="chartTotalValue" th:text="${barrCount}" ></span>
         <div class="chartTotalStyle" style="background-color: #ffdea4"></div>
     </li>
 </ul>
 <div id="chartDiv" style="width: 100%;height: 500px"></div>
+
 <div class="loader"></div>
 </body>
 </html>

@@ -18,6 +18,22 @@
     from p_barrage
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="getBarrCountByUserId" resultType="java.lang.Integer">
+    SELECT
+      COUNT(content)
+    FROM
+      `pili`.`p_barrage` b ,p_videos v
+    WHERE  v.video_pv=b.video_id and v.video_userid=#{id}
+    GROUP BY v.`video_userid`
+  </select>
+  <select id="getBarrCountByDate" resultType="com.shield.pilipili.pojo.PBarrage">
+    SELECT
+      b.createTime,COUNT(content) as barrCount
+    FROM
+      `pili`.`p_barrage` b ,p_videos v
+    WHERE  v.video_pv=b.video_id AND v.`video_userid`=#{userId}
+    GROUP BY v.`video_userid`,DATE_FORMAT(b.createTime,'%Y-%m-%d')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from p_barrage
     where id = #{id,jdbcType=BIGINT}

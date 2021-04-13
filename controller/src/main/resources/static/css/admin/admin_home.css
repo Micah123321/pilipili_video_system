@@ -124,7 +124,7 @@ html,body,#div_home_main{
 #ul_home_menu>.menu_li_select{
     cursor: default;
     background-color: #d9dbe8;
-    border-color: #ff7874;
+    border-color: #00a1d6;
 }
 /*加载动画样式*/
 .loader{

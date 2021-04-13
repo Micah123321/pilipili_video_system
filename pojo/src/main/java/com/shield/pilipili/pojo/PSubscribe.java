@@ -31,6 +31,8 @@ public class PSubscribe implements Serializable {
      */
     private Date createTime;
 
+    private Integer fansCount;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

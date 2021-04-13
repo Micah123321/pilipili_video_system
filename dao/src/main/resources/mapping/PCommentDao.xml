@@ -19,6 +19,22 @@
     from p_comment
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="getComCountByUserId" resultType="java.lang.Integer">
+    SELECT
+      COUNT(content)
+    FROM
+      `pili`.`p_comment` c ,p_videos v
+    WHERE v.video_userid=#{userId} and v.video_pv=c.video_id
+    GROUP BY v.`video_userid`
+  </select>
+  <select id="getCommentCountByDate" resultType="com.shield.pilipili.pojo.PComment">
+    SELECT
+      c.createTime,COUNT(content) commentCount
+    FROM
+      pili.p_comment c ,p_videos v
+    WHERE v.video_pv=c.video_id AND v.`video_userid`=#{userId}
+    GROUP BY v.`video_userid`,DATE_FORMAT(c.createTime,'%Y-%m-%d')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from p_comment
     where id = #{id,jdbcType=BIGINT}

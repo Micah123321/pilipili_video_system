@@ -16,6 +16,28 @@
     from p_subscribe
     where id = #{id,jdbcType=BIGINT}
   </select>
+    <select id="getFansById" resultType="com.shield.pilipili.pojo.PUserInfo">
+      SELECT
+        `subscribe_id`,
+        `subscribed_id`,
+        `createTime` ,
+        `user_id`,
+        `subscribeNum`,
+        `fansNum`,
+        `level`,
+        `experience`,
+        `user_pic`,
+        `up_desc`
+      FROM
+        `pili`.`p_subscribe` s,`pili`.`p_user_info` i
+      WHERE s.`subscribed_id`=i.`user_id` AND subscribed_id = #{id}
+    </select>
+  <select id="getFansByDate" resultType="com.shield.pilipili.pojo.PSubscribe">
+    SELECT
+      createTime,COUNT(subscribe_id) AS fansCount  FROM p_subscribe
+    WHERE subscribed_id=#{userId}
+    GROUP BY DATE_FORMAT(createTime,'%Y-%m-%d')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from p_subscribe
     where id = #{id,jdbcType=BIGINT}

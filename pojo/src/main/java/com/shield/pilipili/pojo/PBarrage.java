@@ -41,6 +41,8 @@ public class PBarrage implements Serializable {
      */
     private Date createTime;
 
+    private Integer barrCount;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
