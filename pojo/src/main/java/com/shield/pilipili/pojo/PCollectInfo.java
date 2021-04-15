@@ -67,6 +67,8 @@ public class PCollectInfo implements Serializable {
         this.addTime = addTime;
     }
 
+
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

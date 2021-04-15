@@ -56,10 +56,6 @@ public class PVideosThumbsup implements Serializable {
         this.videoId = videoId;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public Integer getLikeCount() {
         return likeCount;
     }
@@ -75,4 +71,10 @@ public class PVideosThumbsup implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+
 }

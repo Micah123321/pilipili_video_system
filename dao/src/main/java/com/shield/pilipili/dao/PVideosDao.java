@@ -6,6 +6,13 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import com.shield.pilipili.OrderUtil;
+import com.shield.pilipili.pojo.PVideos;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.core.annotation.OrderUtils;
+
+import java.util.Date;
+import java.util.List;
 
 public interface PVideosDao {
     /**
@@ -49,11 +56,15 @@ public interface PVideosDao {
 
     int insert(PVideos record);
 
-    int insertSelective(PVideos record);
+    /**
+     * 视频模糊查询
+     * @param videoTitle 视频标题
+     * @param videoTime 视频时长
+     * @param categoryId 视频分类
+     * @param order 综合排序
+     * @return
+     */
+    List<PVideos> getPVideosPageList(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid,@Param("order") OrderUtil order);
 
-    PVideos selectByPrimaryKey(Integer videoPv);
-
-    int updateByPrimaryKeySelective(PVideos record);
-
-    int updateByPrimaryKey(PVideos record);
+    int getPVideosPageListCount(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid);
 }

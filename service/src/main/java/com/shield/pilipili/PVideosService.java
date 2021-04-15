@@ -8,6 +8,12 @@ import com.shield.pilipili.pojo.page.PVideosPage;
 import java.util.Date;
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+import com.shield.pilipili.pojo.PVideos;
+
+import java.util.Date;
+import java.util.List;
+
 public interface PVideosService {
     int getPlayCountById(int id);
     /**
@@ -26,4 +32,14 @@ public interface PVideosService {
     List<PVideosThumbsup> getLikeByDate(Date beginDate,  Date endDate, int userId);
 
     List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
+    /**
+     * 视频模糊查询
+     * @param videoTitle 视频标题
+     * @param videoTime 视频时长
+     * @param categoryId 视频分类
+     * @param order 综合排序
+     * @return
+     */
+    List<PVideos> getPVideosPageList(String videoTitle, String videoTime,String videoTimeEnd,Integer type, Integer categoryId,Integer pid, OrderUtil order);
+
 }

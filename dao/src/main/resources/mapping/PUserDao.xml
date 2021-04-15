@@ -9,7 +9,7 @@
     <result column="utype" jdbcType="INTEGER" property="utype" />
   </resultMap>
   <sql id="Base_Column_List">
-    `uid`, userName, phone, upwd, utype
+    uid, userName, phone, upwd, utype
   </sql>
   <select id="login" resultType="com.shield.pilipili.pojo.PUser">
     select

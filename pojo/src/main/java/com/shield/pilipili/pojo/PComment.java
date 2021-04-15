@@ -106,6 +106,8 @@ public class PComment implements Serializable {
         this.createTime = createTime;
     }
 
+
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

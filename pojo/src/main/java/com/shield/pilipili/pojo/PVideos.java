@@ -2,10 +2,12 @@ package com.shield.pilipili.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  * p_videos
@@ -61,6 +63,8 @@ public class PVideos implements Serializable {
     /**
      * 视频上传时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date videoUpdatetime;
 
     /**
@@ -71,13 +75,27 @@ public class PVideos implements Serializable {
     /**
      * 视频审核时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date videoChecktime;
 
-    private Time videoTime;
+    /**
+     * 视频时长
+     */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
+    private Date videoTime;
+
+    /**
+     * 视频图片
+     */
+    private String videoImage;
+
     /**
      * 视频发布时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date videoReleasetime;
 
     /**
@@ -85,13 +103,76 @@ public class PVideos implements Serializable {
      */
     private Long videoType;
 
-    private Long videoParentType;
+    private PCategory pCategory;
+
+    private List<PCategory> categoryList;
+
+    private PUser pUser;
 
     private Integer videoComment;
 
     private Integer videoBarrage;
 
+    private Long videoParentType;
+
+
     private static final long serialVersionUID = 1L;
+
+    public Integer getVideoComment() {
+        return videoComment;
+    }
+
+    public void setVideoComment(Integer videoComment) {
+        this.videoComment = videoComment;
+    }
+
+    public Integer getVideoBarrage() {
+        return videoBarrage;
+    }
+
+    public void setVideoBarrage(Integer videoBarrage) {
+        this.videoBarrage = videoBarrage;
+    }
+
+    public PUser getpUser() {
+        return pUser;
+    }
+
+    public void setpUser(PUser pUser) {
+        this.pUser = pUser;
+    }
+
+    public PCategory getpCategory() {
+        return pCategory;
+    }
+
+    public void setpCategory(PCategory pCategory) {
+        this.pCategory = pCategory;
+    }
+
+    public String getVideoImage() {
+        return videoImage;
+    }
+
+    public void setVideoImage(String videoImage) {
+        this.videoImage = videoImage;
+    }
+
+    public List<PCategory> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<PCategory> categoryList) {
+        this.categoryList = categoryList;
+    }
+
+    public Date getVideoTime() {
+        return videoTime;
+    }
+
+    public void setVideoTime(Date videoTime) {
+        this.videoTime = videoTime;
+    }
 
     public Integer getVideoPv() {
         return videoPv;

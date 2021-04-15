@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>-搜索结果</title>
-    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet"
+    <link href="../../css/bootstrap.css" type="text/css" rel="stylesheet"
           media="all">
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/all-vue.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/vue-filter.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/Page.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/Pagination.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/VideoList.css" type="text/css" media="screen"/>
-    <script src="js/jquery-2.2.3.min.js"></script>
+    <link href="../../css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="../../css/flexslider.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/all-vue.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/vue-filter.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/Page.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/Pagination.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/VideoList.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="../../css/fore/common.css" type="text/css" media="screen"/>
+    <script src="../../js/jquery-2.2.3.min.js"></script>
+    <script src="../../js/search.js"></script>
     <style>
         .search-logo{
             background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/assets/sprite-690be8a6ea.png);
@@ -78,7 +80,6 @@
         .video-item.matrix .hide {
             display: none;
         }
-
     </style>
 </head>
 <body>
@@ -86,7 +87,7 @@
     <div class="search m-auto">
         <a href="" class="search-logo m-auto"></a>
         <div style="margin-top: 3em;margin-left: 35%" class="input-group col-xs-4 col-sm-4 col-lg-4 col-md-4 m-auto">
-            <input maxlength="100" autocomplete="off" type="text" class="form-control" onkeydown="onKeyDown(event)"/>
+            <input maxlength="100" autocomplete="off" type="text" class="form-control" onkeydown="onKeyDown(event)" th:value="${videoTitle}"/>
             <span class="input-group-btn">
                 <button class="btn btn-info btn-search">搜索</button>
             </span>
@@ -110,77 +111,42 @@
         用户
         <span class="num"></span></a></li><li class="v-switcher-header-anchor" style="width: 54.25px; transform: translateX(37px); transition-duration: 200ms;"></li></ul></div>
 </div>
-<div class="body-contain"><div id="all-list"><div class="flow-loader" style="position:relative;"><!----><div class="filter-wrap"><ul class="filter-type clearfix order" style=""><li class="filter-item active"><a href="javascript:;">综合排序</a></li><li class="filter-item"><a href="javascript:;">最多点击</a></li><li class="filter-item"><a href="javascript:;">最新发布</a></li><li class="filter-item"><a href="javascript:;">最多弹幕</a></li><li class="filter-item"><a href="javascript:;">最多收藏</a></li></ul><ul class="filter-type clearfix duration"><li class="filter-item active"><a href="javascript:;">全部时长</a></li><li class="filter-item"><a href="javascript:;">10分钟以下</a></li><li class="filter-item"><a href="javascript:;">10-30分钟</a></li><li class="filter-item"><a href="javascript:;">30-60分钟</a></li><li class="filter-item"><a href="javascript:;">60分钟以上</a></li></ul><ul class="filter-type clearfix tids_1" style=""><li class="filter-item active"><a href="javascript:;">全部分区</a></li><li class="filter-item"><a href="javascript:;">动画</a></li><li class="filter-item"><a href="javascript:;">番剧</a></li><li class="filter-item"><a href="javascript:;">国创</a></li><li class="filter-item"><a href="javascript:;">音乐</a></li><li class="filter-item"><a href="javascript:;">舞蹈</a></li><li class="filter-item"><a href="javascript:;">游戏</a></li><li class="filter-item"><a href="javascript:;">知识</a></li><li class="filter-item"><a href="javascript:;">数码</a></li><li class="filter-item"><a href="javascript:;">生活</a></li><li class="filter-item"><a href="javascript:;">美食</a></li><li class="filter-item"><a href="javascript:;">动物圈</a></li><li class="filter-item"><a href="javascript:;">鬼畜</a></li><li class="filter-item"><a href="javascript:;">时尚</a></li><li class="filter-item"><a href="javascript:;">资讯</a></li><li class="filter-item"><a href="javascript:;">娱乐</a></li><li class="filter-item"><a href="javascript:;">影视</a></li><li class="filter-item"><a href="javascript:;">纪录片</a></li><li class="filter-item"><a href="javascript:;">电影</a></li><li class="filter-item"><a href="javascript:;">电视剧</a></li><!----><!----></ul><a class="fold up" style=""><span>收起</span><i class="arrow-up"></i></a><a class="fold down" style="display:none;"><span>更多筛选</span><i class="arrow-down"></i></a><div class="switch-wrap"><div class="aver type active"><i class="icon-aver"></i></div><div class="imgleft type"><i class="icon-imgleft"></i></div></div><div class="filter-wrap_bottom"></div></div><div class="mixin-list"><!----><!----><!----><!----><!----><!----><!----><!---->
-    <ul class="video-list clearfix" type="video">
-        <li style="border-radius: 10px;border: 1px solid #727272" class="video-item matrix">
-            <a href="" title="我只会心疼giegie" target="_blank" class="img-anchor">
-                <div class="img"><div class="lazy-img"><img class="img-rounded" alt="" src="./images/giegie.webp"></div>
-                    <span class="so-imgTag_rb">00:34</span>
-                    <div class="watch-later-trigger watch-later"></div>
-                    <span class="mask-video"></span></div>
-    <!----></a><div class="info"><div class="headline clearfix"><!----><!----><span class="type hide">搞笑</span><a title="我只会心疼giegie" href="//www.bilibili.com/video/BV1ko4y1d7Jx?from=search&amp;seid=4552862550272992768" target="_blank" class="title">我只会心疼<em class="keyword">giegie</em></a></div><div class="des hide">
-    快手
-</div><div class="tags"><span title="观看" class="so-icon watch-num"><i class="icon-playtime"></i>
-        100.6万
-      </span><span title="弹幕" class="so-icon hide"><i class="icon-subtitle"></i>
-        263
-      </span><span title="上传时间" class="so-icon time"><i class="icon-date"></i>
-        2021-02-07
-      </span><span title="up主" class="so-icon"><i class="icon-uper"></i><a href="//space.bilibili.com/22601190?from=search&amp;seid=4552862550272992768" target="_blank" class="up-name">芝星奥利奥-</a></span></div>
-    </div>
+<div class="body-contain"><div id="all-list"><div class="flow-loader" style="position:relative;"><!----><div class="filter-wrap">
+    <ul class="filter-type clearfix order" id="order">
+        <li class="filter-item active"><a href="javascript:;" onclick="getOrderBy('0')" style="text-decoration: none;">综合排序</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('1')" style="text-decoration: none;">最多点击</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('2')" style="text-decoration: none;">最新发布</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('3')" style="text-decoration: none;">最多弹幕</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('4')" style="text-decoration: none;">最多收藏</a></li>
+    </ul>
+    <input type="hidden" value="" id="orderByName">
+    <ul class="filter-type clearfix duration" id="duration">
+        <li class="filter-item active"><a href="javascript:;" onclick="getDurationBy('allTime','','')" style="text-decoration: none;">全部时长</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','','2')" style="text-decoration: none;">10分钟以下</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','00:30:00')" style="text-decoration: none;">10-30分钟</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:30:00','00:60:00')" style="text-decoration: none;">30-60分钟</a></li>
+        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:60:00','','1')" style="text-decoration: none;">60分钟以上</a></li>
+    </ul>
+    <input type="hidden" value="" id="videoTime">
+    <input type="hidden" value="" id="videoTimeEnd">
+    <input type="hidden" value="" id="type">
+    <input type="hidden" id="videoTitle" th:value="${videoTitle}">
+    <input type="hidden" value="" id="id1">
+    <input type="hidden" value="" id="id2">
+    <input type="hidden" value="" id="id3">
+    <ul class="filter-type clearfix tids_1" style="" id="categoryBy">
+        <li class="filter-item active" value="1"><a href="javascript:;">全部分区</a></li>
+        <li class="sub-filter" style="top: 9px; left: 73px;">
+            <ul class="clearfix">
+                <li class="filter-item"><a href="javascript:;">宅舞</a></li>
+            </ul>
         </li>
-        <li style="border-radius: 10px;border: 1px solid #727272" class="video-item matrix">
-            <a href="" title="我只会心疼giegie" target="_blank" class="img-anchor">
-                <div class="img"><div class="lazy-img"><img class="img-rounded" alt="" src="./images/giegie.webp"></div>
-                    <span class="so-imgTag_rb">00:34</span>
-                    <div class="watch-later-trigger watch-later"></div>
-                    <span class="mask-video"></span></div>
-                <!----></a><div class="info"><div class="headline clearfix"><!----><!----><span class="type hide">搞笑</span><a title="我只会心疼giegie" href="//www.bilibili.com/video/BV1ko4y1d7Jx?from=search&amp;seid=4552862550272992768" target="_blank" class="title">我只会心疼<em class="keyword">giegie</em></a></div><div class="des hide">
-            快手
-        </div><div class="tags"><span title="观看" class="so-icon watch-num"><i class="icon-playtime"></i>
-        100.6万
-      </span><span title="弹幕" class="so-icon hide"><i class="icon-subtitle"></i>
-        263
-      </span><span title="上传时间" class="so-icon time"><i class="icon-date"></i>
-        2021-02-07
-      </span><span title="up主" class="so-icon"><i class="icon-uper"></i><a href="//space.bilibili.com/22601190?from=search&amp;seid=4552862550272992768" target="_blank" class="up-name">芝星奥利奥-</a></span></div>
-        </div>
-        </li>
-        <li style="border-radius: 10px;border: 1px solid #727272" class="video-item matrix">
-            <a href="" title="我只会心疼giegie" target="_blank" class="img-anchor">
-                <div class="img"><div class="lazy-img"><img class="img-rounded" alt="" src="./images/giegie.webp"></div>
-                    <span class="so-imgTag_rb">00:34</span>
-                    <div class="watch-later-trigger watch-later"></div>
-                    <span class="mask-video"></span></div>
-                <!----></a><div class="info"><div class="headline clearfix"><!----><!----><span class="type hide">搞笑</span><a title="我只会心疼giegie" href="//www.bilibili.com/video/BV1ko4y1d7Jx?from=search&amp;seid=4552862550272992768" target="_blank" class="title">我只会心疼<em class="keyword">giegie</em></a></div><div class="des hide">
-            快手
-        </div><div class="tags"><span title="观看" class="so-icon watch-num"><i class="icon-playtime"></i>
-        100.6万
-      </span><span title="弹幕" class="so-icon hide"><i class="icon-subtitle"></i>
-        263
-      </span><span title="上传时间" class="so-icon time"><i class="icon-date"></i>
-        2021-02-07
-      </span><span title="up主" class="so-icon"><i class="icon-uper"></i><a href="//space.bilibili.com/22601190?from=search&amp;seid=4552862550272992768" target="_blank" class="up-name">芝星奥利奥-</a></span></div>
-        </div>
-        </li>
-        <li style="border-radius: 10px;border: 1px solid #727272" class="video-item matrix">
-            <a href="" title="我只会心疼giegie" target="_blank" class="img-anchor">
-                <div class="img"><div class="lazy-img"><img class="img-rounded" alt="" src="./images/giegie.webp"></div>
-                    <span class="so-imgTag_rb">00:34</span>
-                    <div class="watch-later-trigger watch-later"></div>
-                    <span class="mask-video"></span></div>
-                <!----></a><div class="info"><div class="headline clearfix"><!----><!----><span class="type hide">搞笑</span><a title="我只会心疼giegie" href="//www.bilibili.com/video/BV1ko4y1d7Jx?from=search&amp;seid=4552862550272992768" target="_blank" class="title">我只会心疼<em class="keyword">giegie</em></a></div><div class="des hide">
-            快手
-        </div><div class="tags"><span title="观看" class="so-icon watch-num"><i class="icon-playtime"></i>
-        100.6万
-      </span><span title="弹幕" class="so-icon hide"><i class="icon-subtitle"></i>
-        263
-      </span><span title="上传时间" class="so-icon time"><i class="icon-date"></i>
-        2021-02-07
-      </span><span title="up主" class="so-icon"><i class="icon-uper"></i><a href="//space.bilibili.com/22601190?from=search&amp;seid=4552862550272992768" target="_blank" class="up-name">芝星奥利奥-</a></span></div>
-        </div>
-        </li>
-    </ul></div><!----><div class="page-wrap"><div class="pager"><ul class="pages"><!----><!----><!----><li class="page-item active"><button class="pagination-btn num-btn">
+     <!----><!---->
+    </ul>
+    <div class="filter-wrap_bottom"></div></div><div class="mixin-list" >
+    <ul class="video-list clearfix" type="video" id="video-list">
+
+    </ul></div><!----><div class="page-wrap"><div class="pager"><ul class="pages"><li class="page-item active"><button class="pagination-btn num-btn">
     1
 </button></li><li class="page-item"><button class="pagination-btn num-btn">
     2

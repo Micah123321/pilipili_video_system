@@ -18,9 +18,8 @@
         <result column="video_type" jdbcType="BIGINT" property="videoType"/>
     </resultMap>
     <sql id="Base_Column_List">
-        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect, 
-    video_desc, video_state, video_updatetime, video_checkuid, video_checktime, video_releasetime, 
-    video_type
+        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect,
+    video_desc, video_state, video_updatetime, video_checkuid, video_checktime, video_releasetime,
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -293,4 +292,99 @@
             video_type        = #{videoType,jdbcType=BIGINT}
         where video_pv = #{videoPv,jdbcType=INTEGER}
     </update>
+
+    <resultMap id="PVideosPageList" type="com.shield.pilipili.pojo.PVideos">
+        <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
+        <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
+        <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
+        <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
+        <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
+        <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
+        <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
+        <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
+        <result column="video_state" jdbcType="INTEGER" property="videoState"/>
+        <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
+        <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
+        <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
+        <result column="video_time" jdbcType="TIMESTAMP" property="videoTime"/>
+        <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
+        <result column="video_image" jdbcType="VARCHAR" property="videoImage"/>
+        <result column="video_type" jdbcType="BIGINT" property="videoType"/>
+        <result column="video_comment" jdbcType="INTEGER" property="videoComment"/>
+        <result column="video_barrage" jdbcType="INTEGER" property="videoBarrage"/>
+        <association property="pCategory" javaType="com.shield.pilipili.pojo.PCategory">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+            <result column="createdBy" jdbcType="INTEGER" property="createdBy"/>
+            <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime"/>
+            <result column="modifyBy" jdbcType="INTEGER" property="modifyBy"/>
+            <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
+        </association>
+        <association property="pUser" javaType="com.shield.pilipili.pojo.PUser">
+            <id column="uid" jdbcType="INTEGER" property="uid"/>
+            <result column="userName" jdbcType="VARCHAR" property="userName"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="upwd" jdbcType="VARCHAR" property="upwd"/>
+            <result column="utype" jdbcType="INTEGER" property="utype"/>
+        </association>
+    </resultMap>
+    <select id="getPVideosPageList" parameterType="java.lang.Integer" resultMap="PVideosPageList">
+        select
+        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_desc, video_state, video_updatetime, video_checkuid, video_checktime,video_time,video_releasetime,
+        video_type,video_comment,video_barrage,video_image, id, categoryName, parentId, createdBy, creationTime,
+        modifyBy, modifyDate,
+        uid, userName, phone, upwd, utype
+        from p_videos
+        left join p_category on video_type = id
+        left join p_user on video_userid = uid
+        <where>
+            <if test="videoTitle != null and videoTitle != ''">
+                and video_title like CONCAT('%',#{videoTitle},'%')
+            </if>
+            <choose>
+                <when test="videoTime != null and type == null">
+                    and video_time &gt;= #{videoTime} and video_time &lt;= #{videoTimeEnd}
+                </when>
+                <when test="videoTime != null and type == 1">
+                    and video_time &gt; #{videoTime}
+                </when>
+                <when test="videoTime != null and type == 2">
+                    and video_time &lt; #{videoTime}
+                </when>
+            </choose>
+            <choose>
+                <when test="categoryId != null and pid == 1">
+                    and (video_type = #{categoryId}
+                    OR parentId = #{categoryId})
+                </when>
+                <when test="categoryId != null and pid == 2">
+                    and video_type = #{categoryId}
+                </when>
+            </choose>
+        </where>
+        <choose>
+            <when test="order.orderBy == 0">
+                order by video_pv desc
+            </when>
+            <when test="order.orderBy == 1">
+                order by video_play
+                <if test="order.isDesc">desc</if>
+            </when>
+            <when test="order.orderBy == 2">
+                order by video_releasetime
+                <if test="order.isDesc">desc</if>
+            </when>
+            <when test="order.orderBy == 3">
+                order by video_barrage
+                <if test="order.isDesc">desc</if>
+            </when>
+            <when test="order.orderBy == 4">
+                order by video_collect
+                <if test="order.isDesc">desc</if>
+            </when>
+        </choose>
+    </select>
+
 </mapper>
