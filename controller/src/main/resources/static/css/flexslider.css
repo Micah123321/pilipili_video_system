@@ -109,7 +109,7 @@ html[xmlns] .flexslider .slides {
 } 
 .flex-direction-nav a {
     text-decoration: none;
-    display: block;
+    display: none;
     position: absolute;
     top: 42%;
     left: 6%;
@@ -124,7 +124,7 @@ html[xmlns] .flexslider .slides {
 }
 .flex-direction-nav a:before {
 	font-size: 60px;
-    display: block;
+    display: none;
     content: "\f104"; 
     font-family: FontAwesome;
     line-height: 47px;
@@ -142,7 +142,7 @@ html[xmlns] .flexslider .slides {
 }
 .flex-direction-nav a.flex-next:before {
     font-size: 60px;
-    display: block;
+    display: none;
     content: "\f105"; 
     font-family: FontAwesome;
     line-height: 47px;
