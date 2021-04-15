@@ -242,6 +242,8 @@ CREATE TABLE `p_videos` (
   `video_type` bigint(30) NOT NULL COMMENT '视频分类（来源于p_category分类表的类型id）',
   `video_time` bigint(20) NOT NULL,
   `video_image` varchar(200) DEFAULT NULL,
+  `video_comment` int(11) DEFAULT NULL COMMENT '视频评论数',
+  `video_barrage` int(11) DEFAULT NULL COMMENT '视频弹幕数',
   PRIMARY KEY (`video_pv`),
   KEY `video_userid` (`video_userid`),
   KEY `video_checkuid` (`video_checkuid`),
@@ -253,7 +255,7 @@ CREATE TABLE `p_videos` (
 
 /*Data for the table `p_videos` */
 
-insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`) values (10000,1,'第一个视频','xxxx.com',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,0,NULL),(10001,2,'张三的犯罪视频','xxxx.com',1000,1,1,'-----',1,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,0,NULL),(10002,1,'全站第三个视频','xxx.com',200,0,0,'---',1,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,0,NULL);
+insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','xxxx.com',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,0,NULL,5,2),(10001,2,'张三的犯罪视频','xxxx.com',1000,1,1,'-----',1,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,0,NULL,1,1),(10002,1,'全站第三个视频','xxx.com',200,0,0,'---',1,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,0,NULL,1,1);
 
 /*Table structure for table `p_videos_thumbsup` */
 

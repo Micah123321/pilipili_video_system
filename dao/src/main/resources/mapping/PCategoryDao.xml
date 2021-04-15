@@ -19,7 +19,19 @@
     from p_category
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectAllCategory" resultType="com.shield.pilipili.pojo.vo.PCategoryVo">
+      SELECT
+        `id`,
+        `categoryName`,
+        `parentId`,
+        `createdBy`,
+        `creationTime`,
+        `modifyBy`,
+        `modifyDate`
+      FROM
+        `pili`.`p_category`
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from p_category
     where id = #{id,jdbcType=BIGINT}
   </delete>

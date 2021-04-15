@@ -1,10 +1,9 @@
 package com.shield.pilipili;
 
 import com.shield.pilipili.pojo.PCollectInfo;
-import com.shield.pilipili.pojo.PSubscribe;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.PVideosThumbsup;
-import org.apache.ibatis.annotations.Param;
+import com.shield.pilipili.pojo.page.PVideosPage;
 
 import java.util.Date;
 import java.util.List;
@@ -26,5 +25,5 @@ public interface PVideosService {
     List<PCollectInfo> getCollectByDate(Date beginDate, Date endDate, int userId);
     List<PVideosThumbsup> getLikeByDate(Date beginDate,  Date endDate, int userId);
 
-
+    List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
 }

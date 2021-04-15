@@ -1,8 +1,10 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ public class PVideos implements Serializable {
     /**
      * 上传者id
      */
-    private Integer videoUserid;
+    private Integer videoUserid=0;
 
     /**
      * 视频标题
@@ -71,15 +73,23 @@ public class PVideos implements Serializable {
      */
     private Date videoChecktime;
 
+    private Time videoTime;
     /**
      * 视频发布时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date videoReleasetime;
 
     /**
      * 视频分类（来源于p_category分类表的类型id）
      */
     private Long videoType;
+
+    private Long videoParentType;
+
+    private Integer videoComment;
+
+    private Integer videoBarrage;
 
     private static final long serialVersionUID = 1L;
 

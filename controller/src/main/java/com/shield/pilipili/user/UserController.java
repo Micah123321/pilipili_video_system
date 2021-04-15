@@ -21,12 +21,17 @@ public class UserController {
         return "page/user/userlogin";
     }
 
+    @GetMapping("/index")
+    public String index(){
+        return "page/user/index";
+    }
+
     @ResponseBody
     @PostMapping("/log")
     public PUser login(@RequestParam String userName,@RequestParam String upwd, HttpSession session){
         PUser pUser=pUserService.login(userName,upwd);
         if (pUser!=null){
-            session.setAttribute("pUser",pUser);
+            session.setAttribute("userSession",pUser);
         }else {
             return new PUser();
         }

@@ -1,6 +1,7 @@
 package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.*;
+import com.shield.pilipili.pojo.page.PVideosPage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -28,7 +29,17 @@ public interface PVideosDao {
     int getCollectCountById(int id);
 
     List<PCollectInfo> getCollectByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
+
+    /**
+     * 获得点赞数组数据
+     * @param beginDate
+     * @param endDate
+     * @param userId
+     * @return
+     */
     List<PVideosThumbsup> getLikeByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
+
+    List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
     /**
      *
      * @param videoPv

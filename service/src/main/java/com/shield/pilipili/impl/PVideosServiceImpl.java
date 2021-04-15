@@ -6,6 +6,7 @@ import com.shield.pilipili.pojo.PCollectInfo;
 import com.shield.pilipili.pojo.PSubscribe;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.PVideosThumbsup;
+import com.shield.pilipili.pojo.page.PVideosPage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,5 +41,10 @@ public class PVideosServiceImpl implements PVideosService {
     @Override
     public List<PVideosThumbsup> getLikeByDate(Date beginDate, Date endDate, int userId) {
         return pVideosDao.getLikeByDate(beginDate, endDate, userId);
+    }
+
+    @Override
+    public List<PVideos> selectVideosListByUp(PVideosPage pVideosPage) {
+        return pVideosDao.selectVideosListByUp(pVideosPage);
     }
 }

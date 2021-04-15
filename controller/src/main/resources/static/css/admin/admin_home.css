@@ -103,6 +103,7 @@ html,body,#div_home_main{
     width: 100%;
     padding: 10px 50px 10px 20px;
     border-left: 5px solid transparent;
+    user-select:none;
 }
 .menu_li:hover{
     background-color: rgba(217,219,232,0.5);

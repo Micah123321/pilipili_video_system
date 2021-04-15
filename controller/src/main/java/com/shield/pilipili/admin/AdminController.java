@@ -3,16 +3,16 @@ package com.shield.pilipili.admin;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.shield.pilipili.PBarrageService;
-import com.shield.pilipili.PCommentService;
-import com.shield.pilipili.PSubscribeService;
-import com.shield.pilipili.PVideosService;
+import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.*;
+import com.shield.pilipili.pojo.page.PVideosPage;
+import com.shield.pilipili.pojo.vo.PCategoryVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,15 +30,24 @@ public class AdminController {
     private PSubscribeService pSubscribeService;
     @Resource
     private PVideosService pVideosService;
+    @Resource
+    private PCategoryService pCategoryService;
 
     @GetMapping("/admin")
-    public String goHome(Model model) throws ParseException {
-        model.addAttribute("fansCount",pSubscribeService.getFansById(1).size());
-        model.addAttribute("playCount",pVideosService.getPlayCountById(1));
-        model.addAttribute("comCount",pCommentService.getComCountByUserId(1));
-        model.addAttribute("likeCount",pVideosService.getLikeCountById(1));
-        model.addAttribute("collectCount",pVideosService.getCollectCountById(1));
-        model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(1));
+    public String goHome(Model model, HttpSession session) throws ParseException {
+        PUser userSession = (PUser) session.getAttribute("userSession");
+        if (userSession==null){
+            return "redirect:/user/login";
+        }
+        Integer uid = userSession.getUid();
+
+
+        model.addAttribute("fansCount",pSubscribeService.getFansById(uid).size());
+        model.addAttribute("playCount",pVideosService.getPlayCountById(uid));
+        model.addAttribute("comCount",pCommentService.getComCountByUserId(uid));
+        model.addAttribute("likeCount",pVideosService.getLikeCountById(uid));
+        model.addAttribute("collectCount",pVideosService.getCollectCountById(uid));
+        model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(uid));
         model.addAttribute("jsonObject", getChartData(null,null));
         return "page/admin/homePage";
     }
@@ -62,6 +71,43 @@ public class AdminController {
         } else {
             return getChartData(null, null).toJSONString();
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "admin/creative/data", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object getVideoData(PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage){
+        Pagen<PVideos> page = new Pagen<>();
+        page.setPageSize(2);
+        page.setTotalCount(pVideosService.selectVideosListByUp(pVideosPage).size());
+        page.setAllDataList( pVideosService.selectVideosListByUp(pVideosPage));
+        if (currPage>page.getTotalPageCount())currPage=page.getTotalPageCount();
+        page.setIndex(currPage);
+        pVideosPage.setIndex((currPage - 1) * page.getPageSize());
+        pVideosPage.setCount( page.getPageSize());
+        page.setCurrPageNo(currPage);
+        page.setDataList(pVideosService.selectVideosListByUp(pVideosPage));
+        return page;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "admin/creative/typedata", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object getTypeData(PVideosPage pVideosPage){
+        pVideosPage.setVideoType(Long.parseLong("0"));
+        pVideosPage.setVideoState(-1);
+        List<PVideos> pVideoList = pVideosService.selectVideosListByUp(pVideosPage);
+        List<PCategoryVo> level1Category = pCategoryService.selectAllLevel1Category();
+        for (PCategoryVo cate:level1Category) {
+            for (PVideos p:pVideoList) {
+                if (p.getVideoType()==cate.getId()||p.getVideoType()==cate.getParentId()){
+                    cate.setCount(cate.getCount()+1);
+                }
+            }
+            long l = cate.getParentId() - 1;
+            if (l<0)l=0;
+            level1Category.get(Integer.parseInt(l+"")).setCount(cate.getCount());
+        }
+        level1Category.get(0).setCount(pVideoList.size());
+        return level1Category;
     }
 
     //获取图表的JSON数据
@@ -156,4 +202,12 @@ public class AdminController {
         return jsonObject;
     }
 
+    @GetMapping("admin/upload")
+    public String toUpload(){
+        return "page/admin/upload";
+    }
+    @GetMapping("admin/creative")
+    public String toCreative(){
+        return "page/admin/creative";
+    }
 }

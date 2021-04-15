@@ -4,7 +4,10 @@ $(function () {
      ******/
     //点击导航栏li时
     $(".menu_li").click(function () {
-        var url = $(this).attr("data-toggle");
+        var url = $(this).attr("gotopage");
+        if (url=='null'){
+            return;
+        }
         //如果已选择li则退出
         if ($(this).hasClass("menu_li_select")) {
             return;

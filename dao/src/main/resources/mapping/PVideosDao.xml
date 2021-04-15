@@ -1,230 +1,296 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PVideosDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PVideos">
-    <id column="video_pv" jdbcType="INTEGER" property="videoPv" />
-    <result column="video_userid" jdbcType="INTEGER" property="videoUserid" />
-    <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
-    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
-    <result column="video_play" jdbcType="BIGINT" property="videoPlay" />
-    <result column="video_like" jdbcType="INTEGER" property="videoLike" />
-    <result column="video_collect" jdbcType="INTEGER" property="videoCollect" />
-    <result column="video_desc" jdbcType="VARCHAR" property="videoDesc" />
-    <result column="video_state" jdbcType="INTEGER" property="videoState" />
-    <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime" />
-    <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid" />
-    <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime" />
-    <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime" />
-    <result column="video_type" jdbcType="BIGINT" property="videoType" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect, 
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PVideos">
+        <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
+        <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
+        <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
+        <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
+        <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
+        <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
+        <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
+        <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
+        <result column="video_state" jdbcType="INTEGER" property="videoState"/>
+        <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
+        <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
+        <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
+        <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
+        <result column="video_type" jdbcType="BIGINT" property="videoType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect, 
     video_desc, video_state, video_updatetime, video_checkuid, video_checktime, video_releasetime, 
     video_type
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_videos
-    where video_pv = #{videoPv,jdbcType=INTEGER}
-  </select>
-  <select id="getPlayCountById" resultType="java.lang.Integer">
-    SELECT
-      SUM(video_play) video_play
-    FROM
-      `pili`.`p_videos`
-    WHERE video_userid=#{id}
-    GROUP BY `video_userid`
-  </select>
-  <select id="getLikeCountById" resultType="java.lang.Integer">
-    SELECT
-      SUM(video_like) video_like
-    FROM
-      `pili`.`p_videos`
-    WHERE video_userid=#{id}
-    GROUP BY `video_userid`
-  </select>
-  <select id="getCollectCountById" resultType="java.lang.Integer">
-    SELECT
-      SUM(video_collect) video_collect
-    FROM
-      `pili`.`p_videos`
-    WHERE video_userid=#{id}
-    GROUP BY `video_userid`
-  </select>
-  <select id="getCollectByDate" resultType="com.shield.pilipili.pojo.PCollectInfo">
-    SELECT
-      `addTime`,COUNT(ci.id) AS collectCount  FROM p_collect_info ci,p_videos v
-    WHERE v.`video_pv`=ci.`video_id` AND v.`video_userid`=#{userId}
-    GROUP BY DATE_FORMAT(`addTime`,'%Y-%m-%d')
-  </select>
-  <select id="getLikeByDate" resultType="com.shield.pilipili.pojo.PVideosThumbsup">
-    SELECT
-      ci.`createTime`,COUNT(ci.id) AS likeCount  FROM p_videos_thumbsup ci,p_videos v
-    WHERE v.`video_pv`=ci.`video_id` AND v.`video_userid`=#{userId}
-    GROUP BY DATE_FORMAT(`createTime`,'%Y-%m-%d')
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from p_videos
-    where video_pv = #{videoPv,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
-    insert into p_videos (video_userid, video_title, video_url, 
-      video_play, video_like, video_collect, 
-      video_desc, video_state, video_updatetime, 
-      video_checkuid, video_checktime, video_releasetime, 
-      video_type)
-    values (#{videoUserid,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, 
-      #{videoPlay,jdbcType=BIGINT}, #{videoLike,jdbcType=INTEGER}, #{videoCollect,jdbcType=INTEGER}, 
-      #{videoDesc,jdbcType=VARCHAR}, #{videoState,jdbcType=INTEGER}, #{videoUpdatetime,jdbcType=TIMESTAMP}, 
-      #{videoCheckuid,jdbcType=INTEGER}, #{videoChecktime,jdbcType=TIMESTAMP}, #{videoReleasetime,jdbcType=TIMESTAMP}, 
-      #{videoType,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
-    insert into p_videos
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="videoUserid != null">
-        video_userid,
-      </if>
-      <if test="videoTitle != null">
-        video_title,
-      </if>
-      <if test="videoUrl != null">
-        video_url,
-      </if>
-      <if test="videoPlay != null">
-        video_play,
-      </if>
-      <if test="videoLike != null">
-        video_like,
-      </if>
-      <if test="videoCollect != null">
-        video_collect,
-      </if>
-      <if test="videoDesc != null">
-        video_desc,
-      </if>
-      <if test="videoState != null">
-        video_state,
-      </if>
-      <if test="videoUpdatetime != null">
-        video_updatetime,
-      </if>
-      <if test="videoCheckuid != null">
-        video_checkuid,
-      </if>
-      <if test="videoChecktime != null">
-        video_checktime,
-      </if>
-      <if test="videoReleasetime != null">
-        video_releasetime,
-      </if>
-      <if test="videoType != null">
-        video_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="videoUserid != null">
-        #{videoUserid,jdbcType=INTEGER},
-      </if>
-      <if test="videoTitle != null">
-        #{videoTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="videoUrl != null">
-        #{videoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="videoPlay != null">
-        #{videoPlay,jdbcType=BIGINT},
-      </if>
-      <if test="videoLike != null">
-        #{videoLike,jdbcType=INTEGER},
-      </if>
-      <if test="videoCollect != null">
-        #{videoCollect,jdbcType=INTEGER},
-      </if>
-      <if test="videoDesc != null">
-        #{videoDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="videoState != null">
-        #{videoState,jdbcType=INTEGER},
-      </if>
-      <if test="videoUpdatetime != null">
-        #{videoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoCheckuid != null">
-        #{videoCheckuid,jdbcType=INTEGER},
-      </if>
-      <if test="videoChecktime != null">
-        #{videoChecktime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoReleasetime != null">
-        #{videoReleasetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoType != null">
-        #{videoType,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PVideos">
-    update p_videos
-    <set>
-      <if test="videoUserid != null">
-        video_userid = #{videoUserid,jdbcType=INTEGER},
-      </if>
-      <if test="videoTitle != null">
-        video_title = #{videoTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="videoUrl != null">
-        video_url = #{videoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="videoPlay != null">
-        video_play = #{videoPlay,jdbcType=BIGINT},
-      </if>
-      <if test="videoLike != null">
-        video_like = #{videoLike,jdbcType=INTEGER},
-      </if>
-      <if test="videoCollect != null">
-        video_collect = #{videoCollect,jdbcType=INTEGER},
-      </if>
-      <if test="videoDesc != null">
-        video_desc = #{videoDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="videoState != null">
-        video_state = #{videoState,jdbcType=INTEGER},
-      </if>
-      <if test="videoUpdatetime != null">
-        video_updatetime = #{videoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoCheckuid != null">
-        video_checkuid = #{videoCheckuid,jdbcType=INTEGER},
-      </if>
-      <if test="videoChecktime != null">
-        video_checktime = #{videoChecktime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoReleasetime != null">
-        video_releasetime = #{videoReleasetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="videoType != null">
-        video_type = #{videoType,jdbcType=BIGINT},
-      </if>
-    </set>
-    where video_pv = #{videoPv,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PVideos">
-    update p_videos
-    set video_userid = #{videoUserid,jdbcType=INTEGER},
-      video_title = #{videoTitle,jdbcType=VARCHAR},
-      video_url = #{videoUrl,jdbcType=VARCHAR},
-      video_play = #{videoPlay,jdbcType=BIGINT},
-      video_like = #{videoLike,jdbcType=INTEGER},
-      video_collect = #{videoCollect,jdbcType=INTEGER},
-      video_desc = #{videoDesc,jdbcType=VARCHAR},
-      video_state = #{videoState,jdbcType=INTEGER},
-      video_updatetime = #{videoUpdatetime,jdbcType=TIMESTAMP},
-      video_checkuid = #{videoCheckuid,jdbcType=INTEGER},
-      video_checktime = #{videoChecktime,jdbcType=TIMESTAMP},
-      video_releasetime = #{videoReleasetime,jdbcType=TIMESTAMP},
-      video_type = #{videoType,jdbcType=BIGINT}
-    where video_pv = #{videoPv,jdbcType=INTEGER}
-  </update>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_videos
+        where video_pv = #{videoPv,jdbcType=INTEGER}
+    </select>
+    <select id="getPlayCountById" resultType="java.lang.Integer">
+        SELECT SUM(video_play) video_play
+        FROM `pili`.`p_videos`
+        WHERE video_userid = #{id}
+        GROUP BY `video_userid`
+    </select>
+    <select id="getLikeCountById" resultType="java.lang.Integer">
+        SELECT SUM(video_like) video_like
+        FROM `pili`.`p_videos`
+        WHERE video_userid = #{id}
+        GROUP BY `video_userid`
+    </select>
+    <select id="getCollectCountById" resultType="java.lang.Integer">
+        SELECT SUM(video_collect) video_collect
+        FROM `pili`.`p_videos`
+        WHERE video_userid = #{id}
+        GROUP BY `video_userid`
+    </select>
+    <select id="getCollectByDate" resultType="com.shield.pilipili.pojo.PCollectInfo">
+        SELECT `addTime`,
+               COUNT(ci.id) AS collectCount
+        FROM p_collect_info ci,
+             p_videos v
+        WHERE v.`video_pv` = ci.`video_id`
+          AND v.`video_userid` = #{userId}
+        GROUP BY DATE_FORMAT(`addTime`, '%Y-%m-%d')
+    </select>
+    <select id="getLikeByDate" resultType="com.shield.pilipili.pojo.PVideosThumbsup">
+        SELECT ci.`createTime`,
+               COUNT(ci.id) AS likeCount
+        FROM p_videos_thumbsup ci,
+             p_videos v
+        WHERE v.`video_pv` = ci.`video_id`
+          AND v.`video_userid` = #{userId}
+        GROUP BY DATE_FORMAT(`createTime`, '%Y-%m-%d')
+    </select>
+    <select id="selectVideosListByUp" resultType="com.shield.pilipili.pojo.PVideos">
+        SELECT
+        `video_pv` videoPv,
+        `video_userid` videoUserid,
+        `video_title` videoTitle,
+        `video_url` videoUrl,
+        `video_play` videoPlay,
+        `video_like`videoLike,
+        `video_collect` videoCollect,
+        `video_desc` videoDesc,
+        `video_state` videoState,
+        `video_updatetime` videoUpdatetime,
+        `video_checkuid` videoCheckuid,
+        `video_checktime` videoChecktime,
+        `video_releasetime` videoReleasetime,
+        `video_type` videoType,
+        `video_time` videoTime,
+        `video_image` videoImage,
+        `video_comment` videoComment,
+        `video_barrage` videoBarrage,
+        c.parentId videoParentType
+        from
+        p_videos,p_category c
+        <where>
+            <if test="videoTitle != '' and videoTitle!=null">
+                video_title like CONCAT('%',#{videoTitle},'%')
+            </if>
+                <if test="videoState > -1">
+                and video_state=#{videoState}
+            </if>
+            <if test="videoType > 1">
+                and (video_type=#{videoType}
+                or c.parentId=#{videoType})
+            </if>
+            <if test="videoUserid>0">
+                and video_userId=#{videoUserid}
+            </if>
+        and c.id=video_type
+        </where>
+        order by
+        <choose>
+            <when test="orderBy == 0 ">
+                video_releasetime
+            </when>
+            <when test="orderBy == 1 ">
+                video_play
+            </when>
+            <when test="orderBy == 2 ">
+                video_comment
+            </when>
+            <when test="orderBy == 3 ">
+                video_collect
+            </when>
+            <when test="orderBy == 4 ">
+                video_barrage
+            </when>
+        </choose>
+        desc
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from p_videos
+        where video_pv = #{videoPv,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos"
+            useGeneratedKeys="true">
+        insert into p_videos (video_userid, video_title, video_url,
+                              video_play, video_like, video_collect,
+                              video_desc, video_state, video_updatetime,
+                              video_checkuid, video_checktime, video_releasetime,
+                              video_type)
+        values (#{videoUserid,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR},
+                #{videoPlay,jdbcType=BIGINT}, #{videoLike,jdbcType=INTEGER}, #{videoCollect,jdbcType=INTEGER},
+                #{videoDesc,jdbcType=VARCHAR}, #{videoState,jdbcType=INTEGER}, #{videoUpdatetime,jdbcType=TIMESTAMP},
+                #{videoCheckuid,jdbcType=INTEGER}, #{videoChecktime,jdbcType=TIMESTAMP},
+                #{videoReleasetime,jdbcType=TIMESTAMP},
+                #{videoType,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv"
+            parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
+        insert into p_videos
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="videoUserid != null">
+                video_userid,
+            </if>
+            <if test="videoTitle != null">
+                video_title,
+            </if>
+            <if test="videoUrl != null">
+                video_url,
+            </if>
+            <if test="videoPlay != null">
+                video_play,
+            </if>
+            <if test="videoLike != null">
+                video_like,
+            </if>
+            <if test="videoCollect != null">
+                video_collect,
+            </if>
+            <if test="videoDesc != null">
+                video_desc,
+            </if>
+            <if test="videoState != null">
+                video_state,
+            </if>
+            <if test="videoUpdatetime != null">
+                video_updatetime,
+            </if>
+            <if test="videoCheckuid != null">
+                video_checkuid,
+            </if>
+            <if test="videoChecktime != null">
+                video_checktime,
+            </if>
+            <if test="videoReleasetime != null">
+                video_releasetime,
+            </if>
+            <if test="videoType != null">
+                video_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="videoUserid != null">
+                #{videoUserid,jdbcType=INTEGER},
+            </if>
+            <if test="videoTitle != null">
+                #{videoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="videoUrl != null">
+                #{videoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="videoPlay != null">
+                #{videoPlay,jdbcType=BIGINT},
+            </if>
+            <if test="videoLike != null">
+                #{videoLike,jdbcType=INTEGER},
+            </if>
+            <if test="videoCollect != null">
+                #{videoCollect,jdbcType=INTEGER},
+            </if>
+            <if test="videoDesc != null">
+                #{videoDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="videoState != null">
+                #{videoState,jdbcType=INTEGER},
+            </if>
+            <if test="videoUpdatetime != null">
+                #{videoUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoCheckuid != null">
+                #{videoCheckuid,jdbcType=INTEGER},
+            </if>
+            <if test="videoChecktime != null">
+                #{videoChecktime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoReleasetime != null">
+                #{videoReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoType != null">
+                #{videoType,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PVideos">
+        update p_videos
+        <set>
+            <if test="videoUserid != null">
+                video_userid = #{videoUserid,jdbcType=INTEGER},
+            </if>
+            <if test="videoTitle != null">
+                video_title = #{videoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="videoUrl != null">
+                video_url = #{videoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="videoPlay != null">
+                video_play = #{videoPlay,jdbcType=BIGINT},
+            </if>
+            <if test="videoLike != null">
+                video_like = #{videoLike,jdbcType=INTEGER},
+            </if>
+            <if test="videoCollect != null">
+                video_collect = #{videoCollect,jdbcType=INTEGER},
+            </if>
+            <if test="videoDesc != null">
+                video_desc = #{videoDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="videoState != null">
+                video_state = #{videoState,jdbcType=INTEGER},
+            </if>
+            <if test="videoUpdatetime != null">
+                video_updatetime = #{videoUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoCheckuid != null">
+                video_checkuid = #{videoCheckuid,jdbcType=INTEGER},
+            </if>
+            <if test="videoChecktime != null">
+                video_checktime = #{videoChecktime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoReleasetime != null">
+                video_releasetime = #{videoReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoType != null">
+                video_type = #{videoType,jdbcType=BIGINT},
+            </if>
+        </set>
+        where video_pv = #{videoPv,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PVideos">
+        update p_videos
+        set video_userid      = #{videoUserid,jdbcType=INTEGER},
+            video_title       = #{videoTitle,jdbcType=VARCHAR},
+            video_url         = #{videoUrl,jdbcType=VARCHAR},
+            video_play        = #{videoPlay,jdbcType=BIGINT},
+            video_like        = #{videoLike,jdbcType=INTEGER},
+            video_collect     = #{videoCollect,jdbcType=INTEGER},
+            video_desc        = #{videoDesc,jdbcType=VARCHAR},
+            video_state       = #{videoState,jdbcType=INTEGER},
+            video_updatetime  = #{videoUpdatetime,jdbcType=TIMESTAMP},
+            video_checkuid    = #{videoCheckuid,jdbcType=INTEGER},
+            video_checktime   = #{videoChecktime,jdbcType=TIMESTAMP},
+            video_releasetime = #{videoReleasetime,jdbcType=TIMESTAMP},
+            video_type        = #{videoType,jdbcType=BIGINT}
+        where video_pv = #{videoPv,jdbcType=INTEGER}
+    </update>
 </mapper>
