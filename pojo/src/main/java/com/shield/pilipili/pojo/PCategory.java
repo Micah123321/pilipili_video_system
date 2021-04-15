@@ -46,6 +46,7 @@ public class PCategory implements Serializable {
      */
     private Date modifyDate;
 
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -107,4 +108,5 @@ public class PCategory implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
 }

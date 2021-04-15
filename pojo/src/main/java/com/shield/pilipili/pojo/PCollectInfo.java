@@ -70,4 +70,12 @@ public class PCollectInfo implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+    public Integer getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(Integer collectCount) {
+        this.collectCount = collectCount;
+    }
 }

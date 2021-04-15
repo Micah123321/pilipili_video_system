@@ -53,15 +53,24 @@ public class PUserInfo implements Serializable {
     /**
      * 用户名称
      */
-    private String userName;
+    private String nickName;
 
-    public String getUserName() {
-        return userName;
+    public PUserInfo(Integer userId, String nickName) {
+        this.userId = userId;
+        this.nickName = nickName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public PUserInfo() {
     }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
 
     private static final long serialVersionUID = 1L;
 
@@ -132,4 +141,5 @@ public class PUserInfo implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
 }

@@ -14,6 +14,33 @@ public class Pagen<T> {
     private List<T> dataList;//存放的数据
     private List<T> allDataList;//存放的数据
 
+    public void setTotalPageCount(int totalPageCount) {
+        this.totalPageCount = totalPageCount;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public List<T> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<T> dataList) {
+        this.dataList = dataList;
+    }
+
+    public List<T> getAllDataList() {
+        return allDataList;
+    }
+
+    public void setAllDataList(List<T> allDataList) {
+        this.allDataList = allDataList;
+    }
 
     public int getTotalPageCount() {
         return totalPageCount;

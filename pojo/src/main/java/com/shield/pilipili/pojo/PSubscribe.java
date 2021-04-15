@@ -70,4 +70,12 @@ public class PSubscribe implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+    public Integer getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(Integer fansCount) {
+        this.fansCount = fansCount;
+    }
 }

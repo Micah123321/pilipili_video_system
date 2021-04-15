@@ -54,4 +54,5 @@ public class PCommentThumbsup implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
 }

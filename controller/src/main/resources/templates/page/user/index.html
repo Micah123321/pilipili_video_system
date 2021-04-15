@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>pilipili 视频弹幕网</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -131,6 +131,7 @@
                             </div>
                         </div>
                         <ul class="navbar-default navbar-nav navbar-right">
+                            <li><img class="img-circle" src="" alt=""></li>
                             <li><a href="index.html" class="active">首页</a></li>
                             <li><a href="about.html">关于</a></li>
                             <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -143,6 +144,8 @@
                             <li><a href="portfolio.html">个人主页</a></li>
                             <li><a href="contact.html">收藏列表</a></li>
                             <li><a href="/user/login">登录</a></li>
+
+                            <li th:class="${session.userSession==null?'':'hidden'}"><a href="contact.html">登录</a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>

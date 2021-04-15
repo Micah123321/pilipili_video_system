@@ -13,13 +13,37 @@ public interface PUserDao {
      */
     PUser login(@Param("userName") String userName, @Param("upwd") String upwd);
 
+
+    /**
+     * 用户注册
+     * @param puser
+     * @return
+     */
+    int insertUser(PUser puser);
+
+    /**
+     * 查询用户是否重复
+     * @param userName
+     * @return
+     */
+    PUser selePUser(String userName);
+
+
+    /**
+     * 根据userName得到id
+     * @param userName
+     * @return
+     */
+    PUser selectByUserName(String userName);
+
+
     int deleteByPrimaryKey(Integer uid);
 
     int insert(PUser record);
 
     int insertSelective(PUser record);
 
-    PUser selectByPrimaryKey(Integer uid);
+
 
     int updateByPrimaryKeySelective(PUser record);
 

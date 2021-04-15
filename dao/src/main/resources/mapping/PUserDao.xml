@@ -25,6 +25,18 @@
     from p_user
     where `uid` = #{uid,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserName" resultType="com.shield.pilipili.pojo.PUser">
+    select
+    `uid`,
+    `userName`,
+    `phone`,
+    `upwd`,
+    `utype`
+    from p_user
+    <where>
+      userName=#{userName}
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from p_user
     where `uid` = #{uid,jdbcType=INTEGER}
@@ -92,7 +104,9 @@
       utype = #{utype,jdbcType=INTEGER}
     where `uid` = #{uid,jdbcType=INTEGER}
   </update>
-
+  <insert id="insertUser" parameterType="com.shield.pilipili.pojo.PUser">
+    insert into p_user(uid,userName,upwd,phone,utype) values (default,#{userName},#{upwd},#{phone},default)
+  </insert>
 
 
 </mapper>

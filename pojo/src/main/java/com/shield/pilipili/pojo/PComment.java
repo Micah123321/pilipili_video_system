@@ -109,4 +109,12 @@ public class PComment implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
 }

@@ -35,6 +35,16 @@ public class PUser implements Serializable {
      */
     private Integer utype;
 
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUid() {
@@ -79,5 +89,14 @@ public class PUser implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    @Override
+    public String toString() {
+        return "PUser{" +
+                "userName='" + userName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", upwd='" + upwd + '\'' +
+                '}';
     }
 }

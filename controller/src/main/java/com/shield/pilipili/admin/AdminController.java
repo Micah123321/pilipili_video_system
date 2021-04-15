@@ -35,11 +35,11 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String goHome(Model model, HttpSession session) throws ParseException {
-        PUser userSession = (PUser) session.getAttribute("userSession");
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession==null){
             return "redirect:/user/login";
         }
-        Integer uid = userSession.getUid();
+        Integer uid = userSession.getUserId();
 
 
         model.addAttribute("fansCount",pSubscribeService.getFansById(uid).size());

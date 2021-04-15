@@ -3,15 +3,9 @@ package com.shield.pilipili.dao;
 import com.shield.pilipili.pojo.PUserInfo;
 
 public interface PUserInfoDao {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(PUserInfo record);
+    int insertPuserInfo(PUserInfo pUserInfo);
 
-    int insertSelective(PUserInfo record);
+    PUserInfo selectByUserId(Integer userid);
 
-    PUserInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(PUserInfo record);
-
-    int updateByPrimaryKey(PUserInfo record);
 }

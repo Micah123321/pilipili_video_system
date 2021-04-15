@@ -16,8 +16,9 @@
     <a style="margin-left: 32px;
     font-size: 14px;
     color: #757575;" href="/">主站</a>
-    <span id="txt_home_nickname" th:text="${session.userSession.userName}"></span>
+    <span id="txt_home_nickname" th:text="${session.userSession.nickName}"></span>
     <img id="img_home_profile_picture"
+         th:src="${session.userSession.userPic}"
          onerror="this.src='../images/defaultpic.png'"
          alt="头像" title="头像" width="32px" height="32px">
     <input id="adminId" type="hidden"/>
