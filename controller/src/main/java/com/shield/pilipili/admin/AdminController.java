@@ -75,9 +75,13 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "admin/creative/data", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object getVideoData(PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage){
+    public Object getVideoData(PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage,@RequestParam(required = false,defaultValue = "0") Integer videoStateCode){
         Pagen<PVideos> page = new Pagen<>();
         page.setPageSize(2);
+        Integer videoState = pVideosPage.getVideoState();
+        if (videoStateCode<1){
+            pVideosPage.setVideoState(-1);
+        }
         page.setTotalCount(pVideosService.selectVideosListByUp(pVideosPage).size());
         page.setAllDataList( pVideosService.selectVideosListByUp(pVideosPage));
         if (currPage>page.getTotalPageCount())currPage=page.getTotalPageCount();
@@ -85,6 +89,7 @@ public class AdminController {
         pVideosPage.setIndex((currPage - 1) * page.getPageSize());
         pVideosPage.setCount( page.getPageSize());
         page.setCurrPageNo(currPage);
+        if (videoStateCode<1)pVideosPage.setVideoState(videoState);
         page.setDataList(pVideosService.selectVideosListByUp(pVideosPage));
         return page;
     }
@@ -205,6 +210,11 @@ public class AdminController {
     @GetMapping("admin/upload")
     public String toUpload(){
         return "page/admin/upload";
+    }
+    @GetMapping("/admin/account/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("userSession");
+        return "page/user/userlogin";
     }
     @GetMapping("admin/creative")
     public String toCreative(){

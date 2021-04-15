@@ -649,7 +649,8 @@ h4.stats-info {
 }
 
 .news-w3img img {
-    width: 100%;
+    width: 170px;
+    height: 96px;
     -webkit-transition: all 0.7s ease-in-out;
     -moz-transition: all 0.7s ease-in-out;
     -o-transition: all 0.7s ease-in-out;
