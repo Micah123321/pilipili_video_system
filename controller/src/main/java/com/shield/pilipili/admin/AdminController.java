@@ -214,7 +214,7 @@ public class AdminController {
     @GetMapping("/admin/account/logout")
     public String logout(HttpSession session){
         session.removeAttribute("userSession");
-        return "page/user/userlogin";
+        return "redirect:/user/login";
     }
     @GetMapping("admin/creative")
     public String toCreative(){

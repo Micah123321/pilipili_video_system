@@ -10,6 +10,11 @@
     <script src="/js/jquery-2.2.3.min.js"></script>
     <script>
         function register() {
+            if (!$('#agree').is(':checked')){
+                alert("请勾选注意事项")
+                return ;
+            }
+
             var userName = $("#userName").val();
             var nickName = $("#nickName").val();
             var upwd = $("#re-upwd").val();
@@ -116,18 +121,18 @@
                     <!----><span>点击获取</span></button>
                 <p data-v-4ec3110e="" class="error-message"></p></div>
             <div data-v-4ec3110e="" class="form-group"><label data-v-4ec3110e="" class="register-agree"><label
-                    data-v-5641f300="" data-v-4ec3110e="" class="check-box checkbox-bwxr"><input data-v-5641f300=""
+                    data-v-5641f300="" data-v-4ec3110e="" class="check-box checkbox-bwxr"><input id="agree" data-v-5641f300=""
                                                                                                  name="agree"
                                                                                                  type="checkbox"></label>
                 我已同意<a data-v-4ec3110e="" target="_blank" href="https://www.bilibili.com/protocal/licence.html">《哔哩哔哩弹幕网用户使用协议》</a>和<a
                         data-v-4ec3110e="" target="_blank" href="https://www.bilibili.com/blackboard/privacy-pc.html">《哔哩哔哩隐私政策》</a></label>
             </div>
             <div data-v-4ec3110e="" class="form-group">
-                <button  onclick="register()" data-v-4ec3110e="" type="button" class="el-button btn-full el-button--primary "
+                <button onclick="register()" data-v-4ec3110e="" type="button" class="el-button btn-full el-button--primary"
                         ><!----><!----><span>注册</span></button>
             </div>
             <div data-v-4ec3110e="" id="register_pc_direct_login" class="register-hidden-gruop text-right"><a
-                    data-v-4ec3110e="" href="/login">已有账号，直接登录&gt;</a></div>
+                    data-v-4ec3110e="" href="/user/login">已有账号，直接登录&gt;</a></div>
         </form> <!----> <!----> <!----></div>
 </div>
 </body>
