@@ -32,7 +32,7 @@ CREATE TABLE `p_barrage` (
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_barrage_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_barrage_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='弹幕表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='弹幕表';
 
 /*Data for the table `p_barrage` */
 
@@ -211,7 +211,7 @@ CREATE TABLE `p_user_info` (
   `experience` int(11) NOT NULL DEFAULT '0' COMMENT '用户经验',
   `user_pic` varchar(200) NOT NULL DEFAULT '/static/uploads/defaultpic.png' COMMENT '用户头像地址',
   `up_desc` varchar(500) DEFAULT NULL COMMENT '用户简介',
-  `username` varchar(50) NOT NULL,
+  `nickName` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `p_user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`)
@@ -219,7 +219,7 @@ CREATE TABLE `p_user_info` (
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`username`) values (1,1,0,3,1,1,'/static/upload/xx.png','这是本站第一个用户',''),(2,2,1,0,1,0,'/static/upload/xxx.png','你好，我是张三',''),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四',''),(4,4,1,0,1,0,'/static/uploads/defaultpic.png',NULL,'');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`) values (1,1,0,3,6,10000,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','micah'),(2,2,1,0,1,0,'/static/upload/xxx.png','你好，我是张三',''),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四',''),(4,4,1,0,1,0,'/static/uploads/defaultpic.png',NULL,'');
 
 /*Table structure for table `p_videos` */
 
@@ -255,7 +255,7 @@ CREATE TABLE `p_videos` (
 
 /*Data for the table `p_videos` */
 
-insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23',NULL,5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23',NULL,1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',0,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23',NULL,1,1);
+insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',0,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',1,1);
 
 /*Table structure for table `p_videos_thumbsup` */
 

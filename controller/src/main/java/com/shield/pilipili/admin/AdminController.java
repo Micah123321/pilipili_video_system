@@ -40,36 +40,44 @@ public class AdminController {
             return "redirect:/user/login";
         }
         Integer uid = userSession.getUserId();
-
-
         model.addAttribute("fansCount",pSubscribeService.getFansById(uid).size());
         model.addAttribute("playCount",pVideosService.getPlayCountById(uid));
         model.addAttribute("comCount",pCommentService.getComCountByUserId(uid));
         model.addAttribute("likeCount",pVideosService.getLikeCountById(uid));
         model.addAttribute("collectCount",pVideosService.getCollectCountById(uid));
         model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(uid));
-        model.addAttribute("jsonObject", getChartData(null,null));
+        model.addAttribute("jsonObject", getChartData(null,null,uid));
         return "page/admin/homePage";
     }
     @GetMapping("admin/home")
-    public String toAdmin(Model model) throws ParseException {
-        model.addAttribute("fansCount",pSubscribeService.getFansById(1).size());
-        model.addAttribute("playCount",pVideosService.getPlayCountById(1));
-        model.addAttribute("comCount",pCommentService.getComCountByUserId(1));
-        model.addAttribute("likeCount",pVideosService.getLikeCountById(1));
-        model.addAttribute("collectCount",pVideosService.getCollectCountById(1));
-        model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(1));
-        model.addAttribute("jsonObject", getChartData(null,null));
+    public String toAdmin(Model model,HttpSession session) throws ParseException {
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            return "redirect:/user/login";
+        }
+        Integer userId = userSession.getUserId();
+        model.addAttribute("fansCount",pSubscribeService.getFansById(userId).size());
+        model.addAttribute("playCount",pVideosService.getPlayCountById(userId));
+        model.addAttribute("comCount",pCommentService.getComCountByUserId(userId));
+        model.addAttribute("likeCount",pVideosService.getLikeCountById(userId));
+        model.addAttribute("collectCount",pVideosService.getCollectCountById(userId));
+        model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(userId));
+        model.addAttribute("jsonObject", getChartData(null,null,userId));
         return "page/admin/homeManagePage";
     }
     @ResponseBody
     @RequestMapping(value = "admin/home/charts", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public String getChartDataByDate(@RequestParam(required = false) String beginDate, @RequestParam(required = false) String endDate) throws ParseException {
+    public String getChartDataByDate(@RequestParam(required = false) String beginDate, @RequestParam(required = false) String endDate,HttpSession session) throws ParseException {
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            return getChartData(null, null,0).toJSONString();
+        }
+        Integer uid = userSession.getUserId();
         if (beginDate != null && endDate != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            return getChartData(simpleDateFormat.parse(beginDate), simpleDateFormat.parse(endDate)).toJSONString();
+            return getChartData(simpleDateFormat.parse(beginDate), simpleDateFormat.parse(endDate),uid).toJSONString();
         } else {
-            return getChartData(null, null).toJSONString();
+            return getChartData(null, null,0).toJSONString();
         }
     }
 
@@ -116,7 +124,7 @@ public class AdminController {
     }
 
     //获取图表的JSON数据
-    private JSONObject getChartData(Date beginDate, Date endDate) throws ParseException {
+    private JSONObject getChartData(Date beginDate, Date endDate,Integer userId) throws ParseException {
         JSONObject jsonObject = new JSONObject();
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         SimpleDateFormat timeSpecial = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.UK);
@@ -147,11 +155,11 @@ public class AdminController {
         int[] orderNotShippedArray = new int[7];//点赞叔祖
         int[] orderUnconfirmedArray = new int[7];//评论数组
         int[] orderSuccessArray = new int[7];//收藏数组
-        List<PSubscribe> fansList = pSubscribeService.getFansByDate(beginDate, endDate, 1);
-        List<PCollectInfo> collectList = pVideosService.getCollectByDate(beginDate, endDate, 1);
-        List<PComment> commentList = pCommentService.getCommentCountByDate(beginDate, endDate, 1);
-        List<PVideosThumbsup> likeList = pVideosService.getLikeByDate(beginDate, endDate, 1);
-        List<PBarrage> barrList = pBarrageService.getBarrCountByDate(beginDate, endDate, 1);
+        List<PSubscribe> fansList = pSubscribeService.getFansByDate(beginDate, endDate, userId);
+        List<PCollectInfo> collectList = pVideosService.getCollectByDate(beginDate, endDate, userId);
+        List<PComment> commentList = pCommentService.getCommentCountByDate(beginDate, endDate, userId);
+        List<PVideosThumbsup> likeList = pVideosService.getLikeByDate(beginDate, endDate, userId);
+        List<PBarrage> barrList = pBarrageService.getBarrCountByDate(beginDate, endDate, userId);
         for (PSubscribe pSubscribe : fansList) {
             int index = 0;
             for (int j = 0; j < dateStr.length; j++) {

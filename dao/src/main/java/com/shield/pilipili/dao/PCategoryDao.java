@@ -6,8 +6,6 @@ import com.shield.pilipili.pojo.vo.PCategoryVo;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 public interface PCategoryDao {
 
     List<PCategoryVo> selectAllCategory();
