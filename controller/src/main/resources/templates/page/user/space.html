@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>个人主页</title>
@@ -15,7 +15,54 @@
     <link href="/css/draft.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/notice.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/info.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/space.css" type="text/css" rel="stylesheet" media="all">
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            getUserInfo = function () {
+                var uid = $("#uid").val()
+                $.ajax({
+                    url: "/user/space/myinfo/",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        uid: uid
+                    },
+                    success: function (data) {
+                        var state = /*[[${session.userSession.userId eq userId?'false':'disabled'}]]*/ 'disabled';
+                        var tbody = $(".h-info");
+                        tbody.empty();
+                        if (data.userId > 0) {
+                            tbody.append("<div class=\"h-avatar\"><img src=\"" + data.userPic + "\" id=\"h-avatar\"></div>\n" +
+                                "                        <div class=\"h-basic\">\n" +
+                                "                            <div class='h'><span id=\"h-name\">" + data.nickName + "</span><span id=\"h-ceritification\" class=\"icon\"></span><span\n" +
+                                "                                    id=\"h-gender\" class=\"icon gender\"></span>\n" +
+                                "                                <a href=\"//www.bilibili.com/html/help.html#k\" target=\"_blank\" lvl=\"" + data.level + "\"\n" +
+                                "                                   class=\"h-level m-level\"></a></div>\n" +
+                                "<div class=\"h-basic-spacing\"><input disabled='"+state+"'  onchange='ajaxDesc()' value='"+data.upDesc+"' id=\"h-sign\" type=\"text\" placeholder=\"编辑个性签名\" maxlength=\"60\" class=\"space_input\"></div>"+
+                                "                        </div>")
+                            if(state=="false"){
+                                $("#h-sign").removeAttr("disabled");
+                            }
+                            $("#n-gz").text(data.subscribeNum);
+                            $("#n-fs").text(data.fansNum);
+                            $("#n-bf").text(data.upPlay);
+                            $("#n-dz").text(data.upLike);
+                            $(".be-textarea_inner").val(data.upSpaceNotice);
+                            $(".uid .text").text(data.id);
+                            $(".birthday .text").text(data.birthday);
+                        }
+                        //显示产品数据
+                    },
+                    beforeSend: function () {
+                    },
+                    error: function (data) {
+                    }
+                });
+            }
+        })
+    </script>
+    <script src="/js/user/space.js"></script>
     <style>.h-avatar {
         position: relative;
         float: left;
@@ -79,7 +126,8 @@
             <div class="h-forbid" style="display: none;">
                 <div class="f-wrap"><i class="f-icon"></i><span class="f-txt">该账号封禁中</span></div>
             </div>
-            <div class="h-inner" style="background-image: url('../images/home.webp');">
+            <div class="h-inner h" style="background-image: url('/images/home.webp');">
+                <input id="uid" type="hidden" th:value="${userId}">
                 <div class="h-gradient"></div>
                 <div class="h-user">
                     <div class="h-info clearfix">
@@ -90,6 +138,9 @@
                                 <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="5"
                                    class="h-level m-level"></a></div>
                         </div>
+                        <div class="h-basic-spacing"><h4 title=":）" class="h-sign" style="display: none;">
+                            :）
+                        </h4><input id="h-sign" type="text" placeholder="编辑个性签名" maxlength="60" class="space_input"></div>
                     </div>
                 </div>
             </div>
@@ -100,21 +151,14 @@
                     <div class="n-tab-links"><a href="/91801122"
                                                 class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span
                             class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
-                            href="/91801122/dynamic" class="n-btn n-dynamic"><span
-                            class="iconfont icon-ic_following"></span><span class="n-text">动态</span></a><a
                             href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
                             class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">
             26
-          </span></a><!----><a href="/91801122/channel/index" class="n-btn n-channel"><span
-                            class="iconfont icon-ic_channel"></span><span class="n-text">频道</span><span class="n-num">
-            0
-          </span></a><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span
+          </span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span
                             class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
             6
           </span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span
-                            class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a><a
-                            href="/91801122/setting" class="n-btn n-setting"><span
-                            class="iconfont icon-ic_setting"></span><span class="n-text">设置</span></a></div>
+                            class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
                     <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
                                                                            class="space_input"><span
                             class="icon search-btn"></span></div>
@@ -127,12 +171,10 @@
                         <p id="n-fs" class="n-data-v space-fans">
                             964
                         </p></a>
-                        <div title="视频、动态、专栏累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
-                            <p id="n-bf" class="n-data-v">699</p></div>
-                        <div title="截止昨天，播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
+                        <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
+                            <p id="n-dz" class="n-data-v">699</p></div>
+                        <div title="播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
                             <p id="n-bf" class="n-data-v">11.6万</p></div>
-                        <div title="截止昨天，阅读数总计为339" class="n-data n-bf"><p class="n-data-k">阅读数</p>
-                            <p id="n-bf" class="n-data-v">339</p></div>
                     </div>
                 </div>
                 <div class="n-cursor" style="width: 50px; left: 20px;"></div>
@@ -147,12 +189,12 @@
                             class="count">15</span><a href="/91801122/video" class="more">更多</a>
                         <div class="be-tab">
                             <ul class="be-tab-inner clearfix">
-                                <li class="be-tab-item is-active"><input type="radio" name="be-tab-0"
+                                <li value="0" class="be-tab-item is-active"><input type="radio" name="be-tab-0"
                                                                          class="be-tab-input"
                                                                          value="pubdate"><span>最新发布</span></li>
-                                <li class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
+                                <li value="1" class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
                                                                value="click"><span>最多播放</span></li>
-                                <li class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
+                                <li value="3" class="be-tab-item"><input type="radio" name="be-tab-0" class="be-tab-input"
                                                                value="stow"><span>最多收藏</span></li>
                             </ul>
                             <div class="be-tab-cursor" style="transform: translateX(0px); width: 48px;"></div>
@@ -242,17 +284,6 @@
                         </div>
                     </div>
                 </div>
-                <div><!---->
-                    <div class="section">
-                        <div class="row user-auth no-auth"><img
-                                src="//s1.hdslb.com/bfs/static/jinkela/space/assets/icon-auth.png"
-                                alt="获得 bilibili 认证，享受多重认证福利！" class="icon-auth">
-                            <div class="no-auth-title"><a href="//account.bilibili.com/account/official/home"
-                                                          title="点此申请 bilibili 认证" target="_blank" class="goto-auth">点此申请
-                                bilibili 认证<em class="icon i-m-ra"></em></a><span>获得 bilibili 认证，享受多重认证福利！</span></div>
-                        </div>
-                    </div>
-                </div>
                 <div class="section i-m">
                     <div class="i-m-r1"><a href="https://member.bilibili.com/platform/home" target="_blank"
                                            class="i-m-title"><span class="icon-i-title"></span><span
@@ -266,7 +297,7 @@
                 </div>
                 <div class="section i-ann"><h3 class="section-title">公告</h3>
                     <div class="content">
-                        <div class="be-textarea be-input--append" id="i-ann-content"><!----><textarea rows="4"
+                        <div class="be-textarea be-input--append" id="i-ann-content"><!----><textarea th:disabled="${session.userSession.userId eq userId?'false':'disabled'}" rows="4"
                                                                                                       type="textarea"
                                                                                                       placeholder="编辑我的空间公告"
                                                                                                       maxlength="150"
@@ -296,5 +327,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

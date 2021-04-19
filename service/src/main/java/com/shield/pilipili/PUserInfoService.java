@@ -6,5 +6,6 @@ public interface PUserInfoService {
     int insertPuserInfo(PUserInfo pUserInfo);
 
     PUserInfo selectByUserId(Integer userid);
+    int updateUserInfo(PUserInfo pUserInfo);
 
 }

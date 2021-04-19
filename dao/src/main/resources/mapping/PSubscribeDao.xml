@@ -20,7 +20,7 @@
       SELECT
         `subscribe_id`,
         `subscribed_id`,
-        `createTime` ,
+        i.`createTime` ,
         `user_id`,
         `subscribeNum`,
         `fansNum`,

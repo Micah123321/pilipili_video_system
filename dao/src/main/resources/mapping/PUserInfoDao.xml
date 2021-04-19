@@ -11,9 +11,12 @@
         <result column="user_pic" jdbcType="VARCHAR" property="userPic"/>
         <result column="up_desc" jdbcType="VARCHAR" property="upDesc"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="up_spaceNotice" jdbcType="VARCHAR" property="upSpaceNotice"/>
+        <result column="createTime" jdbcType="DATE" property="createTime"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_id, subscribeNum, fansNum, `level`, experience, user_pic, up_desc,nickName
+    id, user_id, subscribeNum, fansNum, `level`, experience, user_pic, up_desc,nickName,up_spaceNotice,createTime,birthday
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -154,5 +157,35 @@ VALUES
       up_desc = #{upDesc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="updateUserInfo">
+        update p_user_info
+        <set>
+            <if test="subscribeNum != null">
+                subscribeNum = #{subscribeNum},
+            </if>
+            <if test="fansNum != null">
+                fansNum = #{fansNum},
+            </if>
+            <if test="level != null">
+                `level` = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="experience != null">
+                experience = #{experience,jdbcType=INTEGER},
+            </if>
+            <if test="userPic != null">
+                user_pic = #{userPic,jdbcType=VARCHAR},
+            </if>
+            <if test="upDesc != null">
+                up_desc = #{upDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nickName = #{nickName},
+            </if>
+            <if test="upSpaceNotice != null">
+                up_spaceNotice = #{upSpaceNotice},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
 
 </mapper>

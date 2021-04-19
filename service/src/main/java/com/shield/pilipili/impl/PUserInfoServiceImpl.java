@@ -22,4 +22,9 @@ public class PUserInfoServiceImpl implements PUserInfoService {
     public PUserInfo selectByUserId(Integer userid) {
         return pUserInfoDao.selectByUserId(userid);
     }
+
+    @Override
+    public int updateUserInfo(PUserInfo pUserInfo) {
+        return pUserInfoDao.updateUserInfo(pUserInfo);
+    }
 }

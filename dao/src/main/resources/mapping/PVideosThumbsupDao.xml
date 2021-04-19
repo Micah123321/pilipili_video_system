@@ -15,6 +15,15 @@
     from p_videos_thumbsup
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getAllLikeCountByUid" resultType="int">
+    SELECT
+      SUM(v.video_userid) likeCount
+    FROM
+      `pili`.`p_videos_thumbsup` t,p_videos v
+    WHERE v.`video_pv`=t.`video_id` AND t.`video_id`IN(SELECT video_pv FROM p_videos WHERE video_userid=#{uid})
+      AND v.`video_userid`=#{uid}
+    ORDER BY t.`video_id`
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from p_videos_thumbsup
     where id = #{id,jdbcType=INTEGER}

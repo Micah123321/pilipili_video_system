@@ -1,8 +1,11 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * p_user_info
@@ -55,6 +58,57 @@ public class PUserInfo implements Serializable {
      */
     private String nickName;
 
+    private Integer upPlay;
+    private Integer upLike;
+    /**
+     * 用户公告
+     */
+    private String upSpaceNotice;
+    /**
+     * 创建时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+    /**
+     * 用户生日
+     */
+    @DateTimeFormat(pattern = "MM-dd")
+    @JsonFormat(pattern = "MM-dd")
+    private Date birthday;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getUpSpaceNotice() {
+        return upSpaceNotice;
+    }
+
+    public void setUpSpaceNotice(String upSpaceNotice) {
+        this.upSpaceNotice = upSpaceNotice;
+    }
+
+    public Integer getUpLike() {
+        return upLike;
+    }
+
+    public void setUpLike(Integer upLike) {
+        this.upLike = upLike;
+    }
+
     public PUserInfo(Integer userId, String nickName) {
         this.userId = userId;
         this.nickName = nickName;
@@ -73,6 +127,14 @@ public class PUserInfo implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
+
+    public Integer getUpPlay() {
+        return upPlay;
+    }
+
+    public void setUpPlay(Integer upPlay) {
+        this.upPlay = upPlay;
+    }
 
     public Integer getId() {
         return id;

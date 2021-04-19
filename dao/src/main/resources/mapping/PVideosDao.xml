@@ -90,7 +90,7 @@
             <if test="videoTitle != '' and videoTitle!=null">
                 video_title like CONCAT('%',#{videoTitle},'%')
             </if>
-                <if test="videoState > -1">
+                <if test="videoState > -1 and videoState!=null">
                 and video_state=#{videoState}
             </if>
             <if test="videoType > 1">
