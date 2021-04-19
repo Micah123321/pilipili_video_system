@@ -52,6 +52,11 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
+    public List<PVideosPage> getVideosListByType(PVideosPage pVideosPage) {
+        return pVideosDao.getVideosListByType(pVideosPage);
+    }
+
+    @Override
     public List<PVideos> selectVideosListByUp(PVideosPage pVideosPage) {
         return pVideosDao.selectVideosListByUp(pVideosPage);
     }

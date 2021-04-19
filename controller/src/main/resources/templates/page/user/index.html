@@ -43,7 +43,8 @@
             position: fixed;
             border: black 1px solid;
         }
-        .link p:hover{
+
+        .link p:hover {
             transition: 0.5s all;
             -webkit-transition: 0.5s all;
             color: #00a0d8;
@@ -103,15 +104,6 @@
     <!-- banner-info -->
     <nav class="" id="myScrollspy">
         <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#hotvideo">热门视频</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#newvideo">最新视频</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#gamevideo">游戏视频</a>
-            </li>
         </ul>
     </nav>
     <div class="banner-agileinfo">
@@ -141,18 +133,21 @@
                             </div>
                         </div>
                         <ul class="navbar-default navbar-nav navbar-right">
-                            <li><img id="imgcircle" style=";margin-top:-10px;width:50%;width: 50%;" class="img-circle" alt="">
+                            <li><img id="imgcircle" style=";margin-top:-10px;width:50%;width: 50%;" class="img-circle"
+                                     alt="">
                                 <div role="tooltip" id="van-popover-9985" aria-hidden="true"
                                      class="van-popover van-popper van-popper-nav van-popper-avatar" tabindex="0"
-                                     style="transition: 0.5s all;width: 280px;margin-top:-20px;margin-left: 125px; transform-origin: center top; z-index: 2037;"><!---->
-                                    <div  data-v-59fd5a91="" class="vp-container hidden"><a data-v-59fd5a91=""
-                                                                                    href="//space.bilibili.com"
-                                                                                    target="_blank" class="avatar">
+                                     style="transition: 0.5s all;width: 280px;margin-top:-20px;margin-left: 125px; transform-origin: center top; z-index: 2037;">
+                                    <!---->
+                                    <div data-v-59fd5a91="" class="vp-container hidden"><a data-v-59fd5a91=""
+                                                                                           href="//space.bilibili.com"
+                                                                                           target="_blank"
+                                                                                           class="avatar">
                                         <div class="bili-avatar">
                                             <img class="bili-avatar-img bili-avatar-face bili-avatar-img-radius"
-                                                 data-src="https://i2.hdslb.com/bfs/face/50419aa893e99d014af3758ac270fcb541bf712c.jpg@160w_160h_1c.webp"
+                                                 data-src=50419aa893e99d014af3758ac270fcb541bf712c.jpg@160w_160h_1c.webp"
                                                  alt=""
-                                                 src="https://i2.hdslb.com/bfs/face/50419aa893e99d014af3758ac270fcb541bf712c.jpg@160w_160h_1c.webp">
+                                                 src=50419aa893e99d014af3758ac270fcb541bf712c.jpg@160w_160h_1c.webp">
 
 
                                             <span class="bili-avatar-icon"></span>
@@ -252,322 +247,1012 @@
 <!-- Popular -->
 <!-- news -->
 <div id="news" class="w3ls-section services news">
-    <div class="container" style="padding: 0 60px">
-        <div class="col-md-8">
-            <h3 id="hotvideo" class="agileits-title">
-                <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                     class="bi bi-easel" viewBox="0 0 16 16">
-                    <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
-                </svg>&nbsp;热门视频
+    <div class="container videoBody" style="padding: 0 60px">
+        <div class="videoList">
+            <div class="col-md-8">
+                <h3 id="hotvideo" class="agileits-title">
+                    <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                         fill="currentColor"
+                         class="bi bi-easel" viewBox="0 0 16 16">
+                        <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+                    </svg>&nbsp;热门视频
 
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button>
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 更多
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-forward"
+                             viewBox="0 0 16 16">
+                            <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                        </svg>
+                    </button>
 
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 换一组
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle"
-                         viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
-                    </svg>
-                </button>
-            </h3>
-            <div class="news-agileinfo">
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 换一组
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-shuffle"
+                             viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+                        </svg>
+                    </button>
+                </h3>
+                <div class="news-agileinfo">
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
                     </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rank-list">
+                    <header class="rank-header"><span class="name">排行榜</span>
+                        <button type="button" style="font-family: 宋体;float:right;margin-right: 5px"
+                                class="btn btn-primary"
+                                data-toggle="button"> 更多
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-forward"
+                                 viewBox="0 0 16 16">
+                                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                            </svg>
+                        </button>
+                    </header>
+                    <div class="rank-wrap">
+                        <span class="number on">1</span>
+                        <div class="preview">
+                            <div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a>
+                                <div class="watch-later-video van-watchlater black"><span class="wl-tips"
+                                                                                          style="display: none;"></span>
+                                </div>
+                            </div>
+                            <div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                            </a><span>综合得分：159.7万</span></div>
+                        </div>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                                    <p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">2</span><a
+                            href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p
+                            title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="///bfs/archive/574c710d57168a720b261bb2be607d887b866185.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p>
+                                    <p class="subtitle"><span class="name">兔鸡是个大聪明</span><span
+                                            class="point">·</span><span class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">3</span><a
+                            href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p
+                            title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    alt="">
+                                <div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p>
+                                    <p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai"
+                                                                           target="_blank" class="link"><p
+                            title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p>
+                                    <p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span
+                                            class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp"
+                                                                           target="_blank" class="link"><p
+                            title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of
+                        Darkness》</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p>
+                                    <p class="subtitle"><span class="name">Ragnar天曦</span><span
+                                            class="point">·</span><span class="time">2021-04-07</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp"
+                                                                           target="_blank" class="link"><p
+                            title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p>
+                                    <p class="subtitle"><span class="name">瓶子君152</span><span
+                                            class="point">·</span><span class="time">2021-04-10</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C"
+                                                                           target="_blank" class="link"><p
+                            title="别说了！快给我变！" class="title">别说了！快给我变！</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">别说了！快给我变！</p>
+                                    <p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS"
+                                                                           target="_blank" class="link"><p
+                            title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p>
+                                    <p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7"
+                                                                           target="_blank" class="link"><p
+                            title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p>
+                                    <p class="subtitle"><span class="name">努力的Lorre</span><span
+                                            class="point">·</span><span class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un"
+                                                                            target="_blank" class="link"><p
+                            title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p>
+                                    <p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span
+                                            class="time">2021-04-13</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="rank-list"><header class="rank-header"><span class="name">排行榜</span><button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button></header><div class="rank-wrap"><span class="number on">1</span><div class="preview"><div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a><div class="watch-later-video van-watchlater black"><span class="wl-tips" style="display: none;"></span></div></div><div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p></a><span>综合得分：159.7万</span></div></div><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p><p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">2</span><a href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/574c710d57168a720b261bb2be607d887b866185.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p><p class="subtitle"><span class="name">兔鸡是个大聪明</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">3</span><a href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/a3ebbe18fe61df87cb0457b398f37cefd8f6e89c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p><p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai" target="_blank" class="link"><p title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p><p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp" target="_blank" class="link"><p title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p><p class="subtitle"><span class="name">Ragnar天曦</span><span class="point">·</span><span class="time">2021-04-07</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp" target="_blank" class="link"><p title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p><p class="subtitle"><span class="name">瓶子君152</span><span class="point">·</span><span class="time">2021-04-10</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C" target="_blank" class="link"><p title="别说了！快给我变！" class="title">别说了！快给我变！</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">别说了！快给我变！</p><p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS" target="_blank" class="link"><p title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p><p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7" target="_blank" class="link"><p title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p><p class="subtitle"><span class="name">努力的Lorre</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un" target="_blank" class="link"><p title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p><p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span class="time">2021-04-13</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li></ul></div></div></div></div>
-        </div>
-        
-        
+        <div class="videoList">
+            <div class="col-md-8">
+                <h3 id="newvideo" class="agileits-title">
+                    <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                         fill="currentColor"
+                         class="bi bi-easel" viewBox="0 0 16 16">
+                        <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+                    </svg>&nbsp;最新视频
 
-        <div class="col-md-8">
-            <h3 id="newvideo" class="agileits-title">
-                <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                     class="bi bi-easel" viewBox="0 0 16 16">
-                    <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
-                </svg>&nbsp;最新视频
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 更多
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-forward"
+                             viewBox="0 0 16 16">
+                            <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                        </svg>
+                    </button>
 
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button>
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 换一组
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-shuffle"
+                             viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+                        </svg>
+                    </button>
+                </h3>
+                <div class="news-agileinfo">
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rank-list">
+                    <header class="rank-header"><span class="name">排行榜</span>
+                        <button type="button" style="font-family: 宋体;float:right;margin-right: 5px"
+                                class="btn btn-primary"
+                                data-toggle="button"> 更多
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-forward"
+                                 viewBox="0 0 16 16">
+                                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                            </svg>
+                        </button>
+                    </header>
+                    <div class="rank-wrap"><span class="number on">1</span>
+                        <div class="preview">
+                            <div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a>
+                                <div class="watch-later-video van-watchlater black"><span class="wl-tips"
+                                                                                          style="display: none;"></span>
+                                </div>
+                            </div>
+                            <div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                            </a><span>综合得分：159.7万</span></div>
+                        </div>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                                    <p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">2</span><a
+                            href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p
+                            title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    alt="">
+                                <div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p>
+                                    <p class="subtitle"><span class="name">兔鸡是个大聪明</span><span
+                                            class="point">·</span><span class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">3</span><a
+                            href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p
+                            title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    alt="">
+                                <div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p>
+                                    <p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai"
+                                                                           target="_blank" class="link"><p
+                            title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p>
+                                    <p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span
+                                            class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp"
+                                                                           target="_blank" class="link"><p
+                            title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of
+                        Darkness》</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p>
+                                    <p class="subtitle"><span class="name">Ragnar天曦</span><span
+                                            class="point">·</span><span class="time">2021-04-07</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp"
+                                                                           target="_blank" class="link"><p
+                            title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p>
+                                    <p class="subtitle"><span class="name">瓶子君152</span><span
+                                            class="point">·</span><span class="time">2021-04-10</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C"
+                                                                           target="_blank" class="link"><p
+                            title="别说了！快给我变！" class="title">别说了！快给我变！</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">别说了！快给我变！</p>
+                                    <p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS"
+                                                                           target="_blank" class="link"><p
+                            title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p>
+                                    <p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7"
+                                                                           target="_blank" class="link"><p
+                            title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p>
+                                    <p class="subtitle"><span class="name">努力的Lorre</span><span
+                                            class="point">·</span><span class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un"
+                                                                            target="_blank" class="link"><p
+                            title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p>
+                                    <p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span
+                                            class="time">2021-04-13</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 换一组
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle"
-                         viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
-                    </svg>
-                </button>
-            </h3>
-            <div class="news-agileinfo">
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="rank-list"><header class="rank-header"><span class="name">排行榜</span><button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button></header><div class="rank-wrap"><span class="number on">1</span><div class="preview"><div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a><div class="watch-later-video van-watchlater black"><span class="wl-tips" style="display: none;"></span></div></div><div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p></a><span>综合得分：159.7万</span></div></div><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p><p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">2</span><a href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/574c710d57168a720b261bb2be607d887b866185.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p><p class="subtitle"><span class="name">兔鸡是个大聪明</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">3</span><a href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/a3ebbe18fe61df87cb0457b398f37cefd8f6e89c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p><p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai" target="_blank" class="link"><p title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p><p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp" target="_blank" class="link"><p title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p><p class="subtitle"><span class="name">Ragnar天曦</span><span class="point">·</span><span class="time">2021-04-07</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp" target="_blank" class="link"><p title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p><p class="subtitle"><span class="name">瓶子君152</span><span class="point">·</span><span class="time">2021-04-10</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C" target="_blank" class="link"><p title="别说了！快给我变！" class="title">别说了！快给我变！</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">别说了！快给我变！</p><p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS" target="_blank" class="link"><p title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p><p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7" target="_blank" class="link"><p title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p><p class="subtitle"><span class="name">努力的Lorre</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un" target="_blank" class="link"><p title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p><p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span class="time">2021-04-13</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li></ul></div></div></div></div>
 
-        </div>
+        <div class="videoList">
+            <div class="col-md-8">
+                <h3 id="gamevideo" class="agileits-title">
+                    <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                         fill="currentColor"
+                         class="bi bi-easel" viewBox="0 0 16 16">
+                        <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
+                    </svg>&nbsp;游戏视频
 
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 更多
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-forward"
+                             viewBox="0 0 16 16">
+                            <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                        </svg>
+                    </button>
 
+                    <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
+                            data-toggle="button"> 换一组
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-shuffle"
+                             viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+                        </svg>
+                    </button>
+                </h3>
+                <div class="news-agileinfo">
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 news-w3lgrids">
+                        <div class="news-w3img">
+                            <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
+                        </div>
+                        <div class="news-w3imgtext ">
+                            <p>这是标题</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rank-list">
+                    <header class="rank-header"><span class="name">排行榜</span>
+                        <button type="button" style="font-family: 宋体;float:right;margin-right: 5px"
+                                class="btn btn-primary"
+                                data-toggle="button"> 更多
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-forward"
+                                 viewBox="0 0 16 16">
+                                <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
+                            </svg>
+                        </button>
+                    </header>
+                    <div class="rank-wrap"><span class="number on">1</span>
+                        <div class="preview">
+                            <div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a>
+                                <div class="watch-later-video van-watchlater black"><span class="wl-tips"
+                                                                                          style="display: none;"></span>
+                                </div>
+                            </div>
+                            <div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank"
+                                                class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                            </a><span>综合得分：159.7万</span></div>
+                        </div>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p>
+                                    <p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">2</span><a
+                            href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p
+                            title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    alt="">
+                                <div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p>
+                                    <p class="subtitle"><span class="name">兔鸡是个大聪明</span><span
+                                            class="point">·</span><span class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number on">3</span><a
+                            href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p
+                            title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="///bfs/archive/a3ebbe18fe61df87cb0457b398f37cefd8f6e89c.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p>
+                                    <p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span
+                                            class="time">2021-04-12</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai"
+                                                                           target="_blank" class="link"><p
+                            title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p>
+                                    <p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span
+                                            class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp"
+                                                                           target="_blank" class="link"><p
+                            title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of
+                        Darkness》</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p>
+                                    <p class="subtitle"><span class="name">Ragnar天曦</span><span
+                                            class="point">·</span><span class="time">2021-04-07</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp"
+                                                                           target="_blank" class="link"><p
+                            title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p>
+                                    <p class="subtitle"><span class="name">瓶子君152</span><span
+                                            class="point">·</span><span class="time">2021-04-10</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C"
+                                                                           target="_blank" class="link"><p
+                            title="别说了！快给我变！" class="title">别说了！快给我变！</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">别说了！快给我变！</p>
+                                    <p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS"
+                                                                           target="_blank" class="link"><p
+                            title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p>
+                                    <p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span
+                                            class="time">2021-04-11</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7"
+                                                                           target="_blank" class="link"><p
+                            title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p>
+                                    <p class="subtitle"><span class="name">努力的Lorre</span><span
+                                            class="point">·</span><span class="time">2021-04-14</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un"
+                                                                            target="_blank" class="link"><p
+                            title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a>
+                        <div class="popover-video-card pvc" style="display: none;">
+                            <div class="content"><img
+                                    src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp"
+                                    alt="">
+                                <div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p>
+                                    <p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span
+                                            class="time">2021-04-13</span></p></div>
+                            </div>
+                            <div class="count">
+                                <ul>
+                                    <li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li>
+                                    <li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-md-8">
-            <h3 id="gamevideo" class="agileits-title">
-                <svg style="color: #03a9f4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                     class="bi bi-easel" viewBox="0 0 16 16">
-                    <path d="M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z"/>
-                </svg>&nbsp;游戏视频
-
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button>
-
-                <button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 换一组
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle"
-                         viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
-                    </svg>
-                </button>
-            </h3>
-            <div class="news-agileinfo">
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/1.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/5.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a9.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a2.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="col-sm-3 news-w3lgrids">
-                    <div class="news-w3img">
-                        <img src="../images/a3.jpg" class="img-responsive zoom-img" alt=""/>
-                    </div>
-                    <div class="news-w3imgtext ">
-                        <p>这是标题</p>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="rank-list"><header class="rank-header"><span class="name">排行榜</span><button type="button" style="font-family: 宋体;float:right;margin-right: 5px" class="btn btn-primary"
-                        data-toggle="button"> 更多
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-forward"
-                         viewBox="0 0 16 16">
-                        <path d="M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z"/>
-                    </svg>
-                </button></header><div class="rank-wrap"><span class="number on">1</span><div class="preview"><div class="pic"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt="用火影告诉你《进击的巨人》大结局有多狗血！"></a><div class="watch-later-video van-watchlater black"><span class="wl-tips" style="display: none;"></span></div></div><div class="txt"><a href="//www.bilibili.com/video/BV18i4y1A7GR" target="_blank" class="link"><p title="用火影告诉你《进击的巨人》大结局有多狗血！">用火影告诉你《进击的巨人》大结局有多狗血！</p></a><span>综合得分：159.7万</span></div></div><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/fb3a85715454c148c5d24bf7c4b3b733e5963d65.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">用火影告诉你《进击的巨人》大结局有多狗血！</p><p class="subtitle"><span class="name">锅盖哒</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>117.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>4390</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.4万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.7万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">2</span><a href="//www.bilibili.com/video/BV1kZ4y1c7P6" target="_blank" class="link"><p title="我只会心疼哥♀斯拉 ~" class="title">我只会心疼哥♀斯拉 ~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/574c710d57168a720b261bb2be607d887b866185.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">我只会心疼哥♀斯拉 ~</p><p class="subtitle"><span class="name">兔鸡是个大聪明</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>149.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1142</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.9万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.3万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number on">3</span><a href="//www.bilibili.com/video/BV1zX4y1g7y9" target="_blank" class="link"><p title="当奥特曼听说B站上架了奥特曼后" class="title">当奥特曼听说B站上架了奥特曼后</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i2.hdslb.com/bfs/archive/a3ebbe18fe61df87cb0457b398f37cefd8f6e89c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">当奥特曼听说B站上架了奥特曼后</p><p class="subtitle"><span class="name">南宫星宇</span><span class="point">·</span><span class="time">2021-04-12</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>78.3万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1258</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>3.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">4</span><a href="//www.bilibili.com/video/BV1Yb4y1D7ai" target="_blank" class="link"><p title="22娘：我只会心疼哥哥~" class="title">22娘：我只会心疼哥哥~</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/0feca08d856db6c6e05bdc78252f1116b8b57614.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">22娘：我只会心疼哥哥~</p><p class="subtitle"><span class="name">空耳狂魔</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>86.5万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>481</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.1万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>1.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">5</span><a href="//www.bilibili.com/video/BV1hX4y1g7pp" target="_blank" class="link"><p title="【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》" class="title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/5ba59f61127a6a57b28cb72f8d6ca611bfe44e40.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【毕业设计】【动画短片】《冲破黑暗 Out of Darkness》</p><p class="subtitle"><span class="name">Ragnar天曦</span><span class="point">·</span><span class="time">2021-04-07</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>221.4万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>8779</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>16.2万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>36.9万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">6</span><a href="//www.bilibili.com/video/BV1j54y1b7Wp" target="_blank" class="link"><p title="顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局" class="title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/c4d1b5eba0342f1b9f1cb3f5de15e547f45e5f33.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">顶级烂完！海的这边是小丑！直球吐槽进击的巨人结局</p><p class="subtitle"><span class="name">瓶子君152</span><span class="point">·</span><span class="time">2021-04-10</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>485.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>2.1万</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>10.8万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>28.2万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">7</span><a href="//www.bilibili.com/video/BV18v411876C" target="_blank" class="link"><p title="别说了！快给我变！" class="title">别说了！快给我变！</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/ffac13b03e07dad778953377b7673f2360cb2c31.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">别说了！快给我变！</p><p class="subtitle"><span class="name">须賀圭介</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>52.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1288</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>2.3万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.6万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">8</span><a href="//www.bilibili.com/video/BV1p64y1m7VS" target="_blank" class="link"><p title="【定格动画】鲸（第二版） 改了个燃一点的背景音乐" class="title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/04783b24bd5b8deabecd5a05505b0e586c457254.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">【定格动画】鲸（第二版） 改了个燃一点的背景音乐</p><p class="subtitle"><span class="name">梦幻-手绘</span><span class="point">·</span><span class="time">2021-04-11</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>39.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>347</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4.8万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">9</span><a href="//www.bilibili.com/video/BV1BZ4y1c7W7" target="_blank" class="link"><p title="漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子" class="title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i1.hdslb.com/bfs/archive/c5b27eece14f3261bccc3126b62311f290e43a5b.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">漫威最“漂亮”的反恐战争，复仇者沦为美国霸权的棋子</p><p class="subtitle"><span class="name">努力的Lorre</span><span class="point">·</span><span class="time">2021-04-14</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>46.1万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>1110</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>6817</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>2.0万</span></li></ul></div></div></div><div class="rank-wrap"><span class="number">10</span><a href="//www.bilibili.com/video/BV1vZ4y1c7Un" target="_blank" class="link"><p title="“被改造成这鬼样，我憎恨人类，除了你以外”" class="title">“被改造成这鬼样，我憎恨人类，除了你以外”</p></a><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="//i0.hdslb.com/bfs/archive/53dae3044dc9274efbae429f62f9887f075bbe8c.jpg@112w_63h_1c_100q.webp" alt=""><div class="info"><p class="f-title">“被改造成这鬼样，我憎恨人类，除了你以外”</p><p class="subtitle"><span class="name">死肥宅东</span><span class="point">·</span><span class="time">2021-04-13</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>55.9万</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>384</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>1.5万</span></li><li><i class="bilifont bili-icon_shipin_yingbishu"></i><span>4838</span></li></ul></div></div></div></div>
-
-        </div>
-
     </div>
 </div>
 

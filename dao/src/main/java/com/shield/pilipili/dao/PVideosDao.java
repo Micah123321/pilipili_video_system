@@ -56,6 +56,8 @@ public interface PVideosDao {
 
     int insert(PVideos record);
 
+    List<PVideosPage> getVideosListByType(PVideosPage pVideosPage);
+
     /**
      * 视频模糊查询
      * @param videoTitle 视频标题

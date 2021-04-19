@@ -31,6 +31,8 @@ public interface PVideosService {
     List<PCollectInfo> getCollectByDate(Date beginDate, Date endDate, int userId);
     List<PVideosThumbsup> getLikeByDate(Date beginDate,  Date endDate, int userId);
 
+    List<PVideosPage> getVideosListByType(PVideosPage pVideosPage);
+
     List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
     /**
      * 视频模糊查询

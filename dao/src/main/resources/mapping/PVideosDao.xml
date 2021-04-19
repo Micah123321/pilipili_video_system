@@ -63,6 +63,59 @@
           AND v.`video_userid` = #{userId}
         GROUP BY DATE_FORMAT(`createTime`, '%Y-%m-%d')
     </select>
+    <select id="getVideosListByType" resultType="com.shield.pilipili.pojo.PVideos">
+        SELECT
+        `video_pv` videoPv,
+        `video_userid` videoUserid,
+        `video_title` videoTitle,
+        `video_url` videoUrl,
+        `video_play` videoPlay,
+        `video_like`videoLike,
+        `video_collect` videoCollect,
+        `video_desc` videoDesc,
+        `video_state` videoState,
+        `video_updatetime` videoUpdatetime,
+        `video_checkuid` videoCheckuid,
+        `video_checktime` videoChecktime,
+        `video_releasetime` videoReleasetime,
+        `video_type` videoType,
+        `video_time` videoTime,
+        `video_image` videoImage,
+        `video_comment` videoComment,
+        `video_barrage` videoBarrage,
+        c.parentId videoParentType,
+        c.categoryName typeName
+        from
+        p_videos v,p_category c
+        <where>
+            <if test="videoType > 1">
+               v.video_type=#{videoType}
+            </if>
+            and c.id=video_type
+        </where>
+        order by
+        <choose>
+            <when test="orderBy == 0 ">
+                video_releasetime
+            </when>
+            <when test="orderBy == 1 ">
+                video_play
+            </when>
+            <when test="orderBy == 2 ">
+                video_comment
+            </when>
+            <when test="orderBy == 3 ">
+                video_collect
+            </when>
+            <when test="orderBy == 4 ">
+                video_barrage
+            </when>
+        </choose>
+        desc
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
+    </select>
     <select id="selectVideosListByUp" resultType="com.shield.pilipili.pojo.PVideos">
         SELECT
         `video_pv` videoPv,
