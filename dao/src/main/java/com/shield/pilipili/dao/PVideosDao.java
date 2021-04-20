@@ -66,5 +66,15 @@ public interface PVideosDao {
      */
     List<PVideos> getPVideosPageList(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid,@Param("order") OrderUtil order);
 
+    /**
+     * 视频个数查询
+     * @param videoTitle
+     * @param videoTime
+     * @param videoTimeEnd
+     * @param type
+     * @param categoryId
+     * @param pid
+     * @return
+     */
     int getPVideosPageListCount(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid);
 }

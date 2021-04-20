@@ -1,5 +1,6 @@
 package com.shield.pilipili.user;
 
+import com.github.pagehelper.PageInfo;
 import com.shield.pilipili.OrderUtil;
 import com.shield.pilipili.PCategoryService;
 import com.shield.pilipili.PVideosService;
@@ -27,13 +28,6 @@ public class SearchController {
     }
 
     @ResponseBody
-    @GetMapping("/list/{videoTitle}")
-    public Object getPVideosPageList(@PathVariable String videoTitle){
-        List<PVideos> pVideosPageList = pVideosService.getPVideosPageList(videoTitle, null,null, 0,0,0,new OrderUtil(0,false));
-        return pVideosPageList;
-    }
-
-    @ResponseBody
     @GetMapping("/category/{parentId}")
     public Object getPCategoryBy(@PathVariable Integer parentId){
         List<PCategory> pCategoryBy = pCategoryService.getPCategoryBy(parentId);
@@ -42,8 +36,8 @@ public class SearchController {
 
     @ResponseBody
     @GetMapping("/common")
-    public Object getPCategoryByCommon(String videoTitle, Integer order, String videoTime,String videoTimeEnd,Integer type,Integer category,Integer pid){
-        List<PVideos> pVideosPageList = pVideosService.getPVideosPageList(videoTitle, videoTime, videoTimeEnd,type,category,pid, new OrderUtil(order, true));
+    public Object getPCategoryByCommon(String videoTitle,@RequestParam(defaultValue = "0") Integer order, String videoTime,String videoTimeEnd,Integer type,Integer category,Integer pid,@RequestParam(defaultValue = "1") Integer currPage,@RequestParam(defaultValue = "2")Integer pageSize){
+        PageInfo<PVideos> pVideosPageList = pVideosService.getPVideosPageList(videoTitle, videoTime, videoTimeEnd,type,category,pid, new OrderUtil(order, true),currPage,pageSize);
         return pVideosPageList;
     }
 }

@@ -369,7 +369,7 @@
                 order by video_pv desc
             </when>
             <when test="order.orderBy == 1">
-                order by video_play
+               order by video_play
                 <if test="order.isDesc">desc</if>
             </when>
             <when test="order.orderBy == 2">
@@ -385,6 +385,43 @@
                 <if test="order.isDesc">desc</if>
             </when>
         </choose>
+    </select>
+
+    <select id="getPVideosPageListCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select
+        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_desc, video_state, video_updatetime, video_checkuid, video_checktime,video_time,video_releasetime,
+        video_type,video_comment,video_barrage,video_image, id, categoryName, parentId, createdBy, creationTime,
+        modifyBy, modifyDate,
+        uid, userName, phone, upwd, utype
+        from p_videos
+        left join p_category on video_type = id
+        left join p_user on video_userid = uid
+        <where>
+            <if test="videoTitle != null and videoTitle != ''">
+                and video_title like CONCAT('%',#{videoTitle},'%')
+            </if>
+            <choose>
+                <when test="videoTime != null and type == null">
+                    and video_time &gt;= #{videoTime} and video_time &lt;= #{videoTimeEnd}
+                </when>
+                <when test="videoTime != null and type == 1">
+                    and video_time &gt; #{videoTime}
+                </when>
+                <when test="videoTime != null and type == 2">
+                    and video_time &lt; #{videoTime}
+                </when>
+            </choose>
+            <choose>
+                <when test="categoryId != null and pid == 1">
+                    and (video_type = #{categoryId}
+                    OR parentId = #{categoryId})
+                </when>
+                <when test="categoryId != null and pid == 2">
+                    and video_type = #{categoryId}
+                </when>
+            </choose>
+        </where>
     </select>
 
 </mapper>
