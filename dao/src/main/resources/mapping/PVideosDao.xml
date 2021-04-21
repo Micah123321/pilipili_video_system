@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PVideosDao">
-    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PVideos">
-        <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
-        <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
-        <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
-        <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
-        <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
-        <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
-        <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
-        <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
-        <result column="video_state" jdbcType="INTEGER" property="videoState"/>
-        <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
-        <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
-        <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
-        <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
-        <result column="video_type" jdbcType="BIGINT" property="videoType"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect,
-    video_desc, video_state, video_updatetime, video_checkuid, video_checktime, video_releasetime,
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from p_videos
-        where video_pv = #{videoPv,jdbcType=INTEGER}
-    </select>
     <select id="getPlayCountById" resultType="java.lang.Integer">
         SELECT SUM(video_play) video_play
         FROM `pili`.`p_videos`
@@ -143,7 +117,7 @@
             <if test="videoTitle != '' and videoTitle!=null">
                 video_title like CONCAT('%',#{videoTitle},'%')
             </if>
-                <if test="videoState > -1 and videoState!=null">
+                <if test="videoState > -1">
                 and video_state=#{videoState}
             </if>
             <if test="videoType > 1">
@@ -422,7 +396,7 @@
                 order by video_pv desc
             </when>
             <when test="order.orderBy == 1">
-               order by video_play
+                order by video_play
                 <if test="order.isDesc">desc</if>
             </when>
             <when test="order.orderBy == 2">

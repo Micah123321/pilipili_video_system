@@ -36,14 +36,6 @@ public interface PVideosDao {
     int getCollectCountById(int id);
 
     List<PCollectInfo> getCollectByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
-
-    /**
-     * 获得点赞数组数据
-     * @param beginDate
-     * @param endDate
-     * @param userId
-     * @return
-     */
     List<PVideosThumbsup> getLikeByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
 
     List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
@@ -79,4 +71,10 @@ public interface PVideosDao {
      * @return
      */
     int getPVideosPageListCount(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid);
+    int updateByPrimaryKeySelective(PVideos record);
+
+    int updateByPrimaryKey(PVideos record);
+    List<PVideos> selectzr();
+    List<PVideos> selectzx();
+    List<PVideos> selectyx();
 }
