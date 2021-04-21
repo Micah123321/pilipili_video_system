@@ -2,7 +2,28 @@ $(function () {
     initZone();
     common(0,"","","","","");
 })
+$(function () {
+    $(".btn-search").click(function () {
+        goSearch()
+    })
+    goSearch=function () {
+        var videoTitle = $("input[type=text]").val();
+        location.href = "/search/goSearch?videoTitle=" + videoTitle;
+    }
+})
 
+function onKeyDown(event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 27) { // 按 Esc
+        //要做的事情
+    }
+    if (e && e.keyCode == 113) { // 按 F2
+        //要做的事情
+    }
+    if (e && e.keyCode == 13) { // enter 键
+        goSearch()
+    }
+}
 function flashPage(index,totalPageCount) {
     $(".pager").empty();
     var pageDiv = $(".pager");
@@ -42,19 +63,6 @@ function goto(curr) {
 
 
 //搜索框键盘响应
-function onKeyDown(event) {
-    var e = event || window.event || arguments.callee.caller.arguments[0];
-    if (e && e.keyCode == 27) { // 按 Esc
-        //要做的事情
-    }
-    if (e && e.keyCode == 113) { // 按 F2
-        //要做的事情
-    }
-    if (e && e.keyCode == 13) { // enter 键
-        var videoTitle = $("input[type=text]").val();
-        location.href = "/search/goSearch/" + videoTitle;
-    }
-}
 
 //分区的一级分类
 function initZone() {
@@ -230,7 +238,7 @@ function common(order, videoTime, videoTimeEnd, type, id,pid) {
                 var videos = videosList[i];
                 ul += " <li style='border-radius: 10px;border: 1px solid #727272;' class='video-item matrix'>" +
                     " <a href='' title='" + videos.videoTitle + "' target='_blank' class='img-anchor'>" +
-                    " <div class='img'><div class='lazy-img'><img class='img-rounded img-responsive' style='width: 320px;height: 200px' alt='' src='" + videos.videoImage + "'></div>" +
+                    " <div class='img'><div class='lazy-img'><img class='img-rounded img-responsive' style='width: 168px;height: 100px' alt='' src='" + videos.videoImage + "'></div>" +
                     " <span class='so-imgTag_rb'>" + videos.videoTime + "</span>" +
                     " <div class='watch-later-trigger watch-later'></div>" +
                     " <span class='mask-video'></span></div>" +

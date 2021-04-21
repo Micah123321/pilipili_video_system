@@ -21,8 +21,8 @@ public class SearchController {
     @Resource
     private PVideosService pVideosService;
 
-    @RequestMapping("/goSearch/{videoTitle}")
-    public String goSearch(@PathVariable String videoTitle, Model model){
+    @RequestMapping("/goSearch")
+    public String goSearch(@RequestParam(defaultValue = "",required = false) String videoTitle, Model model){
         model.addAttribute("videoTitle",videoTitle);
         return "page/user/search";
     }
@@ -36,7 +36,7 @@ public class SearchController {
 
     @ResponseBody
     @GetMapping("/common")
-    public Object getPCategoryByCommon(String videoTitle,@RequestParam(defaultValue = "0") Integer order, String videoTime,String videoTimeEnd,Integer type,Integer category,Integer pid,@RequestParam(defaultValue = "1") Integer currPage,@RequestParam(defaultValue = "2")Integer pageSize){
+    public Object getPCategoryByCommon(String videoTitle,@RequestParam(defaultValue = "0") Integer order, String videoTime,String videoTimeEnd,Integer type,Integer category,Integer pid,@RequestParam(defaultValue = "1") Integer currPage,@RequestParam(defaultValue = "15")Integer pageSize){
         PageInfo<PVideos> pVideosPageList = pVideosService.getPVideosPageList(videoTitle, videoTime, videoTimeEnd,type,category,pid, new OrderUtil(order, true),currPage,pageSize);
         return pVideosPageList;
     }

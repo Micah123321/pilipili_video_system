@@ -668,6 +668,13 @@ h4.stats-info {
 .news-w3imgtext {
     padding: 1em 1.25em;
     text-align: center;
+
+}
+.news-w3imgtext p{
+    width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
 
 .news h5 {
@@ -1800,6 +1807,7 @@ h2.typoh2 {
     }
 
     .news-w3imgtext {
+
         padding: 2em 1.5em;
     }
 

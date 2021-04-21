@@ -16,7 +16,7 @@
     <script src="/js/jquery-2.2.3.min.js"></script>
     <script src="/js/search.js"></script>
     <style>
-        .search-logo{
+        .search-logo {
             background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/assets/sprite-690be8a6ea.png);
             background-position: -261px -72px;
             width: 131px;
@@ -27,6 +27,7 @@
             position: relative;
             top: -10px;
         }
+
         v-switcher-header-tabs {
             overflow: hidden;
             height: 100%;
@@ -35,6 +36,7 @@
             -ms-flex-order: 1;
             order: 1;
         }
+
         v-switcher-header {
             position: relative;
             font-size: 0;
@@ -43,11 +45,14 @@
             margin: 0;
             white-space: nowrap;
             -ms-flex-positive: 1;
-            flex-grow: 1;}
+            flex-grow: 1;
+        }
+
         .v-switcher-header-item {
             border-bottom: 1px solid #ccd0d7;
             box-sizing: border-box;
         }
+
         .v-switcher-header-item {
             display: inline-block;
             text-align: center;
@@ -56,14 +61,17 @@
             vertical-align: middle;
             white-space: nowrap;
         }
+
         .v-switcher-header-item a {
             color: #000;
             font-size: 16px;
             display: block;
         }
+
         .v-switcher-header-item .router-link-active {
             color: #00a1d6;
         }
+
         .v-switcher-header-item {
             display: inline-block;
             text-align: center;
@@ -72,11 +80,22 @@
             vertical-align: middle;
             white-space: nowrap;
         }
+
         .video-item.matrix .headline {
             margin-bottom: 12px;
-            height: 40px;
             overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap:break-word;
         }
+
+        .video-item.matrix .headline a {
+            word-wrap:break-word;
+            width: 160px;
+            height: 40px;
+            display: block;
+        }
+
         .video-item.matrix .hide {
             display: none;
         }
@@ -87,82 +106,155 @@
     <div class="search m-auto">
         <a href="" class="search-logo m-auto"></a>
         <div style="margin-top: 3em;margin-left: 35%" class="input-group col-xs-4 col-sm-4 col-lg-4 col-md-4 m-auto">
-            <input maxlength="100" autocomplete="off" type="text" class="form-control" onkeydown="onKeyDown(event)" th:value="${videoTitle}"/>
+            <input maxlength="100" autocomplete="off" type="text" class="form-control" onkeydown="onKeyDown(event)"
+                   th:value="${videoTitle}"/>
             <span class="input-group-btn">
                 <button class="btn btn-info btn-search">搜索</button>
             </span>
         </div>
     </div>
-    <div class="v-switcher-header-tabs"><ul class="v-switcher-header v-switcher-header-around v-switcher-header-translate"><li class="v-switcher-header-item is-active" style="height:56px;line-height:56px;width:12.5%;"><a href="/all?keyword=giegie" class="router-link-exact-active router-link-active">
-        综合
-        <span class="num"></span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/video?keyword=giegie" class="">
-        视频
-        <span class="num"></span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/bangumi?keyword=giegie" class="">
-        番剧
-        <span class="num">0</span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/pgc?keyword=giegie" class="">
-        影视
-        <span class="num">0</span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/live?keyword=giegie" class="">
-        直播
-        <span class="num">0</span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/article?keyword=giegie" class="">
-        专栏
-        <span class="num">0</span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/topic?keyword=giegie" class="">
-        话题
-        <span class="num">0</span></a></li><li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a href="/upuser?keyword=giegie" class="">
-        用户
-        <span class="num"></span></a></li><li class="v-switcher-header-anchor" style="width: 54.25px; transform: translateX(37px); transition-duration: 200ms;"></li></ul></div>
+    <div class="v-switcher-header-tabs">
+        <ul class="v-switcher-header v-switcher-header-around v-switcher-header-translate">
+            <li class="v-switcher-header-item is-active" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/all?keyword=giegie" class="router-link-exact-active router-link-active">
+                综合
+                <span class="num"></span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/video?keyword=giegie" class="">
+                视频
+                <span class="num"></span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/bangumi?keyword=giegie" class="">
+                番剧
+                <span class="num">0</span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/pgc?keyword=giegie" class="">
+                影视
+                <span class="num">0</span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/live?keyword=giegie" class="">
+                直播
+                <span class="num">0</span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/article?keyword=giegie" class="">
+                专栏
+                <span class="num">0</span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/topic?keyword=giegie" class="">
+                话题
+                <span class="num">0</span></a></li>
+            <li class="v-switcher-header-item" style="height:56px;line-height:56px;width:12.5%;"><a
+                    href="/upuser?keyword=giegie" class="">
+                用户
+                <span class="num"></span></a></li>
+            <li class="v-switcher-header-anchor"
+                style="width: 54.25px; transform: translateX(37px); transition-duration: 200ms;"></li>
+        </ul>
+    </div>
 </div>
-<div class="body-contain"><div id="all-list"><div class="flow-loader" style="position:relative;"><!----><div class="filter-wrap">
-    <ul class="filter-type clearfix order" id="order">
-        <li class="filter-item active"><a href="javascript:;" onclick="getOrderBy('0')" style="text-decoration: none;">综合排序</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('1')" style="text-decoration: none;">最多点击</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('2')" style="text-decoration: none;">最新发布</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('3')" style="text-decoration: none;">最多弹幕</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('4')" style="text-decoration: none;">最多收藏</a></li>
-    </ul>
-    <input type="hidden" value="" id="orderByName">
-    <ul class="filter-type clearfix duration" id="duration">
-        <li class="filter-item active"><a href="javascript:;" onclick="getDurationBy('allTime','','')" style="text-decoration: none;">全部时长</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','','2')" style="text-decoration: none;">10分钟以下</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','00:30:00')" style="text-decoration: none;">10-30分钟</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:30:00','00:60:00')" style="text-decoration: none;">30-60分钟</a></li>
-        <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:60:00','','1')" style="text-decoration: none;">60分钟以上</a></li>
-    </ul>
-    <input type="hidden" value="" id="videoTime">
-    <input type="hidden" value="" id="videoTimeEnd">
-    <input type="hidden" value="" id="type">
-    <input type="hidden" id="videoTitle" th:value="${videoTitle}">
-    <input type="hidden" value="" id="id1">
-    <input type="hidden" value="" id="id2">
-    <input type="hidden" value="" id="id3">
-    <ul class="filter-type clearfix tids_1" style="" id="categoryBy">
-        <li class="filter-item active" value="1"><a href="javascript:;">全部分区</a></li>
-        <li class="sub-filter" style="top: 9px; left: 73px;">
-            <ul class="clearfix">
-                <li class="filter-item"><a href="javascript:;">宅舞</a></li>
-            </ul>
-        </li>
-     <!----><!---->
-    </ul>
-    <div class="filter-wrap_bottom"></div></div><div class="mixin-list" >
-    <ul class="video-list clearfix" type="video" id="video-list">
+<div class="body-contain">
+    <div id="all-list">
+        <div class="flow-loader" style="position:relative;"><!---->
+            <div class="filter-wrap">
+                <ul class="filter-type clearfix order" id="order">
+                    <li class="filter-item active"><a href="javascript:;" onclick="getOrderBy('0')"
+                                                      style="text-decoration: none;">综合排序</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('1')"
+                                               style="text-decoration: none;">最多点击</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('2')"
+                                               style="text-decoration: none;">最新发布</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('3')"
+                                               style="text-decoration: none;">最多弹幕</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getOrderBy('4')"
+                                               style="text-decoration: none;">最多收藏</a></li>
+                </ul>
+                <input type="hidden" value="" id="orderByName">
+                <ul class="filter-type clearfix duration" id="duration">
+                    <li class="filter-item active"><a href="javascript:;" onclick="getDurationBy('allTime','','')"
+                                                      style="text-decoration: none;">全部时长</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','','2')"
+                                               style="text-decoration: none;">10分钟以下</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:10:00','00:30:00')"
+                                               style="text-decoration: none;">10-30分钟</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:30:00','00:60:00')"
+                                               style="text-decoration: none;">30-60分钟</a></li>
+                    <li class="filter-item"><a href="javascript:;" onclick="getDurationBy('00:60:00','','1')"
+                                               style="text-decoration: none;">60分钟以上</a></li>
+                </ul>
+                <input type="hidden" value="" id="videoTime">
+                <input type="hidden" value="" id="videoTimeEnd">
+                <input type="hidden" value="" id="type">
+                <input type="hidden" id="videoTitle" th:value="${videoTitle}">
+                <input type="hidden" value="" id="id1">
+                <input type="hidden" value="" id="id2">
+                <input type="hidden" value="" id="id3">
+                <ul class="filter-type clearfix tids_1" style="" id="categoryBy">
+                    <li class="filter-item active" value="1"><a href="javascript:;">全部分区</a></li>
+                    <li class="sub-filter" style="top: 9px; left: 73px;">
+                        <ul class="clearfix">
+                            <li class="filter-item"><a href="javascript:;">宅舞</a></li>
+                        </ul>
+                    </li>
+                    <!----><!---->
+                </ul>
+                <div class="filter-wrap_bottom"></div>
+            </div>
+            <div class="mixin-list">
+                <ul class="video-list clearfix" type="video" id="video-list">
 
-    </ul></div><!---->
+                </ul>
+            </div><!---->
 
 
-    <div class="page-wrap">
-        <div class="pager">
-            <ul class="pages"><!----><!----><!---->
-                <li class="page-item active"><button class="pagination-btn num-btn">1</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">2</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">3</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">4</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">5</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">6</button></li>
-                <li class="page-item"><button class="pagination-btn num-btn">7</button></li><strong>...</strong>
-                <li class="page-item last"><button class="pagination-btn">16</button></li>
-                <li class="page-item next"><button class="nav-btn iconfont icon-arrowdown3">下一页
-                </button></li></ul><!----></div></div>
-    <input type="hidden" id="currPage" value="1">
-    <div class="flow-loader-state" style="text-align:center;"><!----></div><div class="flow-loader-detect" style="position:absolute;bottom:0;right:0;width:100%;height:50px;z-index:-1;background:transparent;"></div></div><div class="video-info-module" style="display:none;"><div class="v-title"></div><div class="v-info"><span class="name"></span><span class="line"></span><span class="time"></span></div><div class="v-preview clearfix"><div class="lazy-img"><img alt="" src=""></div><p class="txt"></p></div><div class="v-data"><span class="play"><i class="icon"></i>--</span><span class="danmu"><i class="icon"></i>--</span><span class="star"><i class="icon"></i>--</span><span class="coin"><i class="icon"></i>--</span></div></div></div></div>
+            <div class="page-wrap">
+                <div class="pager">
+                    <ul class="pages"><!----><!----><!---->
+                        <li class="page-item active">
+                            <button class="pagination-btn num-btn">1</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">2</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">3</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">4</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">5</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">6</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="pagination-btn num-btn">7</button>
+                        </li>
+                        <strong>...</strong>
+                        <li class="page-item last">
+                            <button class="pagination-btn">16</button>
+                        </li>
+                        <li class="page-item next">
+                            <button class="nav-btn iconfont icon-arrowdown3">下一页
+                            </button>
+                        </li>
+                    </ul><!----></div>
+            </div>
+            <input type="hidden" id="currPage" value="1">
+            <div class="flow-loader-state" style="text-align:center;"><!----></div>
+            <div class="flow-loader-detect"
+                 style="position:absolute;bottom:0;right:0;width:100%;height:50px;z-index:-1;background:transparent;"></div>
+        </div>
+        <div class="video-info-module" style="display:none;">
+            <div class="v-title"></div>
+            <div class="v-info"><span class="name"></span><span class="line"></span><span class="time"></span></div>
+            <div class="v-preview clearfix">
+                <div class="lazy-img"><img alt="" src=""></div>
+                <p class="txt"></p></div>
+            <div class="v-data"><span class="play"><i class="icon"></i>--</span><span class="danmu"><i class="icon"></i>--</span><span
+                    class="star"><i class="icon"></i>--</span><span class="coin"><i class="icon"></i>--</span></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

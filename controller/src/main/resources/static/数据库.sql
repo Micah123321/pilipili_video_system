@@ -1,6 +1,6 @@
 /*
-SQLyog Professional v12.08 (64 bit)
-MySQL - 5.7.24 : Database - pili
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.7.17 : Database - pili
 *********************************************************************
 */
 
@@ -175,11 +175,11 @@ CREATE TABLE `p_subscribe` (
   KEY `subscribed_id` (`subscribed_id`),
   CONSTRAINT `p_subscribe_ibfk_1` FOREIGN KEY (`subscribe_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_subscribe_ibfk_2` FOREIGN KEY (`subscribed_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
 
 /*Data for the table `p_subscribe` */
 
-insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11'),(3,4,1,'2021-04-06 14:27:17'),(4,4,2,NULL),(5,4,3,NULL),(6,1,2,NULL),(7,1,4,NULL);
+insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11'),(3,4,1,'2021-04-06 14:27:17'),(4,1,2,'2021-04-16 10:12:27');
 
 /*Table structure for table `p_user` */
 
@@ -222,7 +222,7 @@ CREATE TABLE `p_user_info` (
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`) values (1,1,2,3,6,30000,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','你好，我是站长haha','micah','这咱空间公告哈aaaa','2021-04-19 23:23:18','2021-04-19 23:23:14'),(2,2,1,2,1,0,'/static/upload/xxx.png','你好，我是张三','张三',NULL,'2021-04-19 23:23:25','2021-04-19 23:23:27'),(3,3,1,1,1,0,'/static/upload/xxxx.png','你好，我是李四','李四',NULL,'2021-04-19 23:23:28','2021-04-19 23:23:30'),(4,4,3,1,2,100,'/static/uploads/defaultpic.png',NULL,'王五',NULL,'2021-04-19 23:23:32','2021-04-19 23:23:33');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`) values (1,1,1,3,6,10000,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','micah',NULL,NULL,NULL),(2,2,1,1,1,0,'/static/upload/xxx.png','你好，我是张三','',NULL,NULL,NULL),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四','',NULL,NULL,NULL),(4,4,1,0,1,0,'/static/uploads/defaultpic.png',NULL,'',NULL,NULL,NULL);
 
 /*Table structure for table `p_videos` */
 
@@ -233,20 +233,20 @@ CREATE TABLE `p_videos` (
   `video_userid` int(11) NOT NULL COMMENT '上传者id',
   `video_title` varchar(50) NOT NULL COMMENT '视频标题',
   `video_url` varchar(100) NOT NULL COMMENT '视频播放路径',
-  `video_play` bigint(20) NOT NULL COMMENT '视频播放量',
-  `video_like` int(11) NOT NULL COMMENT '视频点赞数量',
-  `video_collect` int(11) NOT NULL COMMENT '视频收藏数量',
-  `video_desc` varchar(1000) DEFAULT NULL COMMENT '视频简介',
-  `video_state` int(11) NOT NULL COMMENT '视频状态 0-待审核 1-已审核 2-审核失败 3-违规',
+  `video_play` bigint(20) NOT NULL DEFAULT '0' COMMENT '视频播放量',
+  `video_like` int(11) NOT NULL DEFAULT '0' COMMENT '视频点赞数量',
+  `video_collect` int(11) NOT NULL DEFAULT '0' COMMENT '视频收藏数量',
+  `video_desc` varchar(1000) DEFAULT '--' COMMENT '视频简介',
+  `video_state` int(11) NOT NULL DEFAULT '0' COMMENT '视频状态 0-待审核 1-已审核 2-审核失败 3-违规',
   `video_updatetime` datetime NOT NULL COMMENT '视频上传时间',
   `video_checkuid` int(11) DEFAULT NULL COMMENT '视频审核人',
   `video_checktime` datetime DEFAULT NULL COMMENT '视频审核时间',
   `video_releasetime` datetime DEFAULT NULL COMMENT '视频发布时间',
   `video_type` bigint(30) NOT NULL COMMENT '视频分类（来源于p_category分类表的类型id）',
   `video_time` time NOT NULL,
-  `video_image` varchar(200) DEFAULT NULL,
-  `video_comment` int(11) DEFAULT NULL COMMENT '视频评论数',
-  `video_barrage` int(11) DEFAULT NULL COMMENT '视频弹幕数',
+  `video_image` varchar(200) NOT NULL,
+  `video_comment` int(11) DEFAULT '0' COMMENT '视频评论数',
+  `video_barrage` int(11) DEFAULT '0' COMMENT '视频弹幕数',
   PRIMARY KEY (`video_pv`),
   KEY `video_userid` (`video_userid`),
   KEY `video_checkuid` (`video_checkuid`),
@@ -254,11 +254,11 @@ CREATE TABLE `p_videos` (
   CONSTRAINT `p_videos_ibfk_1` FOREIGN KEY (`video_userid`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_ibfk_2` FOREIGN KEY (`video_checkuid`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_ibfk_3` FOREIGN KEY (`video_type`) REFERENCES `p_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8 COMMENT='视频信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=10042 DEFAULT CHARSET=utf8 COMMENT='视频信息表';
 
 /*Data for the table `p_videos` */
 
-insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23',NULL,5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23',NULL,1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',0,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23',NULL,1,1);
+insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/bbb.mp4',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',1,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',1,1),(10003,3,'不要“做”挑战？（第十二期）','/uploads/xxx',0,0,0,'--',0,'2021-04-21 12:01:21',1,'2021-04-21 12:01:27','2021-04-21 12:01:30',2,'23:23:00','/uploads/a2adb3d24078ea3dfb466ec78d34c3fb8da0498e.jpg@412w_232h_1c.jpg',0,0),(10004,3,'打牌时会颜艺的超能力少女你喜欢吗？【间谍过家家38】','/xx',0,0,0,'--',0,'2021-04-21 12:05:47',1,'2021-04-21 12:05:48','2021-04-21 12:05:51',2,'14:14:00','/uploads/022d45051f2d9b3ad77d898e08c27b8f05837305.jpg@160w_100h.webp',0,0),(10005,3,'四大巨头聚会 小蜘蛛冒死直播 [转生成蜘蛛又怎样 主线篇13]','/uploads/',0,0,0,'--',1,'2021-04-21 12:10:33',1,'2021-04-21 12:10:33','2021-04-21 12:10:33',2,'06:59:00','/uploads/ebdcbbd6270073c4e66c42e34c7a054a07924999.jpg@160w_100h.webp',0,0),(10006,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',100,0,0,'--',1,'2021-04-21 12:11:43',1,'2021-04-21 12:11:43','2021-04-21 12:11:43',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10007,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:12:28',1,'2021-04-21 12:12:28','2021-04-21 12:12:28',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10008,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:12:29',1,'2021-04-21 12:12:29','2021-04-21 12:12:29',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10009,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:12:29',1,'2021-04-21 12:12:29','2021-04-21 12:12:29',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10010,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:13:44',1,'2021-04-21 12:13:44','2021-04-21 12:13:44',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10011,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:14:04',1,'2021-04-21 12:14:04','2021-04-21 12:14:04',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10012,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:14:05',1,'2021-04-21 12:14:05','2021-04-21 12:14:05',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10013,3,'【A-soul/live2d桌宠】来领养一只可爱小嘉然吧~','/uploads/',0,0,0,'--',1,'2021-04-21 12:14:05',1,'2021-04-21 12:14:05','2021-04-21 12:14:05',3,'06:59:00','/uploads/52ab77c8a0c604bc1d281d4add09783ddca95ee3.jpg@160w_100h.webp',0,0),(10014,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',200,0,0,'--',1,'2021-04-21 12:17:01',1,'2021-04-21 12:17:01','2021-04-21 12:17:01',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10015,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:02',1,'2021-04-21 12:17:02','2021-04-21 12:17:02',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10016,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:02',1,'2021-04-21 12:17:02','2021-04-21 12:17:02',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10017,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:03',1,'2021-04-21 12:17:03','2021-04-21 12:17:03',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10018,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:03',1,'2021-04-21 12:17:03','2021-04-21 12:17:03',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10019,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:04',1,'2021-04-21 12:17:04','2021-04-21 12:17:04',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10020,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:04',1,'2021-04-21 12:17:04','2021-04-21 12:17:04',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10021,3,'假面骑士圣刃远古龙起源故事–很久以前，龙族与人类幸福的生活在一起……','/uploads/',0,0,0,'--',1,'2021-04-21 12:17:04',1,'2021-04-21 12:17:04','2021-04-21 12:17:04',4,'06:59:00','/uploads/086d4e871b840be195dcf30492efde1ea7193b2d.png@160w_100h.webp',0,0),(10022,2,'【原神动画】食蒙之灵','/uploads/',300,0,0,'--',1,'2021-04-21 12:18:01',1,'2021-04-21 12:18:01','2021-04-21 12:18:01',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10023,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:02',1,'2021-04-21 12:18:02','2021-04-21 12:18:02',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10024,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:02',1,'2021-04-21 12:18:02','2021-04-21 12:18:02',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10025,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:03',1,'2021-04-21 12:18:03','2021-04-21 12:18:03',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10026,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:03',1,'2021-04-21 12:18:03','2021-04-21 12:18:03',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10027,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:03',1,'2021-04-21 12:18:03','2021-04-21 12:18:03',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10028,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:04',1,'2021-04-21 12:18:04','2021-04-21 12:18:04',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10029,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:04',1,'2021-04-21 12:18:04','2021-04-21 12:18:04',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h.webp',0,0),(10030,2,'【原神动画】食蒙之灵','/uploads/',0,0,0,'--',1,'2021-04-21 12:18:41',1,'2021-04-21 12:18:41','2021-04-21 12:18:41',5,'06:59:00','/uploads/6f9dcff2746f16c64e0fd00382c557922aa44751.png@160w_100h (1).webp',0,0),(10031,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:20:31',1,'2021-04-21 12:20:31','2021-04-21 12:20:31',6,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10032,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:20:36',1,'2021-04-21 12:20:36','2021-04-21 12:20:36',7,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10033,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:20:41',1,'2021-04-21 12:20:41','2021-04-21 12:20:41',8,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10034,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:20:52',1,'2021-04-21 12:20:52','2021-04-21 12:20:52',9,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10035,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:20:58',1,'2021-04-21 12:20:58','2021-04-21 12:20:58',10,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10036,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',400,0,0,'--',1,'2021-04-21 12:21:03',1,'2021-04-21 12:21:03','2021-04-21 12:21:03',11,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10037,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:21:10',1,'2021-04-21 12:21:10','2021-04-21 12:21:10',12,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10038,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:21:15',1,'2021-04-21 12:21:15','2021-04-21 12:21:15',13,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10039,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:21:18',1,'2021-04-21 12:21:18','2021-04-21 12:21:18',14,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10040,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:21:23',1,'2021-04-21 12:21:23','2021-04-21 12:21:23',15,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0),(10041,1,'《Charlotte》夏洛特:2020年了你还记得我们的约定吗?……拯救了世界，却忘记了你！','/uploads/',0,0,0,'--',1,'2021-04-21 12:21:28',1,'2021-04-21 12:21:28','2021-04-21 12:21:28',16,'06:59:00','/uploads/ba7f467c6d346067864229ad115281fdb99e6a2e.jpg@160w_100h.webp',0,0);
 
 /*Table structure for table `p_videos_thumbsup` */
 
@@ -274,11 +274,11 @@ CREATE TABLE `p_videos_thumbsup` (
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_videos_thumbsup_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_thumbsup_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
 
 /*Data for the table `p_videos_thumbsup` */
 
-insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (1,1,10000,'2021-04-12 14:11:41'),(2,2,10000,'2021-04-12 14:11:43'),(3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49'),(5,4,10000,'2021-04-17 23:32:40');
+insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (1,1,10000,'2021-04-12 14:11:41'),(2,2,10000,'2021-04-12 14:11:43'),(3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

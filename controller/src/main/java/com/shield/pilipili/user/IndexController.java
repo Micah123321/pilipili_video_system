@@ -41,8 +41,9 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/videoInfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object videoInfo(PVideosPage pVideosPage){
-        pVideosPage.setCount(7);
+        pVideosPage.setCount(8);
         pVideosPage.setIndex(0);
+        pVideosPage.setOrderBy(1);
         List<PCategoryVo> categoryVoList = pCategoryService.selectAllLevel1Category();
         List<PVideoListVo> listVos=new ArrayList<>();
         for (PCategoryVo p:categoryVoList) {
