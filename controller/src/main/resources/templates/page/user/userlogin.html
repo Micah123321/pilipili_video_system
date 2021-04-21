@@ -31,8 +31,7 @@
                         },
                     async: true,
                     success:function(data){
-                        var upwd = data.upwd;
-                        if(upwd != upwd){
+                        if(upwd != data.upwd){
                             alert("账号或密码错误");
                         }else{
                             window.location.href="/user/index";

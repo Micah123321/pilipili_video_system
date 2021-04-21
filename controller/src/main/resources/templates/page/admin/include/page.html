@@ -5,6 +5,7 @@
         $(function () {
             $(".disabled>a,.pageThis>a").attr("onclick", null);
         })
+
     </script>
     <ul>
         <li data-name="firstPage" th:disabled="${!pageUtil.isHasPrev()?'disabled':''}">

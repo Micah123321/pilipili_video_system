@@ -14,4 +14,6 @@ public interface PVideosThumbsupDao {
     int updateByPrimaryKeySelective(PVideosThumbsup record);
 
     int updateByPrimaryKey(PVideosThumbsup record);
+
+    int getAllLikeCountByUid(int uid);
 }

@@ -8,4 +8,6 @@ public interface PUserInfoDao {
 
     PUserInfo selectByUserId(Integer userid);
 
+    int updateUserInfo(PUserInfo pUserInfo);
+
 }

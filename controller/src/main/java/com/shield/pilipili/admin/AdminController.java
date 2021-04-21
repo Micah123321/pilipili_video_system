@@ -32,6 +32,8 @@ public class AdminController {
     private PVideosService pVideosService;
     @Resource
     private PCategoryService pCategoryService;
+    @Resource
+    private PVideosThumbsupService pVideosThumbsupService;
 
     @GetMapping("/admin")
     public String goHome(Model model, HttpSession session) throws ParseException {
@@ -43,7 +45,7 @@ public class AdminController {
         model.addAttribute("fansCount",pSubscribeService.getFansById(uid).size());
         model.addAttribute("playCount",pVideosService.getPlayCountById(uid));
         model.addAttribute("comCount",pCommentService.getComCountByUserId(uid));
-        model.addAttribute("likeCount",pVideosService.getLikeCountById(uid));
+        model.addAttribute("likeCount",pVideosThumbsupService.getAllLikeCountByUid(uid));
         model.addAttribute("collectCount",pVideosService.getCollectCountById(uid));
         model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(uid));
         model.addAttribute("jsonObject", getChartData(null,null,uid));
@@ -59,7 +61,7 @@ public class AdminController {
         model.addAttribute("fansCount",pSubscribeService.getFansById(userId).size());
         model.addAttribute("playCount",pVideosService.getPlayCountById(userId));
         model.addAttribute("comCount",pCommentService.getComCountByUserId(userId));
-        model.addAttribute("likeCount",pVideosService.getLikeCountById(userId));
+        model.addAttribute("likeCount",pVideosThumbsupService.getAllLikeCountByUid(userId));
         model.addAttribute("collectCount",pVideosService.getCollectCountById(userId));
         model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(userId));
         model.addAttribute("jsonObject", getChartData(null,null,userId));

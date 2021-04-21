@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.shield.pilipili.pojo.PVideos;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -42,6 +43,17 @@ public interface PVideosService {
      * @param order 综合排序
      * @return
      */
-    List<PVideos> getPVideosPageList(String videoTitle, String videoTime,String videoTimeEnd,Integer type, Integer categoryId,Integer pid, OrderUtil order);
+    PageInfo<PVideos> getPVideosPageList(String videoTitle, String videoTime,String videoTimeEnd,Integer type, Integer categoryId,Integer pid, OrderUtil order,Integer currPage,Integer pageSize);
 
+    /**
+     * 视频个数查询
+     * @param videoTitle
+     * @param videoTime
+     * @param videoTimeEnd
+     * @param type
+     * @param categoryId
+     * @param pid
+     * @return
+     */
+    int getPVideosPageListCount(String videoTitle, String videoTime, String videoTimeEnd, Integer type, Integer categoryId,Integer pid);
 }

@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.17 : Database - pili
+SQLyog Professional v12.08 (64 bit)
+MySQL - 5.7.24 : Database - pili
 *********************************************************************
 */
 
@@ -175,11 +175,11 @@ CREATE TABLE `p_subscribe` (
   KEY `subscribed_id` (`subscribed_id`),
   CONSTRAINT `p_subscribe_ibfk_1` FOREIGN KEY (`subscribe_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_subscribe_ibfk_2` FOREIGN KEY (`subscribed_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
 
 /*Data for the table `p_subscribe` */
 
-insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11'),(3,4,1,'2021-04-06 14:27:17');
+insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (1,2,1,'2021-04-09 10:40:02'),(2,3,1,'2021-04-09 10:40:11'),(3,4,1,'2021-04-06 14:27:17'),(4,4,2,NULL),(5,4,3,NULL),(6,1,2,NULL),(7,1,4,NULL);
 
 /*Table structure for table `p_user` */
 
@@ -212,6 +212,9 @@ CREATE TABLE `p_user_info` (
   `user_pic` varchar(200) NOT NULL DEFAULT '/static/uploads/defaultpic.png' COMMENT '用户头像地址',
   `up_desc` varchar(500) DEFAULT NULL COMMENT '用户简介',
   `nickName` varchar(50) NOT NULL,
+  `up_spaceNotice` varchar(500) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `p_user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`)
@@ -219,7 +222,7 @@ CREATE TABLE `p_user_info` (
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`) values (1,1,0,3,6,10000,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','micah'),(2,2,1,0,1,0,'/static/upload/xxx.png','你好，我是张三',''),(3,3,1,0,1,0,'/static/upload/xxxx.png','你好，我是李四',''),(4,4,1,0,1,0,'/static/uploads/defaultpic.png',NULL,'');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`) values (1,1,2,3,6,30000,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','你好，我是站长haha','micah','这咱空间公告哈aaaa','2021-04-19 23:23:18','2021-04-19 23:23:14'),(2,2,1,2,1,0,'/static/upload/xxx.png','你好，我是张三','张三',NULL,'2021-04-19 23:23:25','2021-04-19 23:23:27'),(3,3,1,1,1,0,'/static/upload/xxxx.png','你好，我是李四','李四',NULL,'2021-04-19 23:23:28','2021-04-19 23:23:30'),(4,4,3,1,2,100,'/static/uploads/defaultpic.png',NULL,'王五',NULL,'2021-04-19 23:23:32','2021-04-19 23:23:33');
 
 /*Table structure for table `p_videos` */
 
@@ -255,7 +258,7 @@ CREATE TABLE `p_videos` (
 
 /*Data for the table `p_videos` */
 
-insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',0,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',1,1);
+insert  into `p_videos`(`video_pv`,`video_userid`,`video_title`,`video_url`,`video_play`,`video_like`,`video_collect`,`video_desc`,`video_state`,`video_updatetime`,`video_checkuid`,`video_checktime`,`video_releasetime`,`video_type`,`video_time`,`video_image`,`video_comment`,`video_barrage`) values (10000,1,'第一个视频','/uploads/34f9e5f68be36596e7f956c6c09634cd470507ee.png',100,3,1,'这是简介',1,'2021-04-09 10:29:44',1,'2021-04-09 10:29:55','2021-04-09 10:29:57',12,'00:11:23',NULL,5,2),(10001,2,'张三的犯罪视频','/uploads/622afeea9b9706fba2c8331476a4c30ec726fbe9.png',1000,1,1,'-----',2,'2021-04-09 11:01:52',1,'2021-04-09 11:01:57','2021-04-09 11:02:00',6,'00:11:23',NULL,1,1),(10002,1,'全站第三个视频','/uploads/c7029540b64349775a8c4ea263eef8f4ff617e5a.png',200,0,0,'---',0,'2021-04-12 10:08:58',1,'2021-05-07 10:09:02','2021-05-01 10:09:06',6,'00:11:23',NULL,1,1);
 
 /*Table structure for table `p_videos_thumbsup` */
 
@@ -271,11 +274,11 @@ CREATE TABLE `p_videos_thumbsup` (
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_videos_thumbsup_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_thumbsup_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
 
 /*Data for the table `p_videos_thumbsup` */
 
-insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (1,1,10000,'2021-04-12 14:11:41'),(2,2,10000,'2021-04-12 14:11:43'),(3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49');
+insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (1,1,10000,'2021-04-12 14:11:41'),(2,2,10000,'2021-04-12 14:11:43'),(3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49'),(5,4,10000,'2021-04-17 23:32:40');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

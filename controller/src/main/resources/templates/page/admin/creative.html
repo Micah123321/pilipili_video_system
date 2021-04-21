@@ -7,7 +7,7 @@
     <link href="/css/creative2.css" type="text/css" rel="stylesheet" media="all">
     <script src="/js/admin/admin_creative.js"></script>
     <style>
-        #videoType{
+        #videoType {
             width: 100%;
             border: 1px solid #e7e7e7;
             border-radius: 4px;
@@ -24,7 +24,8 @@
             cursor: pointer;
             display: block;
         }
-        #orderBy{
+
+        #orderBy {
             width: 100%;
             height: 100%;
             outline: none;
@@ -45,7 +46,7 @@
 </head>
 <body>
 <div data-v-a9d43656="" class="upload-manage cc-content-body">
-    <input type="hidden" id="currPage"value="1">
+    <input type="hidden" id="currPage" value="1">
     <div data-v-a9d43656="" class="new-link-top-wrap">
         <div id="tab-container" class="new-link-top-container"><a href="/platform/upload-manager/article"
                                                                   class="link-top-item router-link-exact-active active"><span>视频管理</span>
@@ -65,16 +66,21 @@
                         <input type="hidden" id="videoState" value="-1">
                         <div data-v-016fc23b="" class="split-item operate-txt active"><a data-v-295d2c4a=""
                                                                                          data-v-016fc23b=""
-                                                                                         class="txt-item current" state="-1">全部稿件
+                                                                                         class="txt-item current"
+                                                                                         state="-1">全部稿件
                             <span id="videosCount">34</span> </a></div>
                         <div data-v-016fc23b="" class="split-item operate-txt"><a data-v-295d2c4a="" data-v-016fc23b=""
-                                                                                  class="txt-item" state="0">进行中 <span id="uncheckvideos">0</span></a></div>
+                                                                                  class="txt-item" state="0">进行中 <span
+                                id="uncheckvideos">0</span></a></div>
                         <div data-v-016fc23b="" class="split-item operate-txt"><a data-v-295d2c4a="" data-v-016fc23b=""
-                                                                                  class="txt-item" state="1">已通过 <span id="checkvideos">16</span></a></div>
+                                                                                  class="txt-item" state="1">已通过 <span
+                                id="checkvideos">16</span></a></div>
                         <div data-v-016fc23b="" class="split-item operate-txt"><a data-v-295d2c4a="" data-v-016fc23b=""
-                                                                                  class="txt-item "state="2">未通过 <span id="warnvideos"></span></a></div>
+                                                                                  class="txt-item " state="2">未通过 <span
+                                id="warnvideos"></span></a></div>
                         <div data-v-016fc23b="" class="split-item operate-txt"><a data-v-295d2c4a="" data-v-016fc23b=""
-                                                                                  class="txt-item "state="3">违规 <span ></span></a></div>
+                                                                                  class="txt-item " state="3">违规
+                            <span></span></a></div>
                     </div>
                     <div data-v-295d2c4a="" class="header-operate">
                         <div data-v-295d2c4a="" class="bcc-select" style="width: 112px;">
@@ -83,7 +89,7 @@
                             </select>
                         </div>
                         <div data-v-295d2c4a="" class="bcc-select" style="width: 154px;">
-                            <select id="orderBy"  onchange="getVideoData()">
+                            <select id="orderBy" onchange="getVideoData()">
                                 <option selected value="0">投稿时间排序</option>
                                 <option value="1">播放数排序</option>
                                 <option value="2">评论数排序</option>
@@ -91,7 +97,7 @@
                                 <option value="4">弹幕数排序</option>
                             </select>
                         </div>
-                       </div>
+                    </div>
                 </div>
                 <div data-v-70ed43e6="" class="article-list_wrap">
                     <div data-v-70ed43e6="">
@@ -207,9 +213,12 @@
                                                 style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
                                                 class="icon-text">2</span></div>
                                     </div>
-                                </div></div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div data-v-70ed43e6="" class="bcc-pagination-container">
                     <ul class="bcc-pagination">
                         <li class="bcc-pagination-item bcc-pagination-previous">上一页</li>
@@ -219,14 +228,17 @@
                         <li class="bcc-pagination-item"><a>4</a></li>
                         <li class="bcc-pagination-item bcc-pagination-next">下一页</li>
                         <li class="bcc-pagination-extra">
-                            <div class="bcc-pagination-total"> 共 <span id="totalPageCount">4</span> 页 / <span id="totalCount"></span>个，</div>
+                            <div class="bcc-pagination-total"> 共 <span id="totalPageCount">4</span> 页 / <span
+                                    id="totalCount"></span>个，
+                            </div>
                             <div class="bcc-pagination-elevator"> 跳转至 <input type="text" autocomplete="off"
                                                                              spellcheck="false"> 页
                             </div>
                         </li>
                     </ul>
                 </div>
-                </div>
+
+            </div>
         </div>
     </div>
 </div>

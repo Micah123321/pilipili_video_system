@@ -62,8 +62,15 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
-    public List<PVideos> getPVideosPageList(String videoTitle, String videoTime,String videoTimeEnd,Integer type, Integer categoryId, Integer pid,OrderUtil order) {
-        List<PVideos> pVideosPageList = pVideosDao.getPVideosPageList(videoTitle, videoTime,videoTimeEnd ,type,categoryId,pid, order);
-        return pVideosPageList;
+    public PageInfo<PVideos> getPVideosPageList(String videoTitle, String videoTime, String videoTimeEnd, Integer type, Integer categoryId, Integer pid, OrderUtil order, Integer currPage, Integer pageSize) {
+        PageHelper.startPage(currPage, pageSize);
+        List<PVideos> pVideosPageList = pVideosDao.getPVideosPageList(videoTitle, videoTime, videoTimeEnd, type, categoryId, pid, order);
+        PageInfo<PVideos> pageInfo = new PageInfo<>(pVideosPageList);
+        return pageInfo;
+    }
+
+    @Override
+    public int getPVideosPageListCount(String videoTitle, String videoTime, String videoTimeEnd, Integer type, Integer categoryId, Integer pid) {
+        return pVideosDao.getPVideosPageListCount(videoTitle, videoTime, videoTimeEnd, type, categoryId, pid);
     }
 }
