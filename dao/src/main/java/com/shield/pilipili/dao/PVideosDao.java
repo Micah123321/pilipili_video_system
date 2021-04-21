@@ -74,7 +74,4 @@ public interface PVideosDao {
     int updateByPrimaryKeySelective(PVideos record);
 
     int updateByPrimaryKey(PVideos record);
-    List<PVideos> selectzr();
-    List<PVideos> selectzx();
-    List<PVideos> selectyx();
 }

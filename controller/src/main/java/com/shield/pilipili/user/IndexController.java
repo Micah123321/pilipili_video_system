@@ -52,7 +52,6 @@ public class IndexController {
             List<PVideosPage> listByType = pVideosService.getVideosListByType(pVideosPage);
             listVos.add(new PVideoListVo(listByType,p.getCategoryName()));
         }
-        System.out.println("吐了");
         return listVos;
     }
 
