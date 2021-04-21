@@ -168,4 +168,15 @@ var ajaxUtil = {
                 console.debug(url);
             }
         }
+        ,
+    pagetopage:function (url) {
+        $.ajax({
+            url:  "/admin/" + url,
+            type: "get",
+            contentType: "text/html;charset=UTF-8",
+            success: function (data) {
+                $("#div_home_context_main").html(data);
+            }
+        });
+    }
 };

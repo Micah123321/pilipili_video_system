@@ -221,6 +221,17 @@ public class AdminController {
     public String toUpload(){
         return "page/admin/upload";
     }
+
+    @GetMapping("/admin/uploadDetail")
+    public String toUploadDetail(){
+        return "page/admin/uploadDetail";
+    }
+
+    @GetMapping("/admin/uploadInfo")
+    public String toUploadInfo(){
+        return "page/admin/uploadInfo";
+    }
+
     @GetMapping("/admin/account/logout")
     public String logout(HttpSession session){
         session.removeAttribute("userSession");
