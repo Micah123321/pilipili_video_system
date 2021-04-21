@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/datedropper.css">
+    <link rel="stylesheet" type="text/css" href="/css/timedropper.min.css">
     <link href="/css/bootstrap.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="/css/fileinput.min.css">
     <link href="/css/uploadDetail.css" type="text/css" rel="stylesheet" media="all">
-    <script src="/js/jquery-2.2.3.min.js"></script>
     <script src="/js/admin/admin_upload.js"></script>
     <script type="text/javascript" src="/js/fileinput.min.js"></script>
     <script type="text/javascript" src="/js/locales/zh.js"></script>
+
 
     <style>
         .select-box-v2-container[data-v-498e2f51] {
@@ -22,6 +25,7 @@
     </style>
 </head>
 <body>
+
 <div data-v-0876d562="" id="app" class="canary-container">
     <div data-v-01cfd5ed="" data-v-0876d562="" class="notify-v2-container"><!----></div> <!---->
     <div data-v-6ec1eb48="" data-v-0876d562="" class="upload-v2-container">
@@ -109,8 +113,8 @@
                 <div data-v-632b126d="" data-v-8c1e1774="" class="file-list-v2-wrp">
                     <div data-v-632b126d=""></div>
                 </div>
-                <input id="input-repl-3a"  name="videoFileAddress" data-ref="url2" type="file" accept="mp4" />
-                <input type="hidden" name="url2" value="">
+                <input id="input-repl-3a"  name="videoFileAddress" data-ref="videoUrl" type="file" accept="mp4" />
+                <input type="hidden" name="videoUrl" value="">
                 <div data-v-8c1e1774="" class="dividing-line"></div>
             </div>
             <div data-v-3e9c20f4="" data-v-7d11eb07="" class="file-content-v2-container">
@@ -130,20 +134,14 @@
                                                                                                    class="cover-v2-upload-show-tip-upload">上传封面</span>
                                         <span data-v-41f81e2c="" class="cover-v2-upload-show-tip-edit">裁切修改</span></div>
                                 </div>
-                                <input id="file" onchange="changepic()" data-v-41f81e2c="" type="file"
-                                       accept="image/jpeg, image/jpg, image/png"></div>
+                                <form id="uploadForm" enctype="multipart/form-data">
+                                    <input id="file" name="videoFileAddress" onchange="changepic()" data-v-41f81e2c="" type="file"
+                                           accept="image/jpeg, image/jpg, image/png">
+                                </form>
+                                <input type="hidden" name="videoImage">
+                                </div>
                         </div>
                     </div>
-                    <script>
-                        function changepic() {
-                            var reads = new FileReader();
-                            f = document.getElementById('file').files[0];
-                            reads.readAsDataURL(f);
-                            reads.onload = function (e) {
-                                document.getElementById('show').src = this.result;
-                            };
-                        }
-                    </script>
                     <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
                     <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
                     <div data-v-3c07cd70="" data-v-9ede723a="" class="content-title-v2-container">
@@ -159,7 +157,7 @@
                                                                                                placeholder="建议使用【作品题材】+其他部分 的形式填写标题"
                                                                                                class="input-box-v2-1-val">
                                 </div>
-                                <p data-v-291b1b04="" class="input-box-v2-1-max-tip">3/80</p></div>
+                                <p data-v-291b1b04="" class="input-box-v2-1-max-tip"><span id="titlenum">0</span>/80</p></div>
                         </div>
                     </div>
                     <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
@@ -174,6 +172,7 @@
                                 <div data-v-498e2f51=""
                                      class="select-box-v2-controller select-box-v2-controller-selected"><p
                                         data-v-498e2f51=""
+                                        cid="0"
                                         value="2" class="select-item-cont select-item-cont-inserted">
                                     动画 → 综合</p> <!----> <i data-v-498e2f51=""
                                                            class="selebox-box-v2-drop-icon iconfont icon-ic_collapse"
@@ -317,9 +316,10 @@
                         </div>
                         <div data-v-6bad4b02="" class="content-desc-v2-text-wrp">
                             <div data-v-64fae010="" data-v-6bad4b02="" class="text-area-box-v2-container"><textarea
+                                    id="descarea"
                                     data-v-64fae010="" class="text-area-box-v2-val placeholder-style"
                                     style="height: 120px;"></textarea>
-                                <p data-v-64fae010="" class="text-area-box-v2-max-tip">0/2000</p></div>
+                                <p data-v-64fae010="" class="text-area-box-v2-max-tip"><span id="desctext"> 0</span>/2000</p></div>
                         </div>
                     </div>
                     <div data-v-9ede723a="" class="dividing-line"></div>
@@ -334,19 +334,34 @@
                             <span data-v-3480cc97="" style="display: none;">，</span> <span data-v-3480cc97=""
                                                                                            style="color: rgb(242, 98, 145); display: none;">合作稿件默认定时为当前+4小时，可以进行调整</span>
                             <span data-v-3480cc97="">）</span></p></div>
+
                     <div data-v-3480cc97="" class="d-time-v2-date-picker-wrp">
                         <div data-v-3480cc97="" class="date-picker-timezone-wrp">
                             <div data-v-498e2f51="" data-v-3480cc97="" class="select-box-v2-container"> <!----></div>
                         </div>
+
                         <div data-v-3480cc97="" class="date-picker-date-wrp">
-                            <div data-v-3480cc97="" class="date-picker-date"><p data-v-3480cc97="" class="date-show">
-                                2021-04-19</p> <i data-v-3480cc97="" class="date-show-icon iconfont icon-date-o"></i>
+                            <div data-v-3480cc97="" class="date-picker-date"><p data-v-3480cc97="" class="date-show"><input type="text" class="input" id="pickdate" /></p>
+                                <i data-v-3480cc97="" class="date-show-icon iconfont icon-date-o"></i>
                             </div> <!----></div>
+
                         <div data-v-3480cc97="" class="date-picker-date-wrp">
-                            <div data-v-3480cc97="" class="date-picker-timer"><p data-v-3480cc97="" class="date-show">
-                                15:00</p> <i data-v-3480cc97="" class="date-show-icon iconfont icon-time1"></i></div>
+                            <div data-v-3480cc97="" class="date-picker-timer"><p data-v-3480cc97="" class="date-show"><input type="text" class="input" id="picktime" /></p><i data-v-3480cc97="" class="date-show-icon iconfont icon-time1"></i></div>
                             <!----></div>
                     </div>
+                    <script src="/js/datedropper.min.js"></script>
+                    <script src="/js/timedropper.min.js"></script>
+                    <script>
+                        $("#pickdate").dateDropper({
+                            animate: false,
+                            format: 'Y-m-d',
+                            maxYear: '2020'
+                        });
+                        $("#picktime").timeDropper({
+                            meridians: false,
+                            format: 'HH:mm',
+                        });
+                    </script>
                 </div>
                 <div data-v-54a862f1="" data-v-3e9c20f4="" class="submit-button-group-v2-container"><span
                         data-v-54a862f1="" onclick="gotoPage()" class="submit-btn-group-add">立即投稿</span></div>

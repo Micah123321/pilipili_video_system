@@ -9,23 +9,56 @@ $(document).bind('click', function (e) {
     }
     $(".drop-cascader-container").slideUp()
 });
+function changepic() {
+    var reads = new FileReader();
+    f = document.getElementById('file').files[0];
+    reads.readAsDataURL(f);
+    reads.onload = function (e) {
+        document.getElementById('show').src = this.result;
+    };
+    uploadImageFun()
+}
+
 $(function () {
+    uploadImageFun=function () {
+        if (!confirm("确定上传该图片作为封面吗"))return;
+        var formData = new FormData($('#uploadForm')[0]);
+        $.ajax({
+            type: 'post',
+            url: "/video/videoUpload", //上传文件的请求路径必须是绝对路劲
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+            if (data.success!=null){
+                alert(data.success)
+                $("input[name='videoImage']").val(data.url);
+            }
+        }).error(function () {
+            alert("上传失败");
+        });
+    }
+    $(".cover-v2-upload-show-tip-upload").click(function () {
+        uploadImageFun()
+    })
+
     $("#input-repl-3a").fileinput({
         dropZoneTitle : "请上传小于150M的视频！",
         uploadUrl : "/video/videoUpload",
         language : "zh",
         autoReplace : true,
-        showCaption : false,
+        showCaption : true,
         showUpload : true,
         overwriteInitial : true,
         showUploadedThumbs : true,
         //showPreview:false,                   //显示上传图片的大小信息
         maxFileCount : 1,
         minFileCount:1,
-        maxFileSize : 153600,//文件最大153600kb=150M
-        initialPreviewShowDelete : false,
-        showRemove : false,//是否显示删除按钮
-        showClose : false,
+        maxFileSize : 204800,//文件最大153600kb=150M
+        initialPreviewShowDelete : true,
+        showRemove : true,//是否显示删除按钮
+        showClose : true,
         layoutTemplates : {
             actionUpload:'',
         },
@@ -45,17 +78,46 @@ $(function () {
     //异步上传返回结果处理
     $("#input-repl-3a").on("fileuploaded", function(event, data, previewId, index) {
         //debugger
-        videoUrl = "/file/video/videoAd/"+ data.response.url;
-
+        videoUrl = "/uploads/"+ data.response.url;
+        $(".remain-upload").text("(1/1)")
         var ref = $(this).attr("data-ref");
         $("input[name='" + ref + "']").val(data.response.url);
     });
 
-
+    $('#input-repl-3a').on('filesuccessremove', function(event, id) {
+        if (some_processing_function(id)) {
+            console.log('Uploaded thumbnail successfully removed');
+        } else {
+            return false;
+        }
+    });
+    //标题字数校验
+    $('.input-box-v2-1-val').bind('input propertychange','textarea',function(){
+        var curLength=$(this).val().trim().length;
+        if(curLength>80)
+        {
+            var num=$(this).val().trim().substr(0,80);
+            $(this).val(num);
+        }
+        $("#titlenum").text($(this).val().trim().length);
+    });
+//简介字数校验
+    $('#descarea').bind('input propertychange','textarea',function(){
+        var curLength=$(this).val().trim().length;
+        if(curLength>3000)
+        {
+            var num=$(this).val().trim().substr(0,3000);
+            $(this).val(num);
+        }
+        $("#desctext").text($(this).val().trim().length);
+    });
 
     gotoPage = function () {
         window.parent.location.href = "/"
     }
+    /**
+     * 以下方法均为分类管理
+     */
     $(".select-box-v2-controller").click(function () {
         $(".drop-cascader-container").slideToggle()
     })
@@ -79,7 +141,7 @@ $(function () {
         var lv = $(".drop-cascader-pre-item-selected").attr("title");
         var lv2 = $(".drop-cascader-list-item-selected").attr("title");
         $(".select-item-cont-inserted").text("" + lv + "<--" + lv2)
-        $(".select-item-cont-inserted").attr("value", lv2)
+        $(".select-item-cont-inserted").attr("value", $(".drop-cascader-list-item-selected").attr("cid"))
         $(".drop-cascader-container").slideUp()
     }
     ajaxType = function () {
@@ -118,7 +180,7 @@ $(function () {
                 tbody.empty();
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].parentId == lv) {
-                        tbody.append("<div onclick='relistClass(this)' title='" + data[i].categoryName + "' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item\"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
+                        tbody.append("<div cid='"+data[i].id+"' onclick='relistClass(this)' title='" + data[i].categoryName + "' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item\"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
                     }
                 }
             },
@@ -141,17 +203,16 @@ $(function () {
                 if (data[i].parentId == 2) {
                     j++;
                     if (j == 1) {
-                        tbody.append("<div  title='" + data[i].categoryName + "' onclick='relistClass(this)' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item drop-cascader-list-item-selected\"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
+                        tbody.append("<div cid='"+data[i].id+"'  title='" + data[i].categoryName + "' onclick='relistClass(this)' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item drop-cascader-list-item-selected\"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
                     } else {
-                        tbody.append("<div  title='" + data[i].categoryName + "' onclick='relistClass(this)' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item \"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
+                        tbody.append("<div cid='"+data[i].id+"' title='" + data[i].categoryName + "' onclick='relistClass(this)' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item \"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
                     }
                 }
             }
             var lv = $(".drop-cascader-pre-item-selected").attr("title");
             var lv2 = $(".drop-cascader-list-item-selected").attr("title");
             $(".select-item-cont-inserted").text("" + lv + "<--" + lv2)
-            $(".select-item-cont-inserted").attr("value", lv2)
-
+            $(".select-item-cont-inserted").attr("value", $(".drop-cascader-list-item-selected").attr("cid"))
         },
         error: function (data) {
 

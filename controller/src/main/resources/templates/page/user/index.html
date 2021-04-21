@@ -633,7 +633,11 @@
             top: 5%;
             margin-right: 100px;
             position: fixed;
-            border: black 1px solid;
+            padding-top: 6px;
+            background: #fff;
+            border: 1px solid #e7e7e7;
+            border-radius: 10px;
+            z-index: 2;
         }
 
         .link p:hover {
@@ -645,7 +649,20 @@
             position: relative;
             display: block;
              padding: 4px 10px;
-            width: 86px;
+            width: 90px;
+        }
+        .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+            color: #fff;
+            background-color: #00a1d6;
+        }
+        .nav-pills > li + li {
+            margin-left: 0;
+        }
+        .nav-pills > li > a {
+            border-radius:0;
+            line-height: 26px;
+            text-align: center;
+            overflow: hidden;
         }
     </style>
 </head>
