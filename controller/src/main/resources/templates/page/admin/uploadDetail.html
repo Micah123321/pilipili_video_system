@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/uploadDetail.css" type="text/css" rel="stylesheet" media="all">
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/admin/admin_upload.js"></script>
+    <style>
+        .select-box-v2-container[data-v-498e2f51] {
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div data-v-0876d562="" id="app" class="canary-container">
+    <div data-v-01cfd5ed="" data-v-0876d562="" class="notify-v2-container"><!----></div> <!---->
+    <div data-v-6ec1eb48="" data-v-0876d562="" class="upload-v2-container">
+        <div data-v-3ff1e4d5="" data-v-6ec1eb48="" class="upload-v2-step1-container" style="display: none;"><!---->
+            <div data-v-3ff1e4d5="" id="homeDrop">
+                <svg data-v-3ff1e4d5="" width="830" height="284" viewBox="-1 -1 832 286" preserveAspectRatio="none">
+                    <path data-v-3ff1e4d5="" d="M0 6
+        A 6 6, 0, 0, 1, 6, 0
+        H 824
+        A 6 6, 0, 0, 1, 830, 6
+        V 278
+        A 6 6, 0, 0, 1, 824, 284
+        H 6
+        A 6 6, 0, 0, 1, 0, 278
+        Z"></path>
+                </svg>
+                <i data-v-3ff1e4d5="" class="iconfont icon-android_uploadx"></i>
+                <div data-v-3ff1e4d5="" class="upload-hint">拖拽视频到此处也可上传</div>
+                <div data-v-3ff1e4d5="" class="upload-btn">
+                    <div data-v-3ff1e4d5="" id="bili-upload-btn"></div>
+                    <div data-v-3ff1e4d5="" class="upload-btn-title">上传视频</div>
+                </div>
+                <div data-v-3ff1e4d5="" class="video-jam"><p data-v-3ff1e4d5="" class="video-jam-pretext">当前审核队列</p>
+                    <p data-v-3ff1e4d5="" class="video-jam-state" style="background-color: rgb(69, 129, 142);">快速</p>
+                    <p data-v-3ff1e4d5="" class="video-jam-comment">预计稿件过审时间小于10分钟（活动投稿除外）</p></div>
+            </div>
+            <div data-v-746497e0="" data-v-3ff1e4d5="" class="video-editor-ol-wrp"><i data-v-746497e0=""
+                                                                                      class="iconfont icon-xic_video_huaban"></i>
+                <div data-v-746497e0="" class="video-editor-ol-content"><p data-v-746497e0="" class="title">
+                    bilibili云剪辑</p>
+                    <p data-v-746497e0="" class="sub_title"><span data-v-746497e0="">支持云渲染，无需导出直接投稿</span> <img
+                            data-v-746497e0=""
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAA6FJREFUSA29ljtMU1EcxumlYBwqIHHBATXBJr4xMVEThKokMEGCZYCBhWeiMT5GRgcXGFx4dnDAGNT4iAkmRkFZMA46uJTGCAM6UYjoIrT199VzSbn2lusjnOTkvL7/953//zx9eR7S6Oho5draWiPQKvLuVCpVJjOfz/eZYoE87ff7H7W3t79Tf67kyzU4ODh4AfIbYIKQL1N/QTlvhPIkTC6nfY6yGFyUem93d/d9N96sgiMjI3vx6A5GJ8kT+fn5/RUVFVOhUGgtG9Hk5KQ/FovVJBKJq4zXk2fwuKWjo+OTE/+b4PDwcDWGDwAuWZbV2dXVNek0ytUeGhoKJZPJYTAlTLSps7PzVSZ+g6DEAD8H8DoQCIRbW1uXMsFe66z5TiI0Dv4Mk67NFF0XNGF8yxq8DwaDdW7h8yqqMEej0Wes7THCe8IOr98mMGu2JM/cxJjUEXCXmdQhiHZiGyM/ZJNE6EvaXCrFgafNq6urbwz3KfWnPTS78R7un3Vbs4GBgS5IbyGUUBQov2J/nLyL9hRRqc02UbOmL8GEtXstqWKsrT/hJsba7jdiHwnPQQxP9/T01JWWlu7D7in2NbOzs1fE5UyGc8Jo5FnMQLPUOetzgu02G+kKBoWIXbTXQmPNzc3fKC6pDqZOZbakY0V/UBeIBVEDYsuEZMP2dRgeALNaVFT0GwZP5xj7AX6Pw2a9qTMsDdayUSGtQvRFtvjbFqztTepNeJSw++ySWWsDFdKes/ucpbilQX+Vdulu1HPegZyjCSeJ2uPj49sXFxeHVIdjVKVbYnyescMKaRkNXcJ/lCQWj8cfY3Qa+wib424uAmlIK71LcwGzjSGWj2dPIKiFqB+xDspUNmxmnzCWrZw5sFkdz66DOU++zRG55kVM3oH/Ig8XaJRT/km6ADhZUFBw1auR0ViQ4DQzPKe7z4uxwgnuCPkDD27ci424pQF22uIwP0K9mIu22otxOBzWnVlJbvCCF0ZvpTSkZZlvQZSOa14ItF4Yfudsen66zMMclVZ6l0LSi1i9LtrNRPVmcmN8YoLzkUgksBnecNYbjby0oG5xDGf0Uo+NjZXkIgGzAzEfmG14qhvGNYlLnABmjMYvQVlg3EJRsrKyci/XBuLMPeUyriGkR9va2hZlmy2JQ1yMlRjuNEwzXU//64shz4yY+xfDVpXoln2ibFHnN5EF79Pz5faiKHx//U20RVVu2Uc4U1R1vdR6PKn+81f/J7QfCX0nk61JAAAAAElFTkSuQmCC"
+                            alt="question" class="question">
+                    </p>
+                    <div data-v-171e54a9="" data-v-746497e0="" class="warning-info-v2-container"><p data-v-171e54a9=""
+                                                                                                    class="warning-info-v2-content">
+                        <span data-v-171e54a9="">支持74以上版本Chrome内核浏览器</span></p>
+                        <p data-v-171e54a9="" class="warning-info-v2-content"><span
+                                data-v-171e54a9="">如：Chrome，Opera等</span></p></div>
+                    <p></p></div>
+                <a data-v-746497e0="" href="/studio/bs-editor" target="_blank" class="video-editor-ol-btn">立即体验</a> <a
+                        data-v-746497e0=""
+                        href="https://www.bilibili.com/blackboard/help.html#bilibili%E4%BA%91%E5%89%AA%E8%BE%91?id=f54c00910d624648b26e0c9edc981cd4"
+                        target="_blank"><p data-v-746497e0="" class="video-editor-ol-helper">查看使用帮助</p></a> <span
+                        data-v-746497e0="" class="video-editor-ol-new">new</span></div>
+            <div data-v-3ff1e4d5="" class="upload-agreement">
+                <div data-v-3ff1e4d5="" class="reg-1">
+                    <div data-v-3ff1e4d5=""><a data-v-3ff1e4d5=""
+                                               href="https://www.bilibili.com/blackboard/blackroom.html" target="_blank"
+                                               class="reg-2-forbidden">禁止发布的视频内容</a></div>
+                    <div data-v-3ff1e4d5="" style="position: relative;"><a data-v-3ff1e4d5=""
+                                                                           href="javascript:void(0);">视频大小</a> <!---->
+                        <span data-v-3ff1e4d5="" class="tip_new" style="display: none;">new</span></div>
+                    <div data-v-3ff1e4d5="" style="position: relative;"><a data-v-3ff1e4d5=""
+                                                                           href="javascript:void(0);">视频格式</a> <!---->
+                        <span data-v-3ff1e4d5="" class="tip_new" style="display: none;">new</span></div>
+                    <div data-v-3ff1e4d5="" style="position: relative;"><a data-v-3ff1e4d5=""
+                                                                           href="javascript:void(0);">视频码率</a> <!---->
+                        <span data-v-3ff1e4d5="" class="tip_new">new</span></div>
+                </div>
+                <div data-v-3ff1e4d5="" class="reg-2">上传视频，即表示您已同意<a data-v-3ff1e4d5=""
+                                                                     href="https://passport.bilibili.com/register/licence"
+                                                                     target="_blank">
+                    哔哩哔哩使用协议 </a>与<a data-v-3ff1e4d5="" href="https://member.bilibili.com/studio/creative-treaty"
+                                     target="_blank"> 哔哩哔哩创作公约 </a>，请勿上传色情，反动等违法视频。
+                </div>
+            </div>
+            <div data-v-955f4446="" data-v-3ff1e4d5="" class="tool-box-v2-container">
+                <div data-v-955f4446="" class="tool-title">第三方工具</div>
+                <div data-v-955f4446="" class="tool-xiaowan"><span data-v-955f4446="" class="icon-download"></span> <a
+                        data-v-955f4446="" href="//dl.hdslb.com/video-press/xiaowantoolsrev194.zip" target="_blank">小丸压制工具原版</a>
+                </div>
+                <div data-v-955f4446="" class="tool-xiaowan-bilibili"><span data-v-955f4446="" class="icon-tv"></span>
+                    <a data-v-955f4446="" href="//dl.hdslb.com/video-press/BiliBiliEncoder.zip" target="_blank">小丸压制工具Bilibili定制版</a>
+                </div>
+            </div>
+        </div>
+        <div data-v-7d11eb07="" data-v-6ec1eb48="" class="upload-v2-step2-container" style=""><!---->
+            <div data-v-8c1e1774="" data-v-7d11eb07="" class="file-list-v2-container">
+                <div data-v-8c1e1774="" class="file-title"><h1 data-v-8c1e1774="">文件上传</h1>
+                    <p data-v-8c1e1774="" class="info">（推荐采用mp4、flv格式，可有效缩短审核转码耗时）</p>
+                    <p data-v-8c1e1774="" class="remain-upload">
+                        (0/1)</p></div>
+                <div data-v-632b126d="" data-v-8c1e1774="" class="file-list-v2-wrp">
+                    <div data-v-632b126d=""></div>
+                </div>
+                <div data-v-8c1e1774="" class="file-add-btn-group">
+                    <div data-v-8c1e1774="" class="file-add-btn" style=""><img data-v-8c1e1774=""
+                                                                               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAPhJREFUSA3tVm0KwjAMXf1A2BFkehvv4gU8xfyxn97F66h4ABFEZn0ZKdTClqZD2I8GQrMmL699Y2FFMXWz1i7hR3hN8d/PC5It/M2+0RIutADUG/iLcTMtXg3QEoT1mTBUZPRzlnS0hGGDFElbr4kfe9v9YffhY2rMUbKG00ctWYUCV0dTJ+bQFpibMabtgADV2Nh7jRD2GmFKzj6xUjPJqOYEwkPM6aRmqry7oVbSM7PssF4iGOmGV9zwE1H7WwL5K/iDnd6nylIkJTWc+bHbG1xTCAcbSslMKCmkzmdJ1ZJJgJS/NpoWK26snhwphHeQNUxI8bTtC6n0ShyL6cu0AAAAAElFTkSuQmCC"
+                                                                               alt="icon_add" class="file-add-btn-img">
+                        <span data-v-8c1e1774="" class="file-add-btn-title">添加视频</span>
+                        <div data-v-8c1e1774="" id="bili-upload-btn-more"></div>
+                    </div> <!----></div>
+                <div data-v-8c1e1774="" class="dividing-line"></div>
+            </div>
+            <div data-v-3e9c20f4="" data-v-7d11eb07="" class="file-content-v2-container">
+                <div data-v-9ede723a="" data-v-3e9c20f4="" class="normal-v2-container">
+                    <div data-v-9ede723a="" class="normal-title-wrp"><h1 data-v-9ede723a="">基本信息</h1></div>
+                    <div data-v-41f81e2c="" data-v-9ede723a="" class="cover-v2-container">
+                        <div data-v-cb0b3534="" data-v-41f81e2c="" class="section-title-v2-container"><!----> <h3
+                                data-v-cb0b3534="" class="section-title-v2-content-main">视频封面设置</h3>
+                            <p data-v-cb0b3534="" class="section-title-v2-content-sub">
+                                （格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600）</p> <!----> <!----></div>
+                        <div data-v-41f81e2c="" class="cover-v2-detail-wrp">
+                            <div data-v-41f81e2c="" class="cover-v2-preview">
+                                <div data-v-41f81e2c="" class="cover-v2-preview-show"><img id="show" data-v-41f81e2c=""
+                                                                                           alt="cover-preview-show"
+                                                                                           class="cover-preview-show">
+                                    <div data-v-41f81e2c="" class="cover-v2-upload-show-tip"><span data-v-41f81e2c=""
+                                                                                                   class="cover-v2-upload-show-tip-upload">上传封面</span>
+                                        <span data-v-41f81e2c="" class="cover-v2-upload-show-tip-edit">裁切修改</span></div>
+                                </div>
+                                <input id="file" onchange="changepic()" data-v-41f81e2c="" type="file"
+                                       accept="image/jpeg, image/jpg, image/png"></div>
+                        </div>
+                    </div>
+                    <script>
+                        function changepic() {
+                            var reads = new FileReader();
+                            f = document.getElementById('file').files[0];
+                            reads.readAsDataURL(f);
+                            reads.onload = function (e) {
+                                document.getElementById('show').src = this.result;
+                            };
+                        }
+                    </script>
+                    <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
+                    <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
+                    <div data-v-3c07cd70="" data-v-9ede723a="" class="content-title-v2-container">
+                        <div data-v-cb0b3534="" data-v-3c07cd70="" class="section-title-v2-container"><p
+                                data-v-cb0b3534="" class="section-title-v2-deg">*</p>
+                            <h3 data-v-cb0b3534="" class="section-title-v2-content-main">标题</h3> <!----> <!----> <!---->
+                        </div>
+                        <div data-v-3c07cd70="" class="content-title-v2-input-wrp">
+                            <div data-v-291b1b04="" data-v-3c07cd70="" class="input-box-v2-1-container">
+                                <div data-v-291b1b04="" class="input-box-v2-1-instance"><input data-v-291b1b04=""
+                                                                                               type="text"
+                                                                                               maxlength="80"
+                                                                                               placeholder="建议使用【作品题材】+其他部分 的形式填写标题"
+                                                                                               class="input-box-v2-1-val">
+                                </div>
+                                <p data-v-291b1b04="" class="input-box-v2-1-max-tip">3/80</p></div>
+                        </div>
+                    </div>
+                    <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
+                    <div data-v-18fef0e4="" data-v-9ede723a="" id="type-list-v2-container"
+                         class="type-list-v2-container">
+                        <div data-v-cb0b3534="" data-v-18fef0e4="" class="section-title-v2-container"><p
+                                data-v-cb0b3534="" class="section-title-v2-deg">*</p>
+                            <h3 data-v-cb0b3534="" class="section-title-v2-content-main">分区</h3> <!----> <!----> <!---->
+                        </div>
+                        <div data-v-18fef0e4="" class="type-list-v2-selector-wrp">
+                            <div data-v-498e2f51="" data-v-18fef0e4="" id="test" class="select-box-v2-container">
+                                <div data-v-498e2f51=""
+                                     class="select-box-v2-controller select-box-v2-controller-selected"><p
+                                        data-v-498e2f51=""
+                                        value="2" class="select-item-cont select-item-cont-inserted">
+                                    动画 → 综合</p> <!----> <i data-v-498e2f51=""
+                                                           class="selebox-box-v2-drop-icon iconfont icon-ic_collapse"
+                                                           style="transform: rotate(180deg) translateZ(0px);"></i></div>
+                                <div data-v-5d902fe9="" data-v-18fef0e4="" data-v-498e2f51=""
+                                     class="drop-cascader-container" style="top: 50px;">
+                                    <div data-v-5d902fe9="" class="drop-cascader-pre-wrp">
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            推荐选择</p> <i data-v-5d902fe9=""
+                                                        class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            生活</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            游戏</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            娱乐</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            知识</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            影视</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            音乐</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            动画</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            时尚</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            美食</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            汽车</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            数码</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            动物圈</p> <i data-v-5d902fe9=""
+                                                       class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            舞蹈</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9=""
+                                             class="drop-cascader-pre-item drop-cascader-pre-item-selected"><p
+                                                data-v-5d902fe9="" class="pre-item-content">国创</p> <i data-v-5d902fe9=""
+                                                                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            鬼畜</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            纪录片</p> <i data-v-5d902fe9=""
+                                                       class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            番剧</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            电视剧</p> <i data-v-5d902fe9=""
+                                                       class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-pre-item"><p data-v-5d902fe9=""
+                                                                                                  class="pre-item-content">
+                                            电影</p> <i data-v-5d902fe9=""
+                                                      class="pre-item-icon iconfont icon-ic_into"></i>
+                                        </div>
+                                    </div>
+                                    <div data-v-5d902fe9="" class="drop-cascader-list-wrp">
+                                        <div data-v-5d902fe9="" class="drop-cascader-list-item"><p data-v-5d902fe9=""
+                                                                                                   class="item-main">
+                                            国产动画</p>
+                                            <p data-v-5d902fe9="" class="item-sub">国产连载动画，国产完结动画</p></div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-list-item"><p data-v-5d902fe9=""
+                                                                                                   class="item-main">
+                                            国产原创相关</p>
+                                            <p data-v-5d902fe9="" class="item-sub">以国产动画、漫画、小说为素材的二次创作</p></div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-list-item"><p data-v-5d902fe9=""
+                                                                                                   class="item-main">
+                                            布袋戏</p>
+                                            <p data-v-5d902fe9="" class="item-sub">布袋戏以及相关剪辑节目</p></div>
+                                        <div data-v-5d902fe9=""
+                                             class="drop-cascader-list-item drop-cascader-list-item-selected"><p
+                                                data-v-5d902fe9="" class="item-main">资讯</p>
+                                            <p data-v-5d902fe9="" class="item-sub">原创国产动画、漫画的相关资讯、宣传节目等</p></div>
+                                        <div data-v-5d902fe9="" class="drop-cascader-list-item"><p data-v-5d902fe9=""
+                                                                                                   class="item-main">
+                                            动态漫·广播剧</p>
+                                            <p data-v-5d902fe9="" class="item-sub">国产动态漫画、有声漫画、广播剧</p></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
+                    <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
+                    <div data-v-6bad4b02="" data-v-9ede723a="" class="content-desc-v2-container">
+                        <div data-v-cb0b3534="" data-v-6bad4b02="" class="section-title-v2-container"><!----> <h3
+                                data-v-cb0b3534="" class="section-title-v2-content-main">简介</h3> <!----> <!----> <!---->
+                        </div>
+                        <div data-v-6bad4b02="" class="content-desc-v2-text-wrp">
+                            <div data-v-64fae010="" data-v-6bad4b02="" class="text-area-box-v2-container"><textarea
+                                    data-v-64fae010="" class="text-area-box-v2-val placeholder-style"
+                                    style="height: 120px;"></textarea>
+                                <p data-v-64fae010="" class="text-area-box-v2-max-tip">0/2000</p></div>
+                        </div>
+                    </div>
+                    <div data-v-9ede723a="" class="dividing-line"></div>
+                </div>
+                <div data-v-3480cc97="" data-v-3e9c20f4="" class="d-time-v2-container">
+                    <div data-v-3480cc97="" class="d-time-v2-switch-wrp"><p data-v-3480cc97="" class="d-time-v2-pre">
+                        定时发布</p>
+                        <div data-v-52a41366="" data-v-3480cc97=""
+                             class="check-radio-v2-2-container check-radio-v2-2-container-active"><span
+                                data-v-52a41366="" class="check-radio-v2-2-roll"></span></div>
+                        <p data-v-3480cc97="" class="d-time-v2-last"><span data-v-3480cc97="">（当前+4小时 ≤ 可选时间 ≤ 当前+15天，转载稿件撞车判定以过审发布时间为准</span>
+                            <span data-v-3480cc97="" style="display: none;">，</span> <span data-v-3480cc97=""
+                                                                                           style="color: rgb(242, 98, 145); display: none;">合作稿件默认定时为当前+4小时，可以进行调整</span>
+                            <span data-v-3480cc97="">）</span></p></div>
+                    <div data-v-3480cc97="" class="d-time-v2-date-picker-wrp">
+                        <div data-v-3480cc97="" class="date-picker-timezone-wrp">
+                            <div data-v-498e2f51="" data-v-3480cc97="" class="select-box-v2-container"> <!----></div>
+                        </div>
+                        <div data-v-3480cc97="" class="date-picker-date-wrp">
+                            <div data-v-3480cc97="" class="date-picker-date"><p data-v-3480cc97="" class="date-show">
+                                2021-04-19</p> <i data-v-3480cc97="" class="date-show-icon iconfont icon-date-o"></i>
+                            </div> <!----></div>
+                        <div data-v-3480cc97="" class="date-picker-date-wrp">
+                            <div data-v-3480cc97="" class="date-picker-timer"><p data-v-3480cc97="" class="date-show">
+                                15:00</p> <i data-v-3480cc97="" class="date-show-icon iconfont icon-time1"></i></div>
+                            <!----></div>
+                    </div>
+                </div>
+                <div data-v-54a862f1="" data-v-3e9c20f4="" class="submit-button-group-v2-container"><span
+                        data-v-54a862f1="" onclick="gotoPage()" class="submit-btn-group-add">立即投稿</span></div>
+            </div>
+            <div data-v-51ea6eb8="" data-v-7d11eb07="" class="auto-complete-container-v2" style="display: none;">
+                <div data-v-51ea6eb8="" class="auto-complete-body"><img data-v-51ea6eb8=""
+                                                                        src="//s2.hdslb.com/bfs/static/studio-upload-v3/static/img/wait-upload.928ac8e.png"
+                                                                        alt="wait-upload">
+                    <p data-v-51ea6eb8="">等待视频上传完后会自动提交&nbsp;<a data-v-51ea6eb8="">取消自动提交&nbsp;</a></p></div>
+            </div>
+        </div>
+        <div data-v-8b8cf23a="" data-v-6ec1eb48="" class="upload-step-3-container-v2" style="display: none;">
+            <div data-v-5f1ab41e="" data-v-8b8cf23a="" class="step-controller-v2-container">
+                <div data-v-5f1ab41e="" class="step-ctrl-item"><span data-v-5f1ab41e=""
+                                                                     class="step-ctrl-complete-icon iconfont icon-duihao"></span>
+                    <span data-v-5f1ab41e="" class="step-ctrl-complete-content">填写投稿信息</span></div>
+                <div data-v-5f1ab41e="" class="step-ctrl-line step-ctrl-line-active"></div>
+                <div data-v-5f1ab41e="" class="step-ctrl-item"><span data-v-5f1ab41e=""
+                                                                     class="step-ctrl-active-icon">2</span> <span
+                        data-v-5f1ab41e="" class="step-ctrl-active-content">投稿审核中</span></div>
+                <div data-v-5f1ab41e="" class="step-ctrl-line step-ctrl-line-wait"></div>
+                <div data-v-5f1ab41e="" class="step-ctrl-item"><span data-v-5f1ab41e=""
+                                                                     class="step-ctrl-wait-icon">3</span> <span
+                        data-v-5f1ab41e="" class="step-ctrl-wait-content">完成</span></div>
+            </div>
+            <div data-v-8b8cf23a="" class="upload-3-v2-success-image"><img data-v-8b8cf23a=""
+                                                                           src="//s2.hdslb.com/bfs/static/studio-upload-v3/static/img/success-2233.0a1bf03.png"
+                                                                           alt="upload_success_2"></div>
+            <h3 data-v-8b8cf23a="" class="upload-3-v2-success-hint-1">稿件投递成功</h3> <!---->
+            <div data-v-8b8cf23a="" class="upload-3-v2-success-split"></div>
+            <div data-v-8b8cf23a="" class="upload-3-v2-success-go-url"><a data-v-8b8cf23a=""
+                                                                          href="//member.bilibili.com/v2#/upload-manager/article"
+                                                                          target="_self" class="">查看稿件</a><a
+                    data-v-8b8cf23a="" href="https://member.bilibili.com/video/upload.html" target="_self"
+                    class="">再投一个</a><!----> <!----></div>
+            <p data-v-8b8cf23a="" class="upload-3-v2-success-hint-2">若稿件没有立刻显示在列表中，请稍候片刻</p>
+            <p data-v-8b8cf23a="" class="upload-3-v2-success-hint-3">稿件名称:bbb</p>
+            <div data-v-8b8cf23a="" class="upload-3-v2-follow"><p data-v-8b8cf23a="" class="upload-3-v2-follow-title">
+                想要了解更多创作资讯，关注我们的官方账号吧～</p>
+                <div data-v-8b8cf23a="" class="upload-3-v2-follow-account"><a data-v-8b8cf23a=""
+                                                                              href="https://space.bilibili.com/37090048/#/"
+                                                                              target="_blank">
+                    <div data-v-8b8cf23a="" class="upload-3-v2-follow-avatar"><img data-v-8b8cf23a="" alt="官方账号头像"
+                                                                                   src="//i2.hdslb.com/bfs/face/01365904ffb64d1858da7e20e1040b9f2d94165d.jpg"
+                                                                                   class="upload-3-v2-follow-avatar-pic">
+                        <img data-v-8b8cf23a="" alt="闪电标志"
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAAAXNSR0IArs4c6QAABXdJREFUWAmdV1tonUUQ/lJikhpNay9yUhJssRdUTNVijW8KxUhbKlgffCjUPmgxiCJUGy/xIRWsIEiFJt7AKz7pQ2sLKoH4UnKMV9S2NLa0wZDE1qY2ib0pHr9v/509m//8J8c6MP/uzs7Mzs7Mzu4PeCgUCpPqVumztr9QWFoPHPsTmGUzu24GCsaxjhwabF3Mj4DD3cQ29avZKazLq4t2doH7vxKpCFXqeg7sb3WcTkeLJj4dLRQkceqCRm4dp3P3vjG095wAFtUBn6wGTIOYZlHJ3tZrElUjF7zKqHE709hURnOoIoQxGWqIR4h9gchOtQYm/fAPQGMdlvvxMBU0y1dT+fHEMNkw8VcwsolzORlZv2NQeuD2/Qs9LPA7GRWDA3OK2lytURkO60riwGngsR+BsYvFCbm2i0yd5hwTkKawTTIpgmnIGXNoyVFLnEpzpsZaMYDzpARJoRMAucR2Hbh8ZzZ39DFj6SFPE+/UHmpI4LaCa/w8cN1soHtlKf2ehcAT1zu2CUXqJ3UVJYNrac87t9oIWDUn6f/GZYZp5xengoIGuXlE0wxxgJNklFe3H0xIXTcAJhyYfMd8oEOCBwaA8/8UWRSKJ2nfoI++zbx/GzBfGwd6QjrSF7+S0CTqrmOJmeobyNR3i4IiN9KJYzYfWirKEc8Ss6A7MM7UoWQbsY84SdQZ0blPjK4g2EXGmUBJFqW6L0ZSyongg98ZhdeOAwcngHlc9z4m7XpiBC3cvwu/RaGfk/R5aSQiIXQuJ9O8QKmjkos60dLthNcz9nEYxfoePW+gFFeqe+DhTI7lEXUUOpcMGnj4aFXx3BotOif1XLxG4W3QpNIzhg+48pwrWPRKIw0WSoNXpaAEdA7kPIEKlc6CnQfR9hQVrHFlT0SDnTcCOkwGz9JxAkVm8/dJf/xS0vLbWKKg41CYDNX/DAVMWLM3uU07vm/DFkKnKO96k38Dm76bTnx8SRjvlFyPhjooMcynA89R+MFvYiqgqrTAb5F58LklkovgnlHgzaHpAvFIzPtcxjjqDip4wRQomSgOnOZ+H6LJUVlw3FEZ09jdK27CPspI4n+BfpPJbKmhu4wW1QhZenkgIa+0XJHJWk+8MuTyF5R5EiRm3WYk/y+QrkxjXBDNJ57pa45dbTa6Avshq1Uvz2s6uMZjrfJyDe+tTc2h8NuU2mHi7cyecBiDAVy8i5Od4jJQWr41VFplbL5SK+WPLAY2lO7dpbDknQFcXJfFoyIItOOtvGjTtTGZLX6XXAm8xNpxNQvCFqb+ScplgQ7fG7eUeKSHnmjX06CNQp+ZoIrOFhadmVzdzCeDitZcnnZB/zjw4mDSL/dVaFQlrQp4vntF74iFdBeVW1wvN90Qr68sLi7ZqLzGqqb1pVO6U9AhD0ySeJVNbBzgMytlwQLW9pe541ydcVVuD1HrU/5pY9x13K5e2hFMqZyPEH3VTy4SXSIxKMZvMxkFdu3VUtnTyxJa/NVdsZ1XQlqHeOySivhHZEAvMRigJ0DPiYiF3ePnEoypGxvjEXCWz/NnuPDQ+en0eCTdKei196lu5AabzHqb2Zy1ygWFZopXznOHgaOpB6DxWZu6DESeIC6s5lG4xDxYwcFRYj3RPX7v4A+QMttcLrqBHs7K3m0/A4enjJrd6pw/T/9G7yExytwVWtvVAVFoBHMcXxJbiQH0DnqFplWqCUHAd3T2ty0tWVizeeJdXJwHPnoaaiCgIS1s9hObNI5BNSJ/Bhj4g5cvE9UeJ0ouPfBXz+WC9FzqrJuKYXbWcmH3pDRi2VYeIeqxW+mviSxlQbLSIe9mQghB5mxEpBLuE3cTNxBZFbDIIxt3lEfY8hxgL7FP8WVbEf4FEnCVulNNf2wAAAAASUVORK5CYII="
+                             class="upload-3-v2-follow-avatar-cert"></div>
+                    <span data-v-8b8cf23a="" class="upload-3-v2-follow-name">哔哩哔哩创作中心</span></a></div>
+                <div data-v-8b8cf23a="" class="upload-3-v2-follow-btn follow"><i data-v-8b8cf23a=""
+                                                                                 class="iconfont icon-ic_add"></i> <span
+                        data-v-8b8cf23a="">关注</span></div>
+            </div>
+        </div>
+    </div> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----></div>
+</body>
+</html>
