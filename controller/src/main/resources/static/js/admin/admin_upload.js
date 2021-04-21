@@ -16,6 +16,15 @@ $(function () {
     $(".select-box-v2-controller").click(function () {
         $(".drop-cascader-container").slideToggle()
     })
+    $(".check-radio-v2-2-container ").click(function () {
+        if ($(this).hasClass("check-radio-v2-2-container-active")){
+            $(this).removeClass("check-radio-v2-2-container-active")
+            $(".d-time-v2-date-picker-wrp").slideUp()
+        }else{
+            $(this).addClass("check-radio-v2-2-container-active")
+            $(".d-time-v2-date-picker-wrp").slideDown()
+        }
+    })
     reClass = function (obj) {
         $(".drop-cascader-pre-item").removeClass("drop-cascader-pre-item-selected")
         $(obj).addClass("drop-cascader-pre-item-selected")
@@ -106,6 +115,7 @@ $(function () {
 
         }
     });
+    $(".d-time-v2-date-picker-wrp").slideUp()
 })
 gotoPage = function () {
     window.parent.location.href = "/"

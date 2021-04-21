@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/index")
@@ -43,8 +41,8 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/videoInfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object videoInfo(PVideosPage pVideosPage){
-        pVideosPage.setCount(8);
-        pVideosPage.setIndex(1);
+        pVideosPage.setCount(7);
+        pVideosPage.setIndex(0);
         List<PCategoryVo> categoryVoList = pCategoryService.selectAllLevel1Category();
         List<PVideoListVo> listVos=new ArrayList<>();
         for (PCategoryVo p:categoryVoList) {

@@ -69,6 +69,11 @@ public class UserController {
         return "page/user/userregister";
     }
 
+    @RequestMapping("/fans/list")
+    public String getFansList() {
+        return "page/user/fanslist";
+    }
+
     @RequestMapping("/space")
     public String goSpace(HttpSession session) {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
