@@ -1,4 +1,17 @@
 $(function () {
+    $.ajax({
+        url: "/search/category/1",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            var menu=$(".dropdown-menu")
+            menu.empty();
+            for (var i = 0; i < data.length; i++) {
+                menu.append("<li><a href=\"icons.html\">"+data[i].categoryName+"</a></li>")
+            }
+        }
+    });
+
     ajaxVideoInfo = function () {
         $.ajax({
             url: "/index/videoInfo",
