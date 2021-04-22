@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="/js/jquery-1.12.3.min.js"></script>
+    <script src="/js/jquery-2.2.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/datedropper.css">
     <link rel="stylesheet" type="text/css" href="/css/timedropper.min.css">
     <link href="/css/bootstrap.css" type="text/css" rel="stylesheet">
@@ -25,8 +25,9 @@
     </style>
 </head>
 <body>
-
+<input th:value="${pid}" type="hidden" id="pid">
 <div data-v-0876d562="" id="app" class="canary-container">
+
     <div data-v-01cfd5ed="" data-v-0876d562="" class="notify-v2-container"><!----></div> <!---->
     <div data-v-6ec1eb48="" data-v-0876d562="" class="upload-v2-container">
         <div data-v-3ff1e4d5="" data-v-6ec1eb48="" class="upload-v2-step1-container" style="display: none;"><!---->
@@ -110,11 +111,35 @@
                     <p data-v-8c1e1774="" class="info">（推荐采用mp4、flv格式，可有效缩短审核转码耗时）</p>
                     <p data-v-8c1e1774="" class="remain-upload">
                         (0/1)</p></div>
-                <div data-v-632b126d="" data-v-8c1e1774="" class="file-list-v2-wrp">
-                    <div data-v-632b126d=""></div>
+                <div data-v-632b126d="" style="display: none"  data-v-8c1e1774="" class="file-list-v2-wrp">
+                    <div data-v-632b126d="">
+                        <div data-v-632b126d="" data-drag-index="0" class="file-list-v2-item">
+                            <div data-v-632b126d="" class="file-list-v2-item-icon"><span data-v-632b126d="">P1</span>
+                            </div>
+                            <div data-v-632b126d="" class="file-list-v2-item-wrp">
+                                <div data-v-632b126d="" class="item-status-wrp"><span data-v-632b126d=""
+                                                                                      class="item-title"><p
+                                        data-v-632b126d="" class="item-title-text">孙策利用伽罗练习篮球？？</p> <!----></span>
+                                    <div data-v-632b126d="" class="item-status-op"><!----> <!----> <span
+                                            data-v-632b126d="" class="item-status-click">删除</span> <!----> <i
+                                            data-v-632b126d="" class="icon-success-v2"></i> <!----> <!----></div>
+                                </div>
+                                <div data-v-632b126d="" class="item-upload-info"><span data-v-632b126d=""
+                                                                                       class="upload-status-intro">上传完成</span>
+                                    <!----> <!----> <!----> <!----></div>
+                                <div data-v-632b126d="" class="item-upload-progress">
+                                    <div data-v-632b126d="" class="item-upload-progress-complete"
+                                         style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <input id="input-repl-3a"  name="videoFileAddress" data-ref="videoUrl" type="file" accept="mp4" />
+
+                <input id="input-repl-3a" onchange="FileValue(this)" name="videoFileAddress" data-ref="videoUrl"
+                       type="file" accept="mp4"/>
                 <input type="hidden" name="videoUrl" value="">
+                <video class="hidden" id="myvideo"></video>
                 <div data-v-8c1e1774="" class="dividing-line"></div>
             </div>
             <div data-v-3e9c20f4="" data-v-7d11eb07="" class="file-content-v2-container">
@@ -127,19 +152,23 @@
                                 （格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600）</p> <!----> <!----></div>
                         <div data-v-41f81e2c="" class="cover-v2-detail-wrp">
                             <div data-v-41f81e2c="" class="cover-v2-preview">
-                                <div data-v-41f81e2c="" class="cover-v2-preview-show"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAACk9JREFUeAHtWw9QVMcZ39337gCpipJUiBmpVE1jEkyTdrSdtqmYZpKBTjNtPNA6wBn1OKGkZdp0pv+CZjqZDpEkVOAuEv4VEC5Tm3a0SdXWJq0zbVInNR1JtamiNaIWC6aGv3dv+9sHD+4d73HvkHM47A7v3u737X77fd9+++23uw9CbvJEY1n+5/e0LoqT5LuoRPrpQM9fXC7XcKTysEgbzJT6nsb2TfF2+RiTyW8pJUd5/IJ9lXW+WyPlLyYV4G3yfQ5Ce/AsHhWYIp9tl/mzKEdk1TGngN2Njcmc8BrImRg62pTT7Mo9zZpSQtGG5VhTAJVJfDkl9G4jaTgldmaX5xjhzGAxpQBPQ1sBbN1pJgxs/0S30n/ODG8EtzxfhOnJPC4LDCzDLLtKFP6KqyD3n0ZEowGrbmzNkIh8BH0vNKLPCVYCzrNc+TlHjPBmMEsK8NS3LCeSvE9vevwS5/SZvivkxdJSR79ZB9MBLy9vSpz70fhDcHSfMaOnEPIDd57jx2Z4M7ilKUAl2a0XXpCji8DQ83OS+e9q6nyZZh1MBxzC75xMeM75r4d7L4oVIOJkSQEY6XQzypgSa7AWv+pp8nl317akmdWbKtzT1PZVCP/EJO3Pc0UpKikpGZykjinKkgLAgGxKYQRhx1zaZrPZ3qhpat9aVuazh6lvCV1d15JOCXsBlSWTBgES4N9wOzd0muDDgi0pQOHktbCURAVKljBCX0xJJ69W1e39rKU2JpUqKyvjmGyrAvp2kyqEc1Lhcua8Yoa3ArekgGuXB+oJJwetEBR1YA2ZsiQd8jT6dk0lPBU07Ekp3wWdh0XeMHHyR8T/ZYa4CICWVgFBb9QTu5AtxZSIJNp6Dx5656XTHS1lZWXIhk+ehr3rKGX7CaXxxrV597AS+GJxwcYTxnjrUMsK0EgKRyfb5CfBnBONEzS4hfeBgEKe2l7gODZZXa/3Z6kk3v570F9hUg9On+cV5uc0m+AjAkesAI16VX3bpyXGfgRreAQwMyelVVffCFaugfnK/mG6q3SL4z86JArr1/ukddmkBTRzQnFamSvcU1iQ49bK1/sOq4CKCl+CPHcoGWG2TetMlgOcMGmYcSWeMLYezujbYDpZw4d7QxEdEGQH4cqbfr+k8iBoMol9DR7EdD1Hu9OcBx4jCunR2hn1pfI3MNx36dLp7nDTzlABYiTWZisPSYRtQKdr4NXmUz5xKQQO+w+O9ZcmoU5EmxCVcU7GrEDQwt8CxBXmjpmTPrT7EI8Fi+MDnNAL2DkepAHaUrjZ0WGkrAkKqKr1LZPsvAKR35eNGsQkjJNejNRzQ70XfxIaMOkUMLLhkPbBAX08JgUNwzT8T3PfFboteO8yZm7ifE0iUttsFV7oBtNrU+ItXLdhGlNAvF36PmrcGUaJsY/mpLi6yfeAJoga4/90j28pvHieBgx+wzMdogpHUEKuKgpqxUBiDMY+4pizwPCXdCxTapMI/yZgb+CBa0CqaWxzMco8Iq9LCt/V1fnuk+GWEl2bGVQA3yxl6cpyDFupji2sPoNDQ6tKtm46r04BbGA+qaswUjhLBunTsSq8EEHw3q98+DQW2HM6+XCqJMfZVUevKkA1F10NdVE+5XI5roaAY674LadTLIEnQxlnRFEDN1UBMBH1HVIpEFKO2SKCOP8E5jlTZTYSfELdWAfAAkyd902hgMkGMNxR12RtdTjcyNxuk+wrKOOrEc3fj3UoAU+duyDn57qKERTEnuTBLLKNU/4VTNN+LMnvYuE6ThXSQYb8XS7Xxu4IyBlWnZICxOHIvFvi0xWqZCC6Wo3nfnja5TA0XE6OWJsaMVDykKex7bHC/NxfGvYeBgjhH4Z3qtYsGJQfFeS5RPw0QX4fF6Rn0fcJhSvHsZKdUvC48x3vhyGrQ1tWgBiNzCwlF5u1RyHcvRiNxYyw8QMRg1kGEOjTYvQ4JQVg7i4zICt0IPhOg/BpeH8BMYwQijNOenA6/Yuh3qHSkpJNHwhguGRZAeuyle0QvlIjaMSYhtO9KV2EsqgOnUWcLGx7x2gKQ1mIjh6Pm2/7F6A7xjCTZCw7QayU4uQn4oSg9AIaTUV44uf+36DlvyPuFBZqtY1lBeBg4b9WiYp6kPgafl6nCv1OJO2C64pDT7+iZOH8uxEO9W3w0AOFhj1YRd/i0MRSsjwFYF5HQNFhQFUETF1g7DzMr4NQ/jdElqewgTp5+ADrfPllx3UFVEXO3LdAv0DcE9DEW5Mlm7RcUsgdmPAZUPA9wC1Bv4uxk9WO7IZwZHbAgE9DkGUF0P7el0h80iJoNxNTuhuj8XdMundw0nuSDQxccLvzLhv2ME3A0ZMcMZ3E87pGVtxaM2JbzLh8JwbhNsDfxNJ7VMOHe1tWwOgHSDuwwZhRG6Ti/PwrEFI874QT1ghv2QdojWN5d6jJEPyOWAHBjWdD/v8KmA2jeD0yWHaCU+iE1jS0bUSYmofviWpCr7FrGtodlNEt+K7naNcZ+kxZmWMouA98EOXErZMTFy9XeIB6C50Oa1f0wUQs5KOmAK+3NRkClIOHVC5REZqO3ePDkTLGqDinW431OzMlbbgV+X/gUZPX67URpu4h7lOjaIkkAhEVBUTVB2BdVk9iEKhkPldfnzQqH0lNXTkXee2KXaJM1n1M0SvLuBan43eNnF/3tlfrO/QdNQUcPiz3IFA6Pdrh0gQ2p6K6umWBuGzFScH3AA/68oOWVtX7UjTmkqSPPIX8Eq2MMFhEg1FJUZsCIgR+MLutmRD2gOAcW1cnS5TXJiaSAZQ+oZOGkgxJ4q95Gtrb4RfECfX6cTzvDvj9+8bL05uLmgIEm11nWFNqOl8HgXNFGUr4mHjrkrghVrexdBUOP1bpcCgg9P5h8Zavnw2FT1c5alNAMCg8+2DvsAu7uVo8GHld6sJ+wu0PBO6Fr6g2wJ9VFF5amJfj0bWa5kJULUDwOnoysxVzvIpJ5B6m8HmE8ct+P/9T0eYNYnUQqaimcW8tVaT74DAlzPkzfQFyrHRLztj3AyPVpv836grQWC5yOv6KvHgMkzt/w9tAiOeGpqhOgRsqyRQ7uykUgJsh+FLjNKIAToYN0JIBLBZBcCtEBF66hK9f1dBbVQAUJE5ZdAmtVni9vvk6YAwWdje0rsTFSkYw61h1xLmien+gKkDh9A/BFUbzaYjYdopLEANcLIAohL9LplItItJ5OoYp7ZQGyXsCJsyDVFY2z8NZ+luIVFaIcnCCdRwHgVNYmm7YihHc/xTzOJcV/1nCsayGCA+CsIBn8aWpelqtKkB04mnwPY4LltopdhhLzbrA7BpXnuOcYHrECSJzsbOjEaPdJICzNWEp8MOSSzThhZxjFiAK2IfP4QlJNTCbPFGeTQmD+wEOVp5wOx0NwXLplrr9+/cPf2rV3b9KTEqGmdA7cAk6vicPbhVDeTHqYPcg/u1ns7vAMeHCRGcBwXJV1PoWJsh8LXZwn4ciboPp2IPxMz5P+TUEQCcDCj+03Zn7Z/BrGgzNeFmiyeD/AHZMPYrjJkj7AAAAAElFTkSuQmCC" id="show" data-v-41f81e2c=""
-                                                                                           alt="cover-preview-show"
-                                                                                           class="cover-preview-show">
+                                <div data-v-41f81e2c="" class="cover-v2-preview-show"><img
+                                        src="data:image/png;base64,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"
+                                        id="show" data-v-41f81e2c=""
+                                        alt="cover-preview-show"
+                                        class="cover-preview-show">
                                     <div data-v-41f81e2c="" class="cover-v2-upload-show-tip"><span data-v-41f81e2c=""
                                                                                                    class="cover-v2-upload-show-tip-upload">上传封面</span>
                                         <span data-v-41f81e2c="" class="cover-v2-upload-show-tip-edit">裁切修改</span></div>
                                 </div>
                                 <form id="uploadForm" enctype="multipart/form-data">
-                                    <input id="file" name="videoFileAddress" onchange="changepic()" data-v-41f81e2c="" type="file"
+                                    <input id="file" name="videoFileAddress" onchange="changepic()" data-v-41f81e2c=""
+                                           type="file"
                                            accept="image/jpeg, image/jpg, image/png">
                                 </form>
                                 <input type="hidden" name="videoImage">
-                                </div>
+                                <input type="hidden" name="videoTime">
+                            </div>
                         </div>
                     </div>
                     <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
@@ -157,7 +186,8 @@
                                                                                                placeholder="建议使用【作品题材】+其他部分 的形式填写标题"
                                                                                                class="input-box-v2-1-val">
                                 </div>
-                                <p data-v-291b1b04="" class="input-box-v2-1-max-tip"><span id="titlenum">0</span>/80</p></div>
+                                <p data-v-291b1b04="" class="input-box-v2-1-max-tip"><span id="titlenum">0</span>/80</p>
+                            </div>
                         </div>
                     </div>
                     <div data-v-9ede723a="" class="ui-v2-normal-line-white-divide"></div>
@@ -319,7 +349,8 @@
                                     id="descarea"
                                     data-v-64fae010="" class="text-area-box-v2-val placeholder-style"
                                     style="height: 120px;"></textarea>
-                                <p data-v-64fae010="" class="text-area-box-v2-max-tip"><span id="desctext"> 0</span>/2000</p></div>
+                                <p data-v-64fae010="" class="text-area-box-v2-max-tip"><span id="desctext"> 0</span>/2000
+                                </p></div>
                         </div>
                     </div>
                     <div data-v-9ede723a="" class="dividing-line"></div>
@@ -341,12 +372,16 @@
                         </div>
 
                         <div data-v-3480cc97="" class="date-picker-date-wrp">
-                            <div data-v-3480cc97="" class="date-picker-date"><p data-v-3480cc97="" class="date-show"><input type="text" class="input" id="pickdate" /></p>
+                            <div data-v-3480cc97="" class="date-picker-date"><p data-v-3480cc97="" class="date-show">
+                                <input type="text" class="input" id="pickdate"/></p>
                                 <i data-v-3480cc97="" class="date-show-icon iconfont icon-date-o"></i>
                             </div> <!----></div>
 
                         <div data-v-3480cc97="" class="date-picker-date-wrp">
-                            <div data-v-3480cc97="" class="date-picker-timer"><p data-v-3480cc97="" class="date-show"><input type="text" class="input" id="picktime" /></p><i data-v-3480cc97="" class="date-show-icon iconfont icon-time1"></i></div>
+                            <div data-v-3480cc97="" class="date-picker-timer"><p data-v-3480cc97="" class="date-show">
+                                <input type="text" class="input" id="picktime"/></p><i data-v-3480cc97=""
+                                                                                       class="date-show-icon iconfont icon-time1"></i>
+                            </div>
                             <!----></div>
                     </div>
                     <script src="/js/datedropper.min.js"></script>
@@ -364,7 +399,7 @@
                     </script>
                 </div>
                 <div data-v-54a862f1="" data-v-3e9c20f4="" class="submit-button-group-v2-container"><span
-                        data-v-54a862f1="" onclick="gotoPage()" class="submit-btn-group-add">立即投稿</span></div>
+                        data-v-54a862f1="" onclick="ajaxVideo('/video/insert')" class="submit-btn-group-add">立即投稿</span></div>
             </div>
             <div data-v-51ea6eb8="" data-v-7d11eb07="" class="auto-complete-container-v2" style="display: none;">
                 <div data-v-51ea6eb8="" class="auto-complete-body"><img data-v-51ea6eb8=""
@@ -373,6 +408,7 @@
                     <p data-v-51ea6eb8="">等待视频上传完后会自动提交&nbsp;<a data-v-51ea6eb8="">取消自动提交&nbsp;</a></p></div>
             </div>
         </div>
+
         <div data-v-8b8cf23a="" data-v-6ec1eb48="" class="upload-step-3-container-v2" style="display: none;">
             <div data-v-5f1ab41e="" data-v-8b8cf23a="" class="step-controller-v2-container">
                 <div data-v-5f1ab41e="" class="step-ctrl-item"><span data-v-5f1ab41e=""
@@ -393,28 +429,13 @@
             <h3 data-v-8b8cf23a="" class="upload-3-v2-success-hint-1">稿件投递成功</h3> <!---->
             <div data-v-8b8cf23a="" class="upload-3-v2-success-split"></div>
             <div data-v-8b8cf23a="" class="upload-3-v2-success-go-url"><a data-v-8b8cf23a=""
-                                                                          href="//member.bilibili.com/v2#/upload-manager/article"
+                                                                          onclick="gotoPage()"
                                                                           target="_self" class="">查看稿件</a><a
-                    data-v-8b8cf23a="" href="https://member.bilibili.com/video/upload.html" target="_self"
+                    data-v-8b8cf23a="" href="/admin/uploadDetail" target="_self"
                     class="">再投一个</a><!----> <!----></div>
             <p data-v-8b8cf23a="" class="upload-3-v2-success-hint-2">若稿件没有立刻显示在列表中，请稍候片刻</p>
-            <p data-v-8b8cf23a="" class="upload-3-v2-success-hint-3">稿件名称:bbb</p>
-            <div data-v-8b8cf23a="" class="upload-3-v2-follow"><p data-v-8b8cf23a="" class="upload-3-v2-follow-title">
-                想要了解更多创作资讯，关注我们的官方账号吧～</p>
-                <div data-v-8b8cf23a="" class="upload-3-v2-follow-account"><a data-v-8b8cf23a=""
-                                                                              href="https://space.bilibili.com/37090048/#/"
-                                                                              target="_blank">
-                    <div data-v-8b8cf23a="" class="upload-3-v2-follow-avatar"><img data-v-8b8cf23a="" alt="官方账号头像"
-                                                                                   src="//i2.hdslb.com/bfs/face/01365904ffb64d1858da7e20e1040b9f2d94165d.jpg"
-                                                                                   class="upload-3-v2-follow-avatar-pic">
-                        <img data-v-8b8cf23a="" alt="闪电标志"
-                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAAAXNSR0IArs4c6QAABXdJREFUWAmdV1tonUUQ/lJikhpNay9yUhJssRdUTNVijW8KxUhbKlgffCjUPmgxiCJUGy/xIRWsIEiFJt7AKz7pQ2sLKoH4UnKMV9S2NLa0wZDE1qY2ib0pHr9v/509m//8J8c6MP/uzs7Mzs7Mzu4PeCgUCpPqVumztr9QWFoPHPsTmGUzu24GCsaxjhwabF3Mj4DD3cQ29avZKazLq4t2doH7vxKpCFXqeg7sb3WcTkeLJj4dLRQkceqCRm4dp3P3vjG095wAFtUBn6wGTIOYZlHJ3tZrElUjF7zKqHE709hURnOoIoQxGWqIR4h9gchOtQYm/fAPQGMdlvvxMBU0y1dT+fHEMNkw8VcwsolzORlZv2NQeuD2/Qs9LPA7GRWDA3OK2lytURkO60riwGngsR+BsYvFCbm2i0yd5hwTkKawTTIpgmnIGXNoyVFLnEpzpsZaMYDzpARJoRMAucR2Hbh8ZzZ39DFj6SFPE+/UHmpI4LaCa/w8cN1soHtlKf2ehcAT1zu2CUXqJ3UVJYNrac87t9oIWDUn6f/GZYZp5xengoIGuXlE0wxxgJNklFe3H0xIXTcAJhyYfMd8oEOCBwaA8/8UWRSKJ2nfoI++zbx/GzBfGwd6QjrSF7+S0CTqrmOJmeobyNR3i4IiN9KJYzYfWirKEc8Ss6A7MM7UoWQbsY84SdQZ0blPjK4g2EXGmUBJFqW6L0ZSyongg98ZhdeOAwcngHlc9z4m7XpiBC3cvwu/RaGfk/R5aSQiIXQuJ9O8QKmjkos60dLthNcz9nEYxfoePW+gFFeqe+DhTI7lEXUUOpcMGnj4aFXx3BotOif1XLxG4W3QpNIzhg+48pwrWPRKIw0WSoNXpaAEdA7kPIEKlc6CnQfR9hQVrHFlT0SDnTcCOkwGz9JxAkVm8/dJf/xS0vLbWKKg41CYDNX/DAVMWLM3uU07vm/DFkKnKO96k38Dm76bTnx8SRjvlFyPhjooMcynA89R+MFvYiqgqrTAb5F58LklkovgnlHgzaHpAvFIzPtcxjjqDip4wRQomSgOnOZ+H6LJUVlw3FEZ09jdK27CPspI4n+BfpPJbKmhu4wW1QhZenkgIa+0XJHJWk+8MuTyF5R5EiRm3WYk/y+QrkxjXBDNJ57pa45dbTa6Avshq1Uvz2s6uMZjrfJyDe+tTc2h8NuU2mHi7cyecBiDAVy8i5Od4jJQWr41VFplbL5SK+WPLAY2lO7dpbDknQFcXJfFoyIItOOtvGjTtTGZLX6XXAm8xNpxNQvCFqb+ScplgQ7fG7eUeKSHnmjX06CNQp+ZoIrOFhadmVzdzCeDitZcnnZB/zjw4mDSL/dVaFQlrQp4vntF74iFdBeVW1wvN90Qr68sLi7ZqLzGqqb1pVO6U9AhD0ySeJVNbBzgMytlwQLW9pe541ydcVVuD1HrU/5pY9x13K5e2hFMqZyPEH3VTy4SXSIxKMZvMxkFdu3VUtnTyxJa/NVdsZ1XQlqHeOySivhHZEAvMRigJ0DPiYiF3ePnEoypGxvjEXCWz/NnuPDQ+en0eCTdKei196lu5AabzHqb2Zy1ygWFZopXznOHgaOpB6DxWZu6DESeIC6s5lG4xDxYwcFRYj3RPX7v4A+QMttcLrqBHs7K3m0/A4enjJrd6pw/T/9G7yExytwVWtvVAVFoBHMcXxJbiQH0DnqFplWqCUHAd3T2ty0tWVizeeJdXJwHPnoaaiCgIS1s9hObNI5BNSJ/Bhj4g5cvE9UeJ0ouPfBXz+WC9FzqrJuKYXbWcmH3pDRi2VYeIeqxW+mviSxlQbLSIe9mQghB5mxEpBLuE3cTNxBZFbDIIxt3lEfY8hxgL7FP8WVbEf4FEnCVulNNf2wAAAAASUVORK5CYII="
-                             class="upload-3-v2-follow-avatar-cert"></div>
-                    <span data-v-8b8cf23a="" class="upload-3-v2-follow-name">哔哩哔哩创作中心</span></a></div>
-                <div data-v-8b8cf23a="" class="upload-3-v2-follow-btn follow"><i data-v-8b8cf23a=""
-                                                                                 class="iconfont icon-ic_add"></i> <span
-                        data-v-8b8cf23a="">关注</span></div>
-            </div>
+            <p data-v-8b8cf23a="" class="upload-3-v2-success-hint-3">稿件名称: <span id="objgj"></span></p>
+
         </div>
     </div> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----></div>
 </body>

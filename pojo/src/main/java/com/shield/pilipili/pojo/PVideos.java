@@ -94,8 +94,8 @@ public class PVideos implements Serializable {
     /**
      * 视频发布时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date videoReleasetime;
 
     /**

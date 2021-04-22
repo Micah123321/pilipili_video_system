@@ -38,15 +38,21 @@ public interface PVideosDao {
     List<PCollectInfo> getCollectByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
     List<PVideosThumbsup> getLikeByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
 
+    /**
+     * 根据pv获得视频信息
+     * @param pid
+     * @return
+     */
+    PVideos getVideoByPv(int pid);
     List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
     /**
-     *
+     *删除功能
      * @param videoPv
      * @return
      */
     int deleteByPrimaryKey(Integer videoPv);
 
-    int insert(PVideos record);
+    int insertVideo(PVideos record);
 
     List<PVideosPage> getVideosListByType(PVideosPage pVideosPage);
 

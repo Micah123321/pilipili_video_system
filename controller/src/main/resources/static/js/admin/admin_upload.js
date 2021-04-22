@@ -18,8 +18,57 @@ function changepic() {
     };
     uploadImageFun()
 }
+function FileValue(val) {
+    var file = val.files[0];
+    var url = URL.createObjectURL(file);
+    $("#myvideo").prop("src", url);
+    $("#myvideo")[0].addEventListener("loadedmetadata", function() {
+        var tol = this.duration; //获取总时长
+        $("input[name='videoTime']").val(tol)
+    });
+}
 
 $(function () {
+
+    ajaxVideo=function (url) {
+        var videoTitle=$(".input-box-v2-1-val").val();
+        var videoUrl=$("input[name='videoUrl']").val();
+        var videoDesc=$("#descarea").val();
+        var videoReleasetime=0;
+        if ($(".check-radio-v2-2-container-active").length>0){
+            videoReleasetime=$("#pickdate").val()+" "+$("#picktime").val();
+        }
+        var videoType=$(".select-item-cont-inserted").attr("value");
+        var videoTime=$("input[name='videoTime']").val();
+        var videoImage=$("input[name='videoImage']").val();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {
+                "videoTitle":videoTitle,
+                "videoUrl":videoUrl,
+                "videoDesc":videoDesc,
+                "videoReleasetimeSecond":videoReleasetime,
+                "videoType":videoType,
+                "videoTimeSecond":videoTime,
+                "videoImage":videoImage,
+            },
+            beforeSend: function () {
+                $(".loader").css("display", "block");
+            }
+        }).success(function (data) {
+            $(".loader").css("display", "none");
+            if (data.videoPv>0){
+                $(".upload-step-3-container-v2").show()
+                $(".upload-v2-step2-container").hide()
+                $("#objgj").text(data.videoTitle);
+            }
+
+        }).error(function () {
+            alert("投稿失败");
+        });
+    }
+
     uploadImageFun=function () {
         if (!confirm("确定上传该图片作为封面吗"))return;
         var formData = new FormData($('#uploadForm')[0]);
@@ -113,7 +162,14 @@ $(function () {
     });
 
     gotoPage = function () {
-        window.parent.location.href = "/"
+        $.ajax({
+            url:  "/admin/creative",
+            type: "get",
+            contentType: "text/html;charset=UTF-8",
+            success: function (data) {
+                $("#div_home_context_main",window.parent.document).html(data);
+            }
+        });
     }
     /**
      * 以下方法均为分类管理
@@ -198,9 +254,11 @@ $(function () {
         success: function (data) {
             var tbody = $(".drop-cascader-list-wrp");
             tbody.empty();
+            var mr=[];
             for (var i = 0; i < data.length; i++) {
                 var j = 0;
-                if (data[i].parentId == 2) {
+                mr.push(data[i])
+                if (data[i].parentId == data[1].id) {
                     j++;
                     if (j == 1) {
                         tbody.append("<div cid='"+data[i].id+"'  title='" + data[i].categoryName + "' onclick='relistClass(this)' data-v-5d902fe9=\"\" class=\"drop-cascader-list-item drop-cascader-list-item-selected\"><p data-v-5d902fe9=\"\" class=\"item-main\">" + data[i].categoryName + "</p> <p data-v-5d902fe9=\"\" class=\"item-sub\">" + data[i].categoryName + "</p></div>")
@@ -211,15 +269,75 @@ $(function () {
             }
             var lv = $(".drop-cascader-pre-item-selected").attr("title");
             var lv2 = $(".drop-cascader-list-item-selected").attr("title");
-            $(".select-item-cont-inserted").text("" + lv + "<--" + lv2)
+            $(".select-item-cont-inserted").text("" + mr[1].categoryName + "<--" + lv2)
             $(".select-item-cont-inserted").attr("value", $(".drop-cascader-list-item-selected").attr("cid"))
         },
         error: function (data) {
 
         }
     });
+    var pid=$("#pid").val()
+    if (pid.length>0){
+        $("div.file-input.file-input-ajax-new").hide()
+        $(".file-list-v2-wrp").show()
+        $.ajax({
+            url: "/video/videodata",
+            type: "get",
+            data:{
+                "pid":pid
+            },
+            dataType: "json",
+            success: function (data) {
+                $(".file-list-v2-wrp").empty()
+                $(".file-list-v2-wrp").append("<div data-v-632b126d=\"\">\n" +
+                    "                        <div data-v-632b126d=\"\" data-drag-index=\"0\" class=\"file-list-v2-item\">\n" +
+                    "                            <div data-v-632b126d=\"\" class=\"file-list-v2-item-icon\"><span data-v-632b126d=\"\">P1</span>\n" +
+                    "                            </div>\n" +
+                    "                            <div data-v-632b126d=\"\" class=\"file-list-v2-item-wrp\">\n" +
+                    "                                <div data-v-632b126d=\"\" class=\"item-status-wrp\"><span data-v-632b126d=\"\" class=\"item-title\"><p data-v-632b126d=\"\" class=\"item-title-text\">"+data.videoTitle+"</p> <!----></span>\n" +
+                    "                                    <div data-v-632b126d=\"\" class=\"item-status-op\"><!----> <!----> <span data-v-632b126d=\"\" class=\"item-status-click\">删除</span> <!----> <i data-v-632b126d=\"\" class=\"icon-success-v2\"></i> <!----> <!----></div>\n" +
+                    "                                </div>\n" +
+                    "                                <div data-v-632b126d=\"\" class=\"item-upload-info\"><span data-v-632b126d=\"\" class=\"upload-status-intro\">上传完成</span>\n" +
+                    "                                    <!----> <!----> <!----> <!----></div>\n" +
+                    "                                <div data-v-632b126d=\"\" class=\"item-upload-progress\">\n" +
+                    "                                    <div data-v-632b126d=\"\" class=\"item-upload-progress-complete\" style=\"width: 100%;\"></div>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "                        </div>\n" +
+                    "                    </div>")
+                $(".input-box-v2-1-val").val(data.videoTitle);
+                $("input[name='videoUrl']").val(data.videoUrl);
+                $("#descarea").val(data.videoDesc);
+                var pickdate= data.videoReleasetime+"";
+                var picktime=pickdate.split(" ");
+                $("#pickdate").val(picktime[0])
+                $("#picktime").val(picktime[1]);
+                $(".select-item-cont-inserted").attr("value",data.videoType);
+                $("input[name='videoTime']").val(time_to_sec(data.videoTime));
+                $("input[name='videoImage']").val(data.videoImage);
+                $(".submit-button-group-v2-container").attr("onclick","onclick=\"ajaxVideo('/video/upload')\"")
+                $(".submit-btn-group-add").text("修改")
+            },
+            error: function (data) {
+
+            }
+        });
+    }
     $(".d-time-v2-date-picker-wrp").slideUp()
+    /**
+     * 时间转为秒
+     * @param time 时间(00:00:00)
+     * @returns {string} 时间戳（单位：秒）
+     */
+    var time_to_sec = function (time) {
+        var s = '';
+
+        var hour = time.split(':')[0];
+        var min = time.split(':')[1];
+        var sec = time.split(':')[2];
+
+        s = Number(hour*3600) + Number(min*60) + Number(sec);
+
+        return s;
+    };
 })
-gotoPage = function () {
-    window.parent.location.href = "/"
-}

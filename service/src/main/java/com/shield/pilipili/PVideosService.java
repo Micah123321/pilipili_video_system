@@ -22,6 +22,7 @@ public interface PVideosService {
      * @param id
      * @return
      */
+    PVideos getVideoByPv(int pid);
     int getLikeCountById(int id);
     /**
      * 根据用户id查询收藏数
@@ -45,6 +46,18 @@ public interface PVideosService {
      */
     PageInfo<PVideos> getPVideosPageList(String videoTitle, String videoTime,String videoTimeEnd,Integer type, Integer categoryId,Integer pid, OrderUtil order,Integer currPage,Integer pageSize);
 
+    /**
+     * 根据主键删除
+     * @param videoPv
+     * @return
+     */
+    int deleteByPrimaryKey(Integer videoPv);
+    /**
+     * 插入视频
+     * @param record
+     * @return
+     */
+    int insertVideo(PVideos record);
     /**
      * 视频个数查询
      * @param videoTitle

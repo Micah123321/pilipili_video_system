@@ -27,6 +27,11 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
+    public PVideos getVideoByPv(int pid) {
+        return pVideosDao.getVideoByPv(pid);
+    }
+
+    @Override
     public int getLikeCountById(int id) {
         return pVideosDao.getLikeCountById(id);
     }
@@ -62,6 +67,16 @@ public class PVideosServiceImpl implements PVideosService {
         List<PVideos> pVideosPageList = pVideosDao.getPVideosPageList(videoTitle, videoTime, videoTimeEnd, type, categoryId, pid, order);
         PageInfo<PVideos> pageInfo = new PageInfo<>(pVideosPageList);
         return pageInfo;
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer videoPv) {
+        return pVideosDao.deleteByPrimaryKey(videoPv);
+    }
+
+    @Override
+    public int insertVideo(PVideos record) {
+        return pVideosDao.insertVideo(record);
     }
 
     @Override

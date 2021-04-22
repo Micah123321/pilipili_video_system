@@ -87,7 +87,7 @@ public class AdminController {
     @RequestMapping(value = "admin/creative/data", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object getVideoData(PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage,@RequestParam(required = false,defaultValue = "0") Integer videoStateCode){
         Pagen<PVideos> page = new Pagen<>();
-        page.setPageSize(2);
+        page.setPageSize(10);
         Integer videoState = pVideosPage.getVideoState();
         if (videoStateCode<1){
             pVideosPage.setVideoState(-1);
@@ -217,21 +217,33 @@ public class AdminController {
         return jsonObject;
     }
 
-    @GetMapping("admin/upload")
+    @GetMapping("/admin/upload")
     public String toUpload(){
         return "page/admin/upload";
     }
 
-    @GetMapping("/admin/uploadDetail")
+    @GetMapping("/video/uploadDetail")
     public String toUploadDetail(){
         return "page/admin/uploadDetail";
     }
 
-    @GetMapping("/admin/uploadInfo")
-    public String toUploadInfo(){
+    @RequestMapping("/video/uploadDetail/{pid}")
+    public String toDetail(@PathVariable Integer pid, Model model){
+        model.addAttribute("pid",pid);
+        return "page/admin/uploadDetail";
+    }
+
+    @GetMapping("/video/uploadInfo/{pid}")
+    public String toUploadInfo(@PathVariable Integer pid, Model model){
+        model.addAttribute("pid",pid);
         return "page/admin/uploadInfo";
     }
 
+    @GetMapping("/admin/uploadInfo")
+    public String toUploadInfo(Model model){
+        model.addAttribute("pid",0);
+        return "page/admin/uploadInfo";
+    }
     @GetMapping("/admin/account/logout")
     public String logout(HttpSession session){
         session.removeAttribute("userSession");

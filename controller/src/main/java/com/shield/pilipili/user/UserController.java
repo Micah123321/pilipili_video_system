@@ -8,12 +8,9 @@ import com.shield.pilipili.pojo.PUser;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.page.PVideosPage;
-import com.shield.pilipili.pojo.vo.PCategoryVo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 

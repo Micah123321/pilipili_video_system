@@ -157,19 +157,54 @@
         from p_videos
         where video_pv = #{videoPv,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos"
+    <insert id="insertVideo" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos"
             useGeneratedKeys="true">
-        insert into p_videos (video_userid, video_title, video_url,
-                              video_play, video_like, video_collect,
-                              video_desc, video_state, video_updatetime,
-                              video_checkuid, video_checktime, video_releasetime,
-                              video_type)
-        values (#{videoUserid,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR},
-                #{videoPlay,jdbcType=BIGINT}, #{videoLike,jdbcType=INTEGER}, #{videoCollect,jdbcType=INTEGER},
-                #{videoDesc,jdbcType=VARCHAR}, #{videoState,jdbcType=INTEGER}, #{videoUpdatetime,jdbcType=TIMESTAMP},
-                #{videoCheckuid,jdbcType=INTEGER}, #{videoChecktime,jdbcType=TIMESTAMP},
-                #{videoReleasetime,jdbcType=TIMESTAMP},
-                #{videoType,jdbcType=BIGINT})
+        INSERT INTO `pili`.`p_videos` (
+            `video_pv`,
+            `video_userid`,
+            `video_title`,
+            `video_url`,
+            `video_play`,
+            `video_like`,
+            `video_collect`,
+            `video_desc`,
+            `video_state`,
+            `video_updatetime`,
+            `video_checkuid`,
+            `video_checktime`,
+            `video_releasetime`,
+            `video_type`,
+            `video_time`,
+            `video_image`,
+            `video_comment`,
+            `video_barrage`
+        )
+        VALUES
+        (
+            DEFAULT,
+            #{videoUserid},
+            #{videoTitle},
+            #{videoUrl},
+            DEFAULT,
+            DEFAULT,
+            DEFAULT,
+            #{videoDesc},
+            0,
+            NOW(),
+            null,
+            NULL,
+         <if test="videoReleasetime!=null">
+             #{videoReleasetime},
+         </if>
+         <if test="videoReleasetime==null">
+             null,
+         </if>
+            #{videoType},
+            #{videoTime},
+            #{videoImage},
+            0,
+            0
+        ) ;
     </insert>
     <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv"
             parameterType="com.shield.pilipili.pojo.PVideos" useGeneratedKeys="true">
@@ -449,6 +484,31 @@
                 </when>
             </choose>
         </where>
+    </select>
+    <select id="getVideoByPv" resultType="com.shield.pilipili.pojo.PVideos">
+        SELECT
+            `video_pv` videoPv,
+            `video_userid` videoUserid,
+            `video_title` videoTitle,
+            `video_url` videoUrl,
+            `video_play` videoPlay,
+            `video_like`videoLike,
+            `video_collect` videoCollect,
+            `video_desc` videoDesc,
+            `video_state` videoState,
+            `video_updatetime` videoUpdatetime,
+            `video_checkuid` videoCheckuid,
+            `video_checktime` videoChecktime,
+            `video_releasetime` videoReleasetime,
+            `video_type` videoType,
+            `video_time` videoTime,
+            `video_image` videoImage,
+            `video_comment` videoComment,
+            `video_barrage` videoBarrage
+        FROM
+            `pili`.`p_videos`
+        WHERE
+            `video_pv`=#{pid}
     </select>
 
 </mapper>
