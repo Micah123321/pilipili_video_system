@@ -295,23 +295,11 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PVideos">
         update p_videos
         <set>
-            <if test="videoUserid != null">
-                video_userid = #{videoUserid,jdbcType=INTEGER},
-            </if>
             <if test="videoTitle != null">
                 video_title = #{videoTitle,jdbcType=VARCHAR},
             </if>
             <if test="videoUrl != null">
                 video_url = #{videoUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="videoPlay != null">
-                video_play = #{videoPlay,jdbcType=BIGINT},
-            </if>
-            <if test="videoLike != null">
-                video_like = #{videoLike,jdbcType=INTEGER},
-            </if>
-            <if test="videoCollect != null">
-                video_collect = #{videoCollect,jdbcType=INTEGER},
             </if>
             <if test="videoDesc != null">
                 video_desc = #{videoDesc,jdbcType=VARCHAR},
@@ -322,14 +310,11 @@
             <if test="videoUpdatetime != null">
                 video_updatetime = #{videoUpdatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="videoCheckuid != null">
-                video_checkuid = #{videoCheckuid,jdbcType=INTEGER},
-            </if>
-            <if test="videoChecktime != null">
-                video_checktime = #{videoChecktime,jdbcType=TIMESTAMP},
-            </if>
             <if test="videoReleasetime != null">
                 video_releasetime = #{videoReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="videoImage != null">
+                video_image = #{videoImage},
             </if>
             <if test="videoType != null">
                 video_type = #{videoType,jdbcType=BIGINT},

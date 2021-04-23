@@ -5,7 +5,6 @@
     <title>Title</title>
     <link href="/css/creative.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/creative2.css" type="text/css" rel="stylesheet" media="all">
-    <script src="/js/admin/admin_creative.js"></script>
     <style>
         #videoType {
             width: 100%;
@@ -45,6 +44,7 @@
     </style>
 </head>
 <body>
+<script src="/js/admin/admin_creative.js"></script>
 <div data-v-a9d43656="" class="upload-manage cc-content-body">
     <input type="hidden" id="currPage" value="1">
     <div data-v-a9d43656="" class="new-link-top-wrap">
@@ -58,7 +58,7 @@
                                                                                               placeholder="搜索稿件"
                                                                                               spellcheck="false"
                                                                                               class="bcc-search-input">
-            <i onclick="getVideoData()" class="search-input bcc-iconfont bcc-icon-ic_search_"></i></div> <!---->
+            <i onclick="getVideoData(true)" class="search-input bcc-iconfont bcc-icon-ic_search_"></i></div> <!---->
         <div data-v-70ed43e6="" class=" is-article cc-article-wrp">
             <div data-v-70ed43e6="">
                 <div data-v-295d2c4a="" data-v-70ed43e6="" class="article-header">
@@ -84,12 +84,12 @@
                     </div>
                     <div data-v-295d2c4a="" class="header-operate">
                         <div data-v-295d2c4a="" class="bcc-select" style="width: 112px;">
-                            <select id="videoType" onchange="getVideoData()">
+                            <select id="videoType" onchange="getVideoTypeData(true)">
                                 <option selected value="0">全部</option>
                             </select>
                         </div>
                         <div data-v-295d2c4a="" class="bcc-select" style="width: 154px;">
-                            <select id="orderBy" onchange="getVideoData()">
+                            <select id="orderBy" onchange="getVideoData(true)">
                                 <option selected value="0">投稿时间排序</option>
                                 <option value="1">播放数排序</option>
                                 <option value="2">评论数排序</option>

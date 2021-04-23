@@ -85,13 +85,15 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "admin/creative/data", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object getVideoData(PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage,@RequestParam(required = false,defaultValue = "0") Integer videoStateCode){
+    public Object getVideoData(HttpSession session,PVideosPage pVideosPage,@RequestParam(defaultValue = "1")Integer currPage,@RequestParam(required = false,defaultValue = "0") Integer videoStateCode){
         Pagen<PVideos> page = new Pagen<>();
         page.setPageSize(10);
         Integer videoState = pVideosPage.getVideoState();
         if (videoStateCode<1){
             pVideosPage.setVideoState(-1);
         }
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        pVideosPage.setVideoUserid(userSession.getUserId());
         page.setTotalCount(pVideosService.selectVideosListByUp(pVideosPage).size());
         page.setAllDataList( pVideosService.selectVideosListByUp(pVideosPage));
         if (currPage>page.getTotalPageCount())currPage=page.getTotalPageCount();
@@ -106,23 +108,19 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "admin/creative/typedata", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object getTypeData(PVideosPage pVideosPage){
-        pVideosPage.setVideoType(Long.parseLong("0"));
-        pVideosPage.setVideoState(-1);
-        List<PVideos> pVideoList = pVideosService.selectVideosListByUp(pVideosPage);
-        List<PCategoryVo> level1Category = pCategoryService.selectAllLevel1Category();
-        for (PCategoryVo cate:level1Category) {
-            for (PVideos p:pVideoList) {
-                if (p.getVideoType()==cate.getId()||p.getVideoType()==cate.getParentId()){
-                    cate.setCount(cate.getCount()+1);
-                }
-            }
-            long l = cate.getParentId() - 1;
-            if (l<0)l=0;
-            level1Category.get(Integer.parseInt(l+"")).setCount(cate.getCount());
+    public Object getTypeData(HttpSession session){
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        List<PCategoryVo> categoryVos = pCategoryService.getLv1CountByUid(userSession.getUserId());
+        Integer allCount=0;
+        for (PCategoryVo p:categoryVos) {
+            allCount+=p.getCount();
         }
-        level1Category.get(0).setCount(pVideoList.size());
-        return level1Category;
+        PCategoryVo categoryVo = new PCategoryVo();
+        categoryVo.setCount(allCount);
+        categoryVo.setCategoryName("全部");
+        categoryVo.setId(0L);
+        categoryVos.add(0,categoryVo);
+        return categoryVos;
     }
 
     //获取图表的JSON数据
@@ -222,6 +220,26 @@ public class AdminController {
         return "page/admin/upload";
     }
 
+    @GetMapping("/admin/barrage")
+    public String toBarrage(){
+        return "page/admin/barrage";
+    }
+
+    @GetMapping("/admin/fansData")
+    public String toFans(){
+        return "page/admin/fansData";
+    }
+
+    @GetMapping("/admin/appeal")
+    public String toAppeal(){
+        return "page/admin/appeal";
+    }
+
+    @GetMapping("/admin/category")
+    public String toCate(){
+        return "page/admin/category";
+    }
+
     @GetMapping("/video/uploadDetail")
     public String toUploadDetail(){
         return "page/admin/uploadDetail";
@@ -233,7 +251,7 @@ public class AdminController {
         return "page/admin/uploadDetail";
     }
 
-    @GetMapping("/video/uploadInfo/{pid}")
+    @GetMapping("/admin/uploadInfo/{pid}")
     public String toUploadInfo(@PathVariable Integer pid, Model model){
         model.addAttribute("pid",pid);
         return "page/admin/uploadInfo";

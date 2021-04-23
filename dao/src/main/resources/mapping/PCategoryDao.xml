@@ -11,8 +11,8 @@
         <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
-  </sql>
+        id, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
+    </sql>
 
     <select id="getPCategoryBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -27,30 +27,43 @@
 
 
     <select id="selectAllCategory" resultType="com.shield.pilipili.pojo.vo.PCategoryVo">
-      SELECT
-        `id`,
-        `categoryName`,
-        `parentId`,
-        `createdBy`,
-        `creationTime`,
-        `modifyBy`,
-        `modifyDate`
-      FROM
-        `pili`.`p_category`
+        SELECT `id`,
+               `categoryName`,
+               `parentId`,
+               `createdBy`,
+               `creationTime`,
+               `modifyBy`,
+               `modifyDate`
+        FROM `pili`.`p_category`
+    </select>
+    <select id="getLv1CountByUid" resultType="com.shield.pilipili.pojo.vo.PCategoryVo">
+        SELECT catep.categoryName, COUNT(*) count, any_value(catep.id) id
+        FROM p_videos v,
+             p_category cate
+                 LEFT JOIN p_category catep ON cate.parentId = catep.id
+        WHERE cate.`id` = v.`video_type`
+          AND v.`video_type`
+            IN (
+                  SELECT id
+                  FROM p_category
+                  WHERE id IN (SELECT id FROM p_category WHERE parentId = 1)
+                     OR parentId IN (SELECT id FROM p_category WHERE parentId = 1)
+              )
+          AND v.`video_userid` = #{uid}
+        GROUP BY categoryName
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from p_category
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete
+        from p_category
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCategory"
             useGeneratedKeys="true">
-    insert into p_category (categoryName, parentId, createdBy, 
-      creationTime, modifyBy, modifyDate
-      )
-    values (#{categoryname,jdbcType=VARCHAR}, #{parentid,jdbcType=BIGINT}, #{createdby,jdbcType=INTEGER}, 
-      #{creationtime,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into p_category (categoryName, parentId, createdBy,
+                                creationTime, modifyBy, modifyDate)
+        values (#{categoryname,jdbcType=VARCHAR}, #{parentid,jdbcType=BIGINT}, #{createdby,jdbcType=INTEGER},
+                #{creationtime,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCategory"
             useGeneratedKeys="true">
         insert into p_category
@@ -120,15 +133,15 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCategory">
-    update p_category
-    set categoryName = #{categoryname,jdbcType=VARCHAR},
-      parentId = #{parentid,jdbcType=BIGINT},
-      createdBy = #{createdby,jdbcType=INTEGER},
-      creationTime = #{creationtime,jdbcType=TIMESTAMP},
-      modifyBy = #{modifyby,jdbcType=INTEGER},
-      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update p_category
+        set categoryName = #{categoryname,jdbcType=VARCHAR},
+            parentId     = #{parentid,jdbcType=BIGINT},
+            createdBy    = #{createdby,jdbcType=INTEGER},
+            creationTime = #{creationtime,jdbcType=TIMESTAMP},
+            modifyBy     = #{modifyby,jdbcType=INTEGER},
+            modifyDate   = #{modifydate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
 
 </mapper>

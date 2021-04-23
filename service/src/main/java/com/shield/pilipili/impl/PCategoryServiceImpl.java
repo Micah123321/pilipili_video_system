@@ -26,4 +26,9 @@ public class PCategoryServiceImpl implements PCategoryService {
         List<PCategoryVo> pCategories = pCategoryDao.selectAllCategory();
         return pCategories;
     }
+
+    @Override
+    public List<PCategoryVo> getLv1CountByUid(int uid) {
+        return pCategoryDao.getLv1CountByUid(uid);
+    }
 }

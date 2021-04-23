@@ -80,6 +80,11 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
+    public int updateByPrimaryKeySelective(PVideos record) {
+        return pVideosDao.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
     public int getPVideosPageListCount(String videoTitle, String videoTime, String videoTimeEnd, Integer type, Integer categoryId, Integer pid) {
         return pVideosDao.getPVideosPageListCount(videoTitle, videoTime, videoTimeEnd, type, categoryId, pid);
     }

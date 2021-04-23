@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface PCategoryService {
     List<PCategoryVo> selectAllLevel1Category();
+    List<PCategoryVo> getLv1CountByUid(int uid);
 
     /**
      * 分类分级查询

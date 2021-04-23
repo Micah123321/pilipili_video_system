@@ -13,15 +13,8 @@ $(function () {
                 var tbody = $("#videoType");
                 tbody.empty();
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].parentId == 1 || data[i].parentId == 0) {
                         tbody.append("<option value='" + data[i].id + "'>" + data[i].categoryName + "(" + data[i].count + ")</option>")
-                    }
-                    //显示产品数据
                 }
-            },
-            beforeSend: function () {
-            },
-            error: function (data) {
             }
         });
     }
@@ -48,16 +41,7 @@ $(function () {
             success: function (data) {
                 var tbody = $(".article-list_wrap");
                 tbody.empty();
-                for (var i = 0; i < data.dataList.length; i++) {
-                    //显示产品数据
-                    if (data.dataList[i].videoState == 1) {
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'> </div>  </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_list_ranking_x1' style='font-size:16px;color:rgb(80,80,80);'></i> 编辑 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    } else if (data.dataList[i].videoState >= 2) {
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-ic_warning'></i> </div> <div><span class='icon-text'>已锁定</span><span class='icon-text' >该视频违反运营规则，不予审核通过。 </span><span class='treaty'> 查阅<a href='//member.bilibili.com/studio/creative-treaty'target='_blank'>哔哩哔哩创作公约</a>了解更多 </span><!----></div> </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 申诉 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><i class='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    } else if(data.dataList[i].videoState == 0){
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-bianjigaojian'></i> </div> <div><span class='icon-text' style='color: #666'>审核中</span><span class='icon-text' style='color: black'> 该视频正在审核中哦   </span></div> </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 修改 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    }
-                }
+                loadAjaxPage(data.dataList,tbody)
                 var pageUtil = {
                     index: data.index,
                     totalPageCount: data.totalPageCount,
@@ -65,6 +49,93 @@ $(function () {
                 };
                 flashPage(pageUtil);
             },
+        });
+    }
+
+    loadAjaxPage=function (dataList,tbody) {
+        for (var i = 0; i < dataList.length; i++) {
+            //显示产品数据
+            if (dataList[i].videoState == 1) {
+                tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + dataList[i].videoImage + "' alt='" + dataList[i].videoTitle + "'class=''> <div class='duration'>" + dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'> </div>  </div> </div> <div class='meta-view'><a onclick=\"toEdit('"+dataList[i].videoPv+"')\" class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_list_ranking_x1' style='font-size:16px;color:rgb(80,80,80);'></i> 编辑 </a><a onclick='delVideo("+dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
+            } else if (dataList[i].videoState >= 2) {
+                tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + dataList[i].videoImage + "' alt='" + dataList[i].videoTitle + "'class=''> <div class='duration'>" + dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-ic_warning'></i> </div> <div><span class='icon-text'>已锁定</span><span class='icon-text' >该视频违反运营规则，不予审核通过。 </span><span class='treaty'> 查阅<a href='//member.bilibili.com/studio/creative-treaty'target='_blank'>哔哩哔哩创作公约</a>了解更多 </span><!----></div> </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 申诉 </a><a onclick='delVideo("+dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><i class='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
+            } else if(dataList[i].videoState == 0){
+                tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + dataList[i].videoImage + "' alt='" + dataList[i].videoTitle + "'class=''> <div class='duration'>" + dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-bianjigaojian'></i> </div> <div><span class='icon-text' style='color: #666'>审核中</span><span class='icon-text' style='color: black'> 该视频正在审核中哦   </span></div> </div> </div> <div class='meta-view'><a onclick=\"toEdit('"+dataList[i].videoPv+"')\" class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 修改 </a><a onclick='delVideo("+dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" +dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
+            }
+        }
+    }
+    toEdit=function (pv) {
+        ajaxUtil.pagetopage('uploadInfo/'+pv);
+        $(".menu_li").removeClass("menu_li_select")
+    }
+
+    getVideoTypeData = function (flag) {
+        var videoTitle = $(".bcc-search-input").val();
+        var videoState = $(".current").attr("state");
+        var orderBy = $("#orderBy").val();
+        var videoType = $("#videoType").val();
+        var currPage = 1;
+
+        $.ajax({
+            url: "admin/creative/data",
+            type: "get",
+            dataType: "json",
+            data: {
+                "videoTitle": videoTitle,
+                "videoState": videoState,
+                "orderBy": orderBy,
+                "currPage": currPage,
+                "videoType": videoType
+            },
+            success: function (data) {
+                var tbody = $(".article-list_wrap");
+                tbody.empty();
+                var warnvideos = 0;
+                var checkvideos = 0;
+                var uncheckvideos = 0;
+                for (var i = 0; i < data.allDataList.length; i++) {
+                    if (data.allDataList[i].videoState == 1) {
+                        checkvideos++;
+                    } else if (data.allDataList[i].videoState >= 2) {
+                        warnvideos++;
+                    } else {
+                        uncheckvideos++;
+                    }
+                }
+                loadAjaxPage(data.dataList,tbody)
+                $("#videosCount").html(data.totalCount);
+                $("#warnvideos").html(warnvideos);
+                $("#checkvideos").html(checkvideos);
+                $("#uncheckvideos").html(uncheckvideos);
+                var totalCountsz=[];
+                var totalCount=0;
+                if (videoState!=-1){
+                     totalCountsz=[uncheckvideos,checkvideos,warnvideos]
+                     totalCount=totalCountsz[videoState]
+                }else{
+                    totalCount=data.totalCount
+                }
+                var pageSize=data.pageSize;
+                var totalPageCount = totalCount % pageSize == 0 ? (totalCount / pageSize) : (totalCount / pageSize + 1)
+                var index=data.index
+                if (totalPageCount<data.totalPageCount){
+                    index=1
+                }
+                if (flag){
+                    var pageUtil = {
+                        index: index,
+                        totalPageCount: Math.floor(totalPageCount),
+                        totalCount: Math.floor(totalCount)
+                    };
+                    flashPage(pageUtil);
+                }
+            },
+            beforeSend: function () {
+                $("#btn_login").val("获取中...");
+            },
+            error: function (data) {
+
+            }
         });
     }
 
@@ -101,16 +172,7 @@ $(function () {
                         uncheckvideos++;
                     }
                 }
-                for (var i = 0; i < data.dataList.length; i++) {
-                    //显示产品数据
-                    if (data.dataList[i].videoState == 1) {
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'> </div>  </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_list_ranking_x1' style='font-size:16px;color:rgb(80,80,80);'></i> 编辑 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    } else if (data.dataList[i].videoState >= 2) {
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-ic_warning'></i> </div> <div><span class='icon-text'>已锁定</span><span class='icon-text' >该视频违反运营规则，不予审核通过。 </span><span class='treaty'> 查阅<a href='//member.bilibili.com/studio/creative-treaty'target='_blank'>哔哩哔哩创作公约</a>了解更多 </span><!----></div> </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 申诉 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><i class='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    } else if(data.dataList[i].videoState == 0){
-                        tbody.append("<div data-v-70ed43e6=''><div data-v-70ed43e6=''><div class='article-card clearfix v2'><a target='_blank'href='//www.bilibili.com/video/BV1cs411J7jN/'class='cover-wrp'><img src='" + data.dataList[i].videoImage + "' alt='" + data.dataList[i].videoTitle + "'class=''> <div class='duration'>" + data.dataList[i].videoTime + "</div> <div class='tag-wrapper'></div> </a> <div class='meta-wrp'> <div class='meta-title'><!----><a target='_blank' href='//www.bilibili.com/video/BV1cs411J7jN/' class='nameellipsis'>" + data.dataList[i].videoTitle + "</a> </div> <div class='meta-status'> <div><span class='pubdate'>" + data.dataList[i].videoReleasetime + "</span></div> <div data-hint='' class='status hint--rounded hint--bottom v2 is-error is-pubdate'> <div class='icon-wrap'><i class='bcc-iconfont bcc-icon-bianjigaojian'></i> </div> <div><span class='icon-text' style='color: #666'>审核中</span><span class='icon-text' style='color: black'> 该视频正在审核中哦   </span></div> </div> </div> <div class='meta-view'><a class='bili-btn'><i class='bcc-iconfont bcc-icon-Mediumx1' style='font-size:16px;color:rgb(80,80,80);'></i> 修改 </a><a onclick='delVideo("+data.dataList[i].videoPv+")' class='bili-btn'><i class='bcc-iconfont bcc-icon-icon_tasklist_delete_' style='font-size:16px;color:rgb(80,80,80);'></i> 删除 </a><a class='more-btn disabled'><iclass='bcc-iconfont bcc-icon-icon_list_more_x' style='font-size:16px;color:rgb(80,80,80);'></i></a> </div> <div class='meta-footer clearfix'> <div title='播放'class='click view-stat'><i class='bcc-iconfont bcc-icon-ic_Playbackx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text click-text'>" + data.dataList[i].videoPlay + "</span></div> <div title='弹幕'class='danmu view-stat'><i class='bcc-iconfont bcc-icon-ic_Barragex' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoBarrage + "</span></div> <div title='评论'class='comment view-stat'><i class='bcc-iconfont bcc-icon-icon_commentx' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoComment + "</span></div> <div title='收藏'class='favorite view-stat'><i class='bcc-iconfont bcc-icon-icon_action_collection_n_x' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoCollect + "</span></div> <div title='点赞'class='like view-stat'><i class='bcc-iconfont bcc-icon-icon_action_recommend_p_' style='font-size:16px;color:rgb(153,153,153);'></i><span class='icon-text'>" + data.dataList[i].videoLike + "</span></div> </div> </div></div></div> </div>");
-                    }
-                }
+                loadAjaxPage(data.dataList,tbody)
                 $("#videosCount").html(data.totalCount);
                 $("#warnvideos").html(warnvideos);
                 $("#checkvideos").html(checkvideos);
@@ -162,6 +224,7 @@ $(function () {
         $(this).addClass("current");
         getVideoDataDontChange();
     })
+
     $(".bcc-pagination-item").click(function () {
         changeCurr(this);
         getVideoData(true);
@@ -171,6 +234,7 @@ $(function () {
         $("#currPage").val($("#changeInput").val())
         getVideoData(true)
     }
+
     delVideo=function (pid) {
         if(confirm("确定删除该视频吗")){
         $.ajax({
@@ -193,6 +257,7 @@ $(function () {
     }
 
     getVideoData(true);
+
     getTypeData();
 })
 

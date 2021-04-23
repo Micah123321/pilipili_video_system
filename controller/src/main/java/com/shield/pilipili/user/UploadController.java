@@ -54,8 +54,23 @@ public class UploadController {
     @GetMapping(value = "/video/videodata",produces = "application/json;charset=utf-8")
     public Object getVideoData(Integer pid){
         PVideos video = pVideosService.getVideoByPv(pid);
-
+        List<PCategoryVo> voList = pCategoryService.selectAllLevel1Category();
+        StringBuffer stringBuffer = new StringBuffer("");
+        Long parentId=0L;
+        for (PCategoryVo p:voList) {
+            if (video.getVideoType().equals(p.getId())){
+                parentId=p.getParentId();
+                stringBuffer.append(p.getParentId()+"<--");
+                stringBuffer.append(p.getCategoryName());
+            }
+        }
+        for (PCategoryVo p:voList) {
+            if (parentId.equals(p.getId())){
+                stringBuffer.replace(0,stringBuffer.indexOf("<"),p.getCategoryName());
+            }
+        }
         if (video!=null){
+            video.setTypeName(stringBuffer.toString());
             return video;
         }else{
             return new PVideos();
@@ -63,7 +78,7 @@ public class UploadController {
 
     }
 
-    @PostMapping(value = "/video/insert",produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/video/change",produces = "application/json;charset=utf-8")
     @ResponseBody
     public Object insertVideo(PVideos pVideos,String videoReleasetimeSecond,String videoTimeSecond, HttpSession session) throws ParseException {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
@@ -71,7 +86,7 @@ public class UploadController {
             return "error";
         }
         SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
-        SimpleDateFormat ftb = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat ftb = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Long b = new Double(Double.parseDouble(videoTimeSecond)).longValue();
         Date date = ft.parse(DateUtil.secondToDate(b,"hh:mm:ss"));
 
@@ -81,15 +96,26 @@ public class UploadController {
         if (!videoReleasetimeSecond.equals("0")){
             pVideos.setVideoReleasetime(ftb.parse(videoReleasetimeSecond));
         }
-
-        int video = pVideosService.insertVideo(pVideos);
-        if (video>0){
-            PVideos rVideo=new PVideos();
-            rVideo.setVideoPv(video);
-            rVideo.setVideoTitle(pVideos.getVideoTitle());
-            return rVideo;
+        if (pVideos.getVideoPv()!=null){
+            int video =pVideosService.updateByPrimaryKeySelective(pVideos);
+            if (video>0){
+                PVideos rVideo=new PVideos();
+                rVideo.setVideoPv(video);
+                rVideo.setVideoTitle(pVideos.getVideoTitle());
+                return rVideo;
+            }else{
+                return "error";
+            }
         }else{
-            return "error";
+            int video = pVideosService.insertVideo(pVideos);
+            if (video>0){
+                PVideos rVideo=new PVideos();
+                rVideo.setVideoPv(video);
+                rVideo.setVideoTitle(pVideos.getVideoTitle());
+                return rVideo;
+            }else{
+                return "error";
+            }
         }
     }
 

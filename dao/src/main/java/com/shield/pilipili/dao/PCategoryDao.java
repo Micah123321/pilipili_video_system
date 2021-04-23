@@ -10,6 +10,8 @@ public interface PCategoryDao {
 
     List<PCategoryVo> selectAllCategory();
 
+    List<PCategoryVo> getLv1CountByUid(int uid);
+
     int deleteByPrimaryKey(Long id);
 
     int insert(PCategory record);
