@@ -18,4 +18,5 @@ public interface PCategoryService {
      * @return
      */
     List<PCategory> getPCategoryBy(Integer parentId);
+    PCategory getCateById(int id);
 }

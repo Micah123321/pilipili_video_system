@@ -16,6 +16,8 @@ public interface PCategoryDao {
 
     int insert(PCategory record);
 
+    PCategory getCateById(int id);
+
     /**
      * 分类分级查询
      * @param parentId 父级id

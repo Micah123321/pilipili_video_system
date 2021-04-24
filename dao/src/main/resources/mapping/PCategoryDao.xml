@@ -52,6 +52,19 @@
           AND v.`video_userid` = #{uid}
         GROUP BY categoryName
     </select>
+    <select id="getCateById" resultType="com.shield.pilipili.pojo.PCategory">
+        SELECT
+            `id`,
+            `categoryName`,
+            `parentId`,
+            `createdBy`,
+            `creationTime`,
+            `modifyBy`,
+            `modifyDate`
+        FROM
+            `pili`.`p_category`
+where id=#{id}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from p_category
