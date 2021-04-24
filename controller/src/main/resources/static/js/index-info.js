@@ -77,7 +77,7 @@ $(function () {
 
                 for (var i = 0; i < data.length; i++) {
                     for (var j = 0; j < data[i].dataList.length; j++){
-                        videoContent=videoContent+"<div class=\"col-sm-3 news-w3lgrids\">\n" +
+                        videoContent=videoContent+"<div onclick='goDetail("+data[i].dataList[j].videoPv+")' class=\"col-sm-3 news-w3lgrids\">\n" +
                             "                        <div class=\"news-w3img\">\n" +
                             "                            <img src=\""+data[i].dataList[j].videoImage+"\" class=\"img-responsive zoom-img\" alt=\"\"/>\n" +
                             "                        </div>\n" +
@@ -86,7 +86,7 @@ $(function () {
                             "                        </div>\n" +
                             "                    </div>"
 
-                        phContent=phContent+"<div class=\"rank-wrap\"><span class=\"number on\">"+(j+1)+"</span><a href=\"//www.bilibili.com/video/BV1kZ4y1c7P6\" target=\"_blank\" class=\"link\"><p title=\""+data[i].dataList[j].videoTitle+" ~\" class=\"title\">"+data[i].dataList[j].videoTitle+"</p></a>\n" +
+                        phContent=phContent+"<div class=\"rank-wrap\"><span class=\"number on\">"+(j+1)+"</span><a href=\"/pv"+data[i].dataList[j].videoPv+"\" target=\"_blank\" class=\"link\"><p title=\""+data[i].dataList[j].videoTitle+" ~\" class=\"title\">"+data[i].dataList[j].videoTitle+"</p></a>\n" +
                             "                        <div class=\"popover-video-card pvc\" style=\"display: none;\">\n" +
                             "                            <div class=\"content\"><img src=\""+data[i].dataList[j].videoImage+"\" alt=\"\">\n" +
                             "                                <div class=\"info\"><p class=\"f-title\">"+data[i].dataList[j].videoTitle+"</p>\n" +
@@ -113,6 +113,9 @@ $(function () {
                 }
             },
         });
+    }
+    goDetail=function (pv) {
+        location.href="/pv"+pv;
     }
 
     ajaxUserInfo = function () {
