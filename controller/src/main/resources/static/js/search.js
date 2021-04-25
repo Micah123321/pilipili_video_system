@@ -72,7 +72,7 @@ function initZone() {
         url: "/search/category/" + parentId,
         dataType: "json",
         success: function (categoryList) {
-            var ul = "<li class='filter-item active' value='1'><a href='javascript:;' style='text-decoration: none;' onclick='getCategoryTwo(0,0,0)'>全部分区</a></li>";
+            var ul = "<li class='filter-item active' value='1'><a href='javascript:;' style='text-decoration: none;' onclick='getCategoryTwo(0,0)'>全部分区</a></li>";
             for (var i = 0; i < categoryList.length; i++) {
                 var category = categoryList[i];
                 ul += "<li class='filter-item' value='" + category.id + "'><a href='javascript:;' onclick='getCategoryTwo("+category.id+",1)' style='text-decoration: none;'>" + category.categoryName + "</a></li>";

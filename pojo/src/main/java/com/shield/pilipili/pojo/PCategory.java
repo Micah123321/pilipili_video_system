@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * p_category
@@ -45,7 +46,6 @@ public class PCategory implements Serializable {
      * 最新更新时间
      */
     private Date modifyDate;
-
 
     private static final long serialVersionUID = 1L;
 

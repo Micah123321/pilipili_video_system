@@ -1,17 +1,16 @@
 package com.shield.pilipili.dao;
 
+import com.shield.pilipili.OrderUtil;
+import com.shield.pilipili.pojo.PCollect;
 import com.shield.pilipili.pojo.PCollectInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PCollectInfoDao {
-    int deleteByPrimaryKey(Long id);
 
-    int insert(PCollectInfo record);
+    List<PCollectInfo> getCollectInfoAll(@Param("userId") Integer userId,@Param("title") String title,@Param("order") OrderUtil order,@Param("categoryId") Integer categoryId,@Param("keyword") String keyword);
 
-    int insertSelective(PCollectInfo record);
+    List<PCollectInfo> getCollectCategory(@Param("userId") Integer userId,@Param("title") String title);
 
-    PCollectInfo selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(PCollectInfo record);
-
-    int updateByPrimaryKey(PCollectInfo record);
 }

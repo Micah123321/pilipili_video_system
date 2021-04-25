@@ -25,6 +25,7 @@ public interface PCategoryDao {
      */
     List<PCategory> getPCategoryBy(@Param("parentId") Integer parentId);
 
+    PCategory getPCategoryById(@Param("id") Integer id);
 
     int updateByPrimaryKeySelective(PCategory record);
 

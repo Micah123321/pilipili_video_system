@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * p_collect
@@ -26,12 +27,62 @@ public class PCollect implements Serializable {
      */
     private String title;
 
+    private String intro;
+
     /**
      * 创建时间
      */
     private Date createTime;
 
+    private PUser pUser;
+
+    private PCollectInfo pCollectInfo;
+
+    private List<PVideos> pVideosList;
+
+    private Integer videoCount;
+
     private static final long serialVersionUID = 1L;
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public List<PVideos> getpVideosList() {
+        return pVideosList;
+    }
+
+    public void setpVideosList(List<PVideos> pVideosList) {
+        this.pVideosList = pVideosList;
+    }
+
+    public PCollectInfo getpCollectInfo() {
+        return pCollectInfo;
+    }
+
+    public void setpCollectInfo(PCollectInfo pCollectInfo) {
+        this.pCollectInfo = pCollectInfo;
+    }
+
+    public Integer getVideoCount() {
+        return videoCount;
+    }
+
+    public void setVideoCount(Integer videoCount) {
+        this.videoCount = videoCount;
+    }
+
+    public PUser getpUser() {
+        return pUser;
+    }
+
+    public void setpUser(PUser pUser) {
+        this.pUser = pUser;
+    }
 
     public Long getId() {
         return id;

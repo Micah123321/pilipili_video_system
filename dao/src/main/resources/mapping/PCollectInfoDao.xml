@@ -1,76 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PCollectInfoDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCollectInfo">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="collect_id" jdbcType="BIGINT" property="collectId" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
-    <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCollectInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="collect_id" jdbcType="BIGINT" property="collectId"/>
+        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
+        <result column="addTime" jdbcType="TIMESTAMP" property="addTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, collect_id, video_id, addTime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_collect_info
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from p_collect_info
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollectInfo" useGeneratedKeys="true">
-    insert into p_collect_info (collect_id, video_id, addTime
-      )
-    values (#{collectId,jdbcType=BIGINT}, #{videoId,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollectInfo" useGeneratedKeys="true">
-    insert into p_collect_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        collect_id,
-      </if>
-      <if test="videoId != null">
-        video_id,
-      </if>
-      <if test="addtime != null">
-        addTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="collectId != null">
-        #{collectId,jdbcType=BIGINT},
-      </if>
-      <if test="videoId != null">
-        #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCollectInfo">
-    update p_collect_info
-    <set>
-      <if test="collectId != null">
-        collect_id = #{collectId,jdbcType=BIGINT},
-      </if>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="addtime != null">
-        addTime = #{addtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCollectInfo">
-    update p_collect_info
-    set collect_id = #{collectId,jdbcType=BIGINT},
-      video_id = #{videoId,jdbcType=INTEGER},
-      addTime = #{addtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+    <resultMap id="CollectionAll" type="com.shield.pilipili.pojo.PCollectInfo">
+        <id column="pciId" jdbcType="BIGINT" property="id"/>
+        <result column="collect_id" jdbcType="BIGINT" property="collectId"/>
+        <result column="totalCount" jdbcType="BIGINT" property="totalCount"/>
+        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
+        <result column="addTime" jdbcType="TIMESTAMP" property="addTime"/>
+        <association property="pCollect" javaType="com.shield.pilipili.pojo.PCollect">
+            <id column="pcId" jdbcType="BIGINT" property="id"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+            <result column="title" jdbcType="VARCHAR" property="title"/>
+            <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        </association>
+        <association property="pUser" javaType="com.shield.pilipili.pojo.PUser">
+            <id column="uid" jdbcType="INTEGER" property="uid"/>
+            <result column="userName" jdbcType="VARCHAR" property="userName"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="upwd" jdbcType="VARCHAR" property="upwd"/>
+            <result column="utype" jdbcType="INTEGER" property="utype"/>
+        </association>
+        <association property="pCategory" javaType="com.shield.pilipili.pojo.PCategory">
+            <id column="cateId" jdbcType="BIGINT" property="id"/>
+            <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+            <result column="createdBy" jdbcType="INTEGER" property="createdBy"/>
+            <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime"/>
+            <result column="modifyBy" jdbcType="INTEGER" property="modifyBy"/>
+            <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
+        </association>
+        <collection property="pVideosList" ofType="com.shield.pilipili.pojo.PVideos">
+            <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
+            <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
+            <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
+            <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
+            <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
+            <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
+            <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
+            <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
+            <result column="video_state" jdbcType="INTEGER" property="videoState"/>
+            <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
+            <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
+            <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
+            <result column="video_time" jdbcType="TIMESTAMP" property="videoTime"/>
+            <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
+            <result column="video_image" jdbcType="VARCHAR" property="videoImage"/>
+            <result column="video_type" jdbcType="BIGINT" property="videoType"/>
+            <result column="video_comment" jdbcType="INTEGER" property="videoComment"/>
+            <result column="video_barrage" jdbcType="INTEGER" property="videoBarrage"/>
+        </collection>
+    </resultMap>
+    <select id="getCollectInfoAll" parameterType="java.lang.Long" resultMap="CollectionAll">
+        SELECT pc.id pcId,(SELECT COUNT(pc.id) FROM p_collect_info pci
+        LEFT JOIN p_collect pc ON pc.id = collect_id
+        LEFT JOIN p_user ON uid = user_id
+        LEFT JOIN p_videos ON video_id = video_pv
+        LEFT JOIN p_category pca ON video_type=pca.id
+        <where>
+            user_id = #{userId}
+            <choose>
+                <when test="title != null">
+                    and title = #{title}
+                </when>
+                <otherwise>
+                    and title = '默认收藏夹'
+                </otherwise>
+            </choose>
+            <if test="categoryId != null and categoryId != 0">
+                and video_type = #{categoryId}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and video_title like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>) totalCount, user_id, title, createTime,
+        pci.id pciId, collect_id, video_id, `addTime`,
+        uid, userName, phone, upwd, utype,
+        video_pv,video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_desc, video_state, video_updatetime, video_checkuid, video_checktime,video_time,video_releasetime,
+        video_type,video_comment,video_barrage,video_image,
+        pca.id cateId, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
+        FROM p_collect_info pci
+        LEFT JOIN p_collect pc ON pc.id = collect_id
+        LEFT JOIN p_user ON uid = user_id
+        LEFT JOIN p_videos ON video_id = video_pv
+        LEFT JOIN p_category pca ON video_type=pca.id
+        <where>
+            user_id = #{userId}
+            <choose>
+                <when test="title != null">
+                    and title = #{title}
+                </when>
+                <otherwise>
+                    and title = '默认收藏夹'
+                </otherwise>
+            </choose>
+            <if test="categoryId != null and categoryId != 0">
+                and video_type = #{categoryId}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and video_title like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+        <choose>
+            <when test="order.orderBy == 1">
+                order by addTime
+                <if test="order.isDesc">desc</if>
+            </when>
+            <when test="order.orderBy == 2">
+                order by video_play
+                <if test="order.isDesc">desc</if>
+            </when>
+            <when test="order.orderBy == 3">
+                order by video_releasetime
+                <if test="order.isDesc">desc</if>
+            </when>
+        </choose>
+
+    </select>
+
+    <resultMap id="CollectCategory" type="com.shield.pilipili.pojo.PCollectInfo">
+        <id column="pciId" jdbcType="BIGINT" property="id"/>
+        <result column="collect_id" jdbcType="BIGINT" property="collectId"/>
+        <result column="totalCount" jdbcType="BIGINT" property="totalCount"/>
+        <result column="categoryCount" jdbcType="BIGINT" property="categoryCount"/>
+        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
+        <result column="addTime" jdbcType="TIMESTAMP" property="addTime"/>
+        <association property="pCollect" javaType="com.shield.pilipili.pojo.PCollect">
+            <id column="pcId" jdbcType="BIGINT" property="id"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+            <result column="title" jdbcType="VARCHAR" property="title"/>
+            <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        </association>
+        <association property="pUser" javaType="com.shield.pilipili.pojo.PUser">
+            <id column="uid" jdbcType="INTEGER" property="uid"/>
+            <result column="userName" jdbcType="VARCHAR" property="userName"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="upwd" jdbcType="VARCHAR" property="upwd"/>
+            <result column="utype" jdbcType="INTEGER" property="utype"/>
+        </association>
+        <association property="pCategory" javaType="com.shield.pilipili.pojo.PCategory">
+            <id column="cateId" jdbcType="BIGINT" property="id"/>
+            <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+            <result column="createdBy" jdbcType="INTEGER" property="createdBy"/>
+            <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime"/>
+            <result column="modifyBy" jdbcType="INTEGER" property="modifyBy"/>
+            <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
+        </association>
+        <collection property="pVideosList" ofType="com.shield.pilipili.pojo.PVideos">
+            <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
+            <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
+            <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
+            <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
+            <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
+            <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
+            <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
+            <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
+            <result column="video_state" jdbcType="INTEGER" property="videoState"/>
+            <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
+            <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
+            <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
+            <result column="video_time" jdbcType="TIMESTAMP" property="videoTime"/>
+            <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
+            <result column="video_image" jdbcType="VARCHAR" property="videoImage"/>
+            <result column="video_type" jdbcType="BIGINT" property="videoType"/>
+            <result column="video_comment" jdbcType="INTEGER" property="videoComment"/>
+            <result column="video_barrage" jdbcType="INTEGER" property="videoBarrage"/>
+        </collection>
+    </resultMap>
+    <select id="getCollectCategory" resultMap="CollectCategory">
+        SELECT pc.id pcId,COUNT(pc.id) totalCount, user_id, title, createTime,
+        pci.id pciId, collect_id, video_id, `addTime`,
+        uid, userName, phone, upwd, utype,
+        video_pv,COUNT(video_pv) categoryCount, video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_desc, video_state, video_updatetime, video_checkuid, video_checktime,video_time,video_releasetime,
+        video_type,video_comment,video_barrage,video_image,
+        pca.id cateId, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
+        FROM p_collect_info pci
+        LEFT JOIN p_collect pc ON pc.id = collect_id
+        LEFT JOIN p_user ON uid = user_id
+        LEFT JOIN p_videos ON video_id = video_pv
+        LEFT JOIN p_category pca ON video_type=pca.id
+        <where>
+            user_id = #{userId}
+            <choose>
+                <when test="title != null">
+                    and title = #{title}
+                </when>
+                <otherwise>
+                    and title = '默认收藏夹'
+                </otherwise>
+            </choose>
+        </where>
+        GROUP BY categoryName
+    </select>
 </mapper>

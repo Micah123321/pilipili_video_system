@@ -1,76 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PCollectDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCollect">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, user_id, title, createTime
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_collect
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from p_collect
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollect" useGeneratedKeys="true">
-    insert into p_collect (user_id, title, createTime
-      )
-    values (#{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCollect" useGeneratedKeys="true">
-    insert into p_collect
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="createtime != null">
-        createTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCollect">
-    update p_collect
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCollect">
-    update p_collect
-    set user_id = #{userId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCollect">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, title,intro, createTime,
+    </sql>
+
+    <resultMap id="CollectList" type="com.shield.pilipili.pojo.PCollect">
+        <id column="pcId" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="videoCount" jdbcType="VARCHAR" property="videoCount"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <association property="pUser" javaType="com.shield.pilipili.pojo.PUser">
+            <id column="uid" jdbcType="INTEGER" property="uid" />
+            <result column="userName" jdbcType="VARCHAR" property="userName" />
+            <result column="phone" jdbcType="VARCHAR" property="phone" />
+            <result column="upwd" jdbcType="VARCHAR" property="upwd" />
+            <result column="utype" jdbcType="INTEGER" property="utype" />
+        </association>
+        <association property="pCollectInfo" javaType="com.shield.pilipili.pojo.PCollectInfo">
+            <id column="pciId" jdbcType="BIGINT" property="id" />
+            <result column="collect_id" jdbcType="BIGINT" property="collectId" />
+            <result column="video_id" jdbcType="INTEGER" property="videoId" />
+            <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+        </association>
+        <collection property="pVideosList" ofType="com.shield.pilipili.pojo.PVideos">
+            <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
+            <result column="video_userid" jdbcType="INTEGER" property="videoUserid"/>
+            <result column="video_title" jdbcType="VARCHAR" property="videoTitle"/>
+            <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
+            <result column="video_play" jdbcType="BIGINT" property="videoPlay"/>
+            <result column="video_like" jdbcType="INTEGER" property="videoLike"/>
+            <result column="video_collect" jdbcType="INTEGER" property="videoCollect"/>
+            <result column="video_desc" jdbcType="VARCHAR" property="videoDesc"/>
+            <result column="video_state" jdbcType="INTEGER" property="videoState"/>
+            <result column="video_updatetime" jdbcType="TIMESTAMP" property="videoUpdatetime"/>
+            <result column="video_checkuid" jdbcType="INTEGER" property="videoCheckuid"/>
+            <result column="video_checktime" jdbcType="TIMESTAMP" property="videoChecktime"/>
+            <result column="video_time" jdbcType="TIMESTAMP" property="videoTime"/>
+            <result column="video_releasetime" jdbcType="TIMESTAMP" property="videoReleasetime"/>
+            <result column="video_image" jdbcType="VARCHAR" property="videoImage"/>
+            <result column="video_type" jdbcType="BIGINT" property="videoType"/>
+            <result column="video_comment" jdbcType="INTEGER" property="videoComment"/>
+            <result column="video_barrage" jdbcType="INTEGER" property="videoBarrage"/>
+        </collection>
+    </resultMap>
+    <select id="getPCollectList" resultMap="CollectList">
+        SELECT pc.id pcId, user_id, title,intro, createTime,uid, userName, phone, upwd, utype,
+        pci.id pciId, collect_id, video_id, addTime,
+        video_pv, COUNT(video_id) videoCount,video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_desc, video_state, video_updatetime, video_checkuid, video_checktime,video_time,video_releasetime,
+        video_type,video_comment,video_barrage,video_image
+        FROM p_collect pc
+        left join p_user ON uid = user_id
+        left join p_collect_info pci on collect_id = pc.id
+        LEFT JOIN p_videos ON video_id = video_pv
+        <where>
+            user_id = #{userId}
+            <choose>
+                <when test="title != null and title != ''">
+                    and title = #{title}
+                </when>
+                <otherwise>
+
+                </otherwise>
+            </choose>
+        </where>
+        GROUP BY title
+    </select>
+
+    <insert id="addCollect">
+        insert into p_collect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collect.userId != null">
+                user_id,
+            </if>
+            <if test="collect.title != null">
+                title,
+            </if>
+            <if test="collect.intro != null">
+                intro,
+            </if>
+            <if test="collect.createTime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collect.userId != null">
+                #{collect.userId},
+            </if>
+            <if test="collect.title != null">
+                #{collect.title},
+            </if>
+            <if test="collect.intro != null">
+                #{collect.intro},
+            </if>
+            <if test="collect.createTime != null">
+                #{collect.createTime},
+            </if>
+        </trim>
+    </insert>
+
 </mapper>

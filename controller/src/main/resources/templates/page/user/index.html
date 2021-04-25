@@ -854,7 +854,7 @@
                                 </ul>
                             </li>
                             <li><a href="/user/space">个人主页</a></li>
-                            <li><a href="contact.html">收藏列表</a></li>
+                            <li th:class="${session.userSession!=null?'':'hidden'}"><a href="/collect/goCollect">收藏列表</a></li>
                             <li th:class="${session.userSession==null?'':'hidden'}"><a href="/user/login">登录</a></li>
                             <li th:class="${session.userSession!=null?'':'hidden'}"><a href="/admin">创作中心</a></li>
                         </ul>

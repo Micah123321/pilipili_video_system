@@ -1,17 +1,14 @@
 package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PCollect;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PCollectDao {
-    int deleteByPrimaryKey(Long id);
 
-    int insert(PCollect record);
+    List<PCollect> getPCollectList(@Param("userId") Integer userId,@Param("title") String title);
 
-    int insertSelective(PCollect record);
+    int addCollect(@Param("collect") PCollect collect);
 
-    PCollect selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(PCollect record);
-
-    int updateByPrimaryKey(PCollect record);
 }

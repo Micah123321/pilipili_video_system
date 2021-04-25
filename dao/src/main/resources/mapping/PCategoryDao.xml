@@ -14,6 +14,7 @@
         id, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
     </sql>
 
+
     <select id="getPCategoryBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -21,6 +22,17 @@
         <where>
             <if test="parentId != null and parentId != 0">
                 parentId = #{parentId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getPCategoryById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_category
+        <where>
+            <if test="id != null and id != 0">
+                id = #{id}
             </if>
         </where>
     </select>

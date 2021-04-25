@@ -104,6 +104,7 @@ public class UserController {
         List<PVideos> videosList = pVideosService.selectVideosListByUp(pVideosPage);
         return videosList;
     }
+
     @ResponseBody
     @RequestMapping(value = "/changeDesc", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object changeDesc(@RequestParam String desc,@RequestParam Integer uid,HttpSession session){

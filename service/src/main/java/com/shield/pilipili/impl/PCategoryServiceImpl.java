@@ -27,6 +27,12 @@ public class PCategoryServiceImpl implements PCategoryService {
         return pCategoryDao.getCateById(id);
     }
 
+
+    @Override
+    public PCategory getPCategoryById(Integer id) {
+        return pCategoryDao.getPCategoryById(id);
+    }
+
     @Override
     public List<PCategoryVo> selectAllLevel1Category() {
         List<PCategoryVo> pCategories = pCategoryDao.selectAllCategory();
