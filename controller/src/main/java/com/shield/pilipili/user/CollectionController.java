@@ -30,7 +30,9 @@ public class CollectionController {
     private PCategoryService pCategoryService;
 
     @RequestMapping("/goCollect")
-    public String goCollection() {
+    public String goCollection(Model model,HttpSession session) {
+        PUserInfo pUserInfo = (PUserInfo) session.getAttribute("userSession");
+        model.addAttribute("userId",pUserInfo.getUserId());
         return "page/user/collection";
     }
 
@@ -56,13 +58,9 @@ public class CollectionController {
         PUserInfo pUserInfo = (PUserInfo) session.getAttribute("userSession");
         List<PCollectInfo> categoryList = pCollectInfoService.getCollectCategory(pUserInfo.getUserId(), title);
         for (PCollectInfo collectInfo : categoryList) {
-            if (collectInfo.getpCategory().getParentId() == 1) {
-                collectInfo.setCategoryName(collectInfo.getpCategory().getCategoryName());
-            } else {
-                int parentId = Math.toIntExact(collectInfo.getpCategory().getParentId());
-                PCategory pCategory1 = pCategoryService.getPCategoryById(parentId);
-                collectInfo.setCategoryName(pCategory1.getCategoryName());
-            }
+            int parentId = Math.toIntExact(collectInfo.getpCategory().getParentId());
+            PCategory pCategory1 = pCategoryService.getPCategoryById(parentId);
+            collectInfo.setCategoryName(pCategory1.getCategoryName());
         }
         return categoryList;
     }

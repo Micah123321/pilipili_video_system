@@ -8,6 +8,53 @@
     <link href="/css/fore/space_2.css" type="text/css" rel="stylesheet" media="all">
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="/js/fore/fore_collection.js"></script>
+    <script th:inline="javascript">
+
+        $(function () {
+            getUserInfo = function () {
+                var uid = $("#uid").val()
+                $.ajax({
+                    url: "/user/space/myinfo/",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        uid: uid
+                    },
+                    success: function (data) {
+                        var state = /*[[${session.userSession.userId eq userId?'false':'disabled'}]]*/ 'disabled';
+                        var tbody = $(".h-info");
+                        tbody.empty();
+                        if (data.userId > 0) {
+                            tbody.append("<div class=\"h-avatar\"><img src=\"" + data.userPic + "\" id=\"h-avatar\"></div>\n" +
+                                "                        <div class=\"h-basic\">\n" +
+                                "                            <div class='h'><span id=\"h-name\">" + data.nickName + "</span><span id=\"h-ceritification\" class=\"icon\"></span><span\n" +
+                                "                                    id=\"h-gender\" class=\"icon gender\"></span>\n" +
+                                "                                <a href=\"//www.bilibili.com/html/help.html#k\" target=\"_blank\" lvl=\"" + data.level + "\"\n" +
+                                "                                   class=\"h-level m-level\"></a></div>\n" +
+                                "<div class=\"h-basic-spacing\"><input disabled='"+state+"'  onchange='ajaxDesc()' value='"+data.upDesc+"' id=\"h-sign\" type=\"text\" placeholder=\"编辑个性签名\" maxlength=\"60\" class=\"space_input\"></div>"+
+                                "                        </div>")
+                            if(state=="false"){
+                                $("#h-sign").removeAttr("disabled");
+                            }
+                            $("#n-gz").text(data.subscribeNum);
+                            $("#n-fs").text(data.fansNum);
+                            $("#n-bf").text(data.upPlay);
+                            $("#n-dz").text(data.upLike);
+                            $(".be-textarea_inner").val(data.upSpaceNotice);
+                            $(".uid .text").text(data.id);
+                            $(".birthday .text").text(data.birthday);
+                        }
+                        //显示产品数据
+                    },
+                    beforeSend: function () {
+                    },
+                    error: function (data) {
+                    }
+                });
+            }
+        })
+    </script>
+    <script type="text/javascript" src="/js/user/space.js"></script>
 </head>
 <body>
 <input type="hidden" id="headerLevel" value="默认收藏夹">
@@ -16,237 +63,41 @@
 <input type="hidden" id="categoryId">
 <input type="hidden" id="categoryName">
 <input type="hidden" id="currPage" value="1">
+<input id="uid" type="hidden" th:value="${userId}">
 <div id="app" class="owner">
-    <div class="h">
+    <div class="header">
         <div class="wrapper">
             <div class="h-forbid" style="display: none;">
                 <div class="f-wrap"><i class="f-icon"></i><span class="f-txt">该账号封禁中</span></div>
-            </div><!---->
-            <div class="h-inner"
-                 style="background-image: url(&quot;//i0.hdslb.com/bfs/space/cb1c3ef50e22b6096fde67febe863494caefebad.png@2560w_400h_100q_1o.webp&quot;)">
+            </div>
+            <div class="h-inner h" style="background-image: url('/images/home.webp');">
                 <div class="h-gradient"></div>
                 <div class="h-user">
-                    <div class="h-info clearfix">
-                        <div class="h-avatar"><img
-                                src="//i0.hdslb.com/bfs/face/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@128w_128h_1o.webp"
-                                id="h-avatar"><a target="_blank" href="https://account.bilibili.com/account/face/upload"
-                                                 class="avatar-cover">
-                            更换头像
-                        </a><img src="//i0.hdslb.com/bfs/vip/icon_Certification_big_member_22_3x.png" title="年度大会员"
-                                 class="avatar-icon"></div>
+                    <div class="h-info clearfix"><div class="h-avatar"><img src="/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp" id="h-avatar"></div>
                         <div class="h-basic">
-                            <div><span id="h-name">叫Micah吖</span><span id="h-ceritification" class="icon"></span><span
-                                    id="h-gender" class="icon gender"></span><a
-                                    href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="5"
-                                    class="h-level m-level"></a><a href="//account.bilibili.com/account/big"
-                                                                   target="_blank" class="h-vipType"
-                                                                   style="color: rgb(255, 255, 255); background-color: rgb(251, 114, 153);">年度大会员</a>
-                                <!----></div>
-                            <div class="h-basic-spacing"><h4 title=":）" class="h-sign" style="display: none;">
-                                :）
-                            </h4><input id="h-sign" type="text" placeholder="编辑个性签名" maxlength="60" class="space_input">
-                            </div><!----></div>
-                    </div>
-                </div>
-                <div title="更换皮肤" class="space-theme-trigger icon" style="background-position: 58px 0px;"></div><!---->
-            </div>
-        </div><!---->
-        <div id="space-theme" class="t">
-            <div id="theme-header">
-                <div class="wrapper">
-                    <div class="theme-topright">
-                        <div class="theme-ann" style="display: none;"><span class="theme-ann-icon icon"></span><span
-                                class="theme-ann-text">大会员剩余时间：
-            <var>636</var>天</span></div>
-                        <span class="icon theme-close"></span></div>
-                    <div class="theme-tabs clearfix"><span for="theme-panel" class="tab theme-tab active">头图</span>
-                    </div>
-                </div>
-            </div>
-            <div class="theme-panel">
-                <div class="wrapper theme-panel-inner clearfix">
-                    <div class="be-scrollbar theme-list ps" name="toutu">
-                        <ul id="toutu-list" class="theme-list-inner clearfix">
-                            <li class="upload-toutu toutu-item">
-                                <div class="upload-content">
-                                    <div class="upload-icon"></div>
-                                    <div class="upload-tips u-tips1">自定义头图</div>
-                                    <div class="upload-tips u-tips2">推荐尺寸为2560*400，支持jpg、png图片</div>
-                                </div>
-                                <input type="file" accept="image/png, image/jpeg" class="upload-input"></li>
-                        </ul>
-                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                        </div>
-                        <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
-                        </div>
-                    </div>
-                    <div class="edit-container" style="display: none;">
-                        <div class="crop-container" style="display: none;">
-                            <div class="preview-container"></div>
-                            <div class="option-pane"><span class="rechoose">重新选择</span><span class="upload-size">推荐头图大小为：2560x400</span>
-                            </div>
-                            <div data-v-1ea3cefa="" class="btn-container btn-center"><a data-v-7b0ffc38=""
-                                                                                        class="btn primary"
-                                                                                        data-v-1ea3cefa=""><!----><span
-                                    data-v-7b0ffc38="" class="btn-content">确定</span></a><a data-v-7b0ffc38=""
-                                                                                           class="btn default"
-                                                                                           data-v-1ea3cefa="">
-                                <!----><span data-v-7b0ffc38="" class="btn-content">返回</span></a></div>
-                        </div>
-                        <div class="uploading-container" style="display: none;">
-                            <div class="uploading">
-                                <div class="upload-content">
-                                    <div class="loading-icon loading"><img
-                                            src="//static.hdslb.com/spacev2/2/img/loading.png"></div>
-                                    <div class="loading-text">上传中...</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="theme-panel" style="display: none;">
-                <div class="wrapper theme-panel-inner clearfix"><!----></div>
-            </div>
-            <div id="theme-buy-layer" class="theme-buy-layer" style="display: none;">
-                <div id="theme-buy-layer-wrapper" class="theme-buy-layer-wrapper">
-                    <div action="close" class="theme-buy-close"></div>
-                    <div id="theme-buy-select-length" class="theme-buy-step" style="display: none;">
-                        <div class="theme-buy-header"><img src="" class="theme-buy-preview">
-                            <p class="theme-buy-name"></p><!----></div>
-                        <div class="theme-buy-body"><p class="theme-buy-a">购买月份</p>
-                            <div class="theme-buy-list clearfix">
-                                <div class="theme-buy-item active">3个月</div>
-                                <div class="theme-buy-item">2个月</div>
-                                <div class="theme-buy-item">1个月</div>
-                                <div class="theme-buy-item custom"><span class="hideit">自定义</span></div>
-                            </div>
-                            <div class="theme-buy-price">
-                                <div><span class="theme-bb-span">你的余额为
-                <span class="theme-bb">0</span> B币，</span>需要支付
-                                    <var>NaN</var> B币
-                                </div>
-                            </div>
-                        </div>
-                        <div class="theme-buy-footer"><span class="theme-buy-layer-btn theme-buy-submit-btn disabled">硬币余额不足</span>
-                        </div>
-                    </div>
-                    <div id="theme-buy-success" class="theme-buy-step" style="display: none;">
-                        <div class="theme-buy-body">
-                            <div class="theme-buy-success-icon"></div>
-                            <div class="theme-buy-result-title">恭喜，支付成功！</div>
-                            <div class="theme-buy-result-info">
-                                你已成功
-                                <span id="theme-buy-xf" class="theme-buy-action-type">续费</span><span
-                                    class="theme-buy-g-name"></span></div>
-                            <div class="theme-buy-result-info"><span class="theme-buy-expire-time">NaN年NaN月NaN日</span>
-                                到期
-                            </div>
-                        </div>
-                        <div data-v-1ea3cefa="" class="btn-container theme-buy-footer btn-center"><a data-v-7b0ffc38=""
-                                                                                                     class="btn theme-buy-layer-btn primary"
-                                                                                                     data-v-1ea3cefa="">
-                            <!----><span data-v-7b0ffc38="" class="btn-content">立即使用</span></a><a data-v-7b0ffc38=""
-                                                                                                  class="btn theme-buy-layer-btn default"
-                                                                                                  data-v-1ea3cefa="">
-                            <!----><span data-v-7b0ffc38="" class="btn-content">确认</span></a></div>
-                    </div>
-                    <div id="theme-buy-fail" class="theme-buy-step" style="display: none;">
-                        <div class="theme-buy-body">
-                            <div class="theme-buy-fail-icon"></div>
-                            <div class="theme-buy-result-title">支付未完成</div>
-                            <div class="theme-buy-result-info">你还没有完成购买
-                                <span class="theme-buy-g-name"></span> 哦
-                            </div>
-                            <div class="theme-buy-result-info">原因：
-                                <span class="theme-buy-order-id"></span></div>
-                            <div class="theme-buy-fail-bg"></div>
-                        </div>
-                        <div data-v-1ea3cefa="" class="btn-container theme-buy-footer btn-center"><a data-v-7b0ffc38=""
-                                                                                                     class="btn theme-buy-layer-btn primary"
-                                                                                                     data-v-1ea3cefa="">
-                            <!----><span data-v-7b0ffc38="" class="btn-content">重新支付</span></a></div>
-                    </div>
+                            <div class="h"><span id="h-name">Micah</span><span id="h-ceritification" class="icon"></span><span id="h-gender" class="icon gender"></span>
+                                <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="6" class="h-level m-level"></a></div>
+                            <div class="h-basic-spacing"><input onchange="ajaxDesc()" value="这是本站第一个用户" id="h-sign" type="text" placeholder="编辑个性签名" maxlength="60" class="space_input"></div>                        </div></div>
                 </div>
             </div>
         </div>
-        <div class="modal-container" style="display: none;">
-            <div class="modal-mask"></div>
-            <div class="modal-wrapper">
-                <div class="modal">
-                    <div class="modal-header"><i class="modal-header-close iconfont icon-ic_close"></i>
-                        <div class="modal-title">个人信息举报</div>
+        <div id="navigator" class="n">
+            <div class="wrapper">
+                <div class="n-inner clearfix">
+                    <div class="n-tab-links"><a href="/91801122" class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">13</span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">13</span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
+                    <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频" class="space_input"><span class="icon search-btn"></span></div>
+                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p class="n-data-k">关注数</p>
+                        <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">
+                        粉丝数</p>
+                        <p id="n-fs" class="n-data-v space-fans">3</p></a>
+                        <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
+                            <p id="n-dz" class="n-data-v">3</p></div>
+                        <div title="播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
+                            <p id="n-bf" class="n-data-v">20600</p></div>
                     </div>
-                    <div class="modal-body">
-                        <div class="report-popup"><p class="report-popup-tip">举报内容（可多选）</p>
-                            <ul class="report-popup-list clearfix">
-                                <li class="report-popup-item"><em class="report-popup-item-checkbox"></em><span
-                                        class="report-popup-item-text">头像违规</span></li>
-                                <li class="report-popup-item"><em class="report-popup-item-checkbox"></em><span
-                                        class="report-popup-item-text">昵称违规</span></li>
-                                <li class="report-popup-item"><em class="report-popup-item-checkbox"></em><span
-                                        class="report-popup-item-text">签名违规</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div data-v-1ea3cefa="" class="btn-container modal-footer btn-center"><a data-v-7b0ffc38=""
-                                                                                             class="btn primary"
-                                                                                             data-v-1ea3cefa="">
-                        <!----><span data-v-7b0ffc38="" class="btn-content">确定</span></a><a data-v-7b0ffc38=""
-                                                                                            class="btn default"
-                                                                                            data-v-1ea3cefa="">
-                        <!----><span data-v-7b0ffc38="" class="btn-content">取消</span></a></div>
                 </div>
+                <div class="n-cursor" style="width: 50px; left: 180px;"></div>
             </div>
-        </div>
-    </div>
-    <div id="navigator" class="n">
-        <div class="wrapper">
-            <div class="n-inner clearfix">
-                <div class="n-tab-links"><a href="/91801122" class="n-btn n-index n-fans n-404 router-link-active"><span
-                        class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
-                        href="/91801122/dynamic" class="n-btn n-dynamic"><span
-                        class="iconfont icon-ic_following"></span><span class="n-text">动态</span></a><a
-                        href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
-                        class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">
-            26
-          </span></a><!----><a href="/91801122/channel/index" class="n-btn n-channel"><span
-                        class="iconfont icon-ic_channel"></span><span class="n-text">频道</span><span class="n-num">
-            0
-          </span></a><!----><a href="/91801122/favlist" class="n-btn n-favlist router-link-active active"><span
-                        class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
-            6
-          </span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span
-                        class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a><a
-                        href="/91801122/setting" class="n-btn n-setting"><span
-                        class="iconfont icon-ic_setting"></span><span class="n-text">设置</span></a></div>
-                <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
-                                                                       class="space_input"><span
-                        class="icon search-btn"></span></div>
-                <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="150"><p
-                        class="n-data-k">关注数</p>
-                    <p id="n-gz" class="n-data-v space-attention">
-                        150
-                    </p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="960"><p class="n-data-k">粉丝数</p>
-                    <p id="n-fs" class="n-data-v space-fans">
-                        960
-                    </p></a>
-                    <div title="视频、动态、专栏累计获赞701" class="n-data n-bf"><p class="n-data-k">获赞数</p>
-                        <p id="n-bf" class="n-data-v">701</p></div>
-                    <div title="截止昨天，播放数总计为115,744" class="n-data n-bf"><p class="n-data-k">播放数</p>
-                        <p id="n-bf" class="n-data-v">11.6万</p></div>
-                    <div title="截止昨天，阅读数总计为339" class="n-data n-bf"><p class="n-data-k">阅读数</p>
-                        <p id="n-bf" class="n-data-v">339</p></div>
-                </div>
-            </div>
-            <div class="n-cursor" style="width: 62px; left: 315px;"></div>
-        </div>
-    </div>
-    <div id="navigator-fixed" class="n n-fix">
-        <div class="wrapper">
-            <div class="n-cursor" style="width: 62px; left: 418px;"></div>
         </div>
     </div>
     <div class="s-space">
