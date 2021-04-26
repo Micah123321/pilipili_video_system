@@ -23,4 +23,14 @@ public class PBarrageServiceImpl implements PBarrageService {
     public List<PBarrage> getBarrCountByDate(Date beginDate, Date endDate, int userId) {
         return pBarrageDao.getBarrCountByDate(beginDate, endDate, userId);
     }
+
+    @Override
+    public List<PBarrage> getBarrByPv(int pv) {
+        return pBarrageDao.getBarrByPv(pv);
+    }
+
+    @Override
+    public int insert(PBarrage record) {
+        return pBarrageDao.insert(record);
+    }
 }

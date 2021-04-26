@@ -14,5 +14,6 @@ public interface PBarrageService {
      */
     int getBarrCountByUserId(int id);
     List<PBarrage> getBarrCountByDate( Date beginDate, Date endDate,int userId);
-
+    List<PBarrage> getBarrByPv(int pv);
+    int insert(PBarrage record);
 }

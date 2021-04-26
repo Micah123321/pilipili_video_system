@@ -1,11 +1,9 @@
 package com.shield.pilipili.user;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shield.pilipili.PCategoryService;
 import com.shield.pilipili.PUserInfoService;
 import com.shield.pilipili.PVideosService;
-import com.shield.pilipili.pojo.PCategory;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
@@ -28,6 +26,8 @@ public class DetailController {
     @RequestMapping("/pv{pv}")
     public String toVideoDetail(@PathVariable Integer pv, Model model){
         model.addAttribute("pv",pv);
+        PVideos video = pVideosService.getVideoByPv(pv);
+        model.addAttribute("url","/file/video/?url="+video.getVideoUrl());
         return "/page/user/detail";
     }
 

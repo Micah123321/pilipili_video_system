@@ -34,15 +34,53 @@
     WHERE  v.video_pv=b.video_id AND v.`video_userid`=#{userId}
     GROUP BY v.`video_userid`,DATE_FORMAT(b.createTime,'%Y-%m-%d')
   </select>
+  <select id="getBarrByPv" resultType="com.shield.pilipili.pojo.PBarrage">
+    SELECT
+      `id`,
+      `user_id` userId,
+      `video_id` videoId,
+      `content`,
+      TIME_TO_SEC(`videotime`) videoTimeSecond,
+      `videotime` videoTime,
+      `createTime`,
+      `color`,
+      `size`,
+      `post_ip` postIp,
+      `type`
+    FROM
+      `pili`.`p_barrage`
+    WHERE video_id=#{pv}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from p_barrage
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage" useGeneratedKeys="true">
-    insert into p_barrage (user_id, video_id, content, 
-      videotime, createTime)
-    values (#{userId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
-      #{videotime,jdbcType=TIME}, #{createtime,jdbcType=TIMESTAMP})
+    INSERT INTO `pili`.`p_barrage` (
+      `id`,
+      `user_id`,
+      `video_id`,
+      `content`,
+      `videotime`,
+      `createTime`,
+      `color`,
+      `size`,
+      `post_ip`,
+      `type`
+    )
+    VALUES
+    (
+      default ,
+      #{userId},
+      #{videoId},
+      #{content},
+      #{updateSecond},
+      now(),
+      #{color},
+      null,
+      null,
+      #{type}
+    ) ;
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage" useGeneratedKeys="true">
     insert into p_barrage
