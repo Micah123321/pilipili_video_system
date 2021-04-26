@@ -40,7 +40,7 @@ public class PCategoryServiceImpl implements PCategoryService {
     }
 
     @Override
-    public List<PCategoryVo> getLv1CountByUid(int uid) {
-        return pCategoryDao.getLv1CountByUid(uid);
+    public List<PCategoryVo> getLv1CountByUid(int uid,int videoState) {
+        return pCategoryDao.getLv1CountByUid(uid,videoState);
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -1046,16 +1046,17 @@
             overflow: hidden;
         }
     </style>
-    
+    <script src="/js/user/header.js"></script>
 </head>
 <body>
+<input id="headUserId" type="hidden">
 <div id="bili-header-m" class="bili-header-m report-wrap-module stardust-common">
     <div class="nav-menu"><!---->
         <div class="nav-mask"></div>
         <div class="nav-wrapper bili-wrapper">
             <div class="nav-con nav-wrapper-left">
                 <ul class="nav-con-ul">
-                    <li report-id="playpage_main" class="nav-item home"><a href="https://www.bilibili.com/" title="主站"
+                    <li report-id="playpage_main" class="nav-item home"><a href="/" title="主站"
                                                                            class="t"><i
                             class="header-iconfont header-icon-bilibili-tv"></i>
                         主站
@@ -1064,14 +1065,12 @@
             <div class="nav-wrapper-right"><!---->
                 <div class="nav-con">
                     <ul class="nav-con-ul">
-                        <li report-id="playpage_account" class="nav-item profile-info"><a
-                                href="https://space.bilibili.com/" target="_blank" class="t">
-                            <div class="i-face scale-in"><img
-                                    src="//i1.hdslb.com/bfs/face/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@72w_72h.webp"
-                                    class="face"><img
-                                    src="//i0.hdslb.com/bfs/garb/63c3229a8667db9634c72d4f9a4f915f90f1e8ce.png@168w_168h.webp"
-                                    alt="小闪电" class="pendant"><i class="legalize vip"></i></div>
-                        </a>
+                        <li report-id="playpage_account" class="nav-item profile-info">
+                            <a
+                                    href="/user/space" target="_blank" class="t">
+                                <div class="i-face scale-in"><img
+                                        class="face"></div>
+                            </a>
                             <div class="profile-m dd-bubble" style="display: none;">
                                 <div class="header-u-info">
                                     <div class="header-uname"><b class="big-vip-red">叫Micah吖</b>
@@ -1144,13 +1143,13 @@
                             </div>
                         </li>
                         <li report-id="playpage_collection" class="nav-item"><a
-                                href="https://space.bilibili.com/91801122/favlist" target="_blank" class="t">收藏</a>
+                                href="/collect/goCollect" target="_blank" class="t">收藏</a>
                             <!----></li>
                         <li report-id="playpage_history" class="nav-item"><a
-                                href="https://www.bilibili.com/account/history" target="_blank" class="t">历史</a><!---->
+                                href="/history" target="_blank" class="t">历史</a><!---->
                         </li>
                         <li report-id="playpage_create_center" class="nav-item"><a
-                                href="https://member.bilibili.com/v2#/home" target="_blank" class="t">创作中心</a></li>
+                                href="/admin" target="_blank" class="t">创作中心</a></li>
                     </ul>
                 </div>
                 <div report-id="playpage_contribution" class="up-load"><a

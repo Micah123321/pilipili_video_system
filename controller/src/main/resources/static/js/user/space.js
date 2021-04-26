@@ -1,7 +1,7 @@
 $(function () {
     $(".be-textarea_inner").change(function () {
         var uid = $("#uid").val()
-        var notice=$(".be-textarea_inner").val()
+        var notice = $(".be-textarea_inner").val()
         $.ajax({
             url: "/user/changeNotice",
             type: "get",
@@ -11,16 +11,17 @@ $(function () {
                 notice: notice
             },
             success: function (data) {
-                if (data=="ok"){
+                if (data == "ok") {
 
-                }else{
+                } else {
                     alert("修改公告失败")
                 }
-            }})
+            }
+        })
     })
-    ajaxDesc=function () {
+    ajaxDesc = function () {
         var uid = $("#uid").val()
-        var desc=$("#h-sign").val()
+        var desc = $("#h-sign").val()
         $.ajax({
             url: "/user/changeDesc/",
             type: "get",
@@ -30,26 +31,52 @@ $(function () {
                 desc: desc
             },
             success: function (data) {
-                if (data=="ok"){
+                if (data == "ok") {
 
-                }else{
+                } else {
                     alert("修改简介失败")
                 }
-            }})}
+            }
+        })
+    }
 
+    $(".n-btn").mouseenter(function () {
+        if ($(this).hasClass("n-video")){
+            $(".n-cursor").css({"width":"60px","left":"90px"})
+        }else if ($(this).hasClass("n-favlist")){
+            $(".n-cursor").css({"width":"60px","left":"170px"})
+        }else if ($(this).hasClass("n-subs")){
+            $(".n-cursor").css({"width":"50px","left":"250px"})
+        }else{
+            $(".n-cursor").css({"width":"50px","left":"22px"})
+        }
+    })
+    $(".n-btn").mouseleave(function () {
+        if ($(".active").hasClass("n-video")){
+            $(".n-cursor").css({"width":"60px","left":"90px"})
+        }else if ($(".active").hasClass("n-favlist")){
+            $(".n-cursor").css({"width":"60px","left":"170px"})
+        }else if ($(".active").hasClass("n-subs")){
+            $(".n-cursor").css({"width":"50px","left":"250px"})
+        }else{
+            $(".n-cursor").css({"width":"50px","left":"22px"})
+        }
+    })
 
     $(".be-tab-inner li").click(function () {
         $(".be-tab-inner li").removeClass("is-active")
         $(this).addClass("is-active")
-        var emcount=($(".is-active").val()*2)+"em";
-        if (($(".is-active").val()*2)<3){
-            if ($(".is-active").val()!=0){
-                emcount="3em";
-            }else{
-                emcount="0";
+        var emcount = 0;
+        if (($(".is-active").val() * 2) < 3) {
+            if ($(".is-active").val() != 0) {
+                emcount = 63;
+            } else {
+                emcount = "0";
             }
+        } else {
+            emcount = 126
         }
-        $(".be-tab-cursor").css("left",emcount)
+        $("#spacetab>.be-tab-cursor").css("transform", "translateX(" + emcount + "px)")
         getVideoInfo()
     })
     getVideoInfo = function () {
@@ -61,20 +88,21 @@ $(function () {
             dataType: "json",
             data: {
                 videoUserid: uid,
-                orderBy: orderBy
+                orderBy: orderBy,
+                videoState: 1
             },
             success: function (data) {
                 var tbody = $(".video>.content");
                 tbody.empty();
-                for (var i=0;i<data.length;i++){
-                    tbody.append("<div data-aid=\""+data[i].videoPv+"\" class=\"small-item fakeDanmu-item\"><a href=\"//www.bilibili.com/video/BV1ZW41197Hf\" target=\"_blank\" class=\"cover\"><img src=\""+data[i].videoImage+"\" alt=\""+data[i].videoTitle+"\"><span class=\"length\">"+data[i].videoTime+"</span><span class=\"i-watchlater\"></span><!----></a><a href=\"//www.bilibili.com/video/BV1ZW41197Hf\" target=\"_blank\" title=\"这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！\" class=\"title\">"+data[i].videoTitle+"\n" +
+                for (var i = 0; i < data.length; i++) {
+                    tbody.append("<div data-aid=\"" + data[i].videoPv + "\" class=\"small-item fakeDanmu-item\"><a href=\"/pv"+data[i].videoPv+"\" target=\"_blank\" class=\"cover\"><img src=\"" + data[i].videoImage + "\" alt=\"" + data[i].videoTitle + "\"><span class=\"length\">" + data[i].videoTime + "</span><span class=\"i-watchlater\"></span><!----></a><a href=\"//www.bilibili.com/video/BV1ZW41197Hf\" target=\"_blank\" title=\"这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！\" class=\"title\">" + data[i].videoTitle + "\n" +
                         "                            </a>\n" +
-                        "                            <div class=\"meta\"><span class=\"play\"><i class=\"icon\"></i>"+data[i].videoPlay+"\n" +
-                        "        </span><span class=\"time\"><i class=\"icon\"></i>"+data[i].videoReleasetime+"\n" +
+                        "                            <div class=\"meta\"><span class=\"play\"><i class=\"icon\"></i>" + data[i].videoPlay + "\n" +
+                        "        </span><span class=\"time\"><i class=\"icon\"></i>" + data[i].videoReleasetime + "\n" +
                         "        </span></div>\n" +
                         "                        </div>")
-                    $(".count").text(data.length);
-                    $(".n-num").text(data.length);
+                    $(".video.full-rows.host .count").text(data.length);
+                    $(".n-video>.n-num").text(data.length);
                 }
                 //显示产品数据
             },

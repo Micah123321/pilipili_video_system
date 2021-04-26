@@ -62,6 +62,9 @@
                      OR parentId IN (SELECT id FROM p_category WHERE parentId = 1)
               )
           AND v.`video_userid` = #{uid}
+          <if test="videoState>-1">
+             and v.video_state=#{videoState}
+          </if>
         GROUP BY categoryName
     </select>
     <select id="getCateById" resultType="com.shield.pilipili.pojo.PCategory">

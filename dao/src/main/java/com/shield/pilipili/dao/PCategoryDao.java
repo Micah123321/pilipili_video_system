@@ -10,7 +10,7 @@ public interface PCategoryDao {
 
     List<PCategoryVo> selectAllCategory();
 
-    List<PCategoryVo> getLv1CountByUid(int uid);
+    List<PCategoryVo> getLv1CountByUid(@Param("uid") int uid,@Param("videoState") int videoState);
 
     int deleteByPrimaryKey(Long id);
 

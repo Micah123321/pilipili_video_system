@@ -94,9 +94,11 @@ public class PVideos implements Serializable {
     /**
      * 视频发布时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date videoReleasetime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date videoReleasetimeSecound;
 
     /**
      * 视频分类（来源于p_category分类表的类型id）
@@ -283,6 +285,7 @@ public class PVideos implements Serializable {
     }
 
     public void setVideoReleasetime(Date videoReleasetime) {
+        setVideoReleasetimeSecound(videoReleasetime);
         this.videoReleasetime = videoReleasetime;
     }
 
@@ -298,4 +301,19 @@ public class PVideos implements Serializable {
         return serialVersionUID;
     }
 
+    public Date getVideoReleasetimeSecound() {
+        return videoReleasetimeSecound;
+    }
+
+    public void setVideoReleasetimeSecound(Date videoReleasetimeSecound) {
+        this.videoReleasetimeSecound = videoReleasetimeSecound;
+    }
+
+    public Long getVideoParentType() {
+        return videoParentType;
+    }
+
+    public void setVideoParentType(Long videoParentType) {
+        this.videoParentType = videoParentType;
+    }
 }

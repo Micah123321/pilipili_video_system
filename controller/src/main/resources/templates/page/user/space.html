@@ -120,6 +120,7 @@
     </style>
 </head>
 <body>
+<div th:replace="/page/user/header :: html" ></div>
 <div class="container">
     <div class="header">
         <div class="wrapper">
@@ -131,7 +132,7 @@
                 <div class="h-gradient"></div>
                 <div class="h-user">
                     <div class="h-info clearfix">
-                        <div class="h-avatar"><img src="../images/pic.webp" id="h-avatar"></div>
+                        <div class="h-avatar"><img src="/images/pic.webp" id="h-avatar"></div>
                         <div class="h-basic">
                             <div><span id="h-name">叫Micah吖</span><span id="h-ceritification" class="icon"></span><span
                                     id="h-gender" class="icon gender"></span>
@@ -151,25 +152,25 @@
                     <div class="n-tab-links"><a href="/91801122"
                                                 class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span
                             class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
-                            href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
+                            href="./video" class="n-btn n-video n-audio n-article n-album"><span
                             class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">
-            26
-          </span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span
+
+          </span></a><!----><!----><a href="/collect/goCollect" class="n-btn n-favlist"><span
                             class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
-            6
+
           </span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span
                             class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
                     <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
                                                                            class="space_input"><span
                             class="icon search-btn"></span></div>
-                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p
+                    <div class="n-statistics"><a th:href="'/user/subs/list/'+${userId}" class="n-data n-gz" title="149"><p
                             class="n-data-k">关注数</p>
                         <p id="n-gz" class="n-data-v space-attention">
-                            149
-                        </p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">
+
+                        </p></a><a th:href="'/user/fans/list/'+${userId}" class="n-data n-fs" title="964"><p class="n-data-k">
                         粉丝数</p>
                         <p id="n-fs" class="n-data-v space-fans">
-                            964
+
                         </p></a>
                         <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
                             <p id="n-dz" class="n-data-v">699</p></div>
@@ -187,7 +188,7 @@
                 <div class="section video full-rows host">
                     <h3 class="section-title"><a href="/91801122/video" class="t">我的视频</a><span
                             class="count">15</span><a href="/91801122/video" class="more">更多</a>
-                        <div class="be-tab">
+                        <div id="spacetab" class="be-tab">
                             <ul class="be-tab-inner clearfix">
                                 <li value="0" class="be-tab-item is-active"><input type="radio" name="be-tab-0"
                                                                          class="be-tab-input"
@@ -202,7 +203,7 @@
                     <div class="content clearfix">
                         <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
                                 href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
-                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                src=""
                                 alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
                                 class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
                                                                           target="_blank"
@@ -215,7 +216,7 @@
                         </div>
                         <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
                                 href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
-                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                src=""
                                 alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
                                 class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
                                                                           target="_blank"
@@ -228,7 +229,7 @@
                         </div>
                         <div data-aid="BV1ZW41197Hf" class="small-item fakeDanmu-item"><a
                                 href="//www.bilibili.com/video/BV1ZW41197Hf" target="_blank" class="cover"><img
-                                src="//i1.hdslb.com/bfs/archive/9b6e0d58e82c85eede98e451f2d5c44374f879c5.jpg@160w_100h_100Q_1c.webp"
+                                src=""
                                 alt="这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！"><span class="length">03:24</span><span
                                 class="i-watchlater"></span><!----></a><a href="//www.bilibili.com/video/BV1ZW41197Hf"
                                                                           target="_blank"
@@ -249,7 +250,7 @@
                         <div data-count="http://i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg"
                              class="fav-item"><a href="/91801122/favlist?fid=134985522&amp;ftype=create"
                                                  class="fav-covers"><img
-                                src="//i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg@152w_152h_100Q_1c.webp"
+                                src=""
                                 alt=""></a><span class="fav-count">50</span>
                             <div class="m"><span class="state">
           公开
@@ -260,7 +261,7 @@
                         <div data-count="http://i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg"
                              class="fav-item"><a href="/91801122/favlist?fid=134985522&amp;ftype=create"
                                                  class="fav-covers"><img
-                                src="//i1.hdslb.com/bfs/archive/661a823825d6d0b12c686240600a8ad79de38fe8.jpg@152w_152h_100Q_1c.webp"
+                                src=""
                                 alt=""></a><span class="fav-count">50</span>
                             <div class="m"><span class="state">
           公开

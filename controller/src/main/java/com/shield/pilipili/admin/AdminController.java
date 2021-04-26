@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.*;
+import com.shield.pilipili.pojo.page.PUserInfoPage;
 import com.shield.pilipili.pojo.page.PVideosPage;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,9 @@ public class AdminController {
             return "redirect:/user/login";
         }
         Integer uid = userSession.getUserId();
-        model.addAttribute("fansCount",pSubscribeService.getFansById(uid).size());
+        PUserInfoPage page=new PUserInfoPage();
+        page.setUserId(uid);
+        model.addAttribute("fansCount",pSubscribeService.getFansById(page).size());
         model.addAttribute("playCount",pVideosService.getPlayCountById(uid));
         model.addAttribute("comCount",pCommentService.getComCountByUserId(uid));
         model.addAttribute("likeCount",pVideosThumbsupService.getAllLikeCountByUid(uid));
@@ -58,7 +61,9 @@ public class AdminController {
             return "redirect:/user/login";
         }
         Integer userId = userSession.getUserId();
-        model.addAttribute("fansCount",pSubscribeService.getFansById(userId).size());
+        PUserInfoPage page=new PUserInfoPage();
+        page.setUserId(userId);
+        model.addAttribute("fansCount",pSubscribeService.getFansById(page).size());
         model.addAttribute("playCount",pVideosService.getPlayCountById(userId));
         model.addAttribute("comCount",pCommentService.getComCountByUserId(userId));
         model.addAttribute("likeCount",pVideosThumbsupService.getAllLikeCountByUid(userId));
@@ -108,9 +113,15 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "admin/creative/typedata", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object getTypeData(HttpSession session){
+    public Object getTypeData(Integer uid,Integer videoState,HttpSession session){
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
-        List<PCategoryVo> categoryVos = pCategoryService.getLv1CountByUid(userSession.getUserId());
+        if (uid==null){
+            uid=userSession.getUserId();
+        }
+        if (videoState==null){
+            videoState=-1;
+        }
+        List<PCategoryVo> categoryVos = pCategoryService.getLv1CountByUid(uid,videoState);
         Integer allCount=0;
         for (PCategoryVo p:categoryVos) {
             allCount+=p.getCount();

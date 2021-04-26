@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet"
+          media="all">
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/nav.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/index.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/index-vue.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/app.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/video.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/fav.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/draft.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/notice.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/info.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/space.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/fanslist.css" type="text/css" rel="stylesheet" media="all">
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            getUserInfo = function () {
+                var uid = $("#uid").val()
+                $.ajax({
+                    url: "/user/space/myinfo/",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        "uid": uid
+                    },
+                    success: function (data) {
+                        var state = /*[[${session.userSession.userId eq userId?'false':'disabled'}]]*/ 'disabled';
+                        var tbody = $(".h-info");
+                        tbody.empty();
+                        if (data.userId > 0) {
+                            tbody.append("<div class=\"h-avatar\"><img src=\"" + data.userPic + "\" id=\"h-avatar\"></div>\n" +
+                                "                        <div class=\"h-basic\">\n" +
+                                "                            <div class='h'><span id=\"h-name\">" + data.nickName + "</span><span id=\"h-ceritification\" class=\"icon\"></span><span\n" +
+                                "                                    id=\"h-gender\" class=\"icon gender\"></span>\n" +
+                                "                                <a href=\"//www.bilibili.com/html/help.html#k\" target=\"_blank\" lvl=\"" + data.level + "\"\n" +
+                                "                                   class=\"h-level m-level\"></a></div>\n" +
+                                "<div class=\"h-basic-spacing\"><input disabled='" + state + "'  onchange='ajaxDesc()' value='" + data.upDesc + "' id=\"h-sign\" type=\"text\" placeholder=\"编辑个性签名\" maxlength=\"60\" class=\"space_input\"></div>" +
+                                "                        </div>")
+                            if (state == "false") {
+                                $("#h-sign").removeAttr("disabled");
+                            }
+                            $("#n-gz").text(data.subscribeNum);
+                            $("#n-fs").text(data.fansNum);
+                            $("#n-bf").text(data.upPlay);
+                            $("#n-dz").text(data.upLike);
+                            $(".be-textarea_inner").val(data.upSpaceNotice);
+                            $(".uid .text").text(data.id);
+                            $(".birthday .text").text(data.birthday);
+                        }
+                        //显示产品数据
+                    },
+                    beforeSend: function () {
+                    },
+                    error: function (data) {
+                    }
+                });
+            }
+        })
+    </script>
+    <script src="/js/user/space.js"></script>
+    <style>
+        .h-avatar {
+            position: relative;
+            float: left;
+            width: 64px;
+            height: 64px;
+            border: 2px solid hsla(0, 0%, 100%, .4);
+            border-radius: 52px;
+        }
+
+        #h-avatar {
+            width: 64px;
+            height: 64px;
+            background: #fff;
+            border-radius: 48px;
+        }
+
+        #h-name {
+            display: inline-block;
+            margin-right: 5px;
+            font-weight: 700;
+            line-height: 18px;
+            font-size: 18px;
+            vertical-align: middle;
+        }
+
+        .h-inner {
+            background-position: 50%;
+            background-size: cover;
+            transition: background-image .2s ease, background-size 1s ease;
+            padding-top: 116px;
+            position: relative;
+        }
+
+        .h-basic {
+            float: left;
+            color: #fff;
+            font-size: 0;
+            margin: 10px 0 0 20px;
+        }
+
+        .m-level[lvl="5"] {
+            background-position: -21px -190px;
+        }
+
+        .m-level {
+            display: inline-block;
+            width: 28px;
+            height: 16px;
+            margin-right: 5px;
+            vertical-align: middle;
+            background-image: url('//s1.hdslb.com/bfs/static/jinkela/space/assets/level.png');
+            background-repeat: no-repeat;
+            background-position: 999px 999px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="/page/user/header :: html"></div>
+<div class="container">
+    <div class="header">
+        <div class="wrapper">
+            <div class="h-forbid" style="display: none;">
+                <div class="f-wrap"><i class="f-icon"></i><span class="f-txt">该账号封禁中</span></div>
+            </div>
+            <div class="h-inner h" style="background-image: url('/images/home.webp');">
+                <input id="uid" type="hidden" th:value="${userId}">
+                <input id="currPage" type="hidden" value="1">
+                <div class="h-gradient"></div>
+                <div class="h-user">
+                    <div class="h-info clearfix">
+                        <div class="h-avatar"><img src="/images/pic.webp" id="h-avatar"></div>
+                        <div class="h-basic">
+                            <div><span id="h-name">叫Micah吖</span><span id="h-ceritification" class="icon"></span><span
+                                    id="h-gender" class="icon gender"></span>
+                                <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="5"
+                                   class="h-level m-level"></a></div>
+                        </div>
+                        <div class="h-basic-spacing"><h4 title=":）" class="h-sign" style="display: none;">
+                            :）
+                        </h4><input id="h-sign" type="text" placeholder="编辑个性签名" maxlength="60" class="space_input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="navigator" class="n">
+            <div class="wrapper">
+                <div class="n-inner clearfix">
+                    <div class="n-tab-links"><a href="/user/space/"
+                                                class="n-btn n-index n-fans"><span
+                            class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a>
+                        <a href="/91801122/video" class="n-btn n-video n-audio n-article n-album router-link-exact-active router-link-active active"><span
+                            class="iconfont icon-ic_video"></span><span
+                            class="n-text">投稿</span><span class="n-num">
+
+          </span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span
+                            class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
+
+          </span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span
+                            class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
+                    <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
+                                                                           class="space_input"><span
+                            class="icon search-btn"></span></div>
+                    <div class="n-statistics"><a th:href="'/user/subs/list/'+${userId}" class="n-data n-gz" title="149"><p
+                            class="n-data-k">关注数</p>
+                        <p id="n-gz" class="n-data-v space-attention">
+
+                        </p></a><a th:href="'/user/fans/list/'+${userId}" class="n-data n-fs" title="964"><p class="n-data-k">
+                        粉丝数</p>
+                        <p id="n-fs" class="n-data-v space-fans">
+
+                        </p></a>
+                        <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
+                            <p id="n-dz" class="n-data-v">699</p></div>
+                        <div title="播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
+                            <p id="n-bf" class="n-data-v">11.6万</p></div>
+                    </div>
+                </div>
+                <div class="n-cursor" style="width: 75px; left: 82px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div id="page-video" class="wrapper">
+            <div class="col-full clearfix">
+                <div class="contribution-sidenav">
+                    <div class="nav-container playlist-container">
+                        <div class="contribution-list-container">
+                            <ul class="contribution-list">
+                                <li class="contribution-item cur"><a href="/2/video"
+                                                                     class="text router-link-exact-active router-link-active">视频</a><span
+                                        class="num">37</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="row page-head clearfix">
+                        <div class="breadcrumb"><p class="item cur video-title">TA的视频
+                        </p></div>
+                        <div class="v-filter-line clearfix">
+                            <div id="videotab" class="be-tab">
+                                <ul class="be-tab-inner clearfix">
+                                    <li value="0" class="be-tab-item is-active"><input type="radio" name="be-tab-1"
+                                                                                       class="be-tab-input"
+                                                                                       value="pubdate"><span>最新发布</span>
+                                    </li>
+                                    <li value="1" class="be-tab-item"><input type="radio" name="be-tab-1"
+                                                                             class="be-tab-input"
+                                                                             value="click"><span>最多播放</span></li>
+                                    <li value="3" class="be-tab-item"><input type="radio" name="be-tab-1"
+                                                                             class="be-tab-input"
+                                                                             value="stow"><span>最多收藏</span></li>
+                                </ul>
+                                <div class="be-tab-cursor" style="transform: translateX(0px); width: 56px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="v-search-result" style="display: none;">共找到关于“
+                        <span class="v-search-kw"></span>”的
+                        <em class="v-search-count">37</em> 个视频</p>
+                    <div id="submit-video-type-filter"><a class="active">
+                        全部<span class="count">37</span></a><a class="">
+                        动画<span class="count">8</span></a><a class="">
+                        音乐<span class="count">7</span></a><a class="">
+                        游戏<span class="count">12</span></a><a class="">
+                        鬼畜<span class="count">1</span></a><a class="">
+                        生活<span class="count">6</span></a><a class="">
+                        影视<span class="count">1</span></a><a class="">
+                        数码<span class="count">1</span></a><a class="">
+                        动物圈<span class="count">1</span></a>
+
+                    </div>
+
+                    <div id="submit-video" class="section video">
+                        <div id="video-list-style" class="cube">
+                            <div id="submit-video-list" class="content">
+                                <ul class="clearfix cube-list">
+                                </ul>
+                                <ul class="be-pager">
+                                    <li title="上一页" class="be-pager-prev be-pager-disabled"><a>上一页</a></li>
+                                    <li title="第一页" class="be-pager-item be-pager-item-active"><a>1</a></li><!---->
+                                    <!----><!----><!----><!----><!----><!---->
+                                    <li title="最后一页:2" class="be-pager-item"><a>2</a></li>
+                                    <li title="下一页" class="be-pager-next"><a>下一页</a></li>
+                                    <span class="be-pager-total">共 2 页，</span><span class="be-pager-options-elevator">
+    跳至
+    <input type="text" class="space_input"> 页
+  </span></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/user/page.js"></script>
+<script src="/js/user/video.js"></script>
+</body>
+</html>

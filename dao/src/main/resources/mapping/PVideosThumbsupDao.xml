@@ -17,7 +17,7 @@
   </select>
   <select id="getAllLikeCountByUid" resultType="int">
     SELECT
-      SUM(v.video_userid) likeCount
+      IFNULL(SUM(v.video_userid),0) likeCount
     FROM
       `pili`.`p_videos_thumbsup` t,p_videos v
     WHERE v.`video_pv`=t.`video_id` AND t.`video_id`IN(SELECT video_pv FROM p_videos WHERE video_userid=#{uid})

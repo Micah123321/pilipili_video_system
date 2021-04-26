@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -57,6 +57,7 @@
     <script type="text/javascript" src="/js/user/space.js"></script>
 </head>
 <body>
+<div th:replace="/page/user/header :: html" ></div>
 <input type="hidden" id="headerLevel" value="默认收藏夹">
 <input type="hidden" id="byOrderId">
 <input type="hidden" id="count">
@@ -84,7 +85,7 @@
         <div id="navigator" class="n">
             <div class="wrapper">
                 <div class="n-inner clearfix">
-                    <div class="n-tab-links"><a href="/91801122" class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">13</span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">13</span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
+                    <div class="n-tab-links"><a href="/user/space/" class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">13</span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">13</span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
                     <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频" class="space_input"><span class="icon search-btn"></span></div>
                     <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p class="n-data-k">关注数</p>
                         <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">

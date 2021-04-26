@@ -319,7 +319,7 @@ $(function () {
                 $(".input-box-v2-1-val").val(data.videoTitle);
                 $("input[name='videoUrl']").val(data.videoUrl);
                 $("#descarea").val(data.videoDesc);
-                var pickdate = data.videoReleasetime + "";
+                var pickdate = data.videoReleasetimeSecound + "";
                 var picktime = pickdate.split(" ");
                 $("#pickdate").val(picktime[0])
                 $("#picktime").val(picktime[1]);

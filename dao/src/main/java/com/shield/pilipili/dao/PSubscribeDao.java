@@ -2,6 +2,7 @@ package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PSubscribe;
 import com.shield.pilipili.pojo.PUserInfo;
+import com.shield.pilipili.pojo.page.PUserInfoPage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -13,7 +14,9 @@ public interface PSubscribeDao {
      * @param id 用户id
      * @return 粉丝集合
      */
-    List<PUserInfo> getFansById(int id);
+    List<PUserInfoPage> getFansById(PUserInfoPage userInfoPage);
+
+    List<PUserInfoPage> getSubById(PUserInfoPage userInfoPage);
 
     List<PSubscribe> getFansByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate,@Param("userId")int userId);
 

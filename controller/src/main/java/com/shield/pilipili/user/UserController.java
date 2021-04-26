@@ -66,11 +66,6 @@ public class UserController {
         return "page/user/userregister";
     }
 
-    @RequestMapping("/fans/list")
-    public String getFansList() {
-        return "page/user/fanslist";
-    }
-
     @RequestMapping("/space")
     public String goSpace(HttpSession session) {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
@@ -84,6 +79,21 @@ public class UserController {
     public String goOtherSpace(@PathVariable Integer uid, Model model) {
         model.addAttribute("userId",uid);
         return "page/user/space";
+    }
+
+    @RequestMapping("/space/video")
+    public String goVideoSpace(HttpSession session) {
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            return "redirect:/user/login";
+        }
+        return "redirect:/user/space/"+userSession.getUserId()+"/video";
+    }
+
+    @RequestMapping("/space/{uid}/video")
+    public String goVideoSpaceById(@PathVariable Integer uid, Model model) {
+        model.addAttribute("userId",uid);
+        return "page/user/videolist";
     }
 
     @ResponseBody
@@ -103,6 +113,13 @@ public class UserController {
     public Object getUserInfo(PVideosPage pVideosPage){
         List<PVideos> videosList = pVideosService.selectVideosListByUp(pVideosPage);
         return videosList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getSessionUser", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object getSessionUserInfo(HttpSession session){
+        PUserInfo pUserInfo = (PUserInfo) session.getAttribute("userSession");
+        return pUserInfo;
     }
 
     @ResponseBody
