@@ -17,7 +17,7 @@ public interface PBarrageDao {
 
     List<PBarrage> getBarrCountByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
 
-
+    List<PBarrage> getBarrByPv(int pv);
 
     /**
      *

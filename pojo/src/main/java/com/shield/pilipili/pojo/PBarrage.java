@@ -1,6 +1,8 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,17 +33,28 @@ public class PBarrage implements Serializable {
      */
     private String content;
 
-    /**
-     * 发送视频时间
-     */
+
+    private Integer videoTimeSecond;
     private Date videoTime;
+
+    private String updateSecond;
 
     /**
      * 添加时间
      */
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss")
     private Date createTime;
 
     private Integer barrCount;
+
+    private String color;
+
+    private String size;
+
+    private String postId;
+
+    private String type;
 
     private static final long serialVersionUID = 1L;
 
@@ -75,14 +88,6 @@ public class PBarrage implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Date getVideoTime() {
-        return videoTime;
-    }
-
-    public void setVideoTime(Date videoTime) {
-        this.videoTime = videoTime;
     }
 
     public Date getCreateTime() {

@@ -21,6 +21,7 @@ $(function () {
                 $(".up-info_right  .desc").text(data.userInfo.upDesc)
                 $(".has-charge>span").text(data.userInfo.fansNum)
                 $("#v_desc .info").text(data.video.videoDesc)
+                $("#url").text(data.video.videoUrl)
                 var type=data.video.typeName
                 var typeList=type.split("<--")
                 $(".tag-area.clearfix").html("<li class=\"tag\">\n" +
