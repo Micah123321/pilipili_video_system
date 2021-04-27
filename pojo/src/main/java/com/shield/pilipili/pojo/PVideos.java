@@ -15,6 +15,13 @@ import java.util.List;
  */
 @Data
 public class PVideos implements Serializable {
+    public PVideos(Long videoType) {
+        this.videoType = videoType;
+    }
+    public PVideos(){
+
+    }
+
     /**
      * 视频pv号
      */
@@ -118,6 +125,9 @@ public class PVideos implements Serializable {
     private Long videoParentType;
 
     private String typeName;
+
+    private String videoUserName;
+
 
     public String getTypeName() {
         return typeName;

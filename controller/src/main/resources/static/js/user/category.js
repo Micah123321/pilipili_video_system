@@ -14,104 +14,80 @@ $(function () {
 
     ajaxVideoInfo = function () {
         $.ajax({
-            url: "/index/videoInfo",
+            url: "/category/get",
             type: "get",
             dataType: "json",
-            data: {},
-            // success: function (data) {
-            //     var tbody = $(".videoBody");
-            //     tbody.empty();
-            //     for (var i = 0; i < data.length; i++) {
-            //         tbody.append("<div class=\"videoList\">\n" +
-            //             "            <div class=\"col-md-8\">\n" +
-            //             "                <h3 id=\"t"+data[i].typeName+"\" class=\"agileits-title\">\n" +
-            //             "                    <svg style=\"color: #03a9f4\" xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\"\n" +
-            //             "                         fill=\"currentColor\"\n" +
-            //             "                         class=\"bi bi-easel\" viewBox=\"0 0 16 16\">\n" +
-            //             "                        <path d=\"M8 0a.5.5 0 0 1 .473.337L9.046 2H14a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1.85l1.323 3.837a.5.5 0 1 1-.946.326L11.092 11H8.5v3a.5.5 0 0 1-1 0v-3H4.908l-1.435 4.163a.5.5 0 1 1-.946-.326L3.85 11H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.954L7.527.337A.5.5 0 0 1 8 0zM2 3v7h12V3H2z\"/>\n" +
-            //             "                    </svg>&nbsp;" + data[i].typeName + "\n" +
-            //             "\n" +
-            //             "                    <button type=\"button\" style=\"font-family: 宋体;float:right;margin-right: 5px\" class=\"btn btn-primary\"\n" +
-            //             "                            data-toggle=\"button\"> 更多\n" +
-            //             "                        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
-            //             "                             class=\"bi bi-forward\"\n" +
-            //             "                             viewBox=\"0 0 16 16\">\n" +
-            //             "                            <path d=\"M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z\"/>\n" +
-            //             "                        </svg>\n" +
-            //             "                    </button>\n" +
-            //             "\n" +
-            //             "                    <button type=\"button\" style=\"font-family: 宋体;float:right;margin-right: 5px\" class=\"btn btn-primary\"\n" +
-            //             "                            data-toggle=\"button\"> 换一组\n" +
-            //             "                        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
-            //             "                             class=\"bi bi-shuffle\"\n" +
-            //             "                             viewBox=\"0 0 16 16\">\n" +
-            //             "                            <path fill-rule=\"evenodd\"\n" +
-            //             "                                  d=\"M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z\"/>\n" +
-            //             "                            <path d=\"M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z\"/>\n" +
-            //             "                        </svg>\n" +
-            //             "                    </button>\n" +
-            //             "                </h3>\n" +
-            //             "<div id='"+data[i].typeName+"' class=\"news-agileinfo\">\n" +
-            //             "                </div>\n" +
-            //             "            </div>\n" +
-            //             "            <div class=\"col-md-4\">\n" +
-            //             "                <div id='ph"+data[i].typeName+"' class=\"rank-list\" >\n" +
-            //             "                    <header class=\"rank-header\"><span class=\"name\">排行榜</span>\n" +
-            //             "                        <button type=\"button\" style=\"font-family: 宋体;float:right;margin-right: 5px\"\n" +
-            //             "                                class=\"btn btn-primary\"\n" +
-            //             "                                data-toggle=\"button\"> 更多\n" +
-            //             "                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
-            //             "                                 class=\"bi bi-forward\"\n" +
-            //             "                                 viewBox=\"0 0 16 16\">\n" +
-            //             "                                <path d=\"M9.502 5.513a.144.144 0 0 0-.202.134V6.65a.5.5 0 0 1-.5.5H2.5v2.9h6.3a.5.5 0 0 1 .5.5v1.003c0 .108.11.176.202.134l3.984-2.933a.51.51 0 0 1 .042-.028.147.147 0 0 0 0-.252.51.51 0 0 1-.042-.028L9.502 5.513zM8.3 5.647a1.144 1.144 0 0 1 1.767-.96l3.994 2.94a1.147 1.147 0 0 1 0 1.946l-3.994 2.94a1.144 1.144 0 0 1-1.767-.96v-.503H2a.5.5 0 0 1-.5-.5v-3.9a.5.5 0 0 1 .5-.5h6.3v-.503z\"/>\n" +
-            //             "                            </svg>\n" +
-            //             "                        </button>\n" +
-            //             "                    </header>\n" +
-            //             "</div>\n" +
-            //             "            </div>\n" +
-            //             "        </div>"
-            //         )
-            //     }
-            //     var videoContent="";
-            //     var phContent="";
-            //
-            //     for (var i = 0; i < data.length; i++) {
-            //         for (var j = 0; j < data[i].dataList.length; j++){
-            //             videoContent=videoContent+"<div onclick='goDetail("+data[i].dataList[j].videoPv+")' class=\"col-sm-3 news-w3lgrids\">\n" +
-            //                 "                        <div class=\"news-w3img\">\n" +
-            //                 "                            <img src=\""+data[i].dataList[j].videoImage+"\" class=\"img-responsive zoom-img\" alt=\"\"/>\n" +
-            //                 "                        </div>\n" +
-            //                 "                        <div class=\"news-w3imgtext \">\n" +
-            //                 "                            <p>"+data[i].dataList[j].videoTitle+"</p>\n" +
-            //                 "                        </div>\n" +
-            //                 "                    </div>"
-            //
-            //             phContent=phContent+"<div class=\"rank-wrap\"><span class=\"number on\">"+(j+1)+"</span><a href=\"/pv"+data[i].dataList[j].videoPv+"\" target=\"_blank\" class=\"link\"><p title=\""+data[i].dataList[j].videoTitle+" ~\" class=\"title\">"+data[i].dataList[j].videoTitle+"</p></a>\n" +
-            //                 "                        <div class=\"popover-video-card pvc\" style=\"display: none;\">\n" +
-            //                 "                            <div class=\"content\"><img src=\""+data[i].dataList[j].videoImage+"\" alt=\"\">\n" +
-            //                 "                                <div class=\"info\"><p class=\"f-title\">"+data[i].dataList[j].videoTitle+"</p>\n" +
-            //                 "                                    <p class=\"subtitle\"><span class=\"name\">"+data[i].dataList[j].videoUserid+"</span><span class=\"point\">·</span><span class=\"time\">"+data[i].dataList[j].videoReleasetime+"</span></p></div>\n" +
-            //                 "                            </div>\n" +
-            //                 "                            <div class=\"count\">\n" +
-            //                 "                                <ul>\n" +
-            //                 "                                    <li><i class=\"bilifont bili-icon_shipin_bofangshu\"></i><span>149.9万</span></li>\n" +
-            //                 "                                    <li><i class=\"bilifont bili-icon_shipin_danmushu\"></i><span>1142</span></li>\n" +
-            //                 "                                    <li><i class=\"bilifont bili-icon_shipin_shoucangshu\"></i><span>1.9万</span></li>\n" +
-            //                 "                                    <li><i class=\"bilifont bili-icon_shipin_yingbishu\"></i><span>1.3万</span></li>\n" +
-            //                 "                                </ul>\n" +
-            //                 "                            </div>\n" +
-            //                 "                        </div>\n" +
-            //                 "                    </div>"
-            //         }
-            //         $("#ph"+data[i].typeName).append(phContent)
-            //         $("#"+data[i].typeName).append(videoContent+"<div class=\"clearfix\"></div>\n" )
-            //         videoContent="";
-            //         phContent="";
-            //         $(".flex-column").append("<li class=\"nav-item\">\n" +
-            //             "                <a class=\"nav-link\" href=\"#t"+data[i].typeName+"\">"+data[i].typeName+"</a>\n" +
-            //             "            </li>")
-            //     }
-            // },
+            data: {
+                videoType:$("#cateId").val()
+            },
+            success: function (data) {
+                var tbody = $(".channel-m");
+
+                for (var i = 0; i < data.videoList.length; i++) {
+                    $("#subnav .clearfix").append("<li class=\"\"><a href=\"/v/douga/mad/\">"+data.videoList[i].typeName+"<!----></a></li>")
+                    var context="<div id=\"douga_"+data.videoList[i].typeName+"\" class=\"sub-zone-m clearfix report-wrap-module report-scroll-module\" scrollshow=\"true\">\n" +
+                        "                <div class=\"clearfix\">\n" +
+                        "                    <div class=\"video-floor-m l-con\">\n" +
+                        "                        <div class=\"zone-title\">\n" +
+                        "                            <div class=\"headline clearfix\"><a href=\"/v/douga/mad/\" class=\"name\">"+data.videoList[i].typeName+"</a>\n" +
+                        "                                <div class=\"bili-tab bili-tab\">\n" +
+                        "                                    <div class=\"bili-tab-item\">有新动态</div>\n" +
+                        "                                    <div class=\"bili-tab-item\">最新投稿</div>\n" +
+                        "                                </div><!----><a href=\"/v/douga/mad/\" target=\"_blank\" class=\"link-more\">\n" +
+                        "                                    更多\n" +
+                        "                                    <i class=\"icon\"></i></a><!----></div>\n" +
+                        "                        </div>\n" +
+                        "                        <div class=\"storey-box clearfix\" style=\"height:504px;\"><!---->\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"r-con\">\n" +
+                        "                        <section class=\"sec-rank\">\n" +
+                        "                            <header class=\"rank-head\"><h3>热门</h3>\n" +
+                        "                            </header>\n" +
+                        "                            <div class=\"rank-list-wrap\">\n" +
+                        "                                <ul class=\"rank-list hot-list\"><!---->\n" +
+                        "                                </ul>\n" +
+                        "                            </div>\n" +
+                        "                            <a href=\"/v/douga/mad/#/all/click/0/1/?open=hot\" target=\"_blank\" class=\"more-link\">查看更多\n" +
+                        "                                <i class=\"icon icon-arrow-r\"></i></a></section>\n" +
+                        "                    </div>\n" +
+                        "                </div><!----></div>"
+                    tbody.append(context)
+                }
+                for (var i = 0; i < data.top4.length; i++){
+                    $(".groom-box-m").append("<div class=\"groom-module\"><a href=\"/pv"+data.top4[i].videoPv+"\" target=\"_blank\" title=\""+data.top4[i].videoTitle+"\">\n" +
+                        "                            <div class=\"lazy-img\"><img alt=\""+data.top4[i].videoTitle+"\" src=\""+data.top4[i].videoImage+"\">\n" +
+                        "                            </div><!---->\n" +
+                        "                            <div class=\"card-mark\"><p class=\"title\">"+data.top4[i].videoTitle+"</p>\n" +
+                        "                                <p class=\"author\">up主："+data.top4[i].videoUserName+"</p>\n" +
+                        "                                <p class=\"play\">播放："+data.top4[i].videoPlay+"</p></div>\n" +
+                        "                        </a>\n" +
+                        "                            <div class=\"watch-later-trigger w-later\"></div>\n" +
+                        "                        </div>")
+                }
+                for (var i = 0; i < data.videoList.length; i++){
+                    var catebody=$("#douga_"+data.videoList[i].typeName+" .storey-box.clearfix")
+                    var cateTitlebody=$("#douga_"+data.videoList[i].typeName+" .rank-list.hot-list")
+                    catebody.empty()
+                    var Array = [];
+                    for (var j = 0; j < data.videoList[i].dataList.length; j++){
+                        if (data.videoList[i].dataList[j].videoType==data.videoList[i].videoType){
+                            catebody.append("<div class=\"spread-module\"><a href=\"/pv"+data.videoList[i].dataList[j].videoPv+"\" target=\"_blank\"><div class=\"pic\"><div class=\"lazy-img\"><img alt=\""+data.videoList[i].dataList[j].videoTitle+"\" src=\""+data.videoList[i].dataList[j].videoImage+"\"></div><i class=\"icon medal golden\"></i><div class=\"cover-preview-module\"><!----><div class=\"progress-bar\"><span style=\"width: 0%;\"></span></div></div><div class=\"mask-video\"></div><div class=\"danmu-module\"></div><span class=\"dur\">"+data.videoList[i].dataList[j].videoTime+"</span><!----><!----><div class=\"watch-later-trigger w-later\"></div></div><p title=\""+data.videoList[i].dataList[j].videoTitle+"\" class=\"t\">"+data.videoList[i].dataList[j].videoTitle+"</p><p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoPlay+"</span><span class=\"danmu\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoBarrage+"</span></p></a></div>")
+                            Array.push(data.videoList[i].dataList[j])
+                        }
+                    }
+                    for (var k = 0; k < Array.length; k++){
+                        if (k>10){
+                            return
+                        }
+                        if (k<3){
+                            cateTitlebody.append("<li class=\"rank-item  show-detail first highlight\"><i class=\"ri-num\">"+(k+1)+"</i><a href=\"/pv"+Array[k].videoPv+"\" target=\"_blank\" title=\""+Array[k].videoTitle+"\" class=\"ri-info-wrap clearfix\"><div class=\"lazy-img ri-preview\"><img alt=\""+Array[k].videoTitle+"\" src=\""+Array[k].videoImage+"\"></div><div class=\"ri-detail\"><p class=\"ri-title\">"+Array[k].videoTitle+"</p><p class=\"ri-point\">综合评分："+((Array[k].videoPlay+1)*(Array[k].videoBarrage+1)*(Array[k].videoCollect+1))+"</p></div><div class=\"watch-later-trigger w-later\"></div></a></li>")
+                        }else{
+                            cateTitlebody.append("<li class=\"rank-item\"><i class=\"ri-num\">"+(k+1)+"</i><a href=\"/pv"+Array[k].videoPv+"\" target=\"_blank\" title=\""+Array[k].videoTitle+"\" class=\"ri-info-wrap clearfix\"><!----><div class=\"ri-detail\"><p class=\"ri-title\">"+Array[k].videoTitle+"</p><p class=\"ri-point\">综合评分："+((Array[k].videoPlay+1)*(Array[k].videoBarrage+1)*(Array[k].videoCollect+1))+"</p></div><!----></a></li>")
+                        }
+                    }
+                }
+            },
         });
     }
     goDetail=function (pv) {

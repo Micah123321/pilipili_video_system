@@ -79,14 +79,16 @@
         `video_comment` videoComment,
         `video_barrage` videoBarrage,
         c.parentId videoParentType,
-        c.categoryName typeName
+        c.categoryName typeName,
+        nickName videoUserName
         from
-        p_videos v,p_category c
+        p_videos v,p_category c,p_user_info u
         <where>
             <if test="videoType > 1">
-               v.video_type=#{videoType}
+                (v.video_type=#{videoType} OR c.parentId = #{videoType})
             </if>
             and c.id=video_type
+            AND u.`user_id`=v.`video_userid`
         </where>
         order by
         <choose>

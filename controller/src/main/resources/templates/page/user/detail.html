@@ -33542,6 +33542,7 @@
         .video-info .video-data .view {
             margin-right: 12px;
         }
+
     </style>
     <link rel="stylesheet" href="/css/yzmplayer.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -33574,11 +33575,21 @@
             border-radius: 4px;
             background-color: #222;
             opacity: 1;
-            display: block;
             background: rgba(21,21,21,.9);
             border-radius: 2px;
         }
-    </style>
+        .danmaku-wrap .player-auxiliary-area .player-auxiliary-danmaku-wrap .player-auxiliary-danmaku-list .danmaku-info-row {
+            line-height: 24px;
+            height: 24px;
+        }
+        .v-wrap .r-con {
+            margin-left: 220px;
+        }
+        .yzmplayer-box, .yzmplayer {
+            width: 137%;
+            height: 30%;
+        }
+</style>
     <script src="/js/yzmplayer.js"></script>
     <script src="/js/md5.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
@@ -33589,6 +33600,7 @@
 <script src="/js/user/detail.js"></script>
 <input type="hidden" th:value="${pv}" id="pv">
 <input type="hidden" id="url">
+<input type="hidden" id="type">
 <div class="container">
     <div class="v-wrap"><!---->
         <div class="l-con">
@@ -33596,7 +33608,7 @@
                     title="" class="video-title"><!----><span class="tit tr-fix"></span>
             </h1>
                 <div class="video-data"><span title="" class="view"></span><span
-                        title="" class="dm">1990弹幕</span><span class="videoTime"></span><span
+                        title="" class="dm">弹幕</span><span class="videoTime"></span><span
                         title="" class="rank">&nbsp;&nbsp;
     </span></div>
             </div>
@@ -33890,27 +33902,9 @@
                                 <div class="bui-collapse-wrap">
                                     <div class="bui-collapse-header">
                                         <div class="bui-collapse-arrow">
-                                            <span class="bui-collapse-arrow-text">收起</span>
                                         </div>
                                         <div class="player-auxiliary-filter">
                                             <span class="player-auxiliary-filter-title">弹幕列表</span>
-                                            <i name="player_more"
-                                               class="bp-icon icon-general-moreactions player-auxiliary-filter-menu">
-                                                <div class="player-auxiliary-setting-menu-wrap" style="display: none;">
-                                                    <div class="player-auxiliary-setting-menu-list" value="danmakuList"
-                                                         name="button_danmakulist" label="弹幕列表" style="display: none;">
-                                                        <span class="active-point"></span>弹幕列表
-                                                    </div>
-                                                    <div class="player-auxiliary-setting-menu-list" value="blockSetting"
-                                                         name="button_blocksetting" label="屏蔽设定"><span
-                                                            class="active-point"></span>屏蔽设定
-                                                    </div>
-                                                    <div class="player-auxiliary-setting-menu-list" value="advDanmaku"
-                                                         name="button_advanceddanmu" label="高级弹幕"><span
-                                                            class="active-point"></span>高级弹幕
-                                                    </div>
-                                                </div>
-                                            </i>
                                         </div>
                                     </div>
                                     <div class="bui-collapse-body" style="">
@@ -33945,381 +33939,6 @@
                                                          style="touch-action: pan-x; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
                                                         <ul class="player-auxiliary-danmaku-list bpui-component bpui-undefined bpui-selectable"
                                                             style="height: 45072px; transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); transition-duration: 0ms; transform: translate(0px, -400px) scale(1) translateZ(0px);">
-                                                            <li dmno="16" class="danmaku-info-row"
-                                                                style="padding-top: 384px;"><span
-                                                                    class="danmaku-info-time">00:06</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="我是没打扮">我是没打扮</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="17" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:40</span><span
-                                                                    class="danmaku-info-danmaku" title="告诉我我是第几？">告诉我我是第几？</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="18" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:09</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="古德古德，热乎">古德古德，热乎</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="19" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:12</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="冲冲冲">冲冲冲</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="20" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:00</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="666">666</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="21" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:34</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="坐等猴子">坐等猴子</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="22" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:02</span><span
-                                                                    class="danmaku-info-danmaku" title="第一眼以为是个棺材（">第一眼以为是个棺材（</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="23" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:35</span><span
-                                                                    class="danmaku-info-danmaku" title="注入灵魂，古德古德">注入灵魂，古德古德</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="24" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:32</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="我是没打扮">我是没打扮</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="25" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:32</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="我是没打扮">我是没打扮</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="26" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:33</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="我是没打扮">我是没打扮</span><span
-                                                                    class="danmaku-info-date">04-07 23:16</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="27" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:07</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="下次一定">下次一定</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="28" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:33</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="古德古德">古德古德</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="29" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:07</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="热乎的">热乎的</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="30" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">01:45</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="撑起弹幕">撑起弹幕</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="31" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:10</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="你是？">你是？</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="32" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">01:01</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="好 打">好 打</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="33" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:29</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="也就这么多了">也就这么多了</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="34" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:08</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="下次一定">下次一定</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="35" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:12</span><span
-                                                                    class="danmaku-info-danmaku"
-                                                                    title="这么烫！">这么烫！</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li dmno="36" class="danmaku-info-row"><span
-                                                                    class="danmaku-info-time">00:27</span><span
-                                                                    class="danmaku-info-danmaku" title="这是真的还是特效">这是真的还是特效</span><span
-                                                                    class="danmaku-info-date">04-07 23:17</span>
-                                                                <div class="danmaku-info-float-layer">
-                                                                    <div class="danmaku-info-report-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="举报该弹幕的发送者"
-                                                                         data-position="top-right">举报
-                                                                    </div>
-                                                                    <div class="danmaku-info-block-btn player-tooltips-trigger"
-                                                                         data-tooltip="1" data-change-mode="2"
-                                                                         data-text="屏蔽该弹幕的发送者"
-                                                                         data-position="top-right">屏蔽用户
-                                                                    </div>
-                                                                </div>
-                                                            </li>
                                                         </ul>
                                                         <div class="bscroll-vertical-scrollbar"
                                                              style="position: absolute; z-index: 9999; width: 7px; bottom: 2px; top: 2px; right: 1px; overflow: hidden; opacity: 0; transition-duration: 500ms;">
@@ -34409,76 +34028,10 @@
                class="ad-report report-wrap-module report-scroll-module" scrollshow="true"></a><!----><!---->
             <div id="reco_list" class="recommend-list report-wrap-module report-scroll-module" scrollshow="true">
                 <div class="rec-list"><!---->
-                    <div class="video-page-card">
-                        <div class="card-box">
-                            <div class="pic-box">
-                                <div class="pic"><a
-                                        href="/video/BV1Bx411U7EA/?spm_id_from=333.788.recommend_more_video.0" class=""><img
-                                        src="//i2.hdslb.com/bfs/archive/9a79cbfd573c012307e967ccf48466bc6cacb93d.jpg@336w_190h.webp"
-                                        alt="开哥这局斗地主快笑死我了哈哈哈哈哈哈哈哈哈哈哈哈" width="168" height="95"></a><span
-                                        class="mask-video"></span><span class="duration">03:32</span></div>
-                                <div class="watch-later-video van-watchlater"><span class="wl-tips"
-                                                                                    style="display: none;"></span></div>
-                            </div>
-                            <div class="info"><a href="/video/BV1Bx411U7EA/?spm_id_from=333.788.recommend_more_video.0"
-                                                 class=""><span title="开哥这局斗地主快笑死我了哈哈哈哈哈哈哈哈哈哈哈哈" class="title">开哥这局斗地主快笑死我了哈哈哈哈哈哈哈哈哈哈哈哈</span></a>
-                                <div class="count up"><a href="//space.bilibili.com/25249820/" target="_blank"
-                                                         style="display:;">怎么改昵称咧</a></div>
-                                <div class="count">
-                                    2077.6万 播放&nbsp;·&nbsp;9.8万 弹幕
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-page-card">
-                        <div class="card-box">
-                            <div class="pic-box">
-                                <div class="pic"><a
-                                        href="/video/BV1xh411U7bK/?spm_id_from=333.788.recommend_more_video.1" class=""><img
-                                        src="//i0.hdslb.com/bfs/archive/0d0bea35d2bc473ace55227808c82d24c56455bd.jpg@336w_190h.webp"
-                                        alt="FPX如何靠上路破解“RNG四保一”？传说中的“复活赛”真的来了？FPX vs RNG细节复盘" width="168"
-                                        height="95"></a><span class="mask-video"></span><span
-                                        class="duration">09:51</span></div>
-                                <div class="watch-later-video van-watchlater"><span class="wl-tips"
-                                                                                    style="display: none;"></span></div>
-                            </div>
-                            <div class="info"><a href="/video/BV1xh411U7bK/?spm_id_from=333.788.recommend_more_video.1"
-                                                 class=""><span title="FPX如何靠上路破解“RNG四保一”？传说中的“复活赛”真的来了？FPX vs RNG细节复盘"
-                                                                class="title">FPX如何靠上路破解“RNG四保一”？传说中的“复活赛”真的来了？FPX vs RNG细节复盘</span></a>
-                                <div class="count up"><a href="//space.bilibili.com/594534726/" target="_blank"
-                                                         style="display:;">LPL战术小黑板</a></div>
-                                <div class="count">
-                                    13.1万 播放&nbsp;·&nbsp;632 弹幕
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-page-card">
-                        <div class="card-box">
-                            <div class="pic-box">
-                                <div class="pic"><a
-                                        href="/video/BV1tA411q7xi/?spm_id_from=333.788.recommend_more_video.2" class=""><img
-                                        src="//i0.hdslb.com/bfs/archive/fd6e5e2ce9283cca0f201fa4f56855309441cef5.jpg@336w_190h.webp"
-                                        alt="这他喵才是《夜曲》原版MV" width="168" height="95"></a><span class="mask-video"></span><span
-                                        class="duration">03:44</span></div>
-                                <div class="watch-later-video van-watchlater"><span class="wl-tips"
-                                                                                    style="display: none;"></span></div>
-                            </div>
-                            <div class="info"><a href="/video/BV1tA411q7xi/?spm_id_from=333.788.recommend_more_video.2"
-                                                 class=""><span title="这他喵才是《夜曲》原版MV" class="title">这他喵才是《夜曲》原版MV</span></a>
-                                <div class="count up"><a href="//space.bilibili.com/284845773/" target="_blank"
-                                                         style="display:;">老坚果然翁</a></div>
-                                <div class="count">
-                                    301.5万 播放&nbsp;·&nbsp;6022 弹幕
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
-                <div class="rec-footer" style="display:;">展开</div>
             </div>
-        </div><!----><!----><!----><!----></div>
+        </div></div>
 </div>
 </body>
 </html>

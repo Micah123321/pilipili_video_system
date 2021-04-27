@@ -34,7 +34,7 @@ public class BarrageController {
             obj[0]=barrageList.get(i).getVideoTimeSecond();
             obj[1]=barrageList.get(i).getType();
             obj[2]=barrageList.get(i).getColor();
-            obj[3]=barrageList.get(i).getId();
+            obj[3]=barrageList.get(i).getUserId();
             obj[4]=barrageList.get(i).getContent();
             obj[5]=sdf.format(barrageList.get(i).getCreateTime());
             objects[i]=obj;
@@ -50,7 +50,7 @@ public class BarrageController {
         if (userSession==null){
             return new PBarrageVo();
         }
-        if (pBarrage==null){
+        if (videoTimeSeconds==null){
             PBarrageVo pBarrageVo=new PBarrageVo();
             pBarrageVo.setCode(0);
             Object[] obj={true};

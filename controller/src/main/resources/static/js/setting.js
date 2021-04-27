@@ -168,14 +168,15 @@ $(".yzm-yzmplayer-send-icon").on("click", function () {
             type: "post",
             dataType: "json",
             data: {
-                videoId:$("#pv").val(),
-                content:sendtext,
-                videoTimeSeconds:$(".yzmplayer-ptime").text(),
-                color:sendcolor,
-                type:sendtype
+                videoId: $("#pv").val(),
+                content: sendtext,
+                videoTimeSeconds: $(".yzmplayer-ptime").text(),
+                color: sendcolor,
+                type: sendtype
             },
             success: function (data) {
                 alert("发送成功")
+                ajaxbarrageList()
             }
         });
 
@@ -186,8 +187,7 @@ $(".yzm-yzmplayer-send-icon").on("click", function () {
 })
 dp.danmaku.opacity(1);
 //弹幕列表获取
-
-$(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {
+ajaxbarrageList=function () {
     $(".list-show").empty();
     $.ajax({
         url: dmapi + "?id=" + dmid,
@@ -195,34 +195,31 @@ $(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {
             if (data.code == 0) {
                 var danmaku = data.danmaku;
                 $(".danmuku-num").text(danmaku.length)
+                $(".player-auxiliary-danmaku-number-span").text(danmaku.length)
+                $(".player-auxiliary-danmaku-list.bpui-component.bpui-undefined.bpui-selectable").empty()
+                $(".player-auxiliary-danmaku-list.bpui-component.bpui-undefined.bpui-selectable").append("<li dmno=\"16\" style=\"padding-top: 400px;\" time=\"11\" class=\"danmaku-info-row\"> </li>")
                 $(danmaku).each(function (index, item) {
                     var dammulist = `<d class="danmuku-list" time="${item[0]}"><li>${formatTime(item[0])}</li><li title="${item[4]}">${item[4]}</li><li title="用户：${item[3]}">${item[5]}</li></d>`
+                    var danmuinfoList = "";
+                    danmuinfoList = `<li dmno="16" time="${item[0]}" class="danmaku-info-row"><span class="danmaku-info-time">${formatTime(item[0])}</span><span class="danmaku-info-danmaku" title="${item[4]}">${item[4]}</span><span class="danmaku-info-date">${item[5]}</span><div class="danmaku-info-float-layer"> <div class="danmaku-info-report-btn player-tooltips-trigger"data-tooltip="1" data-change-mode="2"data-text="举报该弹幕的发送者"data-position="top-right">举报 </div> <div class="danmaku-info-block-btn player-tooltips-trigger"data-tooltip="1" data-change-mode="2"data-text="屏蔽该弹幕的发送者"data-position="top-right">屏蔽用户 </div></div> </li>`
                     $(".list-show").append(dammulist);
+                    $(".player-auxiliary-danmaku-list.bpui-component.bpui-undefined.bpui-selectable").append(danmuinfoList)
                 })
             }
             $(".danmuku-list").on("click", function () {
                 dp.seek($(this).attr("time"))
             })
-        }
-    });
-});
-$(".list-show").empty();
-$.ajax({
-    url: dmapi + "?id=" + dmid,
-    success: function (data) {
-        if (data.code == 0) {
-            var danmaku = data.danmaku;
-            $(".danmuku-num").text(danmaku.length)
-            $(danmaku).each(function (index, item) {
-                var dammulist = `<d class="danmuku-list" time="${item[0]}"><li>${formatTime(item[0])}</li><li title="${item[4]}">${item[4]}</li><li title="用户：${item[3]}">${item[5]}</li></d>`
-                $(".list-show").append(dammulist);
+            $(".danmaku-info-row").on("click", function () {
+                dp.seek($(this).attr("time"))
             })
         }
-        $(".danmuku-list").on("click", function () {
-            dp.seek($(this).attr("time"))
-        })
-    }
+    });
+}
+$(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {
+    ajaxbarrageList()
 });
+
+ajaxbarrageList()
 setTimeout(function () {
     $("#link1").fadeIn();
 }, 1 * 500);

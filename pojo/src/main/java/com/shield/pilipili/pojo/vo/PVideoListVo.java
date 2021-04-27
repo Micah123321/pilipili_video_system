@@ -12,6 +12,14 @@ public class PVideoListVo extends PVideosPage {
         this.dataList = dataList;
         this.typeName = typeName;
     }
+    public PVideoListVo(List<PVideosPage> dataList, String typeName,Long videoType) {
+        super(videoType);
+        this.dataList = dataList;
+        this.typeName = typeName;
+    }
+    public PVideoListVo(){
+
+    }
 
     public List<PVideosPage> getDataList() {
         return dataList;

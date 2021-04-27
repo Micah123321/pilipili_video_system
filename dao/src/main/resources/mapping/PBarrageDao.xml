@@ -57,7 +57,6 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage" useGeneratedKeys="true">
     INSERT INTO `pili`.`p_barrage` (
-      `id`,
       `user_id`,
       `video_id`,
       `content`,
@@ -70,7 +69,6 @@
     )
     VALUES
     (
-      default ,
       #{userId},
       #{videoId},
       #{content},
