@@ -84,6 +84,7 @@ function initZone() {
 
 //分区的二级分类
 function getCategoryTwo(id,ids) {
+    $("#currPage").val("1");
     var liobj = $("#categoryBy li");
     liobj.each(function () {
         $(this).click(function () {
@@ -138,6 +139,7 @@ function getCategoryActive(id,ids) {
             $(this).addClass("active");
         })
     })
+
     var id1 = $("#id1").val();
     var orderName = $("#orderByName").val();
     var videoTime = $("#videoTime").val();

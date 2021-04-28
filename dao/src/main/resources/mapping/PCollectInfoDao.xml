@@ -204,4 +204,48 @@
         </where>
         GROUP BY categoryName
     </select>
+
+    <delete id="delCollectInfo">
+        delete
+        from p_collect_info
+        where collect_id = #{id}
+    </delete>
+
+    <delete id="delCollectInfoByVideoPv">
+        delete
+        from p_collect_info
+        where video_id = #{videoPv} and collect_id = #{collectId}
+    </delete>
+
+    <insert id="insertCollectByVideoPv">
+        insert into p_collect_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pCollectInfo.collectId != null and pCollectInfo.collectId != ''">
+                collect_id,
+            </if>
+            <if test="pCollectInfo.videoId != null and pCollectInfo.videoId != ''">
+                video_id,
+            </if>
+            <if test="pCollectInfo.addTime != null ">
+                addTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pCollectInfo.collectId!= null and pCollectInfo.collectId != ''">
+                #{pCollectInfo.collectId},
+            </if>
+            <if test="pCollectInfo.videoId != null and pCollectInfo.videoId != ''">
+                #{pCollectInfo.videoId},
+            </if>
+            <if test="pCollectInfo.addTime">
+                #{pCollectInfo.addTime},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getRepetition" resultType="java.lang.Integer">
+        select count(*) from p_collect_info where video_id = #{videoPv} AND  collect_id = #{collectId}
+    </select>
+
+
 </mapper>

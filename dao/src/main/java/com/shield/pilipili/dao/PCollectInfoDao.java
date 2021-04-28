@@ -13,4 +13,12 @@ public interface PCollectInfoDao {
 
     List<PCollectInfo> getCollectCategory(@Param("userId") Integer userId,@Param("title") String title);
 
+    int delCollectInfo(@Param("id") Integer id);
+
+    int delCollectInfoByVideoPv(@Param("videoPv") Integer videoPv,@Param("collectId")Integer collectId);
+
+    int insertCollectByVideoPv(@Param("pCollectInfo") PCollectInfo pCollectInfo);
+
+    int getRepetition(@Param("videoPv") Integer videoPv,@Param("collectId")Long collectId);
+
 }

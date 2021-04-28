@@ -29,4 +29,22 @@ public class PCollectServiceImpl implements PCollectService {
         }
         return flag;
     }
+
+    @Override
+    public boolean updateCollect(PCollect collect) {
+        boolean flag = false;
+        if (pCollectDao.updateCollect(collect)>0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean delCollect(Integer id) {
+        boolean flag = false;
+        if (pCollectDao.delCollect(id)>0){
+            flag = true;
+        }
+        return flag;
+    }
 }

@@ -65,14 +65,9 @@
         LEFT JOIN p_videos ON video_id = video_pv
         <where>
             user_id = #{userId}
-            <choose>
-                <when test="title != null and title != ''">
-                    and title = #{title}
-                </when>
-                <otherwise>
-
-                </otherwise>
-            </choose>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
         </where>
         GROUP BY title
     </select>
@@ -80,13 +75,13 @@
     <insert id="addCollect">
         insert into p_collect
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="collect.userId != null">
+            <if test="collect.userId != null and collect.userId != ''">
                 user_id,
             </if>
-            <if test="collect.title != null">
+            <if test="collect.title != null and collect.title != ''">
                 title,
             </if>
-            <if test="collect.intro != null">
+            <if test="collect.intro != null and collect.intro != ''">
                 intro,
             </if>
             <if test="collect.createTime != null">
@@ -94,13 +89,13 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="collect.userId != null">
+            <if test="collect.userId != null and collect.userId != ''">
                 #{collect.userId},
             </if>
-            <if test="collect.title != null">
+            <if test="collect.title != null and collect.title != ''">
                 #{collect.title},
             </if>
-            <if test="collect.intro != null">
+            <if test="collect.intro != null and collect.intro != ''">
                 #{collect.intro},
             </if>
             <if test="collect.createTime != null">
@@ -108,5 +103,24 @@
             </if>
         </trim>
     </insert>
+
+    <update id="updateCollect">
+        update p_collect
+        <set>
+            <if test="collect.title != null and collect.title != ''">
+                title = #{collect.title},
+            </if>
+            <if test="collect.intro != null and collect.intro != ''">
+                intro = #{collect.intro},
+            </if>
+        </set>
+        where id = #{collect.id}
+    </update>
+
+    <delete id="delCollect">
+        delete
+        from p_collect
+        where id = #{id}
+    </delete>
 
 </mapper>

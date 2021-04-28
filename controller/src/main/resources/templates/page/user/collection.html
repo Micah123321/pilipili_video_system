@@ -6,11 +6,17 @@
     <link href="/css/fore/collect.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/fore/space_1.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/fore/space_2.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/fore/space_3.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/fore/space_10.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/fore/jquery.mCustomScrollbar.css" type="text/css" rel="stylesheet" media="all">
     <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/js/fore/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript" src="/js/fore/fore_collection.js"></script>
     <script th:inline="javascript">
 
         $(function () {
+            $(".target-favlist").mCustomScrollbar();
+            // $("#fav-createdList-container").mCustomScrollbar();
             getUserInfo = function () {
                 var uid = $("#uid").val()
                 $.ajax({
@@ -31,9 +37,9 @@
                                 "                                    id=\"h-gender\" class=\"icon gender\"></span>\n" +
                                 "                                <a href=\"//www.bilibili.com/html/help.html#k\" target=\"_blank\" lvl=\"" + data.level + "\"\n" +
                                 "                                   class=\"h-level m-level\"></a></div>\n" +
-                                "<div class=\"h-basic-spacing\"><input disabled='"+state+"'  onchange='ajaxDesc()' value='"+data.upDesc+"' id=\"h-sign\" type=\"text\" placeholder=\"编辑个性签名\" maxlength=\"60\" class=\"space_input\"></div>"+
+                                "<div class=\"h-basic-spacing\"><input disabled='" + state + "'  onchange='ajaxDesc()' value='" + data.upDesc + "' id=\"h-sign\" type=\"text\" placeholder=\"编辑个性签名\" maxlength=\"60\" class=\"space_input\"></div>" +
                                 "                        </div>")
-                            if(state=="false"){
+                            if (state == "false") {
                                 $("#h-sign").removeAttr("disabled");
                             }
                             $("#n-gz").text(data.subscribeNum);
@@ -64,6 +70,10 @@
 <input type="hidden" id="categoryId">
 <input type="hidden" id="categoryName">
 <input type="hidden" id="currPage" value="1">
+<input type="hidden" id="videoPv">
+<input type="hidden" id="oldCollectId">
+<input type="hidden" id="newCollectId">
+<input type="hidden" id="type">
 <input id="uid" type="hidden" th:value="${userId}">
 <div id="app" class="owner">
     <div class="header">
@@ -74,11 +84,21 @@
             <div class="h-inner h" style="background-image: url('/images/home.webp');">
                 <div class="h-gradient"></div>
                 <div class="h-user">
-                    <div class="h-info clearfix"><div class="h-avatar"><img src="/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp" id="h-avatar"></div>
+                    <div class="h-info clearfix">
+                        <div class="h-avatar"><img
+                                src="/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp"
+                                id="h-avatar"></div>
                         <div class="h-basic">
-                            <div class="h"><span id="h-name">Micah</span><span id="h-ceritification" class="icon"></span><span id="h-gender" class="icon gender"></span>
-                                <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="6" class="h-level m-level"></a></div>
-                            <div class="h-basic-spacing"><input onchange="ajaxDesc()" value="这是本站第一个用户" id="h-sign" type="text" placeholder="编辑个性签名" maxlength="60" class="space_input"></div>                        </div></div>
+                            <div class="h"><span id="h-name">Micah</span><span id="h-ceritification"
+                                                                               class="icon"></span><span id="h-gender"
+                                                                                                         class="icon gender"></span>
+                                <a href="//www.bilibili.com/html/help.html#k" target="_blank" lvl="6"
+                                   class="h-level m-level"></a></div>
+                            <div class="h-basic-spacing"><input onchange="ajaxDesc()" value="这是本站第一个用户" id="h-sign"
+                                                                type="text" placeholder="编辑个性签名" maxlength="60"
+                                                                class="space_input"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,6 +109,25 @@
                     <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频" class="space_input"><span class="icon search-btn"></span></div>
                     <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p class="n-data-k">关注数</p>
                         <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">
+                    <div class="n-tab-links"><a href="/91801122"
+                                                class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span
+                            class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
+                            href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
+                            class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span
+                            class="n-num">13</span></a><!----><!----><a href="/91801122/favlist"
+                                                                        class="n-btn n-favlist"><span
+                            class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span
+                            class="n-num">13</span></a><a href="/91801122/bangumi"
+                                                          class="n-btn n-bangumi n-subs n-cinema"><span
+                            class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
+                    <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
+                                                                           class="space_input"><span
+                            class="icon search-btn"></span></div>
+                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p
+                            class="n-data-k">关注数</p>
+                        <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans"
+                                                                                  class="n-data n-fs" title="964"><p
+                            class="n-data-k">
                         粉丝数</p>
                         <p id="n-fs" class="n-data-v space-fans">3</p></a>
                         <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
@@ -97,7 +136,7 @@
                             <p id="n-bf" class="n-data-v">20600</p></div>
                     </div>
                 </div>
-                <div class="n-cursor" style="width: 50px; left: 180px;"></div>
+                <div class="n-cursor" style="width: 50px; left: 210px;"></div>
             </div>
         </div>
     </div>
@@ -109,7 +148,8 @@
                         <div class="favlist-title"><p>我的创建</p><i class="icon icon-arrow arrow-transform"></i></div>
                         <div style="display: block;">
                             <div class="be-scrollbar fav-list-container ps" id="fav-createdList-container">
-                                <div class="nav-title nav-add"><span title="创建收藏夹" class="icon icon-add"></span><span
+                                <div class="nav-title nav-add" onclick="newCollect()"><span title="创建收藏夹"
+                                                                                            class="icon icon-add"></span><span
                                         class="text">新建收藏夹</span></div>
 
                                 <ul class="fav-list"><!---->
@@ -133,13 +173,13 @@
                         <div class="fav-info clearfix">
                             <div class="fav-filters clearfix">
                                 <div class="filter-item do-batch"><span class="text">批量操作</span></div>
-                                <div class="be-dropdown filter-item"><span id="zoneBy">全部分区<i
+                                <div class="be-dropdown filter-item" onclick="onZoneBy()"><span id="zoneBy">全部分区<i
                                         class="icon icon-arrow"></i></span>
                                     <ul class="be-dropdown-menu filter-type menu-align-" id="onZoneBy"
                                         style="transform-origin: center top; display: none;">
 
                                     </ul><!----></div>
-                                <div class="be-dropdown filter-item"><span id="orderBy">
+                                <div class="be-dropdown filter-item" onclick="onOrderBy()"><span id="orderBy">
                 最近收藏<i class="icon icon-arrow"></i></span>
 
                                     <ul class="be-dropdown-menu menu-align-" id="onOrderBy"
@@ -150,7 +190,9 @@
                                     </ul><!----></div>
                                 <div class="filter-item search">
                                     <div class="search-input search-container"><input type="text" placeholder="输入关键词"
-                                                                                      class="search-fav-input space_input" id="search" onkeydown="onKeyDown(event)"><span
+                                                                                      class="search-fav-input space_input"
+                                                                                      id="search"
+                                                                                      onkeydown="onKeyDown(event)"><span
                                             title="点击搜索" class="icon icon-search" onclick="search()"></span></div>
                                 </div>
                             </div>
@@ -175,42 +217,36 @@
                 </div><!----><!----><!----><!----></div>
             <div class="modal-container edit-video-modal" style="display: none;">
                 <div class="modal-mask"></div>
-                <div class="modal-wrapper">
+                <div class="modal-wrapper" onkeydown='onKeyNewCollectDown(event)'>
                     <div class="modal">
                         <div class="modal-header"><i class="modal-header-close iconfont icon-ic_close"></i>
                             <div class="modal-title"><p class="edit-video-title">
-                                你正在移动0个视频到
+                                你正在移动1个视频到
                             </p>
-                                <p class="edit-video-subtitle unselected">
-                                    请选择
+                                <p class="edit-video-subtitle">
+
                                 </p></div>
                         </div>
                         <div class="modal-body">
                             <div class="favlist-body">
-                                <div class="be-scrollbar target-favlist ps" slot="body">
+                                <div class="be-scrollbar target-favlist ps ps--active-y" slot="body" >
                                     <ul class="target-favlist-container">
-                                        <li class="target-favitem disabled">
+                                        <li class="target-favitem">
                                             <div class="target-fav-title">
                                                 <div class="fav-select"></div>
                                                 <div class="fav-meta"><p class="fav-name">默认收藏夹</p>
                                                     <p class="fav-state">公开</p></div>
                                             </div>
-                                            <span class="target-fav-count">52</span></li>
-                                        <!----></ul>
+                                            <span class="target-fav-count">1</span></li>
+                                      <!----></ul>
                                     <div class="addfav-container">
-                                        <div class="fake-fav-input"><i class="icon-fav-add"></i>
+                                        <div class="fake-fav-input" onclick="newCollectVideo()"><i class="icon-fav-add"></i>
                                             <p>新建收藏夹</p></div><!----></div>
-                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                                    </div>
-                                    <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                                        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div data-v-1ea3cefa="" class="btn-container modal-footer btn-center"><a data-v-7b0ffc38=""
-                                                                                                 class="btn ghost"
+                        <div data-v-1ea3cefa="" class="btn-container modal-footer btn-center" onclick="actVideo()"><a data-v-7b0ffc38=""
+                                                                                                 class="btn primary"
                                                                                                  data-v-1ea3cefa="">
                             <!----><span data-v-7b0ffc38="" class="btn-content">确定</span></a><!----></div>
                     </div>
@@ -237,13 +273,18 @@
                             <div data-v-f5470440="" class="media-list-type"><i data-v-f5470440=""
                                                                                class="icon-check blue-icon"></i>公开收藏夹
                             </div>
-                            <div data-v-f5470440="" class="submit-btn" onclick="createCollect()">提 交</div>
+                            <div data-v-f5470440="" class="submit-btn">提 交</div>
                         </div>
                     </div> <!----></div>
             </div>
         </div>
     </div>
     <div class="to-top" style="display: none; background-position-x: -40px; opacity: 1;"></div><!----></div>
-<div class="toast_wrapper fade" style="display: none">收藏夹新建成功</div>
+<div class="toast_wrapper fade create" style="display: none">收藏夹新建成功</div>
+<div class="toast_wrapper fade edit" style="display: none">收藏夹编辑成功</div>
+<div class="toast_wrapper fade del-msg" style="display: none">删除成功(ง •̀_•́)ง</div>
+<div class="toast_wrapper fade move-msg" style="display: none">移动成功(ง •̀_•́)ง</div>
+<div class="toast_wrapper fade copy-msg" style="display: none">复制成功(ง •̀_•́)ง</div>
+<div class="be-toast cancel-video" style="display: none">成功取消收藏～</div>
 </body>
 </html>

@@ -30,9 +30,9 @@ public class CollectionController {
     private PCategoryService pCategoryService;
 
     @RequestMapping("/goCollect")
-    public String goCollection(Model model,HttpSession session) {
+    public String goCollection(Model model, HttpSession session) {
         PUserInfo pUserInfo = (PUserInfo) session.getAttribute("userSession");
-        model.addAttribute("userId",pUserInfo.getUserId());
+        model.addAttribute("userId", pUserInfo.getUserId());
         return "page/user/collection";
     }
 
@@ -58,9 +58,13 @@ public class CollectionController {
         PUserInfo pUserInfo = (PUserInfo) session.getAttribute("userSession");
         List<PCollectInfo> categoryList = pCollectInfoService.getCollectCategory(pUserInfo.getUserId(), title);
         for (PCollectInfo collectInfo : categoryList) {
-            int parentId = Math.toIntExact(collectInfo.getpCategory().getParentId());
-            PCategory pCategory1 = pCategoryService.getPCategoryById(parentId);
-            collectInfo.setCategoryName(pCategory1.getCategoryName());
+            if (collectInfo.getpCategory().getParentId() == 1) {
+                collectInfo.setCategoryName(collectInfo.getpCategory().getCategoryName());
+            } else {
+                int parentId = Math.toIntExact(collectInfo.getpCategory().getParentId());
+                PCategory pCategory = pCategoryService.getPCategoryById(parentId);
+                collectInfo.setCategoryName(pCategory.getCategoryName());
+            }
         }
         return categoryList;
     }
@@ -79,4 +83,77 @@ public class CollectionController {
         return resultMap;
     }
 
+    @ResponseBody
+    @PostMapping("/updateCollect")
+    public Object updateCollect(PCollect pCollect) {
+        Map<String, Object> resultMap = new HashMap<>();
+        if (pCollectService.updateCollect(pCollect)) {
+            resultMap.put("updateResult", "true");
+        } else {
+            resultMap.put("updateResult", "false");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/delCollect")
+    public Object delCollect(Integer id) {
+        Map<String, Object> resultMap = new HashMap<>();
+        if (pCollectInfoService.delCollectInfo(id)) {
+            if (pCollectService.delCollect(id)) {
+                resultMap.put("delResult", "true");
+            } else {
+                resultMap.put("delResult", "false");
+            }
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/delCollectVideo")
+    public Object delCollectByVideoPv(Integer videoPv,Integer collectId) {
+        Map<String, Object> resultMap = new HashMap<>();
+        if (pCollectInfoService.delCollectInfoByVideoPv(videoPv,collectId)) {
+            resultMap.put("delResult", "true");
+        } else {
+            resultMap.put("delResult", "false");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/moveCollectVideo")
+    public Object moveCollect(PCollectInfo pCollectInfo,Integer oldCollectId){
+        Map<String, Object> resultMap = new HashMap<>();
+        if (pCollectInfoService.getRepetition(pCollectInfo.getVideoId(),pCollectInfo.getCollectId())){
+            if (pCollectInfoService.insertCollectByVideoPv(pCollectInfo)) {
+                pCollectInfoService.delCollectInfoByVideoPv(pCollectInfo.getVideoId(),oldCollectId);
+                resultMap.put("moveResult", "true");
+            } else {
+                resultMap.put("moveResult", "false");
+            }
+        }else{
+            pCollectInfoService.delCollectInfoByVideoPv(pCollectInfo.getVideoId(),oldCollectId);
+            resultMap.put("moveResult", "true");
+            resultMap.put("numResult","true");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/copyCollectVideo")
+    public Object copyCollect(PCollectInfo pCollectInfo){
+        Map<String, Object> resultMap = new HashMap<>();
+        if (pCollectInfoService.getRepetition(pCollectInfo.getVideoId(),pCollectInfo.getCollectId())){
+            if (pCollectInfoService.insertCollectByVideoPv(pCollectInfo)) {
+                resultMap.put("copyResult", "true");
+            } else {
+                resultMap.put("copyResult", "false");
+            }
+        }else{
+            resultMap.put("copyResult", "true");
+            resultMap.put("numResult","true");
+        }
+        return resultMap;
+    }
 }

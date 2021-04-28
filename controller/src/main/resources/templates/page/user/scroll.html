@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jQuery custom scrollbar demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- stylesheet for demo and examples -->
+    <link rel="stylesheet" href="/css/fore/style.css">
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+    <!-- custom scrollbar stylesheet -->
+    <link rel="stylesheet" href="/css/fore/jquery.mCustomScrollbar.css"/>
+
+</head>
+
+<body style="">
+<header>
+    <a href="http://manos.malihu.gr/jquery-custom-content-scroller/" class="logo"><img src="logo.png"
+                                                                                       alt="jQuery custom scrollbar"></a>
+    <hr>
+</header>
+
+<div id="demo">
+    <section id="info">
+        <div class="callbacks">
+            <ul>
+                <li id="onScrollStart" class=""><a href="#"><span class=""></span> onScrollStart</a></li>
+                <li id="onScroll" class=""><a href="#"><span class=""></span> onScroll</a></li>
+                <li id="onTotalScroll" class=""><a href="#"><span class=""></span> onTotalScroll</a></li>
+                <li id="onTotalScrollBack" class=""><a href="#"><span class=""></span> onTotalScrollBack</a></li>
+                <li id="whileScrolling" class=""><a href="#"><span class=""></span> whileScrolling</a></li>
+                <li id="alwaysTriggerOffsets" class=""><a href="#"><span></span> always trigger offsets</a></li>
+            </ul>
+        </div>
+        <p>
+            <span>Content position (<code>this.mcs.top</code>): <span id="mcs-top">-264</span></span>
+            <span>Dragger position (<code>this.mcs.draggerTop</code>): <span id="mcs-dragger-top">34</span></span>
+            <span>Scroll percentage (<code>this.mcs.topPct</code>): <span id="mcs-top-pct">12%</span></span>
+            <span>Scroll direction (<code>this.mcs.direction</code>): <span id="mcs-direction">y</span></span><br>
+            <span>Total scroll offset (bottom yellow dash): <span id="mcs-total-scroll-offset">60</span></span>
+            <span>Total scroll back offset (top yellow dash): <span id="mcs-total-scroll-back-offset">50</span></span>
+        </p>
+    </section>
+    <section id="examples">
+
+        <!-- content -->
+        <div class="content mCustomScrollbar _mCS_1">
+            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;"
+                 tabindex="0">
+                <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: -264px; left: 0px;"
+                     dir="ltr">
+                    <h2>Callbacks demo</h2>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.</p>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo.</p>
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                        quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+                        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+                        laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                        provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+                        dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+                        maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et
+                        voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
+                        sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
+                        doloribus asperiores repellat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit anim id est laborum.</p>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                        dicta sunt explicabo.</p>
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                        quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+                        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+                        laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                        provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+                        dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                    <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod
+                        maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+                    <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et
+                        voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
+                        sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
+                        doloribus asperiores repellat.</p>
+                    <hr>
+                    <p>End content.</p>
+                    <div class="callback-offset-back"></div>
+                    <div class="callback-offset"></div>
+                </div>
+                <div id="mCSB_1_scrollbar_vertical"
+                     class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical"
+                     style="display: block;"><a href="#" class="mCSB_buttonUp" style="display: block;"></a>
+                    <div class="mCSB_draggerContainer">
+                        <div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
+                             style="position: absolute; min-height: 30px; top: 34px; display: block; height: 46px; max-height: 310px;">
+                            <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                        </div>
+                        <div class="mCSB_draggerRail"></div>
+                    </div>
+                    <a href="#" class="mCSB_buttonDown" style="display: block;"></a></div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<footer>
+    <hr>
+    <p><a href="http://manos.malihu.gr/jquery-custom-content-scroller">Plugin home</a> <a
+            href="https://github.com/malihu/malihu-custom-scrollbar-plugin">Project on Github</a> <a
+            href="https://opensource.org/licenses/MIT">MIT License</a></p>
+</footer>
+
+<!-- custom scrollbar plugin -->
+
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/js/fore/jquery.mCustomScrollbar.concat.min.js"></script>
+<script>
+    (function ($) {
+        $(window).load(function () {
+
+            $(".content").mCustomScrollbar({
+                scrollButtons: {
+                    enable: true
+                },
+                callbacks: {
+                    onScrollStart: function () {
+                        myCallback(this, "#onScrollStart")
+                    },
+                    onScroll: function () {
+                        myCallback(this, "#onScroll")
+                    },
+                    onTotalScroll: function () {
+                        myCallback(this, "#onTotalScroll")
+                    },
+                    onTotalScrollOffset: 60,
+                    onTotalScrollBack: function () {
+                        myCallback(this, "#onTotalScrollBack")
+                    },
+                    onTotalScrollBackOffset: 50,
+                    whileScrolling: function () {
+                        myCallback(this, "#whileScrolling");
+                        $("#mcs-top").text(this.mcs.top);
+                        $("#mcs-dragger-top").text(this.mcs.draggerTop);
+                        $("#mcs-top-pct").text(this.mcs.topPct + "%");
+                        $("#mcs-direction").text(this.mcs.direction);
+                        $("#mcs-total-scroll-offset").text("60");
+                        $("#mcs-total-scroll-back-offset").text("50");
+                    },
+                    alwaysTriggerOffsets: false
+                }
+            });
+
+            function myCallback(el, id) {
+                if ($(id).css("opacity") < 1) {
+                    return;
+                }
+                var span = $(id).find("span");
+                clearTimeout(timeout);
+                span.addClass("on");
+                var timeout = setTimeout(function () {
+                    span.removeClass("on")
+                }, 350);
+            }
+
+            $(".callbacks a").click(function (e) {
+                e.preventDefault();
+                $(this).parent().toggleClass("off");
+                if ($(e.target).parent().attr("id") === "alwaysTriggerOffsets") {
+                    var opts = $(".content").data("mCS").opt;
+                    if (opts.callbacks.alwaysTriggerOffsets) {
+                        opts.callbacks.alwaysTriggerOffsets = false;
+                    } else {
+                        opts.callbacks.alwaysTriggerOffsets = true;
+                    }
+                }
+            });
+
+        });
+    })(jQuery);
+</script>
+
+</body>
+</html>
+

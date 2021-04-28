@@ -10,6 +10,7 @@ import com.shield.pilipili.pojo.PCollectInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,5 +30,42 @@ public class PCollectInfoServiceImpl implements PCollectInfoService {
     @Override
     public  List<PCollectInfo> getCollectCategory(Integer userId,String title) {
         return pCollectInfoDao.getCollectCategory(userId,title);
+    }
+
+    @Override
+    public boolean delCollectInfo(Integer id) {
+        boolean flag = false;
+        if (pCollectInfoDao.delCollectInfo(id)>=0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean delCollectInfoByVideoPv(Integer videoPv,Integer collectId) {
+        boolean flag = false;
+        if (pCollectInfoDao.delCollectInfoByVideoPv(videoPv,collectId)>0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean insertCollectByVideoPv(PCollectInfo pCollectInfo) {
+        pCollectInfo.setAddTime(new Date());
+        boolean flag = false;
+        if (pCollectInfoDao.insertCollectByVideoPv(pCollectInfo)>0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean getRepetition(Integer videoPv, Long collectId) {
+        boolean flag = false;
+        if (pCollectInfoDao.getRepetition(videoPv,collectId)==0){
+            flag = true;
+        }
+        return flag;
     }
 }
