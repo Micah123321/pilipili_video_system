@@ -9,6 +9,7 @@
         <result column="creationTime" jdbcType="TIMESTAMP" property="creationTime"/>
         <result column="modifyBy" jdbcType="INTEGER" property="modifyBy"/>
         <result column="modifyDate" jdbcType="TIMESTAMP" property="modifyDate"/>
+        <result column="parentTypeName" jdbcType="VARCHAR" property="parentTypeName"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
@@ -16,9 +17,17 @@
 
 
     <select id="getPCategoryBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from p_category
+        SELECT
+        `id`,
+        `categoryName`,
+        `parentId`,
+        `createdBy`,
+        `creationTime`,
+        `modifyBy`,
+        `modifyDate`,
+        (SELECT categoryName FROM p_category WHERE id=c.parentId)parentTypeName
+        FROM
+        `pili`.`p_category` c
         <where>
             <if test="parentId != null and parentId != 0">
                 parentId = #{parentId}

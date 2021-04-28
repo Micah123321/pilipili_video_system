@@ -1,12 +1,14 @@
 package com.shield.pilipili.pojo.vo;
 
 import com.shield.pilipili.pojo.page.PVideosPage;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
 public class PVideoListVo extends PVideosPage {
     private List<PVideosPage> dataList;
     private String typeName;
+    private String parentTypeName;
 
     public PVideoListVo(List<PVideosPage> dataList, String typeName) {
         this.dataList = dataList;

@@ -47,6 +47,8 @@ public class PCategory implements Serializable {
      */
     private Date modifyDate;
 
+    private String parentTypeName;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

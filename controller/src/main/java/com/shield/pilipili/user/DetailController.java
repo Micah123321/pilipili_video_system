@@ -44,6 +44,7 @@ public class DetailController {
         for (PCategoryVo p:voList) {
             if (video.getVideoType().equals(p.getId())){
                 parentId=p.getParentId();
+                video.setVideoParentType(p.getParentId());
                 stringBuffer.append(p.getParentId()+"<--");
                 stringBuffer.append(p.getCategoryName());
             }

@@ -49,7 +49,9 @@ public class IndexController {
         for (PCategoryVo p:categoryVoList) {
             pVideosPage.setVideoType(p.getId());
             List<PVideosPage> listByType = pVideosService.getVideosListByType(pVideosPage);
-            listVos.add(new PVideoListVo(listByType,p.getCategoryName()));
+            PVideoListVo pVideoListVo=new PVideoListVo(listByType,p.getCategoryName(),p.getId());
+            pVideoListVo.setVideoParentType(p.getParentId());
+            listVos.add(pVideoListVo);
         }
         return listVos;
     }

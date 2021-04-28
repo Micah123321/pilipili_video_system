@@ -15,7 +15,7 @@ $(function () {
 
     flashPage=function(pageUtil,ajaxfun) {
         fun=ajaxfun
-        $(".be-pager").empty();
+        $(".x").empty();
         var pageDiv = $(".be-pager");
         var pageContent ="<li  onclick='goto(" + (pageUtil.index - 1) + ")' title=\"上一页\" class=\"be-pager-prev\"><a>上一页</a></li>";
         for (var i = 1; i <= pageUtil.totalPageCount; i++) {
@@ -41,6 +41,7 @@ $(function () {
         }
     }
     changeInput = function () {
+        if($("#changeInput").val()>0)
         $("#currPage").val($("#changeInput").val())
         //刷新数据方法👇👇
         fun()
