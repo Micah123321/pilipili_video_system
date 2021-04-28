@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.08 (64 bit)
 MySQL - 5.7.17 : Database - pili
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -216,7 +217,7 @@ CREATE TABLE `p_user_info` (
   `experience` int(11) NOT NULL DEFAULT '0' COMMENT '用户经验',
   `user_pic` varchar(200) NOT NULL DEFAULT '/uploads/defaultpic.png' COMMENT '用户头像地址',
   `up_desc` varchar(500) DEFAULT '这个人没有填简介啊~~~' COMMENT '用户简介',
-  `nickName` varchar(50) NOT NULL,
+  `nickName` varchar(50) NOT NULL COMMENT '用户昵称',
   `up_spaceNotice` varchar(500) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `birthday` datetime DEFAULT NULL,
