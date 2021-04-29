@@ -53,7 +53,7 @@ public class ViewCategoryController {
     @RequestMapping(value = "/category/get", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public JSONObject categoryInfo(PVideosPage pVideosPage, Integer pageSize){
         JSONObject jsonObject = new JSONObject();
-        pVideosPage.setCount(4);
+        pVideosPage.setCount(6);
         pVideosPage.setIndex(0);
         pVideosPage.setOrderBy(pVideosPage.getOrderBy());
         List<PVideosPage> top4Video = pVideosService.getVideosListByType(pVideosPage);

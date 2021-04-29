@@ -12,10 +12,6 @@ public interface PCategoryDao {
 
     List<PCategoryVo> getLv1CountByUid(@Param("uid") int uid,@Param("videoState") int videoState);
 
-    int deleteByPrimaryKey(Long id);
-
-    int insert(PCategory record);
-
     PCategory getCateById(int id);
 
     /**
@@ -27,7 +23,6 @@ public interface PCategoryDao {
 
     PCategory getPCategoryById(@Param("id") Integer id);
 
-    int updateByPrimaryKeySelective(PCategory record);
-
-    int updateByPrimaryKey(PCategory record);
+    int updateById(PCategory record);
+    int insert(PCategory record);
 }

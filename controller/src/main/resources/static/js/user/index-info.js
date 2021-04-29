@@ -41,7 +41,7 @@ $(function () {
                         "                    </button>\n" +
                         "\n" +
                         "                    <button type=\"button\" style=\"font-family: 宋体;float:right;margin-right: 5px\" class=\"btn btn-primary\"\n" +
-                        "                            data-toggle=\"button\"> 换一组\n" +
+                        "                            onclick='changeVideo("+data[i].typeName+","+data[i].videoType+")' data-toggle=\"button\"> 换一组\n" +
                         "                        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
                         "                             class=\"bi bi-shuffle\"\n" +
                         "                             viewBox=\"0 0 16 16\">\n" +
@@ -77,14 +77,14 @@ $(function () {
 
                 for (var i = 0; i < data.length; i++) {
                     for (var j = 0; j < data[i].dataList.length; j++){
-                        videoContent=videoContent+"<div onclick='goDetail("+data[i].dataList[j].videoPv+")' class=\"col-sm-3 news-w3lgrids\">\n" +
-                            "                        <div class=\"news-w3img\">\n" +
-                            "                            <img src=\""+data[i].dataList[j].videoImage+"\" class=\"img-responsive zoom-img\" alt=\"\"/>\n" +
-                            "                        </div>\n" +
-                            "                        <div class=\"news-w3imgtext \">\n" +
-                            "                            <p>"+data[i].dataList[j].videoTitle+"</p>\n" +
-                            "                        </div>\n" +
-                            "                    </div>"
+                        var tx="";
+                        if (data[i].dataList[j].videoPlay>=10000){
+                            tx="silvery"
+                        }
+                        if (data[i].dataList[j].videoPlay>=20000){
+                            tx="golden"
+                        }
+                        videoContent=videoContent+`<div class="spread-module col-md-3 col-sm-6 col-xs-12"><a href="/pv${data[i].dataList[j].videoPv}" target="_blank"><div class="pic"><div class="lazy-img"><img alt="${data[i].dataList[j].videoTitle}" src="${data[i].dataList[j].videoImage}"></div><i class="icon medal ${tx}"></i><div class="cover-preview-module"><!----><div class="progress-bar"><span style="width: 0%;"></span></div></div><div class="mask-video"></div><div class="danmu-module"></div><span class="dur">${data[i].dataList[j].videoTime}</span><!----><!----><div class="watch-later-trigger w-later"></div></div><p title="${data[i].dataList[j].videoTitle}" class="t">${data[i].dataList[j].videoTitle}</p><p class="num"><span class="play"><i class="icon"></i>${data[i].dataList[j].videoPlay}</span><span class="danmu"><i class="icon"></i>${data[i].dataList[j].videoBarrage}</span></p></a></div>`
                         var array=""
                         if ((j+1)<4){
                             array="on";
@@ -121,6 +121,31 @@ $(function () {
         location.href="/pv"+pv;
     }
 
+    changeVideo=function (divName,type) {
+        $.ajax({
+            url: "/index/randVideoInfo",
+            type: "get",
+            dataType: "json",
+            data: {
+                videoType:type
+            },
+            success: function (data) {
+                var tbody=$(divName)
+                tbody.empty()
+                for (var i = 0; i < data.length; i++) {
+                    var tx="";
+                    if (data[i].videoPlay>=10000){
+                        tx="silvery"
+                    }
+                    if (data[i].videoPlay>=20000){
+                        tx="golden"
+                    }
+                    tbody.append(`<div class="spread-module col-md-3 col-sm-6 col-xs-12"><a href="/pv${data[i].videoPv}" target="_blank"><div class="pic"><div class="lazy-img"><img alt="${data[i].videoTitle}" src="${data[i].videoImage}"></div><i class="icon medal ${tx}"></i><div class="cover-preview-module"><!----><div class="progress-bar"><span style="width: 0%;"></span></div></div><div class="mask-video"></div><div class="danmu-module"></div><span class="dur">${data[i].videoTime}</span><!----><!----><div class="watch-later-trigger w-later"></div></div><p title="${data[i].videoTitle}" class="t">${data[i].videoTitle}</p><p class="num"><span class="play"><i class="icon"></i>${data[i].videoPlay}</span><span class="danmu"><i class="icon"></i>${data[i].videoBarrage}</span></p></a></div>`)
+                }
+            }
+        })
+    }
+
     ajaxUserInfo = function () {
         $.ajax({
             url: "/index/userinfo",
@@ -140,7 +165,7 @@ $(function () {
                 var tbody = $("#van-popover-9985");
                 tbody.empty();
                 tbody.append("<a data-v-59fd5a91=''href='/user/space'target='_blank' class='avatar'><div class='bili-avatar'>   <img class='bili-avatar-img bili-avatar-face bili-avatar-img-radius'        data-src='" + data.userPic + "'        alt=''        src='" + data.userPic + "'>     <span class='bili-avatar-icon'></span>     </div> </a>")
-                tbody.append("<p data-v-59fd5a91=\"\" class=\"nickname\" style=\"padding-top: 42px;\">" + data.nickName + "</p><!----><div data-v-59fd5a91=\"\" class=\"level-content\"><div data-v-59fd5a91=\"\" class=\"level-info\"><span data-v-59fd5a91=\"\"class=\"grade\">等级 " + data.level + "</span></div><a data-v-59fd5a91=\"\"href=\"https://account.bilibili.com/account/record?type=exp\"target=\"_blank\" class=\"level-link\"><div data-v-59fd5a91=\"\" class=\"level-bar\"><div data-v-59fd5a91=\"\" class=\"level-progress\"  style=\"width: 0%;\"></div></div></a><div data-v-59fd5a91=\"\" class=\"level-intro\"><p data-v-59fd5a91=\"\" class=\"level-intro__title\">作为LV0，你无法享受特权</p><div data-v-59fd5a91=\"\" class=\"level-intro__content\">成为正式会员,你可以：<br>1、发射个性弹幕<br>2、参与视频评论<br>3、登入获得硬币<br>4、投稿成为偶像</div><a data-v-59fd5a91=\"\"href=\"//www.bilibili.com/blackboard/help.html#%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7%E7%9B%B8%E5%85%B3?id=7251c4ab69d44a8ebbbd276dea46d790\"target=\"_blank\" class=\"level-intro__link\">会员等级相关说明<svg data-v-59fd5a91=\"\" aria-hidden=\"true\" class=\"svg-icon\"> <use data-v-59fd5a91=\"\"xlink:href=\"#bili-icon_caozuo_xiangyou\"></use></svg></a></div></div><div data-v-59fd5a91=\"\" class=\"counts\"><a data-v-59fd5a91=\"\"href=\"/user/subs/list/\"target=\"_blank\" class=\"count-item\"><div data-v-59fd5a91=\"\" class=\"item-key\">关注</div><div data-v-59fd5a91=\"\" class=\"item-value\"><span data-v-59fd5a91=\"\"class=\"item-num\">" + data.subscribeNum + "</span><spandata-v-59fd5a91=\"\" class=\"item-unit\"></span></div></a><a data-v-59fd5a91=\"\" href=\"/user/fans/list/"+ data.userId +"\"target=\"_blank\" class=\"count-item\"><div data-v-59fd5a91=\"\" class=\"item-key\">粉丝</div><div data-v-59fd5a91=\"\" class=\"item-value\"><span data-v-59fd5a91=\"\"class=\"item-num\">" + data.fansNum + "</span><spandata-v-59fd5a91=\"\" class=\"item-unit\"></span></div></a></div><div data-v-59fd5a91=\"\" class=\"links\"><a data-v-59fd5a91=\"\"href=\"/user/space\"target=\"_blank\" class=\"link-item\"><div data-v-59fd5a91=\"\" class=\"link-title\"><i data-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_gerenzhongxin\"></i>个人中心</div></a><a data-v-59fd5a91=\"\"href=\"/admin\"target=\"_blank\" class=\"link-item\"><div data-v-59fd5a91=\"\" class=\"link-title\"><i data-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_tougaoguanli\"></i>投稿管理</div></a></div><div data-v-59fd5a91=\"\" onclick=\"javascript:location.href='/admin/account/logout'\" class=\"logout\"><span data-v-59fd5a91=\"\"><idata-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_dengchu\"></i>退出</span></div>  </div>")
+                tbody.append("<p data-v-59fd5a91=\"\" class=\"nickname\" style=\"padding-top: 42px;\">" + data.nickName + "</p><!----><div data-v-59fd5a91=\"\" class=\"level-content\"><div data-v-59fd5a91=\"\" class=\"level-info\"><span data-v-59fd5a91=\"\"class=\"grade\">等级 " + data.level + "</span></div><a data-v-59fd5a91=\"\"href=\"https://account.bilibili.com/account/record?type=exp\"target=\"_blank\" class=\"level-link\"><div data-v-59fd5a91=\"\" class=\"level-bar\"><div data-v-59fd5a91=\"\" class=\"level-progress\"  style=\"width: 0%;\"></div></div></a><div data-v-59fd5a91=\"\" class=\"level-intro\"><p data-v-59fd5a91=\"\" class=\"level-intro__title\">作为LV0，你无法享受特权</p><div data-v-59fd5a91=\"\" class=\"level-intro__content\">成为正式会员,你可以：<br>1、发射个性弹幕<br>2、参与视频评论<br>3、登入获得硬币<br>4、投稿成为偶像</div><a data-v-59fd5a91=\"\"href=\"//www.bilibili.com/blackboard/help.html#%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7%E7%9B%B8%E5%85%B3?id=7251c4ab69d44a8ebbbd276dea46d790\"target=\"_blank\" class=\"level-intro__link\">会员等级相关说明<svg data-v-59fd5a91=\"\" aria-hidden=\"true\" class=\"svg-icon\"> <use data-v-59fd5a91=\"\"xlink:href=\"#bili-icon_caozuo_xiangyou\"></use></svg></a></div></div><div data-v-59fd5a91=\"\" class=\"counts\"><a data-v-59fd5a91=\"\"href=\"/user/subs/list/\"target=\"_blank\" class=\"count-item\"><div data-v-59fd5a91=\"\" class=\"item-key\">关注</div><div data-v-59fd5a91=\"\" class=\"item-value\"><span data-v-59fd5a91=\"\"class=\"item-num\">" + data.subscribeNum + "</span><spandata-v-59fd5a91=\"\" class=\"item-unit\"></span></div></a><a data-v-59fd5a91=\"\" href=\"/user/fans/list/"+ data.userId +"\"target=\"_blank\" class=\"count-item\"><div data-v-59fd5a91=\"\" class=\"item-key\">粉丝</div><div data-v-59fd5a91=\"\" class=\"item-value\"><span data-v-59fd5a91=\"\"class=\"item-num\">" + data.fansNum + "</span><spandata-v-59fd5a91=\"\" class=\"item-unit\"></span></div></a></div><div data-v-59fd5a91=\"\" class=\"links\"><a data-v-59fd5a91=\"\"href=\"/user/space\"target=\"_blank\" class=\"link-item\"><div data-v-59fd5a91=\"\" class=\"link-title\"><i data-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_gerenzhongxin\"></i>个人中心</div></a><a data-v-59fd5a91=\"\"href=\"/admin?url=creative\"target=\"_blank\" class=\"link-item\"><div data-v-59fd5a91=\"\" class=\"link-title\"><i data-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_tougaoguanli\"></i>投稿管理</div></a></div><div data-v-59fd5a91=\"\" onclick=\"javascript:location.href='/admin/account/logout'\" class=\"logout\"><span data-v-59fd5a91=\"\"><idata-v-59fd5a91=\"\"class=\"link-icon bilifont bili-icon_dingdao_dengchu\"></i>退出</span></div>  </div>")
             },
         });
     }
@@ -148,6 +173,17 @@ $(function () {
     ajaxVideoInfo();
     $("#van-popover-9985").hide();
 })
+$('#myScrollspy').on('activate.bs.scrollspy', function () {
+    var top=$(this).offset().top;//获取body滚动距离
+    if(top>=1000){                 //如果达到某个值
+        //将元素的position属性置为absolute
+        $("ul.nav-pills").css("transform","translateY(20%)")
+    }else {
+        $("ul.nav-pills").css("transform","translateY(60%)")
+    }
+})
+
+
 
 $(".img-circle").hover(function () {
     $("#van-popover-9985").show()

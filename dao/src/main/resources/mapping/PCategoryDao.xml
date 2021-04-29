@@ -12,7 +12,8 @@
         <result column="parentTypeName" jdbcType="VARCHAR" property="parentTypeName"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
+        id
+        , categoryName, parentId, createdBy, creationTime, modifyBy, modifyDate
     </sql>
 
 
@@ -57,38 +58,37 @@
                `modifyBy`,
                `modifyDate`
         FROM `pili`.`p_category`
+        order by parentId
     </select>
     <select id="getLv1CountByUid" resultType="com.shield.pilipili.pojo.vo.PCategoryVo">
         SELECT catep.categoryName, COUNT(*) count, any_value(catep.id) id
         FROM p_videos v,
-             p_category cate
-                 LEFT JOIN p_category catep ON cate.parentId = catep.id
+        p_category cate
+        LEFT JOIN p_category catep ON cate.parentId = catep.id
         WHERE cate.`id` = v.`video_type`
-          AND v.`video_type`
-            IN (
-                  SELECT id
-                  FROM p_category
-                  WHERE id IN (SELECT id FROM p_category WHERE parentId = 1)
-                     OR parentId IN (SELECT id FROM p_category WHERE parentId = 1)
-              )
-          AND v.`video_userid` = #{uid}
-          <if test="videoState>-1">
-             and v.video_state=#{videoState}
-          </if>
+        AND v.`video_type`
+        IN (
+        SELECT id
+        FROM p_category
+        WHERE id IN (SELECT id FROM p_category WHERE parentId = 1)
+        OR parentId IN (SELECT id FROM p_category WHERE parentId = 1)
+        )
+        AND v.`video_userid` = #{uid}
+        <if test="videoState>-1">
+            and v.video_state=#{videoState}
+        </if>
         GROUP BY categoryName
     </select>
     <select id="getCateById" resultType="com.shield.pilipili.pojo.PCategory">
-        SELECT
-            `id`,
-            `categoryName`,
-            `parentId`,
-            `createdBy`,
-            `creationTime`,
-            `modifyBy`,
-            `modifyDate`
-        FROM
-            `pili`.`p_category`
-where id=#{id}
+        SELECT `id`,
+               `categoryName`,
+               `parentId`,
+               `createdBy`,
+               `creationTime`,
+               `modifyBy`,
+               `modifyDate`
+        FROM `pili`.`p_category`
+        where id = #{id}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
@@ -99,87 +99,22 @@ where id=#{id}
             useGeneratedKeys="true">
         insert into p_category (categoryName, parentId, createdBy,
                                 creationTime, modifyBy, modifyDate)
-        values (#{categoryname,jdbcType=VARCHAR}, #{parentid,jdbcType=BIGINT}, #{createdby,jdbcType=INTEGER},
-                #{creationtime,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=INTEGER}, #{modifydate,jdbcType=TIMESTAMP})
+        values (#{categoryName}, #{parentId}, #{createdBy},
+                now(), #{modifyBy}, now())
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCategory"
-            useGeneratedKeys="true">
-        insert into p_category
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="categoryname != null">
-                categoryName,
-            </if>
-            <if test="parentid != null">
-                parentId,
-            </if>
-            <if test="createdby != null">
-                createdBy,
-            </if>
-            <if test="creationtime != null">
-                creationTime,
-            </if>
-            <if test="modifyby != null">
-                modifyBy,
-            </if>
-            <if test="modifydate != null">
-                modifyDate,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="categoryname != null">
-                #{categoryname,jdbcType=VARCHAR},
-            </if>
-            <if test="parentid != null">
-                #{parentid,jdbcType=BIGINT},
-            </if>
-            <if test="createdby != null">
-                #{createdby,jdbcType=INTEGER},
-            </if>
-            <if test="creationtime != null">
-                #{creationtime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="modifyby != null">
-                #{modifyby,jdbcType=INTEGER},
-            </if>
-            <if test="modifydate != null">
-                #{modifydate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCategory">
+    <update id="updateById" parameterType="com.shield.pilipili.pojo.PCategory">
         update p_category
         <set>
-            <if test="categoryname != null">
-                categoryName = #{categoryname,jdbcType=VARCHAR},
+            <if test="categoryName != null">
+                categoryName = #{categoryName},
             </if>
-            <if test="parentid != null">
-                parentId = #{parentid,jdbcType=BIGINT},
+            <if test="modifyBy != null">
+                modifyBy = #{modifyBy},
             </if>
-            <if test="createdby != null">
-                createdBy = #{createdby,jdbcType=INTEGER},
-            </if>
-            <if test="creationtime != null">
-                creationTime = #{creationtime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="modifyby != null">
-                modifyBy = #{modifyby,jdbcType=INTEGER},
-            </if>
-            <if test="modifydate != null">
-                modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+            <if test="modifyDate != null">
+                modifyDate = now()
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCategory">
-        update p_category
-        set categoryName = #{categoryname,jdbcType=VARCHAR},
-            parentId     = #{parentid,jdbcType=BIGINT},
-            createdBy    = #{createdby,jdbcType=INTEGER},
-            creationTime = #{creationtime,jdbcType=TIMESTAMP},
-            modifyBy     = #{modifyby,jdbcType=INTEGER},
-            modifyDate   = #{modifydate,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-
-
 </mapper>

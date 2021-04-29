@@ -14,7 +14,10 @@ $(function () {
                 }else if (data.parentId>1){
                     lv="三级"
                 }
-                $("#cateLvl").val(lv)
+                $(".catelv1").hide()
+                $("#cateLv1").val("")
+                $("#cateLvl").empty();
+                $("#cateLvl").append(`<option selected value="${lv}">${lv}</option>`)
                 $("#cateLvl").attr("disabled","disabled");
                 $("#cateName").val(data.categoryName)
             }
@@ -22,22 +25,66 @@ $(function () {
     }
     $("#addCate").click(function () {
         $("#cateId").attr("disabled","disabled");
+        $("#cateLvl").empty();
         $("#cateLvl").removeAttr("disabled")
+        $("#cateLvl").append(`<option selected value="1">二级</option><option value="2">三级</option>`)
         $("#cateName").val("")
         $("#cateLvl").val("")
         $("#cateId").val("自增长")
+        $("#cateLv1").val("")
+        $(".catelv1").hide()
     })
 
     ajaxCateEdit=function () {
+        var cateId=$("#cateId").val()
+        if (cateId=="自增长"){
+            cateId="0"
+        }
+        var parentId=$("#catelv1").val()
+        if (parentId==""||parentId==null){
+            parentId=1
+        }
         $.ajax({
             url: "admin/categoryinfo/edit",
             type: "post",
             dataType: "json",
+            data:{
+                id:cateId,
+                categoryName:$("#cateName").val(),
+                parentId:parentId,
+            },
             success: function (data) {
-
+                if (data.code==0){
+                    alert("成功")
+                    $('#myModal').modal('hide')
+                    ajaxCateListInfo()
+                }
             }
         });
     }
+    $("#cateLvl").change(function () {
+        if ($(this).val()=="2"){
+            $(".catelv1").show()
+            ajaxLv1CateList()
+        }else{
+            $(".catelv1").hide()
+            $("#catelv1").val("")
+        }
+    })
+    ajaxLv1CateList=function () {
+        $.ajax({
+            url: "admin/categoryLv1info",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#catelv1").empty()
+                for (var i = 0; i < data.length; i++){
+                    $("#catelv1").append(`<option selected value="${data[i].id}">${data[i].categoryName}</option>`)
+                }
+            }
+        });
+    }
+
     ajaxCateListInfo=function () {
         $.ajax({
             url: "admin/categoryinfo",

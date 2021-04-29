@@ -19,6 +19,7 @@
 </head>
 <body>
 <div id="div_home_main">
+    <input type="hidden" id="url" th:value="${url}">
     <div th:replace="/page/admin/include/nav :: nav_main" ></div>
     <ul id="ul_home_menu" class="dropdown">
         <li class="menu_li menu_li_select" gotopage="home">

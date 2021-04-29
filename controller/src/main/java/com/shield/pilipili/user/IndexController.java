@@ -56,6 +56,20 @@ public class IndexController {
         return listVos;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/randVideoInfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object getRandVideo(PVideosPage pVideosPage){
+        pVideosPage.setCount(8);
+        pVideosPage.setIndex(0);
+        pVideosPage.setOrderBy(5);
+        List<PVideosPage> listByType = pVideosService.getVideosListByType(pVideosPage);
+        return listByType;
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "page/user/indextest";
+    }
 
 
 }

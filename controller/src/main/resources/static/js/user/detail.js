@@ -52,6 +52,7 @@ $(function () {
                 var tbody=$(".rec-list");
                 tbody.empty()
                 for (var i = 0; i < data.length; i++) {
+                    if (data[i].videoPv!=$("#pv").val())
                     tbody.append("<div class=\"video-page-card\">\n" +
                         "                        <div class=\"card-box\">\n" +
                         "                            <div class=\"pic-box\">\n" +

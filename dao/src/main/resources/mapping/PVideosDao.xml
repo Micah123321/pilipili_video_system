@@ -107,6 +107,9 @@
             <when test="orderBy == 4 ">
                 video_barrage
             </when>
+            <when test="orderBy == 5 ">
+                rand()
+            </when>
         </choose>
         desc
         <if test=" index >= 0 and count > 0">

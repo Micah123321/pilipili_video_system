@@ -27,6 +27,16 @@ public class PCategoryServiceImpl implements PCategoryService {
         return pCategoryDao.getCateById(id);
     }
 
+    @Override
+    public int updateById(PCategory record) {
+        return pCategoryDao.updateById(record);
+    }
+
+    @Override
+    public int insert(PCategory record) {
+        return pCategoryDao.insert(record);
+    }
+
 
     @Override
     public PCategory getPCategoryById(Integer id) {

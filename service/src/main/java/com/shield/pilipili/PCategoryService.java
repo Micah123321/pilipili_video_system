@@ -22,4 +22,7 @@ public interface PCategoryService {
     PCategory getPCategoryById(Integer id);
 
     PCategory getCateById(int id);
+
+    int updateById(PCategory record);
+    int insert(PCategory record);
 }

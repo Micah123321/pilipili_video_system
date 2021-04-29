@@ -111,6 +111,8 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/space/myvideoinfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object getUserInfo(PVideosPage pVideosPage){
+        pVideosPage.setIndex(0);
+        pVideosPage.setCount(15);
         List<PVideos> videosList = pVideosService.selectVideosListByUp(pVideosPage);
         return videosList;
     }

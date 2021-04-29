@@ -3,26 +3,44 @@ $(function () {
      * event
      ******/
     //点击导航栏li时
-    $(".menu_li").click(function () {
-        var url = $(this).attr("gotopage");
-        if (url=='null'){
+    changeDoc = function (obj) {
+        var url = $(obj).attr("gotopage");
+        if (url == 'null') {
             return;
         }
         //如果已选择li则退出
-        if ($(this).hasClass("menu_li_select")) {
+        if ($(obj).hasClass("menu_li_select")) {
             return;
         } else {
             //清除已选中的li样式
             $(".menu_li_select").removeClass("menu_li_select");
             //设置当前li样式
-            $(this).addClass("menu_li_select");
+            $(obj).addClass("menu_li_select");
         }
         //ajax请求页面
         ajaxUtil.getPage(url, null, false);
         //设置文本
-        var title = $(this).children("span").text();
+        var title = $(obj).children("span").text();
         $("#div_home_title").children("span").text(title);
         document.title = "pilipili 管理后台 - " + title;
+    }
+
+    changeDocUrl = function (url) {
+        //清除已选中的li样式
+        $(".menu_li_select").removeClass("menu_li_select");
+        //设置当前li样式
+        var selectedLi = $(".menu_li[gotopage='" + url + "']");
+        selectedLi.addClass("menu_li_select");
+        //ajax请求页面
+        ajaxUtil.getPage(url, null, false);
+        //设置文本
+        var title = selectedLi.children("span").text();
+        $("#div_home_title").children("span").text(title);
+        document.title = "pilipili 管理后台 - " + title;
+    }
+
+    $(".menu_li").click(function () {
+        changeDoc(this)
     });
     //点击用户昵称或下拉箭头时
     $("#txt_home_nickname,#i_nickname_slide").click(function () {
@@ -34,8 +52,12 @@ $(function () {
         $(".menu_li[data-toggle=account]").click();
     });
     $("#nav_tools_admin_logout").click(function () {
-        location.href ="/admin/account/logout";
+        location.href = "/admin/account/logout";
     });
+    var url = $("#url").val();
+    if (url != null && url != "") {
+        changeDocUrl(url)
+    }
 });
 
 //tbody中tr的单击样式

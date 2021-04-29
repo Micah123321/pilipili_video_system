@@ -37,7 +37,7 @@ public class AdminController {
     private PVideosThumbsupService pVideosThumbsupService;
 
     @GetMapping("/admin")
-    public String goHome(Model model, HttpSession session) throws ParseException {
+    public String goHome(String url,Model model, HttpSession session) throws ParseException {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession==null){
             return "redirect:/user/login";
@@ -52,6 +52,9 @@ public class AdminController {
         model.addAttribute("collectCount",pVideosService.getCollectCountById(uid));
         model.addAttribute("barrCount",pBarrageService.getBarrCountByUserId(uid));
         model.addAttribute("jsonObject", getChartData(null,null,uid));
+        if (url!=null&&url!=""){
+            model.addAttribute("url",url);
+        }
         return "page/admin/homePage";
     }
     @GetMapping("admin/home")
