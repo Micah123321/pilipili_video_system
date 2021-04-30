@@ -77,7 +77,7 @@
                 </otherwise>
             </choose>
             <if test="categoryId != null and categoryId != 0">
-                and video_type = #{categoryId}
+                and parentId = #{categoryId}
             </if>
             <if test="keyword != null and keyword != ''">
                 and video_title like CONCAT('%',#{keyword},'%')
@@ -105,7 +105,7 @@
                 </otherwise>
             </choose>
             <if test="categoryId != null and categoryId != 0">
-                and video_type = #{categoryId}
+                and parentId = #{categoryId}
             </if>
             <if test="keyword != null and keyword != ''">
                 and video_title like CONCAT('%',#{keyword},'%')
@@ -202,7 +202,7 @@
                 </otherwise>
             </choose>
         </where>
-        GROUP BY categoryName
+        GROUP BY parentId
     </select>
 
     <delete id="delCollectInfo">

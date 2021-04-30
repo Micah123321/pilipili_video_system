@@ -89,8 +89,8 @@ function mouseoverCollect(obj) {
     //设置panel2的位置基于unamespan的坐标
     $(".contentCollect[fid=" + fid + "]").css({
         position: "fixed",
-        'top': top + 44.5,
-        'left': left + 108,
+        'top': top - 202,
+        'left': left + 110,
         'z-index': 2,
         'display': 'block'
     });
@@ -109,8 +109,8 @@ function mouseoverCollectD(obj) {
     //设置panel2的位置基于unamespan的坐标
     $(".defaultCollect").css({
         position: "fixed",
-        'top': top + 44.5,
-        'left': left + 108,
+        'top': top - 202,
+        'left': left + 110,
         'z-index': 2,
         'display': 'block'
     });
@@ -305,9 +305,9 @@ function initCollectVideos(categoryId, categoryName) {
         var ul = "";
         var collectList = r.list;
         var play = "";
-        if (collectList.length > 0){
+        if (collectList.length > 0) {
             $(".fav-content.section").removeClass("empty");
-            $(".be-pager").css("display","block");
+            $(".be-pager").css("display", "block");
             for (var i = 0; i < collectList.length; i++) {
                 var collect = collectList[i];
                 for (var j = 0; j < collect.pVideosList.length; j++) {
@@ -325,32 +325,32 @@ function initCollectVideos(categoryId, categoryName) {
                         "<div data-aid='" + video.videoPv + "' class='be-dropdown video-edit' onclick='editVideo(this)'><div class='be-dropdown-trigger' ><i title='更多操作' class='iconfont icon-ic_more'></i></div>" +
                         "<ul data-aid='" + video.videoPv + "' class='be-dropdown-menu menu-align- edit-video' style='left: 0px; top: 0px; transform-origin: center top 0px; display: none;'>" +
                         "<li class='be-dropdown-item be-dropdown-item-delimiter' onclick='cancelCollect(&apos;" + video.videoPv + "&apos;,&apos;" + collect.collectId + "&apos;)'>取消收藏</li>" +
-                        "<li class='be-dropdown-item' onclick='moveVideo(&apos;"+ video.videoPv +"&apos;,&apos;" + collect.collectId + "&apos;,&apos;1&apos;)'>移动到</li>" +
-                        "<li class='be-dropdown-item' onclick='copyVideo(&apos;"+ video.videoPv +"&apos;,&apos;2&apos;)'>复制到</li>" +
+                        "<li class='be-dropdown-item' onclick='moveVideo(&apos;" + video.videoPv + "&apos;,&apos;" + collect.collectId + "&apos;,&apos;1&apos;)'>移动到</li>" +
+                        "<li class='be-dropdown-item' onclick='copyVideo(&apos;" + video.videoPv + "&apos;,&apos;2&apos;)'>复制到</li>" +
                         "</ul></div><div class='video-check-container' style='display: none;'><div class='video-check icon'></div></div></li>";
 
                 }
             }
             flashPage(currPage, r.pages);
             $(".fav-video-list").html(ul);
-        } else{
-           $(".fav-content.section").addClass("empty");
-           $(".be-pager").css("display","none");
+        } else {
+            $(".fav-content.section").addClass("empty");
+            $(".be-pager").css("display", "none");
         }
     })
 }
 
 function actVideo() {
     var type = $("#type").val();
-    if (type == 1){
+    if (type == 1) {
         moveByCollect();
-    } else if (type == 2){
+    } else if (type == 2) {
         copyByCollect();
     }
 }
 
 //复制视频
-function copyVideo(videoId,type) {
+function copyVideo(videoId, type) {
     $("#type").val(type);
     $("#videoPv").val(videoId);
     $(".edit-video-modal").css("display", "block");
@@ -362,35 +362,35 @@ function copyVideo(videoId,type) {
 }
 
 function copyByCollect() {
-        var videoPv = $("#videoPv").val();
-        var collectId = $("#newCollectId").val();
-        var url = "/collect/copyCollectVideo?videoId="+videoPv+"&collectId="+collectId;
-        $.post(url,function (data) {
-            if (data.copyResult == "true"){
-                if (data.numResult == "true"){
-                    initHeaderLevel();
-                    initCollectVideos(0,"");
-                    $(".edit-video-modal").css("display","none");
-                    $(".copy-msg").css("display","block");
-                    setTimeout(function () {
-                        $(".copy-msg").hide();
-                    }, 1000);
-                }else{
-                    $(".num[fid="+collectId+"]").html(($(".num[fid="+collectId+"]").html()*1) + 1)
-                    initHeaderLevel();
-                    initCollectVideos(0,"");
-                    $(".edit-video-modal").css("display","none");
-                    $(".copy-msg").css("display","block");
-                    setTimeout(function () {
-                        $(".copy-msg").hide();
-                    }, 1000);
-                }
+    var videoPv = $("#videoPv").val();
+    var collectId = $("#newCollectId").val();
+    var url = "/collect/copyCollectVideo?videoId=" + videoPv + "&collectId=" + collectId;
+    $.post(url, function (data) {
+        if (data.copyResult == "true") {
+            if (data.numResult == "true") {
+                initHeaderLevel();
+                initCollectVideos(0, "");
+                $(".edit-video-modal").css("display", "none");
+                $(".copy-msg").css("display", "block");
+                setTimeout(function () {
+                    $(".copy-msg").hide();
+                }, 1000);
+            } else {
+                $(".num[fid=" + collectId + "]").html(($(".num[fid=" + collectId + "]").html() * 1) + 1)
+                initHeaderLevel();
+                initCollectVideos(0, "");
+                $(".edit-video-modal").css("display", "none");
+                $(".copy-msg").css("display", "block");
+                setTimeout(function () {
+                    $(".copy-msg").hide();
+                }, 1000);
             }
-        })
+        }
+    })
 }
 
 //移动视频
-function moveVideo(videoPv,oldCollectId,type) {
+function moveVideo(videoPv, oldCollectId, type) {
     $("#type").val(type);
     $("#videoPv").val(videoPv);
     $("#oldCollectId").val(oldCollectId);
@@ -419,9 +419,9 @@ function initEditCollect() {
                     "<span class='target-fav-count'>" + collect.videoCount + "</span></li>";
                 $(".target-favlist-container").html(ul);
             } else {
-                ul += "<li class='target-favitem' cid='"+collect.id+"'>" +
+                ul += "<li class='target-favitem' cid='" + collect.id + "'>" +
                     "<div class='target-fav-title'>" +
-                    "<div class='fav-select' onclick='selectedCollect(this)' cid='"+collect.id+"'></div>" +
+                    "<div class='fav-select' onclick='selectedCollect(this)' cid='" + collect.id + "'></div>" +
                     "<div class='fav-meta'><p class='fav-name'>" + collect.title + "</p>" +
                     "<p class='fav-state'>公开</p></div>" +
                     "</div>" +
@@ -433,37 +433,37 @@ function initEditCollect() {
 }
 
 function moveByCollect() {
-        var videoPv = $("#videoPv").val();
-        var oldCollectId = $("#oldCollectId").val();
-        var newCollectId = $("#newCollectId").val();
-        var url = "/collect/moveCollectVideo?videoId="+videoPv+"&oldCollectId="+oldCollectId+"&collectId="+newCollectId;
-        $.post(url,function (data) {
-            if (data.moveResult == "true"){
-                if (data.numResult == "true"){
-                    $(".fav-item.cur .num").html($(".fav-item.cur .num").html() - 1);
+    var videoPv = $("#videoPv").val();
+    var oldCollectId = $("#oldCollectId").val();
+    var newCollectId = $("#newCollectId").val();
+    var url = "/collect/moveCollectVideo?videoId=" + videoPv + "&oldCollectId=" + oldCollectId + "&collectId=" + newCollectId;
+    $.post(url, function (data) {
+        if (data.moveResult == "true") {
+            if (data.numResult == "true") {
+                $(".fav-item.cur .num").html($(".fav-item.cur .num").html() - 1);
 
-                    $(".small-item[data-aid="+videoPv+"]").remove();
-                    initHeaderLevel();
-                    initCollectVideos(0,"");
-                    $(".edit-video-modal").css("display","none");
-                    $(".move-msg").css("display","block");
-                    setTimeout(function () {
-                        $(".move-msg").hide();
-                    }, 1000);
-                }else{
-                    $(".fav-item.cur .num").html($(".fav-item.cur .num").html() - 1);
-                    $(".num[fid="+newCollectId+"]").html(($(".num[fid="+newCollectId+"]").html()*1) + 1);
-                    $(".small-item[data-aid="+videoPv+"]").remove();
-                    initHeaderLevel();
-                    initCollectVideos(0,"");
-                    $(".edit-video-modal").css("display","none");
-                    $(".move-msg").css("display","block");
-                    setTimeout(function () {
-                        $(".move-msg").hide();
-                    }, 1000);
-                }
+                $(".small-item[data-aid=" + videoPv + "]").remove();
+                initHeaderLevel();
+                initCollectVideos(0, "");
+                $(".edit-video-modal").css("display", "none");
+                $(".move-msg").css("display", "block");
+                setTimeout(function () {
+                    $(".move-msg").hide();
+                }, 1000);
+            } else {
+                $(".fav-item.cur .num").html($(".fav-item.cur .num").html() - 1);
+                $(".num[fid=" + newCollectId + "]").html(($(".num[fid=" + newCollectId + "]").html() * 1) + 1);
+                $(".small-item[data-aid=" + videoPv + "]").remove();
+                initHeaderLevel();
+                initCollectVideos(0, "");
+                $(".edit-video-modal").css("display", "none");
+                $(".move-msg").css("display", "block");
+                setTimeout(function () {
+                    $(".move-msg").hide();
+                }, 1000);
             }
-        })
+        }
+    })
 }
 
 //选中选择的收藏夹
@@ -475,7 +475,7 @@ function selectedCollect(obj) {
 
 function newCollectVideo() {
     $(".fake-fav-input ").remove();
-    $(".addfav-container").html("<div class='fav-container add-tip'><div class='fav-add-tip'>点击弹窗内其他区域或ESC键，取消新建收藏夹"+
+    $(".addfav-container").html("<div class='fav-container add-tip'><div class='fav-add-tip'>点击弹窗内其他区域或ESC键，取消新建收藏夹" +
         "<i class='blue-arrow'></i></div><input type='text' placeholder='最多输入20个字' maxlength='20' class='add-fav-input space_input' >" +
         "<div class='fav-add-btn' onclick='newCollectTwo()'>新建</div></div>");
 }
@@ -494,13 +494,13 @@ function newCollectTwo() {
 }
 
 function mouseupCollect(e) {
-   var pop = $(".add-fav-input");
-    if(!pop.is(e.target) && pop.has(e.target).length === 0) {
+    var pop = $(".add-fav-input");
+    if (!pop.is(e.target) && pop.has(e.target).length === 0) {
         $(".fake-fav-input ").remove();
-        $(".addfav-container").html("<div class='fav-container add-tip'><div class='fav-add-tip'>点击弹窗内其他区域或ESC键，取消新建收藏夹"+
+        $(".addfav-container").html("<div class='fav-container add-tip'><div class='fav-add-tip'>点击弹窗内其他区域或ESC键，取消新建收藏夹" +
             "<i class='blue-arrow'></i></div><input type='text' placeholder='最多输入20个字' maxlength='20' class='add-fav-input space_input'  >" +
             "<div class='fav-add-btn'>新建</div></div>");
-    }else{
+    } else {
         $(".add-tip").remove();
         $(".addfav-container").html("<div class='fake-fav-input' onclick='newCollectVideo()'><i class='icon-fav-add'></i><p>新建收藏夹</p></div>");
     }
@@ -548,7 +548,7 @@ function editVideo(obj) {
         //设置panel2的位置基于unamespan的坐标
         $(".edit-video[data-aid=" + fid + "]").css({
             position: "fixed",
-            'top': top - 150,
+            'top': top - 410,
             'left': left - 75,
             'z-index': 1000,
             'display': 'block'
@@ -583,12 +583,13 @@ function byCategory() {
     var title = $("#headerLevel").val();
     var url = "/collect/categoryBy?title=" + title;
     var count = $(".fav-item.cur .num").html();
+
     $.getJSON(url, function (categoryList) {
         $("#onZoneBy").empty();
         var ul = "<li class='be-dropdown-item' onclick='initCollectVideos(0)'><span>全部分区</span><i>" + count + "</i></li>";
         for (var i = 0; i < categoryList.length; i++) {
             var category = categoryList[i];
-            ul += "<li class='be-dropdown-item' onclick='initCollectVideos(" + category.pCategory.id + ",&apos;" + category.categoryName + "&apos;)'><span>" + category.categoryName + "区</span><i>" + category.categoryCount + "</i></li>";
+            ul += "<li class='be-dropdown-item' onclick='initCollectVideos(" + category.pCategory.parentId + ",&apos;" + category.categoryName + "&apos;)'><span>" + category.categoryName + "区</span><i class='cateCount' caid='" + category.pCategory.id + "'>" + category.categoryCount + "</i></li>";
         }
         $("#onZoneBy").append(ul);
     })
@@ -739,7 +740,7 @@ function backTo() {
     $(".favList-info").after("<div class='fav-header fav-header-info'>" +
         "<div class='fav-info clearfix'>" +
         "<div class='fav-filters clearfix'>" +
-        "<div class='filter-item do-batch'><span class='text'>批量操作</span></div>" +
+        // "<div class='filter-item do-batch'><span class='text'>批量操作</span></div>" +
         "<div class='be-dropdown filter-item' onclick='onZoneBy()'><span id='zoneBy'>全部分区<i" +
         "class='icon icon-arrow'></i></span>" +
         "<ul class='be-dropdown-menu filter-type menu-align-' id='onZoneBy'" +

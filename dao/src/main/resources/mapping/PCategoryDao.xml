@@ -45,7 +45,6 @@
                 id = #{id}
             </if>
         </where>
-        group by id
     </select>
 
 

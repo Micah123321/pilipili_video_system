@@ -63,6 +63,7 @@ public class CollectionController {
             } else {
                 int parentId = Math.toIntExact(collectInfo.getpCategory().getParentId());
                 PCategory pCategory = pCategoryService.getPCategoryById(parentId);
+
                 collectInfo.setCategoryName(pCategory.getCategoryName());
             }
         }

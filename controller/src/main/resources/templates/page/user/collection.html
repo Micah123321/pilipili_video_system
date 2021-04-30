@@ -60,7 +60,63 @@
             }
         })
     </script>
+
     <script type="text/javascript" src="/js/user/space.js"></script>
+    <style>.h-avatar {
+        position: relative;
+        float: left;
+        width: 64px;
+        height: 64px;
+        border: 2px solid hsla(0, 0%, 100%, .4);
+        border-radius: 52px;
+    }
+
+    #h-avatar {
+        width: 64px;
+        height: 64px;
+        background: #fff;
+        border-radius: 48px;
+    }
+
+    #h-name {
+        display: inline-block;
+        margin-right: 5px;
+        font-weight: 700;
+        line-height: 18px;
+        font-size: 18px;
+        vertical-align: middle;
+    }
+
+    .h-inner {
+        background-position: 50%;
+        background-size: cover;
+        transition: background-image .2s ease, background-size 1s ease;
+        padding-top: 116px;
+        position: relative;
+    }
+
+    .h-basic {
+        float: left;
+        color: #fff;
+        font-size: 0;
+        margin: 10px 0 0 20px;
+    }
+
+    .m-level[lvl="5"] {
+        background-position: -21px -190px;
+    }
+
+    .m-level {
+        display: inline-block;
+        width: 28px;
+        height: 16px;
+        margin-right: 5px;
+        vertical-align: middle;
+        background-image: url('//s1.hdslb.com/bfs/static/jinkela/space/assets/level.png');
+        background-repeat: no-repeat;
+        background-position: 999px 999px;
+    }
+    </style>
 </head>
 <body>
 <div th:replace="/page/user/header :: html" ></div>
@@ -140,6 +196,7 @@
             </div>
         </div>
     </div>
+    </div>
     <div class="s-space">
         <div id="page-fav" class="wrapper">
             <div class="col-full clearfix master">
@@ -172,7 +229,7 @@
                     <div class="fav-header fav-header-info">
                         <div class="fav-info clearfix">
                             <div class="fav-filters clearfix">
-                                <div class="filter-item do-batch"><span class="text">批量操作</span></div>
+                                <!--<div class="filter-item do-batch"><span class="text">批量操作</span></div>-->
                                 <div class="be-dropdown filter-item" onclick="onZoneBy()"><span id="zoneBy">全部分区<i
                                         class="icon icon-arrow"></i></span>
                                     <ul class="be-dropdown-menu filter-type menu-align-" id="onZoneBy"
