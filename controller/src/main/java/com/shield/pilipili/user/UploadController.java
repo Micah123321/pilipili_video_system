@@ -9,6 +9,7 @@ import com.shield.pilipili.pojo.vo.PCategoryVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -130,11 +131,19 @@ public class UploadController {
         String paFileName = videoFileAddress.getOriginalFilename();
         //构建文件上传所要保存的"文件夹路径"--这里是相对路径，保存到项目根路径的文件夹下
         String realPath = new String("controller/src/main/resources/" + UPLOAD_PATH_PREFIX);
+        String localPath= ClassUtils.getDefaultClassLoader().getResource("").getPath()+UPLOAD_PATH_PREFIX;
+
         //存放上传文件的文件夹
         File file = new File(realPath);
+        File file2 = new File(realPath);
+
         if(!file.isDirectory()){
             //递归生成文件夹
             file.mkdirs();
+        }
+        if(!file2.isDirectory()){
+            //递归生成文件夹
+            file2.mkdirs();
         }
         //获取原始的名字  original:最初的，起始的  方法是得到原来的文件名在客户机的文件系统名称
         String oldName = videoFileAddress.getOriginalFilename();
@@ -142,9 +151,12 @@ public class UploadController {
         System.out.println(newName);
         if (videoFileAddress != null &&paFileName != null && paFileName.length() > 0) {
             System.out.println(file.getAbsolutePath());
+            System.out.println(file2.getAbsolutePath());
             File newFile = new File(file.getAbsolutePath() + "\\" + newName);
+            File newFile2 = new File(file2.getAbsolutePath() + "\\" + newName);
             try {
                 videoFileAddress.transferTo(newFile);
+                videoFileAddress.transferTo(newFile2);
             } catch (Exception e) {
                 e.printStackTrace();
             }

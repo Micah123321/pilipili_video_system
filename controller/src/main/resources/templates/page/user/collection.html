@@ -161,39 +161,37 @@
         <div id="navigator" class="n">
             <div class="wrapper">
                 <div class="n-inner clearfix">
-                    <div class="n-tab-links"><a href="/user/space/" class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">13</span></a><!----><!----><a href="/91801122/favlist" class="n-btn n-favlist"><span class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">13</span></a><a href="/91801122/bangumi" class="n-btn n-bangumi n-subs n-cinema"><span class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
-                    <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频" class="space_input"><span class="icon search-btn"></span></div>
-                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p class="n-data-k">关注数</p>
-                        <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans" class="n-data n-fs" title="964"><p class="n-data-k">
-                    <div class="n-tab-links"><a href="/91801122"
-                                                class="n-btn n-index n-fans n-404 router-link-exact-active router-link-active active"><span
+                    <div class="n-tab-links"><a th:href="'/user/space/'+${userId}"
+                                                class="n-btn n-index n-fans n-404 "><span
                             class="iconfont icon-ic_home"></span><span class="n-text">主页</span></a><a
-                            href="/91801122/video" class="n-btn n-video n-audio n-article n-album"><span
-                            class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span
-                            class="n-num">13</span></a><!----><!----><a href="/91801122/favlist"
-                                                                        class="n-btn n-favlist"><span
-                            class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span
-                            class="n-num">13</span></a><a href="/91801122/bangumi"
-                                                          class="n-btn n-bangumi n-subs n-cinema"><span
+                            th:href="'/user/space/'+${userId}+'/video'" class="n-btn n-video n-audio n-article n-album"><span
+                            class="iconfont icon-ic_video"></span><span class="n-text">投稿</span><span class="n-num">
+
+          </span></a><!----><!----><a href="/collect/goCollect" class="n-btn n-favlist router-link-exact-active router-link-active active"><span
+                            class="iconfont icon-ic_collect"></span><span class="n-text">收藏</span><span class="n-num">
+
+          </span></a><a href="#" class="n-btn n-bangumi n-subs n-cinema"><span
                             class="iconfont icon-ic_sub"></span><span class="n-text">订阅</span></a></div>
                     <div class="clearfix g-search search-container"><input type="text" placeholder="搜索视频"
                                                                            class="space_input"><span
                             class="icon search-btn"></span></div>
-                    <div class="n-statistics"><a href="/91801122/fans/follow" class="n-data n-gz" title="149"><p
-                            class="n-data-k">关注数</p>
-                        <p id="n-gz" class="n-data-v space-attention">0</p></a><a href="/91801122/fans/fans"
-                                                                                  class="n-data n-fs" title="964"><p
+                    <div class="n-statistics"><a th:href="'/user/subs/list/'+${userId}" class="n-data n-gz" title="149">
+                        <p
+                                class="n-data-k">关注数</p>
+                        <p id="n-gz" class="n-data-v space-attention">
+
+                        </p></a><a th:href="'/user/fans/list/'+${userId}" class="n-data n-fs" title="964"><p
                             class="n-data-k">
                         粉丝数</p>
-                        <p id="n-fs" class="n-data-v space-fans">3</p></a>
+                        <p id="n-fs" class="n-data-v space-fans">
+
+                        </p></a>
                         <div title="视频累计获赞699" class="n-data n-bf"><p class="n-data-k">获赞数</p>
-                            <p id="n-dz" class="n-data-v">3</p></div>
+                            <p id="n-dz" class="n-data-v">699</p></div>
                         <div title="播放数总计为115,636" class="n-data n-bf"><p class="n-data-k">播放数</p>
-                            <p id="n-bf" class="n-data-v">20600</p></div>
+                            <p id="n-bf" class="n-data-v">11.6万</p></div>
                     </div>
                 </div>
-                <div class="n-cursor" style="width: 50px; left: 210px;"></div>
-            </div>
         </div>
     </div>
     </div>

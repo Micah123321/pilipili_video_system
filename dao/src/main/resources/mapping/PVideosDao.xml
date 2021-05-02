@@ -186,7 +186,6 @@
     <insert id="insertVideo" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos"
             useGeneratedKeys="true">
         INSERT INTO `pili`.`p_videos` (
-            `video_pv`,
             `video_userid`,
             `video_title`,
             `video_url`,
@@ -207,7 +206,6 @@
         )
         VALUES
         (
-            DEFAULT,
             #{videoUserid},
             #{videoTitle},
             #{videoUrl},
