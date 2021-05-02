@@ -27,4 +27,9 @@ public class PUserInfoServiceImpl implements PUserInfoService {
     public int updateUserInfo(PUserInfo pUserInfo) {
         return pUserInfoDao.updateUserInfo(pUserInfo);
     }
+
+    @Override
+    public int updateFansData(Integer userId) {
+        return pUserInfoDao.updateFansData(userId);
+    }
 }

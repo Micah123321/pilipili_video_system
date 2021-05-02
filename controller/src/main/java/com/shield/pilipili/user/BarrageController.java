@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.shield.pilipili.PBarrageService;
+import com.shield.pilipili.PVideosService;
 import com.shield.pilipili.pojo.PBarrage;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
@@ -20,6 +21,8 @@ import java.util.List;
 public class BarrageController {
     @Resource
     private PBarrageService pBarrageService;
+    @Resource
+    private PVideosService pVideosService;
 
     @ResponseBody
     @RequestMapping(value = "/barrage/get", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -66,6 +69,7 @@ public class BarrageController {
         int insert = pBarrageService.insert(pBarrage);
 
         if (insert>0){
+            pVideosService.updateVideoData(pBarrage.getVideoId());
             PBarrageVo pBarrageVo=new PBarrageVo();
             pBarrageVo.setCode(0);
             Object[] obj={true};

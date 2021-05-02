@@ -28,7 +28,6 @@ public interface PUserDao {
      */
     PUser selePUser(String userName);
 
-
     /**
      * 根据userName得到id
      * @param userName

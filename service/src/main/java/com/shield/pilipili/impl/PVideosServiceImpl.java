@@ -80,6 +80,11 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
+    public int updateVideoData(Integer pv) {
+        return pVideosDao.updateVideoData(pv);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(PVideos record) {
         return pVideosDao.updateByPrimaryKeySelective(record);
     }

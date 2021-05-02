@@ -37,6 +37,9 @@
       userName=#{userName}
     </where>
   </select>
+  <select id="selePUser" resultType="com.shield.pilipili.pojo.PUser">
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from p_user
     where `uid` = #{uid,jdbcType=INTEGER}

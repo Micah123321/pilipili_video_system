@@ -1,108 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PSubscribeDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PSubscribe">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="subscribe_id" jdbcType="INTEGER" property="subscribeId" />
-    <result column="subscribed_id" jdbcType="INTEGER" property="subscribedId" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, subscribe_id, subscribed_id, createTime
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_subscribe
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PSubscribe">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="subscribe_id" jdbcType="INTEGER" property="subscribeId"/>
+        <result column="subscribed_id" jdbcType="INTEGER" property="subscribedId"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , subscribe_id, subscribed_id, createTime
+    </sql>
     <select id="getFansById" resultType="com.shield.pilipili.pojo.page.PUserInfoPage">
-      SELECT (SELECT
-      COUNT(*)
-      FROM
-      `pili`.`p_subscribe`
-      WHERE subscribe_id=#{userId} AND subscribed_id=s.subscribe_id) isSubYou,`subscribe_id`, `subscribed_id`, i.`createTime` , `user_id` userId, `subscribeNum`, `fansNum`, `level`, `experience`, `user_pic` userPic, `up_desc` upDesc,nickName
-      FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
-      WHERE s.`subscribe_id`=i.`user_id` AND subscribed_id = #{userId}
-      <if test=" index >= 0 and count > 0">
-        limit #{index},#{count}
-      </if>
+        SELECT (SELECT
+        COUNT(*)
+        FROM
+        `pili`.`p_subscribe`
+        WHERE subscribe_id=#{userId} AND subscribed_id=s.subscribe_id) isSubYou,`subscribe_id`, `subscribed_id`,
+        i.`createTime` , `user_id` userId, `subscribeNum`, `fansNum`, `level`, `experience`, `user_pic` userPic,
+        `up_desc` upDesc,nickName
+        FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
+        WHERE s.`subscribe_id`=i.`user_id` AND subscribed_id = #{userId}
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
         ;
     </select>
-  <select id="getSubById" resultType="com.shield.pilipili.pojo.page.PUserInfoPage">
-    SELECT (SELECT
-    COUNT(*)
-    FROM
-    `pili`.`p_subscribe`
-    WHERE subscribed_id=#{userId} AND subscribe_id=s.subscribed_id) isSubYou,`subscribe_id`, `subscribed_id`, i.`createTime` , `user_id` userId, `subscribeNum`, `fansNum`, `level`, `experience`, `user_pic` userPic, `up_desc` upDesc,nickName
-    FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
-    WHERE s.`subscribed_id`=i.`user_id` AND subscribe_id = #{userId}
-    <if test=" index >= 0 and count > 0">
-      limit #{index},#{count}
-    </if>
-    ;
-  </select>
-  <select id="getFansByDate" resultType="com.shield.pilipili.pojo.PSubscribe">
-    SELECT
-      createTime,COUNT(subscribe_id) AS fansCount  FROM p_subscribe
-    WHERE subscribed_id=#{userId}
-    GROUP BY DATE_FORMAT(createTime,'%Y-%m-%d')
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from p_subscribe
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PSubscribe" useGeneratedKeys="true">
-    insert into p_subscribe (subscribe_id, subscribed_id, createTime
-      )
-    values (#{subscribeId,jdbcType=INTEGER}, #{subscribedId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PSubscribe" useGeneratedKeys="true">
-    insert into p_subscribe
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="subscribeId != null">
-        subscribe_id,
-      </if>
-      <if test="subscribedId != null">
-        subscribed_id,
-      </if>
-      <if test="createtime != null">
-        createTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="subscribeId != null">
-        #{subscribeId,jdbcType=INTEGER},
-      </if>
-      <if test="subscribedId != null">
-        #{subscribedId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PSubscribe">
-    update p_subscribe
-    <set>
-      <if test="subscribeId != null">
-        subscribe_id = #{subscribeId,jdbcType=INTEGER},
-      </if>
-      <if test="subscribedId != null">
-        subscribed_id = #{subscribedId,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PSubscribe">
-    update p_subscribe
-    set subscribe_id = #{subscribeId,jdbcType=INTEGER},
-      subscribed_id = #{subscribedId,jdbcType=INTEGER},
-      createTime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <select id="getSubById" resultType="com.shield.pilipili.pojo.page.PUserInfoPage">
+        SELECT (SELECT
+        COUNT(*)
+        FROM
+        `pili`.`p_subscribe`
+        WHERE subscribed_id=#{userId} AND subscribe_id=s.subscribed_id) isSubYou,`subscribe_id`, `subscribed_id`,
+        i.`createTime` , `user_id` userId, `subscribeNum`, `fansNum`, `level`, `experience`, `user_pic` userPic,
+        `up_desc` upDesc,nickName
+        FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
+        WHERE s.`subscribed_id`=i.`user_id` AND subscribe_id = #{userId}
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
+        ;
+    </select>
+    <select id="getFansByDate" resultType="com.shield.pilipili.pojo.PSubscribe">
+        SELECT createTime,
+               COUNT(subscribe_id) AS fansCount
+        FROM p_subscribe
+        WHERE subscribed_id = #{userId}
+        GROUP BY DATE_FORMAT(createTime, '%Y-%m-%d')
+    </select>
+    <select id="checkSub" resultType="java.lang.Integer">
+        SELECT COUNT(id)
+        FROM p_subscribe
+        WHERE subscribed_id = #{subscribedId}
+          AND subscribe_id = #{subscribeId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete
+        from p_subscribe
+        where subscribed_id = #{subscribedId}
+          AND subscribe_id = #{subscribeId}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PSubscribe"
+            useGeneratedKeys="true">
+        insert into p_subscribe (subscribe_id, subscribed_id, createTime)
+        values (#{subscribeId,jdbcType=INTEGER}, #{subscribedId,jdbcType=INTEGER}, now())
+    </insert>
+
+    <update id="updateById" parameterType="com.shield.pilipili.pojo.PSubscribe">
+        update p_subscribe
+        <set>
+            <if test="subscribeId != null">
+                subscribe_id = #{subscribeId,jdbcType=INTEGER},
+            </if>
+            <if test="subscribedId != null">
+                subscribed_id = #{subscribedId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

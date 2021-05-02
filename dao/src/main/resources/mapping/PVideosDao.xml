@@ -18,7 +18,8 @@
         <result column="video_type" jdbcType="BIGINT" property="videoType"/>
     </resultMap>
     <sql id="Base_Column_List">
-        video_pv, video_userid, video_title, video_url, video_play, video_like, video_collect,
+        video_pv
+        , video_userid, video_title, video_url, video_play, video_like, video_collect,
     video_desc, video_state, video_updatetime, video_checkuid, video_checktime, video_releasetime,
     </sql>
 
@@ -143,7 +144,7 @@
             <if test="videoTitle != '' and videoTitle!=null">
                 video_title like CONCAT('%',#{videoTitle},'%')
             </if>
-                <if test="videoState > -1 and videoState!=null">
+            <if test="videoState > -1 and videoState!=null">
                 and video_state=#{videoState}
             </if>
             <if test="videoType > 1">
@@ -153,7 +154,7 @@
             <if test="videoUserid>0">
                 and video_userId=#{videoUserid}
             </if>
-        and c.id=video_type
+            and c.id=video_type
         </where>
         order by
         <choose>
@@ -186,48 +187,48 @@
     <insert id="insertVideo" keyColumn="video_pv" keyProperty="videoPv" parameterType="com.shield.pilipili.pojo.PVideos"
             useGeneratedKeys="true">
         INSERT INTO `pili`.`p_videos` (
-            `video_userid`,
-            `video_title`,
-            `video_url`,
-            `video_play`,
-            `video_like`,
-            `video_collect`,
-            `video_desc`,
-            `video_state`,
-            `video_updatetime`,
-            `video_checkuid`,
-            `video_checktime`,
-            `video_releasetime`,
-            `video_type`,
-            `video_time`,
-            `video_image`,
-            `video_comment`,
-            `video_barrage`
+        `video_userid`,
+        `video_title`,
+        `video_url`,
+        `video_play`,
+        `video_like`,
+        `video_collect`,
+        `video_desc`,
+        `video_state`,
+        `video_updatetime`,
+        `video_checkuid`,
+        `video_checktime`,
+        `video_releasetime`,
+        `video_type`,
+        `video_time`,
+        `video_image`,
+        `video_comment`,
+        `video_barrage`
         )
         VALUES
         (
-            #{videoUserid},
-            #{videoTitle},
-            #{videoUrl},
-            DEFAULT,
-            DEFAULT,
-            DEFAULT,
-            #{videoDesc},
-            0,
-            NOW(),
+        #{videoUserid},
+        #{videoTitle},
+        #{videoUrl},
+        DEFAULT,
+        DEFAULT,
+        DEFAULT,
+        #{videoDesc},
+        0,
+        NOW(),
+        null,
+        NULL,
+        <if test="videoReleasetime!=null">
+            #{videoReleasetime},
+        </if>
+        <if test="videoReleasetime==null">
             null,
-            NULL,
-         <if test="videoReleasetime!=null">
-             #{videoReleasetime},
-         </if>
-         <if test="videoReleasetime==null">
-             null,
-         </if>
-            #{videoType},
-            #{videoTime},
-            #{videoImage},
-            0,
-            0
+        </if>
+        #{videoType},
+        #{videoTime},
+        #{videoImage},
+        0,
+        0
         ) ;
     </insert>
     <insert id="insertSelective" keyColumn="video_pv" keyProperty="videoPv"
@@ -363,6 +364,35 @@
             video_type        = #{videoType,jdbcType=BIGINT}
         where video_pv = #{videoPv,jdbcType=INTEGER}
     </update>
+    <update id="updateVideoData">
+        UPDATE
+            `pili`.`p_videos`
+        SET `video_like`    = (SELECT num
+                               FROM (SELECT COUNT(*) num
+                                     FROM `pili`.`p_videos_thumbsup` s,
+                                          `pili`.`p_videos` i
+                                     WHERE s.`video_id` = i.`video_pv`
+                                       AND i.video_pv = #{pv}) t1),
+            `video_collect` = (SELECT num
+                               FROM (SELECT COUNT(*) num
+                                     FROM `pili`.`p_collect_info` s,
+                                          `pili`.`p_videos` i
+                                     WHERE s.`video_id` = i.`video_pv`
+                                       AND i.video_pv = #{pv}) t1),
+            `video_comment` = (SELECT num
+                               FROM (SELECT COUNT(*) num
+                                     FROM `pili`.`p_comment` s,
+                                          `pili`.`p_videos` i
+                                     WHERE s.`video_id` = i.`video_pv`
+                                       AND i.video_pv = #{pv}) t1),
+            `video_barrage` = (SELECT num
+                               FROM (SELECT COUNT(*) num
+                                     FROM `pili`.`p_barrage` s,
+                                          `pili`.`p_videos` i
+                                     WHERE s.`video_id` = i.`video_pv`
+                                       AND i.video_pv = #{pv}) t1)
+        WHERE `video_pv` = #{pv};
+    </update>
 
     <resultMap id="PVideosPageList" type="com.shield.pilipili.pojo.PVideos">
         <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>
@@ -495,29 +525,26 @@
         </where>
     </select>
     <select id="getVideoByPv" resultType="com.shield.pilipili.pojo.PVideos">
-        SELECT
-            `video_pv` videoPv,
-            `video_userid` videoUserid,
-            `video_title` videoTitle,
-            `video_url` videoUrl,
-            `video_play` videoPlay,
-            `video_like`videoLike,
-            `video_collect` videoCollect,
-            `video_desc` videoDesc,
-            `video_state` videoState,
-            `video_updatetime` videoUpdatetime,
-            `video_checkuid` videoCheckuid,
-            `video_checktime` videoChecktime,
-            `video_releasetime` videoReleasetime,
-            `video_type` videoType,
-            `video_time` videoTime,
-            `video_image` videoImage,
-            `video_comment` videoComment,
-            `video_barrage` videoBarrage
-        FROM
-            `pili`.`p_videos`
-        WHERE
-            `video_pv`=#{pid}
+        SELECT `video_pv`          videoPv,
+               `video_userid`      videoUserid,
+               `video_title`       videoTitle,
+               `video_url`         videoUrl,
+               `video_play`        videoPlay,
+               `video_like`        videoLike,
+               `video_collect`     videoCollect,
+               `video_desc`        videoDesc,
+               `video_state`       videoState,
+               `video_updatetime`  videoUpdatetime,
+               `video_checkuid`    videoCheckuid,
+               `video_checktime`   videoChecktime,
+               `video_releasetime` videoReleasetime,
+               `video_type`        videoType,
+               `video_time`        videoTime,
+               `video_image`       videoImage,
+               `video_comment`     videoComment,
+               `video_barrage`     videoBarrage
+        FROM `pili`.`p_videos`
+        WHERE `video_pv` = #{pid}
     </select>
 
 </mapper>

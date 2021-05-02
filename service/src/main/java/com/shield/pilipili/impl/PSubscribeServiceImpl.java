@@ -29,4 +29,24 @@ public class PSubscribeServiceImpl implements PSubscribeService {
     public List<PUserInfoPage> getSubById(PUserInfoPage userInfoPage) {
         return pSubscribeDao.getSubById(userInfoPage);
     }
+
+    @Override
+    public int deleteById(PSubscribe subscribe) {
+        return pSubscribeDao.deleteById(subscribe);
+    }
+
+    @Override
+    public int insert(PSubscribe record) {
+        return pSubscribeDao.insert(record);
+    }
+
+    @Override
+    public int updateById(PSubscribe subscribe) {
+        return pSubscribeDao.updateById(subscribe);
+    }
+
+    @Override
+    public int checkSub(PSubscribe subscribe) {
+        return pSubscribeDao.checkSub(subscribe);
+    }
 }

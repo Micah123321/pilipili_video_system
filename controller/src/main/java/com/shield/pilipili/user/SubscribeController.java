@@ -2,10 +2,14 @@ package com.shield.pilipili.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shield.pilipili.PSubscribeService;
+import com.shield.pilipili.PUserInfoService;
+import com.shield.pilipili.PVideosService;
+import com.shield.pilipili.pojo.PSubscribe;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.Pagen;
 import com.shield.pilipili.pojo.page.PUserInfoPage;
+import com.shield.pilipili.pojo.vo.MessageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,82 @@ import java.util.List;
 public class SubscribeController {
     @Resource
     private PSubscribeService pSubscribeService;
+
+    @Resource
+    private PUserInfoService pUserInfoService;
+
+    /**
+     * 关注
+     * @param subId
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sub/sub", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object subUp(@RequestParam Integer subId,HttpSession session){
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        MessageVo messageVo = new MessageVo();
+        if (pUserInfo==null){
+            messageVo.setMessage("请登录账号");
+            messageVo.setCode(-1);
+            return messageVo;
+        }
+        if (pUserInfo.getUserId().equals(subId)){
+            messageVo.setMessage("不能订阅你自己");
+            messageVo.setCode(-1);
+            return messageVo;
+        }
+        PSubscribe pSubscribe=new PSubscribe();
+        pSubscribe.setSubscribeId(pUserInfo.getUserId());
+        pSubscribe.setSubscribedId(subId);
+        if (pSubscribeService.checkSub(pSubscribe)>0){
+            messageVo.setMessage("不能重复订阅");
+            messageVo.setCode(-1);
+            return messageVo;
+        }else{
+            if (pSubscribeService.insert(pSubscribe)>0){
+                messageVo.setMessage("ok");
+                messageVo.setCode(0);
+                pUserInfoService.updateFansData(pSubscribe.getSubscribedId());
+                pUserInfoService.updateFansData(pSubscribe.getSubscribeId());
+            }
+        }
+        return messageVo;
+    }
+
+    /**
+     * 取关
+     * @param subId
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sub/del", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object delUp(@RequestParam Integer subId,HttpSession session){
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        MessageVo messageVo = new MessageVo();
+        if (pUserInfo==null){
+            messageVo.setMessage("请登录账号");
+            messageVo.setCode(-1);
+            return messageVo;
+        }
+        PSubscribe pSubscribe=new PSubscribe();
+        pSubscribe.setSubscribeId(pUserInfo.getUserId());
+        pSubscribe.setSubscribedId(subId);
+        if (pSubscribeService.checkSub(pSubscribe)<1){
+            messageVo.setMessage("数据错误");
+            messageVo.setCode(-1);
+            return messageVo;
+        }else{
+            if (pSubscribeService.deleteById(pSubscribe)>0){
+                messageVo.setMessage("ok");
+                messageVo.setCode(0);
+                pUserInfoService.updateFansData(pSubscribe.getSubscribedId());
+                pUserInfoService.updateFansData(pSubscribe.getSubscribeId());
+            }
+        }
+        return messageVo;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/user/fansList/fansdata", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -33,6 +113,35 @@ public class SubscribeController {
         page.setCurrPageNo(currPage);
         page.setDataList(pSubscribeService.getFansById(userInfoPage));
         return page;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/sub/isSub", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object checkIsSub(@RequestParam Integer subId,HttpSession session){
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        MessageVo messageVo = new MessageVo();
+        if (pUserInfo==null){
+            messageVo.setMessage("请登录账号");
+            messageVo.setCode(-1);
+            return messageVo;
+        }
+        if (pUserInfo.getUserId().equals(subId)){
+            messageVo.setMessage("不能订阅你自己");
+            messageVo.setCode(-1);
+            return messageVo;
+        }
+        PSubscribe pSubscribe=new PSubscribe();
+        pSubscribe.setSubscribeId(pUserInfo.getUserId());
+        pSubscribe.setSubscribedId(subId);
+        if (pSubscribeService.checkSub(pSubscribe)<1){
+            messageVo.setMessage("未订阅");
+            messageVo.setCode(0);
+            return messageVo;
+        }else{
+            messageVo.setMessage("已订阅");
+            messageVo.setCode(1);
+            return messageVo;
+        }
     }
 
     @ResponseBody

@@ -58,6 +58,9 @@ public interface PVideosService {
      * @return
      */
     int insertVideo(PVideos record);
+
+    int updateVideoData(Integer pv);
+
     int updateByPrimaryKeySelective(PVideos record);
     /**
      * 视频个数查询

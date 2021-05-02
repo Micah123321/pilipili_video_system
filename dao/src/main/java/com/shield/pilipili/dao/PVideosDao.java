@@ -77,7 +77,8 @@ public interface PVideosDao {
      * @return
      */
     int getPVideosPageListCount(@Param("videoTitle") String videoTitle,@Param("videoTime") String videoTime,@Param("videoTimeEnd") String videoTimeEnd,@Param("type") Integer type,@Param("categoryId") Integer categoryId,@Param("pid") Integer pid);
+
     int updateByPrimaryKeySelective(PVideos record);
 
-    int updateByPrimaryKey(PVideos record);
+    int updateVideoData(Integer pv);
 }

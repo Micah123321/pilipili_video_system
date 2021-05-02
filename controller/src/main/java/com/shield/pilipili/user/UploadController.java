@@ -7,9 +7,9 @@ import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,85 +37,86 @@ public class UploadController {
     public final static String UPLOAD_PATH_PREFIX = "static/uploads/";
 
     @ResponseBody
-    @GetMapping(value = "/typeinfo",produces = "application/json;charset=utf-8")
-    public Object getTypeInfo(){
+    @GetMapping(value = "/typeinfo", produces = "application/json;charset=utf-8")
+    public Object getTypeInfo() {
         List<PCategoryVo> voList = pCategoryService.selectAllLevel1Category();
         return voList;
     }
 
 
     @ResponseBody
-    @GetMapping(value = "/video/del",produces = "application/json;charset=utf-8")
-    public Object delVideo(Integer pid){
-        if (pVideosService.deleteByPrimaryKey(pid)>0){
+    @GetMapping(value = "/video/del", produces = "application/json;charset=utf-8")
+    public Object delVideo(Integer pid) {
+        if (pVideosService.deleteByPrimaryKey(pid) > 0) {
             return "ok";
         }
         return "error";
     }
+
     @ResponseBody
-    @GetMapping(value = "/video/videodata",produces = "application/json;charset=utf-8")
-    public Object getVideoData(Integer pid){
+    @GetMapping(value = "/video/videodata", produces = "application/json;charset=utf-8")
+    public Object getVideoData(Integer pid) {
         PVideos video = pVideosService.getVideoByPv(pid);
         List<PCategoryVo> voList = pCategoryService.selectAllLevel1Category();
         StringBuffer stringBuffer = new StringBuffer("");
-        Long parentId=0L;
-        for (PCategoryVo p:voList) {
-            if (video.getVideoType().equals(p.getId())){
-                parentId=p.getParentId();
-                stringBuffer.append(p.getParentId()+"<--");
+        Long parentId = 0L;
+        for (PCategoryVo p : voList) {
+            if (video.getVideoType().equals(p.getId())) {
+                parentId = p.getParentId();
+                stringBuffer.append(p.getParentId() + "<--");
                 stringBuffer.append(p.getCategoryName());
             }
         }
-        for (PCategoryVo p:voList) {
-            if (parentId.equals(p.getId())){
-                stringBuffer.replace(0,stringBuffer.indexOf("<"),p.getCategoryName());
+        for (PCategoryVo p : voList) {
+            if (parentId.equals(p.getId())) {
+                stringBuffer.replace(0, stringBuffer.indexOf("<"), p.getCategoryName());
             }
         }
-        if (video!=null){
+        if (video != null) {
             video.setTypeName(stringBuffer.toString());
             return video;
-        }else{
+        } else {
             return new PVideos();
         }
 
     }
 
-    @PostMapping(value = "/video/change",produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/video/change", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Object insertVideo(PVideos pVideos,String videoReleasetimeSecond,String videoTimeSecond, HttpSession session) throws ParseException {
+    public Object insertVideo(PVideos pVideos, String videoReleasetimeSecond, String videoTimeSecond, HttpSession session) throws ParseException {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
-        if (userSession==null){
+        if (userSession == null) {
             return "error";
         }
         SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat ftb = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Long b = new Double(Double.parseDouble(videoTimeSecond)).longValue();
-        Date date = ft.parse(DateUtil.secondToDate(b,"hh:mm:ss"));
+        Date date = ft.parse(DateUtil.secondToDate(b, "hh:mm:ss"));
 
         Integer userId = userSession.getUserId();
         pVideos.setVideoUserid(userId);
         pVideos.setVideoTime(date);
-        if (!videoReleasetimeSecond.equals("0")){
+        if (!videoReleasetimeSecond.equals("0")) {
             pVideos.setVideoReleasetime(ftb.parse(videoReleasetimeSecond));
         }
-        if (pVideos.getVideoPv()!=null){
-            int video =pVideosService.updateByPrimaryKeySelective(pVideos);
-            if (video>0){
-                PVideos rVideo=new PVideos();
+        if (pVideos.getVideoPv() != null) {
+            int video = pVideosService.updateByPrimaryKeySelective(pVideos);
+            if (video > 0) {
+                PVideos rVideo = new PVideos();
                 rVideo.setVideoPv(video);
                 rVideo.setVideoTitle(pVideos.getVideoTitle());
                 return rVideo;
-            }else{
+            } else {
                 return "error";
             }
-        }else{
+        } else {
             int video = pVideosService.insertVideo(pVideos);
-            if (video>0){
-                PVideos rVideo=new PVideos();
+            if (video > 0) {
+                PVideos rVideo = new PVideos();
                 rVideo.setVideoPv(video);
                 rVideo.setVideoTitle(pVideos.getVideoTitle());
                 return rVideo;
-            }else{
+            } else {
                 return "error";
             }
         }
@@ -125,43 +127,36 @@ public class UploadController {
      */
     @PostMapping("/video/videoUpload")
     @ResponseBody
-    public ModelMap saveVideoAddress(MultipartFile videoFileAddress,
-                                     HttpServletRequest request, HttpServletResponse response) {
+    public ModelMap saveVideoAddress(MultipartFile videoFileAddress) throws IOException {
         ModelMap map = new ModelMap();
         String paFileName = videoFileAddress.getOriginalFilename();
         //构建文件上传所要保存的"文件夹路径"--这里是相对路径，保存到项目根路径的文件夹下
-        String realPath = new String("controller/src/main/resources/" + UPLOAD_PATH_PREFIX);
-        String localPath= ClassUtils.getDefaultClassLoader().getResource("").getPath()+UPLOAD_PATH_PREFIX;
+        String realPath = "controller/src/main/resources/" + UPLOAD_PATH_PREFIX;
+        String localPath = ClassUtils.getDefaultClassLoader().getResource("").getPath() + UPLOAD_PATH_PREFIX;
 
         //存放上传文件的文件夹
         File file = new File(realPath);
-        File file2 = new File(realPath);
+        File file2 = new File(localPath);
 
-        if(!file.isDirectory()){
-            //递归生成文件夹
-            file.mkdirs();
-        }
-        if(!file2.isDirectory()){
-            //递归生成文件夹
-            file2.mkdirs();
-        }
+        if (!file.isDirectory()) file.mkdirs();
+        if (!file2.isDirectory()) file2.mkdirs();
+
         //获取原始的名字  original:最初的，起始的  方法是得到原来的文件名在客户机的文件系统名称
         String oldName = videoFileAddress.getOriginalFilename();
-        String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."),oldName.length());
+        String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
         System.out.println(newName);
-        if (videoFileAddress != null &&paFileName != null && paFileName.length() > 0) {
-            System.out.println(file.getAbsolutePath());
-            System.out.println(file2.getAbsolutePath());
-            File newFile = new File(file.getAbsolutePath() + "\\" + newName);
-            File newFile2 = new File(file2.getAbsolutePath() + "\\" + newName);
+        if (videoFileAddress != null && paFileName != null && paFileName.length() > 0) {
+            File newFile = new File(file.getAbsolutePath() + File.separator + newName);
+            File newFile2 = new File(file2.getAbsolutePath() + File.separator + newName);
+            System.out.println("本地上传地址：" + newFile.getAbsolutePath() + "---服务器端上传地址：" + newFile2.getAbsolutePath());
             try {
+                FileCopyUtils.copy(videoFileAddress.getBytes(), newFile2);
                 videoFileAddress.transferTo(newFile);
-                videoFileAddress.transferTo(newFile2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             map.put("success", "成功啦");
-            map.put("url", "/uploads/"+newName);
+            map.put("url", "/uploads/" + newName);
         } else {
             System.out.println("上传失败！");
         }

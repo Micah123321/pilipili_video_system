@@ -1,10 +1,7 @@
 package com.shield.pilipili.user;
 
 import com.github.pagehelper.PageInfo;
-import com.shield.pilipili.OrderUtil;
-import com.shield.pilipili.PCategoryService;
-import com.shield.pilipili.PCollectInfoService;
-import com.shield.pilipili.PCollectService;
+import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +25,9 @@ public class CollectionController {
 
     @Resource
     private PCategoryService pCategoryService;
+
+    @Resource
+    private PVideosService pVideosService;
 
     @RequestMapping("/goCollect")
     public String goCollection(Model model, HttpSession session) {

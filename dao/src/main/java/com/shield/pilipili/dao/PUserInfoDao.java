@@ -10,4 +10,6 @@ public interface PUserInfoDao {
 
     int updateUserInfo(PUserInfo pUserInfo);
 
+    int updateFansData(Integer userId);
+
 }

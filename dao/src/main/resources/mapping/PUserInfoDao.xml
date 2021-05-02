@@ -187,5 +187,17 @@ VALUES
         </set>
         where user_id = #{userId}
     </update>
+    <update id="updateFansData">
+        UPDATE
+            `pili`.`p_user_info`
+        SET
+            `fansNum` = (SELECT num FROM (SELECT COUNT(*) num
+                                          FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
+                                          WHERE s.`subscribe_id`=i.`user_id` AND subscribed_id = #{userId}) t1) ,
+            `subscribeNum` = (SELECT num FROM (SELECT COUNT(*) num
+                                               FROM `pili`.`p_subscribe` s,`pili`.`p_user_info` i
+                                               WHERE s.`subscribe_id`=i.`user_id` AND subscribe_id = #{userId}) t1)
+        WHERE `user_id` = #{userId};
+    </update>
 
 </mapper>
