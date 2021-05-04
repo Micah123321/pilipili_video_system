@@ -1,10 +1,10 @@
 $(function () {
-    function changeCurr(obj) {
+     changeCurr=obj=> {
         $("#currPage").val($(obj).find("a").html())
     }
 
     //获取视频列表方法
-    getTypeData = function () {
+    getTypeData =  ()=> {
         $.ajax({
             url: "admin/creative/typedata",
             type: "get",
@@ -19,7 +19,7 @@ $(function () {
         });
     }
 
-    getVideoDataDontChange = function () {
+    getVideoDataDontChange =  () =>{
         var videoTitle = $(".bcc-search-input").val();
         var videoState = $(".current").attr("state");
         var orderBy = $("#orderBy").val();
@@ -31,12 +31,12 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                "videoTitle": videoTitle,
-                "videoState": videoState,
-                "orderBy": orderBy,
-                "currPage": currPage,
-                "videoType": videoType,
-                "videoStateCode":1
+                videoTitle,
+                videoState,
+                orderBy,
+                currPage,
+                videoType,
+                videoStateCode:1
             },
             success: function (data) {
                 var tbody = $(".article-list_wrap");
@@ -52,7 +52,7 @@ $(function () {
         });
     }
 
-    loadAjaxPage=function (dataList,tbody) {
+    loadAjaxPage= (dataList,tbody)=> {
         for (var i = 0; i < dataList.length; i++) {
             //显示产品数据
             if (dataList[i].videoState == 1) {
@@ -64,12 +64,12 @@ $(function () {
             }
         }
     }
-    toEdit=function (pv) {
+    toEdit=pv=>{
         ajaxUtil.pagetopage('uploadInfo/'+pv);
         $(".menu_li").removeClass("menu_li_select")
     }
 
-    getVideoTypeData = function (flag) {
+    getVideoTypeData =  flag=> {
         var videoTitle = $(".bcc-search-input").val();
         var videoState = $(".current").attr("state");
         var orderBy = $("#orderBy").val();
@@ -81,11 +81,11 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                "videoTitle": videoTitle,
-                "videoState": videoState,
-                "orderBy": orderBy,
-                "currPage": currPage,
-                "videoType": videoType
+                videoTitle,
+                videoState,
+                orderBy,
+                currPage,
+                videoType
             },
             success: function (data) {
                 var tbody = $(".article-list_wrap");
@@ -129,17 +129,11 @@ $(function () {
                     };
                     flashPage(pageUtil);
                 }
-            },
-            beforeSend: function () {
-                $("#btn_login").val("获取中...");
-            },
-            error: function (data) {
-
             }
         });
     }
 
-    getVideoData = function (flag) {
+    getVideoData =  flag=> {
         var videoTitle = $(".bcc-search-input").val();
         var videoState = $(".current").attr("state");
         var orderBy = $("#orderBy").val();
@@ -151,11 +145,11 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                "videoTitle": videoTitle,
-                "videoState": videoState,
-                "orderBy": orderBy,
-                "currPage": currPage,
-                "videoType": videoType
+                videoTitle,
+                videoState,
+                orderBy,
+                currPage,
+                videoType
             },
             success: function (data) {
                 var tbody = $(".article-list_wrap");
@@ -185,17 +179,11 @@ $(function () {
                     };
                     flashPage(pageUtil);
                 }
-            },
-            beforeSend: function () {
-                $("#btn_login").val("获取中...");
-            },
-            error: function (data) {
-
             }
         });
     }
 
-    function flashPage(pageUtil) {
+     flashPage=pageUtil=> {
         $(".bcc-pagination-container").empty();
         var pageDiv = $(".bcc-pagination-container");
         var pageContent = "<ul class=\"bcc-pagination\"><li onclick='goto(" + (pageUtil.index - 1) + ")'class=\"bcc-pagination-item bcc-pagination-previous\">上一页</li> ";
@@ -235,7 +223,7 @@ $(function () {
         getVideoData(true)
     }
 
-    delVideo=function (pid) {
+    delVideo= (pid)=> {
         if(confirm("确定删除该视频吗")){
         $.ajax({
             url:  "/video/del",
@@ -261,7 +249,7 @@ $(function () {
     getTypeData();
 })
 
-function goto(curr) {
+ goto=curr=> {
     if (curr <= 0) return;
     $("#currPage").val(curr)
     getVideoDataDontChange()

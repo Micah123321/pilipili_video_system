@@ -3,16 +3,16 @@ $(function () {
     common(0,"","","","","");
 })
 $(function () {
-    $(".btn-search").click(function () {
+    $(".btn-search").click( () =>{
         goSearch()
     })
-    goSearch=function () {
+    goSearch= ()=> {
         var videoTitle = $("input[type=text]").val();
         location.href = "/search/goSearch?videoTitle=" + videoTitle;
     }
 })
 
-function onKeyDown(event) {
+ onKeyDown=event=>{
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if (e && e.keyCode == 27) { // 按 Esc
         //要做的事情
@@ -24,7 +24,7 @@ function onKeyDown(event) {
         goSearch()
     }
 }
-function flashPage(index,totalPageCount) {
+ flashPage=(index,totalPageCount) =>{
     $(".pager").empty();
     var pageDiv = $(".pager");
     var pageContent = "<ul class='pages'><li onclick='goto(" + (index - 1) + ")'class='page-item prev'><button class='nav-btn iconfont icon-arrowdown2'>上一页</button></li> ";
@@ -49,7 +49,7 @@ function flashPage(index,totalPageCount) {
 
 
 
-function goto(curr) {
+ goto=curr=> {
     if (curr <= 0) return;
     $("#currPage").val(curr);
     var orderName = $("#orderByName").val();
@@ -65,7 +65,7 @@ function goto(curr) {
 //搜索框键盘响应
 
 //分区的一级分类
-function initZone() {
+ initZone=()=> {
     var parentId = $("#categoryBy li[class='filter-item active']").attr("value");
     $.ajax({
         type: "get",
@@ -83,7 +83,7 @@ function initZone() {
 }
 
 //分区的二级分类
-function getCategoryTwo(id,ids) {
+ getCategoryTwo=(id,ids)=> {
     $("#currPage").val("1");
     var liobj = $("#categoryBy li");
     liobj.each(function () {
@@ -131,7 +131,7 @@ function getCategoryTwo(id,ids) {
 }
 
 //选中全部分区进行查询
-function getCategoryActive(id,ids) {
+ getCategoryActive=(id,ids)=> {
     var liobj = $("#twoCategory li");
     liobj.each(function () {
         $(this).click(function () {
@@ -158,7 +158,7 @@ function getCategoryActive(id,ids) {
 }
 
 //选中综合排序进行查询
-function getOrderBy(orderName) {
+ getOrderBy=orderName=> {
     var order = $("#order li");
     order.each(function () {
         $(this).click(function () {
@@ -181,7 +181,7 @@ function getOrderBy(orderName) {
     }
 }
 //选中全部时长进行查询
-function getDurationBy(videoTime, videoTimeEnd, type) {
+ getDurationBy=(videoTime, videoTimeEnd, type)=> {
     var duration = $("#duration li");
     duration.each(function () {
         $(this).click(function () {
@@ -207,7 +207,7 @@ function getDurationBy(videoTime, videoTimeEnd, type) {
 }
 
 //模糊查询
-function common(order, videoTime, videoTimeEnd, type, id,pid) {
+ common=(order, videoTime, videoTimeEnd, type, id,pid)=> {
     var videoTitle = $("#videoTitle").val();
     var currPage = $("#currPage").val();
     var url = "/search/common?videoTitle=" + videoTitle+"&currPage="+currPage;

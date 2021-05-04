@@ -1,5 +1,5 @@
 $(function () {
-    getCateInfo=function (cid) {
+    getCateInfo= cid=>{
         $.ajax({
             url: "admin/categoryinfo/"+cid,
             type: "get",
@@ -35,7 +35,7 @@ $(function () {
         $(".catelv1").hide()
     })
 
-    ajaxCateEdit=function () {
+    ajaxCateEdit= ()=> {
         var cateId=$("#cateId").val()
         if (cateId=="自增长"){
             cateId="0"
@@ -71,7 +71,7 @@ $(function () {
             $("#catelv1").val("")
         }
     })
-    ajaxLv1CateList=function () {
+    ajaxLv1CateList= ()=> {
         $.ajax({
             url: "admin/categoryLv1info",
             type: "get",
@@ -85,7 +85,7 @@ $(function () {
         });
     }
 
-    ajaxCateListInfo=function () {
+    ajaxCateListInfo= ()=> {
         $.ajax({
             url: "admin/categoryinfo",
             type: "get",

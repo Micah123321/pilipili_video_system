@@ -19,15 +19,15 @@ $(function () {
         ajaxVideoList()
     })
 
-    getTypeData = function () {
+    getTypeData =  ()=> {
         var uid=$("#uid").val()
         $.ajax({
             url: "/admin/creative/typedata",
             type: "get",
             dataType: "json",
             data: {
-                "uid":uid,
-                "videoState":1
+                uid,
+                videoState:1
             },
             success: function (data) {
                 var tbody = $("#submit-video-type-filter");
@@ -55,7 +55,7 @@ $(function () {
             }
         });
     }
-    ajaxVideoList = function () {
+    ajaxVideoList =  ()=> {
         var videoTitle = $(".search-container>.space_input").val();
         var videoState = 1;
         var orderBy = $(".be-tab-item.is-active").val();
@@ -66,11 +66,11 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                "videoTitle": videoTitle,
-                "videoState": videoState,
-                "orderBy": orderBy,
-                "currPage": currPage,
-                "videoType": videoType
+                videoTitle,
+                videoState,
+                orderBy,
+                currPage,
+                videoType
             },
             success: function (data) {
                 var tbody = $(".cube-list");

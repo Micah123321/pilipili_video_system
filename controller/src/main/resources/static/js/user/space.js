@@ -1,5 +1,5 @@
 $(function () {
-    $(".be-textarea_inner").change(function () {
+    $(".be-textarea_inner").change( ()=> {
         var uid = $("#uid").val()
         var notice = $(".be-textarea_inner").val()
         $.ajax({
@@ -7,12 +7,11 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                uid: uid,
-                notice: notice
+                uid,
+                notice
             },
             success: function (data) {
                 if (data == "ok") {
-
                 } else {
                     alert("修改公告失败")
                 }
@@ -27,8 +26,8 @@ $(function () {
             type: "get",
             dataType: "json",
             data: {
-                uid: uid,
-                desc: desc
+                uid,
+                desc
             },
             success: function (data) {
                 if (data == "ok") {

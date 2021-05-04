@@ -175,9 +175,9 @@ $(function () {
 })
 $('#myScrollspy').on('activate.bs.scrollspy', function () {
     var top=$(this).offset().top;//获取body滚动距离
-    if(top>=1000){                 //如果达到某个值
+    if(top>=850){                 //如果达到某个值
         //将元素的position属性置为absolute
-        $("ul.nav-pills").css("transform","translateY(20%)")
+        $("ul.nav-pills").css("transform","translateY(10%)")
     }else {
         $("ul.nav-pills").css("transform","translateY(60%)")
     }

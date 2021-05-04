@@ -12,7 +12,7 @@ $(function () {
         }
     });
 
-    ajaxVideoInfo = function () {
+    ajaxVideoInfo =  ()=> {
         $.ajax({
             url: "/category/get",
             type: "get",
@@ -93,11 +93,11 @@ $(function () {
             },
         });
     }
-    goDetail=function (pv) {
+    goDetail= (pv)=> {
         location.href="/pv"+pv;
     }
 
-    ajaxUserInfo = function () {
+    ajaxUserInfo =  ()=> {
         $.ajax({
             url: "/index/userinfo",
             type: "get",

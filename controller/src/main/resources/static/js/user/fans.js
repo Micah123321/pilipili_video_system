@@ -10,16 +10,16 @@ $(function () {
             ajaxSubList()
         }
     })
-    ajaxFansList = function () {
-        var uid = $("#uid").val()
+    ajaxFansList =  () =>{
+        var userId = $("#uid").val()
         var currPage = $("#currPage").val()
         $.ajax({
             url: "/user/fansList/fansdata",
             type: "get",
             dataType: "json",
             data: {
-                userId: uid,
-                currPage: currPage
+                userId,
+                currPage
             },
             success: function (data) {
                 var tbody = $(".relation-list");
@@ -49,7 +49,7 @@ $(function () {
         })
     }
 
-    ajaxSub = (text) => {
+    ajaxSub = text => {
         var textarr=text.split(",")
         var subId = textarr[1]
         $.ajax({
@@ -73,7 +73,7 @@ $(function () {
             }
         })
     }
-    ajaxDelSub = (text) => {
+    ajaxDelSub = text => {
         var textarr=text.split(",")
         var subId = textarr[1]
         $.ajax({
@@ -98,7 +98,7 @@ $(function () {
         })
     }
 
-    ajaxSubList = function () {
+    ajaxSubList =  ()=> {
         var uid = $("#uid").val()
         var currPage = $("#currPage").val()
         $.ajax({
@@ -164,12 +164,12 @@ $(function () {
     }
     ajaxCount()
 
-    ulMouseenter=function (obj) {
+    ulMouseenter= obj=> {
         var uid=$(obj).attr("uid");
         $(".zoom-enter-active[uid='"+uid+"']").css({position:"absolute",left:"-10px",top:"24px",'z-index':2});
         $(".zoom-enter-active[uid='"+uid+"']").slideDown()
     }
-    ulMouseleave=function (obj) {
+    ulMouseleave= obj=> {
         var uid=$(obj).attr("uid");
         $(".zoom-enter-active[uid='"+uid+"']").hide()
     }

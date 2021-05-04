@@ -52,7 +52,7 @@ $(function () {
         })
     }
 
-    ajaxGetVideoInfo = function () {
+    ajaxGetVideoInfo =  ()=> {
         $.ajax({
             url: "/detail/getinfo",
             type: "get",
@@ -105,7 +105,7 @@ $(function () {
             }
         })
     }
-    ajaxVideoInfo = function () {
+    ajaxVideoInfo =  ()=> {
         $.ajax({
             url: "/category/videoInfo",
             type: "get",
