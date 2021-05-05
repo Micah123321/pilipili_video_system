@@ -1,9 +1,10 @@
 package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PVideosThumbsup;
+import com.shield.pilipili.pojo.vo.PVideosThumbsupVo;
 
 public interface PVideosThumbsupDao {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByThumbsup(PVideosThumbsup pVideosThumbsup);
 
     int insert(PVideosThumbsup record);
 
@@ -16,4 +17,6 @@ public interface PVideosThumbsupDao {
     int updateByPrimaryKey(PVideosThumbsup record);
 
     int getAllLikeCountByUid(int uid);
+
+    PVideosThumbsupVo selectThumbsupByThumbsup(PVideosThumbsup record);
 }

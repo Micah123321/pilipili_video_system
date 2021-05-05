@@ -3,15 +3,19 @@ package com.shield.pilipili.user;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.shield.pilipili.InterUtil;
 import com.shield.pilipili.PBarrageService;
+import com.shield.pilipili.PPostipService;
 import com.shield.pilipili.PVideosService;
 import com.shield.pilipili.pojo.PBarrage;
+import com.shield.pilipili.pojo.PPostip;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,6 +27,8 @@ public class BarrageController {
     private PBarrageService pBarrageService;
     @Resource
     private PVideosService pVideosService;
+    @Resource
+    private PPostipService pPostipService;
 
     @ResponseBody
     @RequestMapping(value = "/barrage/get", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -48,7 +54,7 @@ public class BarrageController {
 
     @ResponseBody
     @RequestMapping(value = "/barrage/get", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public Object addBarrage(HttpSession session,PBarrage pBarrage,String videoTimeSeconds) throws ParseException {
+    public Object addBarrage(HttpServletRequest request, HttpSession session, PBarrage pBarrage, String videoTimeSeconds) throws ParseException {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession==null){
             return new PBarrageVo();
@@ -66,10 +72,25 @@ public class BarrageController {
 
         pBarrage.setUserId(userSession.getUserId());
 
+        PPostip pPostip = new PPostip();
+        pPostip.setIp(InterUtil.getIpAddr(request));
+        pPostip.setType(1);
+        pPostip.setVideoPv(pBarrage.getVideoId());
+        pPostip.setMinusSecond(600);
+
+        if (pPostipService.selectPostCount(pPostip)>5){
+            PBarrageVo pBarrageVo=new PBarrageVo();
+            pBarrageVo.setCode(-1);
+            Object[] obj={false};
+            pBarrageVo.setDanmaku(obj);
+            return pBarrageVo;
+        }
+
         int insert = pBarrageService.insert(pBarrage);
 
         if (insert>0){
             pVideosService.updateVideoData(pBarrage.getVideoId());
+            pPostipService.insertPostIp(pPostip);
             PBarrageVo pBarrageVo=new PBarrageVo();
             pBarrageVo.setCode(0);
             Object[] obj={true};

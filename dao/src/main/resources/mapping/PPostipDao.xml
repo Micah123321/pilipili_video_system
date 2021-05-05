@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shield.pilipili.dao.PPostipDao">
+
+    <insert id="insertPostIp">
+        INSERT INTO `pili`.`p_postip` (`ip`,
+                                       `video_pv`,
+                                       `postDate`,
+                                       `type`)
+        VALUES (#{ip},
+                #{videoPv},
+                NOW(),
+                #{type});
+    </insert>
+    <select id="selectPostCount" resultType="java.lang.Integer">
+        SELECT COUNT(id)
+        FROM `pili`.`p_postip`
+        WHERE TYPE = #{type}
+          AND video_pv = #{videoPv}
+          AND ip = #{ip}
+          AND (NOW() - postDate) &lt;= #{minusSecond}
+    </select>
+</mapper>

@@ -9,7 +9,7 @@ $(function () {
             },
             dataType: "json",
             success: function (data) {
-                if (data.code==0)ajaxIsSub()
+                if (data.code == 0) ajaxIsSub()
                 else alert(data.message)
             }
         })
@@ -24,8 +24,60 @@ $(function () {
             },
             dataType: "json",
             success: function (data) {
-                if (data.code==0)ajaxIsSub()
+                if (data.code == 0) ajaxIsSub()
                 else alert(data.message)
+            }
+        })
+    }
+    ajaxAddThumbsup = () => {
+        var videoId = $("#pv").val()
+        $.ajax({
+            url: "/detail/addThumbsup",
+            type: "get",
+            data: {
+                videoId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0) ajaxThumbsup()
+                else alert(data.message)
+            }
+        })
+    }
+    ajaxDelThumbsup = () => {
+        var videoId = $("#pv").val()
+        $.ajax({
+            url: "/detail/delThumbsup",
+            type: "get",
+            data: {
+                videoId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0) ajaxThumbsup()
+                else alert(data.message)
+            }
+        })
+    }
+    ajaxThumbsup = () => {
+        var videoId = $("#pv").val()
+        $.ajax({
+            url: "/detail/thumbsup",
+            type: "get",
+            data: {
+                videoId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.isThumbsup) {
+                    $(".ops .like").html(`<i class="van-icon-videodetails_like" style="color:;"></i>${data.num}</span>`)
+                    $(".ops .like").addClass("on")
+                    $(".ops .like").attr("onclick", "ajaxDelThumbsup()")
+                } else {
+                    $(".ops .like").html(`<i class="van-icon-videodetails_like" style="color:;"></i>${data.num}</span>`)
+                    $(".ops .like").removeClass("on")
+                    $(".ops .like").attr("onclick", "ajaxAddThumbsup()")
+                }
             }
         })
     }
@@ -51,8 +103,24 @@ $(function () {
             }
         })
     }
-
-    ajaxGetVideoInfo =  ()=> {
+    ajaxUpdatePlay = () => {
+        var second = $(".yzmplayer-dtime").text()
+        var videoTimeSecond = time_to_sec(second)
+        $.ajax({
+            url: "/detail/updatePlay",
+            type: "get",
+            data: {
+                "videoPv": $("#pv").val(),
+                videoTimeSecond
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0)
+                    console.log("添加播放成功")
+            }
+        })
+    }
+    ajaxGetVideoInfo = () => {
         $.ajax({
             url: "/detail/getinfo",
             type: "get",
@@ -105,7 +173,7 @@ $(function () {
             }
         })
     }
-    ajaxVideoInfo =  ()=> {
+    ajaxVideoInfo = () => {
         $.ajax({
             url: "/category/videoInfo",
             type: "get",
@@ -138,4 +206,34 @@ $(function () {
     }
     ajaxGetVideoInfo()
     ajaxVideoInfo()
+    ajaxThumbsup()
 })
+var time_to_sec = function (time) {
+    var s = '';
+    var timearr = time.split(':');
+    if (count(timearr) == 2) {
+        var min = timearr[0];
+        var sec = timearr[1];
+        s = Number(min * 60) + Number(sec);
+    } else {
+        var hour = timearr[0];
+        var min = timearr[1];
+        var sec = timearr[2];
+        s = Number(hour * 3600)+Number(min * 60) + Number(sec);
+    }
+
+    return s;
+};
+function count(o){
+    var t = typeof o;
+    if(t == 'string'){
+        return o.length;
+    }else if(t == 'object'){
+        var n = 0;
+        for(var i in o){
+            n++;
+        }
+        return n;
+    }
+    return false;
+}

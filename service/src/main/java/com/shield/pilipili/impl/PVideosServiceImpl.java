@@ -57,6 +57,11 @@ public class PVideosServiceImpl implements PVideosService {
     }
 
     @Override
+    public int updatePlayCount(Integer pv) {
+        return pVideosDao.updatePlayCount(pv);
+    }
+
+    @Override
     public List<PVideos> selectVideosListByUp(PVideosPage pVideosPage) {
         return pVideosDao.selectVideosListByUp(pVideosPage);
     }

@@ -393,6 +393,12 @@
                                        AND i.video_pv = #{pv}) t1)
         WHERE `video_pv` = #{pv};
     </update>
+    <update id="updatePlayCount">
+        UPDATE
+            `pili`.`p_videos`
+        SET `video_play` = video_play + 1
+        WHERE video_pv = #{pv};
+    </update>
 
     <resultMap id="PVideosPageList" type="com.shield.pilipili.pojo.PVideos">
         <id column="video_pv" jdbcType="INTEGER" property="videoPv"/>

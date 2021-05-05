@@ -153,6 +153,10 @@ $("#dmset").on("click", function () {
     $("#yzmplayer").toggleClass("yzmplayer-hide-controller")
 });
 
+$(".yzmplayer-video.yzmplayer-video-current").on("play",function () {
+    ajaxUpdatePlay()
+})
+
 $(".yzm-yzmplayer-send-icon").on("click", function () {
     var inputtext = document.getElementById("dmtext");
     var sendtexts = inputtext.value;
@@ -175,8 +179,12 @@ $(".yzm-yzmplayer-send-icon").on("click", function () {
                 type: sendtype
             },
             success: function (data) {
-                alert("发送成功")
-                ajaxbarrageList()
+                if (data.code==0){
+                    alert("发送成功")
+                    ajaxbarrageList()
+                }
+                else alert("弹幕发送过于频繁，请之后再试")
+
             }
         });
 

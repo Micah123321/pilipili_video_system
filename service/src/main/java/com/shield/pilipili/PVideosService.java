@@ -19,7 +19,7 @@ public interface PVideosService {
     int getPlayCountById(int id);
     /**
      * 根据用户id查询点赞数
-     * @param id
+     * @param pid
      * @return
      */
     PVideos getVideoByPv(int pid);
@@ -34,6 +34,13 @@ public interface PVideosService {
     List<PVideosThumbsup> getLikeByDate(Date beginDate,  Date endDate, int userId);
 
     List<PVideosPage> getVideosListByType(PVideosPage pVideosPage);
+
+    /**
+     * 更新视频播放量
+     * @param pv
+     * @return
+     */
+    int updatePlayCount(Integer pv);
 
     List<PVideos> selectVideosListByUp(PVideosPage pVideosPage);
     /**

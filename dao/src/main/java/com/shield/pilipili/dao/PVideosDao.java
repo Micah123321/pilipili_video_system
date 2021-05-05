@@ -80,5 +80,7 @@ public interface PVideosDao {
 
     int updateByPrimaryKeySelective(PVideos record);
 
+    int updatePlayCount(Integer pv);
+
     int updateVideoData(Integer pv);
 }
