@@ -25,7 +25,7 @@
         ORDER BY t.`video_id`
     </select>
     <select id="selectThumbsupByThumbsup" resultType="com.shield.pilipili.pojo.vo.PVideosThumbsupVo">
-        SELECT (SELECT COUNT(id) FROM p_videos_thumbsup s WHERE s.user_id = #{userId} AND s.video_id = t.video_id) isThumbsup,
+        SELECT (SELECT COUNT(id) FROM p_videos_thumbsup s WHERE s.user_id = #{userId} AND s.video_id = #{videoId}) isThumbsup,
                COUNT(t.id)                                                                                 num
         FROM p_videos_thumbsup t
         WHERE t.video_id = #{videoId}
