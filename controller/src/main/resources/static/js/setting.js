@@ -180,10 +180,10 @@ $(".yzm-yzmplayer-send-icon").on("click", function () {
             },
             success: function (data) {
                 if (data.code==0){
-                    alert("发送成功")
+                    dp.notice("发送成功！");
                     ajaxbarrageList()
                 }
-                else alert("弹幕发送过于频繁，请之后再试")
+                else dp.notice("发送频率过于频繁，请稍后再试！");
 
             }
         });

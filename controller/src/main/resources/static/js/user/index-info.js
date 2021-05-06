@@ -111,12 +111,17 @@ $(function () {
                     videoContent="";
                     phContent="";
                     $(".flex-column").append("<li class=\"nav-item\">\n" +
-                        "                <a class=\"nav-link\" href=\"#t"+data[i].typeName+"\">"+data[i].typeName+"</a>\n" +
+                        "                <a class=\"nav-link\" onclick=\"changeHash('#t"+data[i].typeName+"');return false;\" href=\"#t"+data[i].typeName+"\">"+data[i].typeName+"</a>\n" +
                         "            </li>")
                 }
             },
         });
     }
+
+    changeHash=(idName)=>{
+        document.querySelector(idName).scrollIntoView(true)
+    }
+
     goDetail=function (pv) {
         location.href="/pv"+pv;
     }
