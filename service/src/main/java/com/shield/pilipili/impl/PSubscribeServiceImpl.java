@@ -16,6 +16,11 @@ public class PSubscribeServiceImpl implements PSubscribeService {
     private PSubscribeDao pSubscribeDao;
 
     @Override
+    public List<PUserInfoPage> getLiveFansById(PUserInfoPage userInfoPage) {
+        return pSubscribeDao.getLiveFansById(userInfoPage);
+    }
+
+    @Override
     public List<PUserInfoPage> getFansById(PUserInfoPage userInfoPage) {
         return pSubscribeDao.getFansById(userInfoPage);
     }

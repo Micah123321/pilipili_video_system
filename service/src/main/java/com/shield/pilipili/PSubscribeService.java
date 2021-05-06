@@ -9,7 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 public interface PSubscribeService {
-
+    /**
+     * 获得活跃粉丝数
+     * @param userInfoPage
+     * @return
+     */
+    List<PUserInfoPage> getLiveFansById(PUserInfoPage userInfoPage);
     List<PUserInfoPage> getFansById(PUserInfoPage userInfoPage);
     List<PSubscribe> getFansByDate(Date beginDate, Date endDate,int userId);
     List<PUserInfoPage> getSubById(PUserInfoPage userInfoPage);

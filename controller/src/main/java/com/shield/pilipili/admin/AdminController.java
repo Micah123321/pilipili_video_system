@@ -254,6 +254,11 @@ public class AdminController {
         return "page/admin/category";
     }
 
+    @GetMapping("/admin/comment")
+    public String toComment(){
+        return "page/admin/comment";
+    }
+
     @GetMapping("/video/uploadDetail")
     public String toUploadDetail(){
         return "page/admin/uploadDetail";

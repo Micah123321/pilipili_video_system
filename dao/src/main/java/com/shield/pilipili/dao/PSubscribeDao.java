@@ -17,6 +17,12 @@ public interface PSubscribeDao {
     List<PUserInfoPage> getFansById(PUserInfoPage userInfoPage);
 
     /**
+     * 获得活跃粉丝数
+     * @param userInfoPage
+     * @return
+     */
+    List<PUserInfoPage> getLiveFansById(PUserInfoPage userInfoPage);
+    /**
      * 根据用户信息查询订阅信息
      * @param userInfoPage 用户id
      * @return 订阅集合
