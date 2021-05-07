@@ -4,20 +4,6 @@
     <title>pilipili 视频弹幕网</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="application/x-javascript">
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-
-        var init = function () {
-            var _bg3width = $("#content-sec3-adjust").width();
-            $("#content-sec3-adjust").css("margin-left", _bg3width * -1 / 2 + "px");
-        };
-    </script>
     <!-- Custom Theme files -->
     <link href="/css/bootstrap.css" type="text/css" rel="stylesheet"
           media="all">
@@ -26,217 +12,84 @@
     <link href="/css/navuser2.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/category.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/font-awesome.css" rel="stylesheet">
-    <!-- font-awesome icons -->
-    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
-    <!-- //Custom Theme files -->
+
     <!-- js -->
     <script src="/js/jquery-2.2.3.min.js"></script>
-    <!--<script type="text/javascript" src="/js/fore/fore_index.js"></script>-->
     <!-- //js -->
     <style>
-        .spread-module {
-            width: 25%;
-            border-radius: 4px;
-        }
-        .spread-module .pic {
-            width: 100%;
-        }
-        @media (min-width: 1200px){
-            .container {
-                width: 1370px;
-            }
-        }
-        ul.nav-pills{
+        ul.nav-pills {
             transform: translateY(60%);
             top: 0;
             transition: transform .2s ease;
         }
+
         .navbar-default .navbar-nav > li > a {
             font-size: 1em;
+        }
+
+        .navbar-header h1 a {
+            font-family: 'Playball', cursive;
+            background: none;
+            border: none;
+        }
+
+        .international-header a, .van-popover a {
+            color: #e4c3c3e3;
+        }
+
+        .btn.btn-primary svg {
+            top: 3px;
+            position: relative;
+        }
+
+        .btn-primary {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+        .btn-primary.active, .btn-primary.focus {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+        .rank-wrap .pvc {
+            z-index: 2000;
+        }
+
+        .nav > li > a:focus {
+            background-color: transparent;
+        }
+
+        .videoList {
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1438px) {
+            .news-agileinfo {
+                overflow: hidden;
+                height: 296px;
+            }
+        }
+        @media (max-width: 992px) {
+            .news-agileinfo {
+                overflow: hidden;
+                height: 592px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-agileinfo {
+                overflow: hidden;
+                height: 1184px;
+            }
         }
     </style>
 </head>
 <body style="overflow-x: hidden;" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 <!-- banner -->
-<div class="banner-w3layouts">
-    <nav class="" id="myScrollspy">
-        <ul class="nav nav-pills flex-column">
-        </ul>
-    </nav>
-    <div id="internationalHeader" class="international-header report-wrap-module">
-        <div style="z-index: 1" class="banner-agileinfo">
-            <div class="container">
-
-                <div class="w3header">
-                    <!--header-->
-                    <nav class="navbar navbar-default">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                    data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <h1><a href="/">pilipili视频</a></h1>
-                        </div>
-                        <!-- navbar-header -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <div style="padding-left: 3em;margin-left: 0em;" class="col-sm-4 text-center">
-                                <div class="input-group">
-                                    <input placeholder="" type="text" class="form-control"
-                                           onkeydown="onKeyDown(event)"/>
-                                    <span class="input-group-btn">
-                                    <button class="btn btn-info btn-search">搜索</button>
-                                </span>
-                                </div>
-                            </div>
-                            <ul class="navbar-default navbar-nav navbar-right">
-                                <li><img id="imgcircle" style=";margin-top:-10px;width:50%;width: 50%;" class="img-circle"
-                                         alt="">
-                                    <div role="tooltip" id="van-popover-9985" aria-hidden="true"
-                                         class="van-popover van-popper van-popper-nav van-popper-avatar" tabindex="0"
-                                         style="transition: 0.5s all;width: 280px;margin-top:-20px;margin-left: 405px; transform-origin: center top; z-index: 2037;">
-                                        <!---->
-                                        <div data-v-59fd5a91="" class="vp-container hidden"><a data-v-59fd5a91=""
-                                                                                               href="/user/space/"
-                                                                                               class="avatar">
-                                            <div class="bili-avatar">
-                                                <img class="bili-avatar-img bili-avatar-face bili-avatar-img-radius"
-                                                     alt=""
-                                                     src="">
-                                                <span class="bili-avatar-icon"></span>
-                                            </div>
-                                        </a>
-                                            <p data-v-59fd5a91="" class="nickname" style="padding-top: 42px;">兜兜重要过吗</p>
-                                            <!---->
-                                            <div data-v-59fd5a91="" class="level-content">
-                                                <div data-v-59fd5a91="" class="level-info"><span data-v-59fd5a91=""
-                                                                                                 class="grade">等级 0</span>
-                                                </div>
-                                                <a data-v-59fd5a91=""
-                                                   href="https://account.bilibili.com/account/record?type=exp"
-                                                   class="level-link">
-                                                    <div data-v-59fd5a91="" class="level-bar">
-                                                        <div data-v-59fd5a91="" class="level-progress"
-                                                             style="width: 0%;"></div>
-                                                    </div>
-                                                </a>
-                                                <div data-v-59fd5a91="" class="level-intro"><p data-v-59fd5a91=""
-                                                                                               class="level-intro__title">
-                                                    作为LV0
-                                                    ，你无法享受特权
-                                                </p>
-                                                    <div data-v-59fd5a91="" class="level-intro__content">成为正式会员,你可以：<br>1、发射个性弹幕<br>2、参与视频评论<br>3、登入获得硬币<br>4、投稿成为偶像
-                                                    </div>
-                                                    <a data-v-59fd5a91=""
-                                                       href="//www.bilibili.com/blackboard/help.html#%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7%E7%9B%B8%E5%85%B3?id=7251c4ab69d44a8ebbbd276dea46d790"
-                                                       target="_blank" class="level-intro__link">会员等级相关说明
-                                                        <svg data-v-59fd5a91="" aria-hidden="true" class="svg-icon">
-                                                            <use data-v-59fd5a91=""
-                                                                 xlink:href="#bili-icon_caozuo_xiangyou"></use>
-                                                        </svg>
-                                                    </a></div>
-                                            </div>
-                                            <div data-v-59fd5a91="" class="counts"><a data-v-59fd5a91=""
-                                                                                      href="//space.bilibili.com/1632884258/fans/follow"
-                                                                                      target="_blank" class="count-item">
-                                                <div data-v-59fd5a91="" class="item-key">关注</div>
-                                                <div data-v-59fd5a91="" class="item-value"><span data-v-59fd5a91=""
-                                                                                                 class="item-num">--</span><span
-                                                        data-v-59fd5a91="" class="item-unit"></span></div>
-                                            </a><a data-v-59fd5a91="" href="//space.bilibili.com/1632884258/fans/fans"
-                                                   target="_blank" class="count-item">
-                                                <div data-v-59fd5a91="" class="item-key">粉丝</div>
-                                                <div data-v-59fd5a91="" class="item-value"><span data-v-59fd5a91=""
-                                                                                                 class="item-num">--</span><span
-                                                        data-v-59fd5a91="" class="item-unit"></span></div>
-                                            </a></div>
-                                            <div data-v-59fd5a91="" class="links"><a data-v-59fd5a91=""
-                                                                                     href="/user/space"
-                                                                                     target="_blank" class="link-item">
-                                                <div data-v-59fd5a91="" class="link-title"><i data-v-59fd5a91=""
-                                                                                              class="link-icon bilifont bili-icon_dingdao_gerenzhongxin"></i>
-                                                    个人中心
-                                                </div>
-                                            </a><a data-v-59fd5a91=""
-                                                   href="https://member.bilibili.com/v2#/upload-manager/article"
-                                                   target="_blank" class="link-item">
-                                                <div data-v-59fd5a91="" class="link-title"><i data-v-59fd5a91=""
-                                                                                              class="link-icon bilifont bili-icon_dingdao_tougaoguanli"></i>
-                                                    投稿管理
-                                                </div>
-                                            </a></div>
-                                            <div data-v-59fd5a91="" class="logout"><span data-v-59fd5a91=""><i
-                                                    data-v-59fd5a91=""
-                                                    class="link-icon bilifont bili-icon_dingdao_dengchu"></i>退出</span></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li><a href="#" class="active">首页</a></li>
-                                <li><a href="about.html">历史</a></li>
-                                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="icons.html">生活</a></li>
-                                        <li><a href="codes.html">游戏</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="/user/space">个人主页</a></li>
-                                <li th:class="${session.userSession!=null?'':'hidden'}" onmouseover='mouseoverCollect(this)' onmouseout='mouseoutCollect()'>
-                                    <a href="/collect/goCollect">收藏列表</a></li>
-                                <li th:class="${session.userSession==null?'':'hidden'}"><a href="/user/login">登录</a></li>
-                                <li th:class="${session.userSession!=null?'':'hidden'}"><a href="/admin">创作中心</a></li>
-                            </ul>
-                            <script src="/js/user/index-info.js">
-
-                            </script>
-                            <div class="clearfix"></div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="bili-banner" style="" data-v-cd8268ae="">
-            <div data-v-66241fcf="" data-v-cd8268ae="" class="animated-banner">
-                <div class="layer">
-                    <video autoplay loop src="/images/title.mp4" width="1893"
-                           height="162"
-                           style="object-fit: cover; opacity: 1;"
-                           data-height="180" data-width="2104"></video>
-                </div>
-            </div>
-            <div class="taper-line" data-v-cd8268ae=""></div><!----></div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $(".btn-search").click(function () {
-            goSearch()
-        })
-        goSearch = function () {
-            var videoTitle = $("input[type=text]").val();
-            if (videoTitle == "") {
-                videoTitle = $("input[type=text]").attr("placeholder");
-            }
-            location.href = "/search/goSearch?videoTitle=" + videoTitle;
-        }
-    })
-
-    function onKeyDown(event) {
-        var e = event || window.event || arguments.callee.caller.arguments[0];
-        if (e && e.keyCode == 27) { // 按 Esc
-            //要做的事情
-        }
-        if (e && e.keyCode == 113) { // 按 F2
-            //要做的事情
-        }
-        if (e && e.keyCode == 13) { // enter 键
-            goSearch()
-        }
-    }
-</script>
+<div th:replace="/page/user/include/nav :: navDiv"></div>
+<script src="/js/user/index-info.js"></script>
 <!-- //stats -->
 <!-- Popular -->
 <!-- news -->
@@ -287,7 +140,7 @@
             <div data-v-64b63b5f="" class="tab-item tab-item--active"><span data-v-64b63b5f="" title="默认收藏夹"
                                                                             class="title">默认收藏夹</span><span
                     data-v-64b63b5f="" class="num">1</span></div>
-         <!----></div>
+            <!----></div>
         <div data-v-64b63b5f="" class="favorite-video-panel">
             <div data-v-64b63b5f="" class="favorite-video-list">
                 <div data-v-64b63b5f=""><a data-v-37582e0a="" data-v-64b63b5f=""

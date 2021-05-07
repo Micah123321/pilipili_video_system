@@ -28,7 +28,7 @@ h4,
 h5,
 h6 {
     margin: 0;
-    font-family: 'Playball', cursive;
+
 }
 
 p {
@@ -747,12 +747,12 @@ h4.stats-info {
 
 
 #myScrollspy {
-
     right: 100px;
     position: fixed;
     top: 250px;
     margin-left: 825px;
     z-index: 10;
+    margin-right: 50px;
 }
 
 /*-- //news --*/
@@ -3293,4 +3293,16 @@ ul.nav-pills {
     line-height: 26px;
     text-align: center;
     overflow: hidden;
+}
+.navbar-default .navbar-nav > li > a {
+    font-size: 1em;
+}
+.navbar-header h1 a {
+    background: none;
+    border: none;
+}
+@media (min-width: 1200px){
+    .container {
+        width: 1370px;
+    }
 }

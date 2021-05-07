@@ -47,6 +47,8 @@ public class PVideos implements Serializable {
      */
     private Long videoPlay;
 
+    private String videoPlayChar;
+
     /**
      * 视频点赞数量
      */
@@ -227,10 +229,17 @@ public class PVideos implements Serializable {
     }
 
     public Long getVideoPlay() {
+
         return videoPlay;
     }
 
     public void setVideoPlay(Long videoPlay) {
+        if (videoPlay>=10000){
+            double result = videoPlay*1.0/10000;
+            setVideoPlayChar(String.format("%.1f",result-0.05)+"万");
+        }else{
+            setVideoPlayChar(String.valueOf(videoPlay.intValue()));
+        }
         this.videoPlay = videoPlay;
     }
 
@@ -325,5 +334,21 @@ public class PVideos implements Serializable {
 
     public void setVideoParentType(Long videoParentType) {
         this.videoParentType = videoParentType;
+    }
+
+    public String getVideoPlayChar() {
+        return videoPlayChar;
+    }
+
+    public void setVideoPlayChar(String videoPlayChar) {
+        this.videoPlayChar = videoPlayChar;
+    }
+
+    public String getVideoUserName() {
+        return videoUserName;
+    }
+
+    public void setVideoUserName(String videoUserName) {
+        this.videoUserName = videoUserName;
     }
 }
