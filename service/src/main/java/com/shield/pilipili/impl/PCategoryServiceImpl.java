@@ -3,6 +3,7 @@ package com.shield.pilipili.impl;
 import com.shield.pilipili.PCategoryService;
 import com.shield.pilipili.dao.PCategoryDao;
 import com.shield.pilipili.pojo.PCategory;
+import com.shield.pilipili.pojo.vo.CategoryChartsVo;
 import org.springframework.stereotype.Service;
 import com.shield.pilipili.dao.PCategoryDao;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
@@ -41,6 +42,11 @@ public class PCategoryServiceImpl implements PCategoryService {
     @Override
     public PCategory getPCategoryById(Integer id) {
         return pCategoryDao.getPCategoryById(id);
+    }
+
+    @Override
+    public List<CategoryChartsVo> getCateChartsByUid(Integer userId) {
+        return pCategoryDao.getCateChartsByUid(userId);
     }
 
     @Override

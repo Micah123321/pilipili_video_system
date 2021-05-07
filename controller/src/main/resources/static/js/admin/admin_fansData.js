@@ -30,136 +30,109 @@ $(function () {
     }
     ajaxFansData()
 })
-Highcharts.chart('dc-section_preference', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: '分区倾向'
-    },
-    subtitle: {
-        text: '粉丝观看该视频分区占比'
-    },
-    accessibility: {
-        announceNewData: {
-            enabled: true
-        }
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: '百分比'
-        }
 
+$.ajax({
+    url: "/admin/fansData/getCharts",
+    type: "get",
+    dataType: "json",
+    data:{
     },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-                format: '{point.y:.1f}%'
-            }
-        }
-    },
+    success: function (data){
+        Highcharts.chart('dc-section-item_body', {
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: '粉丝关注趋势'
+            },
+            subtitle: {
+                text: '涨粉'
+            },
+            xAxis: [{
+                categories: data.dateStr,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                title: {
+                    text: '粉丝',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                }
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 100,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [ {
+                name: '粉丝',
+                type: 'spline',
+                data: data.fansUpArray
+            }]
+        });
+        Highcharts.chart('dc-section_preference', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '分区倾向'
+            },
+            subtitle: {
+                text: '粉丝观看该视频分区占比'
+            },
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: '百分比'
+                }
 
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> 的占比<br/>'
-    },
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%'
+                    }
+                }
+            },
 
-    series: [
-        {
-            name: "分区",
-            colorByPoint: true,
-            data: [
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> 的占比<br/>'
+            },
+
+            series: [
                 {
-                    name: "生活",
-                    y: 62.74,
-                    drilldown: "生活"
-                },
-                {
-                    name: "游戏",
-                    y: 10.57,
-                    drilldown: "游戏"
-                },
-                {
-                    name: "鬼畜",
-                    y: 7.23,
-                    drilldown: "鬼畜"
-                },
-                {
-                    name: "音乐",
-                    y: 5.58,
-                    drilldown: "音乐"
-                },
-                {
-                    name: "动画",
-                    y: 4.02,
-                    drilldown: "动画"
-                },
-                {
-                    name: "电子竞技",
-                    y: 1.92,
-                    drilldown: "电子竞技"
-                },
-                {
-                    name: "单机",
-                    y: 7.62,
-                    drilldown: "单机"
+                    name: "分区",
+                    colorByPoint: true,
+                    data: data.cateCharts
                 }
             ]
-        }
-    ]
-});
-Highcharts.chart('dc-section-item_body', {
-    chart: {
-        zoomType: 'xy'
-    },
-    title: {
-        text: '粉丝关注趋势'
-    },
-    subtitle: {
-        text: '涨粉'
-    },
-    xAxis: [{
-        categories: ['3.14', '3.15', '3.16', '3.17', '3.18', '3.19',
-            '3.20'],
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
-        labels: {
-            format: '{value}',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        },
-        title: {
-            text: '粉丝',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        }
-    }],
-    tooltip: {
-        shared: true
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 100,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    series: [ {
-        name: '粉丝',
-        type: 'spline',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2]
-    }]
-});
+        });
+    }
+})

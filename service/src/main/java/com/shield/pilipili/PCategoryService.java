@@ -1,5 +1,6 @@
 package com.shield.pilipili;
 
+import com.shield.pilipili.pojo.vo.CategoryChartsVo;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import com.shield.pilipili.pojo.PCategory;
 import java.util.List;
 
 public interface PCategoryService {
+    List<CategoryChartsVo> getCateChartsByUid(Integer userId);
     List<PCategoryVo> selectAllLevel1Category();
     List<PCategoryVo> getLv1CountByUid(int uid,int videoState);
 

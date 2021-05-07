@@ -22,6 +22,11 @@ public class PVideosServiceImpl implements PVideosService {
     private PVideosDao pVideosDao;
 
     @Override
+    public String getRandTitle() {
+        return pVideosDao.getRandTitle();
+    }
+
+    @Override
     public int getPlayCountById(int id) {
         return pVideosDao.getPlayCountById(id);
     }

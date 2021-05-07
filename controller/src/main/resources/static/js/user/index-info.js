@@ -12,6 +12,17 @@ $(function () {
         }
     });
 
+    ajaxRandTitle=()=>{
+        $.ajax({
+            url: "/index/randTitle",
+            type: "get",
+            dataType: "text",
+            success: function (data) {
+                $("#bs-example-navbar-collapse-1 .text-center .input-group .form-control").attr("placeholder",data)
+            }
+        })
+    }
+
     ajaxVideoInfo = function () {
         $.ajax({
             url: "/index/videoInfo",
@@ -176,6 +187,7 @@ $(function () {
     }
     ajaxUserInfo();
     ajaxVideoInfo();
+    ajaxRandTitle()
     $("#van-popover-9985").hide();
 })
 $('#myScrollspy').on('activate.bs.scrollspy', function () {

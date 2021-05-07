@@ -55,6 +55,11 @@ public class IndexController {
         }
         return listVos;
     }
+    @ResponseBody
+    @RequestMapping(value = "/randTitle", method = RequestMethod.GET, produces = "text/html;charset=utf-8")
+    public String getRandTitle(){
+        return pVideosService.getRandTitle();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/randVideoInfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -68,7 +73,7 @@ public class IndexController {
 
     @RequestMapping("/test")
     public String test(){
-        return "page/user/indextest";
+        return "page/user/videotest";
     }
 
 

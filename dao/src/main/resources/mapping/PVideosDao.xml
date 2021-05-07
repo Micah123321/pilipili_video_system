@@ -552,5 +552,13 @@
         FROM `pili`.`p_videos`
         WHERE `video_pv` = #{pid}
     </select>
+    <select id="getRandTitle" resultType="java.lang.String">
+        SELECT
+            `video_title`
+        FROM
+            `pili`.`p_videos`
+        ORDER BY RAND()
+        LIMIT 0, 1 ;
+    </select>
 
 </mapper>

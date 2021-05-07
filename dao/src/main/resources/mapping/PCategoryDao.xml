@@ -89,6 +89,20 @@
         FROM `pili`.`p_category`
         where id = #{id}
     </select>
+    <select id="getCateChartsByUid" resultType="com.shield.pilipili.pojo.vo.CategoryChartsVo">
+        SELECT categoryName                                 `name`,
+               ROUND(SUM(video_play) / T2.totalCo * 100, 1) `y`,
+               categoryName                                 `drilldown`
+        FROM `pili`.`p_videos` v,
+             `p_category` c,
+             (SELECT SUM(video_play) AS totalCo
+              FROM p_videos
+              WHERE video_userid = #{userId}) T2
+        WHERE c.id = video_type
+          AND v.video_userid = #{userId}
+        GROUP BY categoryName
+        ORDER BY `y` DESC
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from p_category

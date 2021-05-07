@@ -1,12 +1,14 @@
 package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PCategory;
+import com.shield.pilipili.pojo.vo.CategoryChartsVo;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PCategoryDao {
+    List<CategoryChartsVo> getCateChartsByUid(Integer userId);
 
     List<PCategoryVo> selectAllCategory();
 

@@ -239,19 +239,19 @@ $(function () {
             for (var i = 0; i < videosList.length; i++) {
                 var videos = videosList[i];
                 ul += " <li style='border-radius: 10px;border: 1px solid #727272;' class='video-item matrix'>" +
-                    " <a href='' title='" + videos.videoTitle + "' target='_blank' class='img-anchor'>" +
+                    " <a href='/pv"+videos.videoPv+"' title='" + videos.videoTitle + "' target='_blank' class='img-anchor'>" +
                     " <div class='img'><div class='lazy-img'><img class='img-rounded img-responsive' style='width: 168px;height: 100px' alt='' src='" + videos.videoImage + "'></div>" +
                     " <span class='so-imgTag_rb'>" + videos.videoTime + "</span>" +
                     " <div class='watch-later-trigger watch-later'></div>" +
                     " <span class='mask-video'></span></div>" +
-                    " <!----></a><div class='info'><div class='headline clearfix'><!----><!----><span class='type hide'>videos.pCategory.categoryName</span><a title='" + videos.videoTitle + "' href='//www.bilibili.com/video/BV1ko4y1d7Jx?from=search&amp;seid=4552862550272992768' target='_blank' class='title'>" + videos.videoTitle + "</a></div>" +
+                    " <!----></a><div class='info'><div class='headline clearfix'><!----><!----><span class='type hide'>videos.pCategory.categoryName</span><a title='" + videos.videoTitle + "' href='/pv"+videos.videoPv+"' target='_blank' class='title'>" + videos.videoTitle + "</a></div>" +
                     "<div class='tags'><span title='观看' class='so-icon watch-num'><i class='icon-playtime'></i>" +
                     videos.videoPlay +
                     "</span><span title='弹幕' class='so-icon hide'><i class='icon-subtitle'></i>" +
                     videos.videoBarrage +
                     "</span><span title='上传时间' class='so-icon time'><i class='icon-date'></i>" +
                     videos.videoReleasetime + "\n" +
-                    "</span><span title='up主' class='so-icon'><i class='icon-uper'></i><a href='//space.bilibili.com/22601190?from=search&amp;seid=4552862550272992768' target='_blank' class='up-name'>" + videos.pUser.userName + "</a></span></div>\n" +
+                    "</span><span title='up主' class='so-icon'><i class='icon-uper'></i><a href='/user/space/"+videos.videoUserid+"' target='_blank' class='up-name'>" + videos.pUser.userName + "</a></span></div>\n" +
                     "</div></li>";
             }
             flashPage(currPage,r.pages);

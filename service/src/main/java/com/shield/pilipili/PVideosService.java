@@ -16,6 +16,12 @@ import java.util.Date;
 import java.util.List;
 
 public interface PVideosService {
+    /**
+     * 随机获得标题
+     * @return
+     */
+    String getRandTitle();
+
     int getPlayCountById(int id);
     /**
      * 根据用户id查询点赞数

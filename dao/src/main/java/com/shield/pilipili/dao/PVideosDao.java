@@ -16,6 +16,11 @@ import java.util.List;
 
 public interface PVideosDao {
     /**
+     * 随机获得标题
+     * @return
+     */
+    String getRandTitle();
+    /**
      * 根据用户id查询播放数
      * @param id
      * @return
