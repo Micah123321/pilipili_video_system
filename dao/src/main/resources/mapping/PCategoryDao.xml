@@ -72,7 +72,9 @@
         WHERE id IN (SELECT id FROM p_category WHERE parentId = 1)
         OR parentId IN (SELECT id FROM p_category WHERE parentId = 1)
         )
-        AND v.`video_userid` = #{uid}
+        <if test="uid>0">
+            AND v.`video_userid` = #{uid}
+        </if>
         <if test="videoState>-1">
             and v.video_state=#{videoState}
         </if>

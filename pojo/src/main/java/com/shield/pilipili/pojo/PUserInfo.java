@@ -77,6 +77,13 @@ public class PUserInfo implements Serializable {
     @JsonFormat(pattern = "MM-dd")
     private Date birthday;
 
+    /**
+     * 登录日期
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date loginDate;
+
     public Date getCreateTime() {
         return createTime;
     }

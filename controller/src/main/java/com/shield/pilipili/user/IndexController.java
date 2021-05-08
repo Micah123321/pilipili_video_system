@@ -62,6 +62,13 @@ public class IndexController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/typedata", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object getTypeTitle(){
+        List<PCategoryVo> categoryVos = pCategoryService.getLv1CountByUid(0,1);
+        return categoryVos;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/randVideoInfo", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object getRandVideo(PVideosPage pVideosPage){
         pVideosPage.setCount(8);

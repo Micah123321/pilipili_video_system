@@ -42,9 +42,6 @@ public interface PUserDao {
 
     int insertSelective(PUser record);
 
-
-
     int updateByPrimaryKeySelective(PUser record);
 
-    int updateByPrimaryKey(PUser record);
 }

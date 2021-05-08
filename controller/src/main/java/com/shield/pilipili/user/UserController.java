@@ -1,13 +1,12 @@
 package com.shield.pilipili.user;
 
-import com.shield.pilipili.PUserInfoService;
-import com.shield.pilipili.PUserService;
-import com.shield.pilipili.PVideosService;
-import com.shield.pilipili.PVideosThumbsupService;
+import com.alibaba.fastjson.JSONObject;
+import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.PUser;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.page.PVideosPage;
+import com.shield.pilipili.pojo.vo.MessageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -138,6 +138,45 @@ public class UserController {
             return "ok";
         }else{
             return "error";
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getLevel", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public JSONObject uploadLevel(HttpSession session){
+        JSONObject jsonObject=new JSONObject();
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            jsonObject.put("user",null);
+            return jsonObject;
+        }
+        PUserInfo pUserInfo = pUserInfoService.selectByUserId(userSession.getUserId());
+        pUserInfo.setLevel(LevelUtil.getLevelByExperience(pUserInfo.getExperience()));
+        if (!userSession.getLevel().equals(pUserInfo.getLevel())){
+            pUserInfoService.updateUserInfo(pUserInfo);
+            session.setAttribute("userSession",pUserInfo);
+        }
+        jsonObject.put("user",pUserInfo);
+        jsonObject.put("bar",LevelUtil.getLevelBar(pUserInfo.getExperience()));
+        jsonObject.put("nextExperience",LevelUtil.getNextExperience(pUserInfo.getExperience()));
+        return jsonObject;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addExperience", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object addExperience(HttpSession session){
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        PUserInfo pUserInfo = pUserInfoService.selectByUserId(userSession.getUserId());
+        PUserInfo userInfo=new PUserInfo();
+        userInfo.setExperience(pUserInfo.getExperience()+10);
+        userInfo.setLevel(LevelUtil.getLevelByExperience(userInfo.getExperience()));
+        if (!DateUtil.isNow(pUserInfo.getLoginDate())){
+            userInfo.setLoginDate(new Date());
+            userInfo.setUserId(pUserInfo.getUserId());
+        if (pUserInfoService.updateUserInfo(userInfo)>0)return new MessageVo(0,"签到成功");
+        else return new MessageVo(-1,"失败");
+        }else{
+            return new MessageVo(-1,"您今天已经签过到了");
         }
     }
 

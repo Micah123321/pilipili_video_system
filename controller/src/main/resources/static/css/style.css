@@ -369,7 +369,7 @@ h3.agileits-title {
     color: #312a2d;
     text-transform: capitalize;
     font-size: 2em;
-    margin: 20px 20px;
+    margin: 20px 0px 20px 16px;
 }
 
 
@@ -625,7 +625,7 @@ h4.stats-info {
 /*-- news --*/
 
 .w3ls-section {
-    padding: 4em 0;
+    padding: 1em 0;
 }
 
 .news-w3imgtext {
@@ -671,11 +671,12 @@ h4.stats-info {
     text-align: center;
 
 }
-.news-w3imgtext p{
+
+.news-w3imgtext p {
     width: 10em;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
 .news h5 {
@@ -2594,7 +2595,7 @@ caption {
 
 /* -- //Responsive code -- */
 
-     /* cyrillic-ext */
+/* cyrillic-ext */
 @font-face {
     font-family: 'Open Sans';
     font-style: italic;
@@ -3224,8 +3225,8 @@ caption {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-  
-      /* latin-ext */
+
+/* latin-ext */
 @font-face {
     font-family: 'Playball';
     font-style: normal;
@@ -3294,15 +3295,29 @@ ul.nav-pills {
     text-align: center;
     overflow: hidden;
 }
+
 .navbar-default .navbar-nav > li > a {
     font-size: 1em;
 }
+
 .navbar-header h1 a {
     background: none;
     border: none;
 }
-@media (min-width: 1200px){
+
+@media (min-width: 1200px) {
     .container {
         width: 1370px;
     }
+}
+
+.item.van-popover__reference a ,#primaryPageTab .con a{
+    text-decoration: none;
+    color: #212121;
+    transition: color .3s;
+}
+.navbar-header h1 a {
+    font-family: 'Playball', cursive;
+    background: none;
+    border: none;
 }

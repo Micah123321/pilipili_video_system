@@ -54,7 +54,7 @@ $(function () {
                         "                <h3 id=\"t" + data[i].typeName + "\" class=\"agileits-title\">\n" +icon+
                         "                    &nbsp;" + data[i].typeName + "\n" +
                         "\n" +
-                        "                    <button onclick='toCategory(" + data[i].videoParentType + "," + data[i].videoType + ")' type=\"button\" style=\"font-family: 宋体;float:right;margin-right: 5px\" class=\"btn btn-primary\"\n" +
+                        "                    <button onclick='toCategory(" + data[i].videoParentType + "," + data[i].videoType + ")' type=\"button\" style=\"font-family: 宋体;float:right;\" class=\"btn btn-primary\"\n" +
                         "                            data-toggle=\"button\"> 更多\n" +
                         "                        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\"\n" +
                         "                             class=\"bi bi-forward\"\n" +

@@ -14,9 +14,10 @@
         <result column="up_spaceNotice" jdbcType="VARCHAR" property="upSpaceNotice"/>
         <result column="createTime" jdbcType="DATE" property="createTime"/>
         <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="loginDate" jdbcType="DATE" property="loginDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_id, subscribeNum, fansNum, `level`, experience, user_pic, up_desc,nickName,up_spaceNotice,createTime,birthday
+    id, user_id, subscribeNum, fansNum, `level`, experience, user_pic, up_desc,nickName,up_spaceNotice,createTime,birthday,loginDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -183,6 +184,9 @@ VALUES
             </if>
             <if test="upSpaceNotice != null">
                 up_spaceNotice = #{upSpaceNotice},
+            </if>
+            <if test="loginDate != null">
+                loginDate = #{loginDate},
             </if>
         </set>
         where user_id = #{userId}
