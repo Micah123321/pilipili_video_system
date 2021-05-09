@@ -63,7 +63,7 @@ $(function () {
                         "                            </div><!---->\n" +
                         "                            <div class=\"card-mark\"><p class=\"title\">"+data.top4[i].videoTitle+"</p>\n" +
                         "                                <p class=\"author\">up主："+data.top4[i].videoUserName+"</p>\n" +
-                        "                                <p class=\"play\">播放："+data.top4[i].videoPlay+"</p></div>\n" +
+                        "                                <p class=\"play\">播放："+data.top4[i].videoPlayChar+"</p></div>\n" +
                         "                        </a>\n" +
                         "                            <div class=\"watch-later-trigger w-later\"></div>\n" +
                         "                        </div>")
@@ -75,7 +75,7 @@ $(function () {
                     var Array = [];
                     for (var j = 0; j < data.videoList[i].dataList.length; j++){
                         if (data.videoList[i].dataList[j].videoType==data.videoList[i].videoType){
-                            catebody.append("<div class=\"spread-module\"><a href=\"/pv"+data.videoList[i].dataList[j].videoPv+"\" target=\"_blank\"><div class=\"pic\"><div class=\"lazy-img\"><img alt=\""+data.videoList[i].dataList[j].videoTitle+"\" src=\""+data.videoList[i].dataList[j].videoImage+"\"></div><i class=\"icon medal golden\"></i><div class=\"cover-preview-module\"><!----><div class=\"progress-bar\"><span style=\"width: 0%;\"></span></div></div><div class=\"mask-video\"></div><div class=\"danmu-module\"></div><span class=\"dur\">"+data.videoList[i].dataList[j].videoTime+"</span><!----><!----><div class=\"watch-later-trigger w-later\"></div></div><p title=\""+data.videoList[i].dataList[j].videoTitle+"\" class=\"t\">"+data.videoList[i].dataList[j].videoTitle+"</p><p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoPlay+"</span><span class=\"danmu\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoBarrage+"</span></p></a></div>")
+                            catebody.append("<div class=\"spread-module\"><a href=\"/pv"+data.videoList[i].dataList[j].videoPv+"\" target=\"_blank\"><div class=\"pic\"><div class=\"lazy-img\"><img alt=\""+data.videoList[i].dataList[j].videoTitle+"\" src=\""+data.videoList[i].dataList[j].videoImage+"\"></div><i class=\"icon medal golden\"></i><div class=\"cover-preview-module\"><!----><div class=\"progress-bar\"><span style=\"width: 0%;\"></span></div></div><div class=\"mask-video\"></div><div class=\"danmu-module\"></div><span class=\"dur\">"+data.videoList[i].dataList[j].videoTime+"</span><!----><!----><div class=\"watch-later-trigger w-later\"></div></div><p title=\""+data.videoList[i].dataList[j].videoTitle+"\" class=\"t\">"+data.videoList[i].dataList[j].videoTitle+"</p><p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoPlayChar+"</span><span class=\"danmu\"><i class=\"icon\"></i>"+data.videoList[i].dataList[j].videoBarrage+"</span></p></a></div>")
                             Array.push(data.videoList[i].dataList[j])
                         }
                     }

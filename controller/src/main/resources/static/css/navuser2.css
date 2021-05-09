@@ -230,7 +230,14 @@ ol,ul{list-style:none}a{color:#212121;transition:color .3s}a:hover{color:#00a1d6
      height: 5rem;
      height: 68px;
      -ms-flex: 1;
- }
+ }.bilibili-search-history {
+      width: 87%;
+      top: 33px;
+  }
+.bilibili-search-suggest {
+    width: 87%;
+    top: 33px;
+}
 /*# sourceMappingURL=international-home.1.716bab0ed70def18f3fbb20dfd6d1f94e84f0e82.css.map*/
 /*# sourceMappingURL=international-home.0.716bab0ed70def18f3fbb20dfd6d1f94e84f0e82.css.map*/
 /*# sourceMappingURL=international-home.0.716bab0ed70def18f3fbb20dfd6d1f94e84f0e82.css.map*/

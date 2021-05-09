@@ -560,5 +560,14 @@
         ORDER BY RAND()
         LIMIT 0, 1 ;
     </select>
+    <select id="getTitleByWord" resultType="com.shield.pilipili.pojo.PVideos">
+        SELECT
+            `video_title` videoTitle
+        FROM
+            `pili`.`p_videos`
+        WHERE video_title LIKE CONCAT('%',#{keyword},'%')
+        GROUP BY video_title
+            LIMIT 0, 10 ;
+    </select>
 
 </mapper>

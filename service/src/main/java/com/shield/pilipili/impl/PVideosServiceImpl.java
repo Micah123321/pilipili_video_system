@@ -22,6 +22,11 @@ public class PVideosServiceImpl implements PVideosService {
     private PVideosDao pVideosDao;
 
     @Override
+    public List<PVideos> getTitleByWord(String keyword) {
+        return pVideosDao.getTitleByWord(keyword);
+    }
+
+    @Override
     public String getRandTitle() {
         return pVideosDao.getRandTitle();
     }

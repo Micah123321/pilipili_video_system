@@ -86,11 +86,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            word-wrap:break-word;
+            word-wrap: break-word;
         }
 
         .video-item.matrix .headline a {
-            word-wrap:break-word;
+            word-wrap: break-word;
             width: 160px;
             height: 40px;
             display: block;
@@ -99,10 +99,38 @@
         .video-item.matrix .hide {
             display: none;
         }
+
+        .fixed-top {
+            animation: fadeIn .5s;
+            width: 100%;
+            z-index: 10000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: hsla(0, 0%, 100%, .9);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+            height: 50px
+        }
+        .fixed-top div{
+            position: absolute;
+            height: 30px;
+            bottom: -10px;
+            border-radius: 4px;
+        }
+        .fixed-top .search-logo{
+            margin-top: 14px;
+        }
+        body a {
+            transition: none;
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            -ms-transition:none;
+        }
     </style>
 </head>
 <body>
-<div th:replace="/page/user/header :: html" ></div>
+<div th:replace="/page/user/header :: html"></div>
 <div class="container">
     <div class="search m-auto">
         <a href="" class="search-logo m-auto"></a>

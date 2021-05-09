@@ -88,11 +88,11 @@ $(function () {
                         "                                                    <div class=\"watch-later-trigger w-later\"></div>\n" +
                         "                                                </div>\n" +
                         "                                                <p title=\"" + data.videoListPage.dataList[i].videoTitle + "\" class=\"t\">" + data.videoListPage.dataList[i].videoTitle + "</p>\n" +
-                        "                                                <p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>" + data.videoListPage.dataList[i].videoPlay + "</span><span class=\"danmu\"><i class=\"icon\"></i>+data.videoListPage.dataList[i].videoBarrage+</span></p></a></div>\n" +
+                        "                                                <p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>" + data.videoListPage.dataList[i].videoPlayChar + "</span><span class=\"danmu\"><i class=\"icon\"></i>+data.videoListPage.dataList[i].videoBarrage+</span></p></a></div>\n" +
                         "                                        </div>\n" +
                         "                                        <div class=\"r\"><a href=\"/pv" + data.videoListPage.dataList[i].videoPv + "\" target=\"_blank\" title=\"" + data.videoListPage.dataList[i].videoTitle + "\" class=\"title\">" + data.videoListPage.dataList[i].videoTitle + "</a>\n" +
                         "                                            <div class=\"v-desc\">" + data.videoListPage.dataList[i].videoDesc + "</div>\n" +
-                        "                                            <div class=\"v-info\"><span class=\"v-info-i\"><i title=\"观看\" class=\"b-icon b-icon-v-play\"></i><span>" + data.videoListPage.dataList[i].videoPlay + "</span></span><span class=\"v-info-i\"><i title=\"弹幕\" class=\"b-icon b-icon-v-dm\"></i><span>" + data.videoListPage.dataList[i].videoBarrage + "</span></span>\n" +
+                        "                                            <div class=\"v-info\"><span class=\"v-info-i\"><i title=\"观看\" class=\"b-icon b-icon-v-play\"></i><span>" + data.videoListPage.dataList[i].videoPlayChar + "</span></span><span class=\"v-info-i\"><i title=\"弹幕\" class=\"b-icon b-icon-v-dm\"></i><span>" + data.videoListPage.dataList[i].videoBarrage + "</span></span>\n" +
                         "                                            </div>\n" +
                         "                                            <div class=\"up-info\"><a href=\"/user/spcae/" + data.videoListPage.dataList[i].videoUserid + "\" target=\"_blank\" title=\"" + data.videoListPage.dataList[i].videoUserName + "\" class=\"v-author\">\n" +
                         "                                                " + data.videoListPage.dataList[i].videoUserName + "\n" +
@@ -118,7 +118,7 @@ $(function () {
                             "                                        <div class=\"watch-later-trigger w-later\"></div>\n" +
                             "                                    </div>\n" +
                             "                                    <p title=\"" + data.top4[i].videoTitle + "\" class=\"t\">" + data.top4[i].videoTitle + "</p>\n" +
-                            "                                    <p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>" + data.top4[i].videoPlay + "</span><span class=\"danmu\"><i class=\"icon\"></i>" + data.top4[i].videoBarrage + "</span></p></a></div>")
+                            "                                    <p class=\"num\"><span class=\"play\"><i class=\"icon\"></i>" + data.top4[i].videoPlayChar + "</span><span class=\"danmu\"><i class=\"icon\"></i>" + data.top4[i].videoBarrage + "</span></p></a></div>")
                     }
                 }
                 var pageUtil = {

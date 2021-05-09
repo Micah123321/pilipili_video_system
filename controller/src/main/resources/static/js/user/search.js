@@ -256,13 +256,30 @@ $(function () {
             }
             flashPage(currPage,r.pages);
             $("#video-list").html(ul);
+            if (videoTitle!=null &&videoTitle!=""){
+                $(".headline .title").each(function () {
+                    $(this).html(setHighLight($(this).html(), videoTitle));
+                });
+            }
         }, error: function (r) {
             alert("错误")
         }
     })
 }
+window.onscroll = function () {
+    var scrollT = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollT > 100) {
+        $(".search.m-auto").addClass("fixed-top")
+    } else {
+        $(".search.m-auto").removeClass("fixed-top")
+    }
+}
 
-
+function setHighLight(itemDOM, keyWord) {
+    var regExp = new RegExp(keyWord, 'g');
+    var newDOM = itemDOM.replace(regExp, '<em class="keyword" >' + keyWord + '</em>');
+    return newDOM;
+}
 
 
 

@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.17 : Database - pili
+SQLyog Professional v12.08 (64 bit)
+MySQL - 5.7.24 : Database - pili
 *********************************************************************
 */
 
@@ -185,6 +185,19 @@ CREATE TABLE `p_postip` (
 
 insert  into `p_postip`(`id`,`ip`,`video_pv`,`postDate`,`type`) values (13,'192.168.43.174',10000,'2021-05-05 12:17:33',0),(14,'192.168.43.174',10000,'2021-05-05 12:17:36',0),(15,'192.168.43.174',10000,'2021-05-05 12:22:47',0),(16,'192.168.16.206',10000,'2021-05-06 10:59:05',0),(17,'192.168.16.206',10000,'2021-05-06 11:03:27',0),(18,'192.168.16.206',10045,'2021-05-06 11:07:31',0),(19,'192.168.16.206',10045,'2021-05-06 11:08:04',0),(20,'192.168.16.206',10045,'2021-05-06 11:08:33',1),(21,'192.168.16.206',10045,'2021-05-06 11:08:36',1),(22,'192.168.16.206',10045,'2021-05-06 11:08:38',1),(23,'192.168.16.206',10045,'2021-05-06 11:08:41',1),(24,'192.168.16.206',10045,'2021-05-06 11:08:43',1),(25,'192.168.16.206',10045,'2021-05-06 11:08:46',1),(26,'192.168.16.206',10045,'2021-05-06 11:09:21',0),(27,'192.168.16.206',10048,'2021-05-06 11:14:20',0),(28,'192.168.16.206',10000,'2021-05-06 11:21:28',0),(29,'192.168.16.206',10000,'2021-05-06 11:58:03',0),(30,'192.168.16.206',10000,'2021-05-06 11:58:14',1),(31,'192.168.0.141',10000,'2021-05-08 11:42:46',0),(32,'192.168.0.141',10000,'2021-05-08 11:46:45',0);
 
+/*Table structure for table `p_search_hot` */
+
+DROP TABLE IF EXISTS `p_search_hot`;
+
+CREATE TABLE `p_search_hot` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(160) NOT NULL,
+  `searchDate` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `p_search_hot` */
+
 /*Table structure for table `p_subscribe` */
 
 DROP TABLE IF EXISTS `p_subscribe`;
@@ -199,11 +212,11 @@ CREATE TABLE `p_subscribe` (
   KEY `subscribed_id` (`subscribed_id`),
   CONSTRAINT `p_subscribe_ibfk_1` FOREIGN KEY (`subscribe_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_subscribe_ibfk_2` FOREIGN KEY (`subscribed_id`) REFERENCES `p_user` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='订阅信息表';
 
 /*Data for the table `p_subscribe` */
 
-insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (3,4,1,'2021-04-06 14:27:17'),(7,3,1,'2021-04-26 11:04:50'),(21,1,2,'2021-05-06 11:06:38'),(23,2,1,'2021-05-06 11:58:26'),(25,1,4,'2021-05-07 08:47:42');
+insert  into `p_subscribe`(`id`,`subscribe_id`,`subscribed_id`,`createTime`) values (3,4,1,'2021-04-06 14:27:17'),(7,3,1,'2021-04-26 11:04:50'),(23,2,1,'2021-05-06 11:58:26'),(25,1,4,'2021-05-07 08:47:42'),(26,1,2,'2021-05-09 17:59:43');
 
 /*Table structure for table `p_user` */
 
@@ -247,7 +260,7 @@ CREATE TABLE `p_user_info` (
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`,`loginDate`) values (1,1,2,3,5,10030,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','Micah','这是本站第一个用户','2021-04-20 10:44:49','2021-04-20 10:44:52','2021-05-08'),(2,2,1,1,1,260,'/uploads/defaultpic.png','你好，我是张三','张三',NULL,NULL,NULL,'2021-05-08'),(3,3,1,0,3,350,'/uploads/defaultpic.png','你好，我是李四','李四',NULL,NULL,NULL,'2021-05-07'),(4,4,1,1,4,750,'/uploads/defaultpic.png','这个人没有填简介啊~~~','王五',NULL,NULL,NULL,'2021-05-07');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`,`loginDate`) values (1,1,2,3,5,10120,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','Micah','这是本站第一个用户','2021-04-20 10:44:49','2021-04-20 10:44:52','2021-05-10'),(2,2,1,1,1,260,'/uploads/defaultpic.png','你好，我是张三','张三',NULL,NULL,NULL,'2021-05-08'),(3,3,1,0,3,350,'/uploads/defaultpic.png','你好，我是李四','李四',NULL,NULL,NULL,'2021-05-07'),(4,4,1,1,4,750,'/uploads/defaultpic.png','这个人没有填简介啊~~~','王五',NULL,NULL,NULL,'2021-05-07');
 
 /*Table structure for table `p_videos` */
 
@@ -256,7 +269,7 @@ DROP TABLE IF EXISTS `p_videos`;
 CREATE TABLE `p_videos` (
   `video_pv` int(11) NOT NULL AUTO_INCREMENT COMMENT '视频pv号',
   `video_userid` int(11) NOT NULL COMMENT '上传者id',
-  `video_title` varchar(50) NOT NULL COMMENT '视频标题',
+  `video_title` varchar(160) NOT NULL COMMENT '视频标题',
   `video_url` varchar(100) NOT NULL COMMENT '视频播放路径',
   `video_play` bigint(20) NOT NULL DEFAULT '0' COMMENT '视频播放量',
   `video_like` int(11) NOT NULL DEFAULT '0' COMMENT '视频点赞数量',
@@ -299,11 +312,11 @@ CREATE TABLE `p_videos_thumbsup` (
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_videos_thumbsup_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_videos_thumbsup_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='视频点赞记录表';
 
 /*Data for the table `p_videos_thumbsup` */
 
-insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49'),(29,1,10009,'2021-05-06 11:03:33'),(31,1,10001,'2021-05-06 11:06:41'),(32,1,10048,'2021-05-06 11:14:23'),(33,1,10000,'2021-05-06 11:21:57'),(34,2,10000,'2021-05-06 11:58:24');
+insert  into `p_videos_thumbsup`(`id`,`user_id`,`video_id`,`createTime`) values (3,3,10000,'2021-04-11 14:11:45'),(4,2,10001,'2021-04-11 14:11:49'),(29,1,10009,'2021-05-06 11:03:33'),(32,1,10048,'2021-05-06 11:14:23'),(33,1,10000,'2021-05-06 11:21:57'),(34,2,10000,'2021-05-06 11:58:24'),(36,1,10001,'2021-05-09 17:59:39');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

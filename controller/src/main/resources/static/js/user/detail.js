@@ -142,7 +142,7 @@ $(function () {
 
                 $(".video-title span").text(data.video.videoTitle)
                 $('title').text(data.video.videoTitle + "_霹雳霹雳 (゜-゜)つロ 干杯~-pilipili")
-                $(".video-data>.view").text(data.video.videoPlay + "播放")
+                $(".video-data>.view").text(data.video.videoPlayChar + "播放")
                 $(".video-data>.dm").text(data.video.videoBarrage + "弹幕")
                 $(".video-data>.videoTime").text(data.video.videoReleasetime)
                 $(".video-data>.rank").text("")
@@ -195,7 +195,7 @@ $(function () {
                             "                            <div class=\"info\"><a href=\"pv" + data[i].videoPv + "\" class=\"\"><span title=\"" + data[i].videoTitle + "\" class=\"title\">" + data[i].videoTitle + "</span></a>\n" +
                             "                                <div class=\"count up\"><a href=\"/user/space/" + data[i].videoUserid + "\" target=\"_blank\" style=\"display:;\">" + data[i].videoUserName + "</a></div>\n" +
                             "                                <div class=\"count\">\n" +
-                            "                                    " + data[i].videoPlay + " 播放&nbsp;·&nbsp;" + data[i].videoBarrage + " 弹幕\n" +
+                            "                                    " + data[i].videoPlayChar + " 播放&nbsp;·&nbsp;" + data[i].videoBarrage + " 弹幕\n" +
                             "                                </div>\n" +
                             "                            </div>\n" +
                             "                        </div>\n" +

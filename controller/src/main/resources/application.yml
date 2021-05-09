@@ -1,4 +1,6 @@
 spring:
+  redis:
+    timeout: 5000ms
   servlet:
     multipart:
       max-file-size: 200MB

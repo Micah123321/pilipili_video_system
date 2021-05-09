@@ -17,6 +17,12 @@ import java.util.List;
 
 public interface PVideosService {
     /**
+     * 根据单词模糊查询视频标题列表
+     * @param keyword
+     * @return
+     */
+    List<PVideos> getTitleByWord(String keyword);
+    /**
      * 随机获得标题
      * @return
      */

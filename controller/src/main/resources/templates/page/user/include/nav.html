@@ -30,7 +30,7 @@
                             </div>
                             <!-- navbar-header -->
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <div style="padding-left: 3em;margin-left: 0em;" class="col-sm-4 text-center">
+                                <div id="test" style="padding-left: 3em;margin-left: 0em;" class="col-sm-4 text-center">
                                     <div class="input-group">
                                         <input placeholder="" type="text" class="form-control"
                                                onkeydown="onKeyDown(event)"/>
@@ -38,6 +38,12 @@
                                     <button class="btn btn-info btn-search">搜索</button>
                                 </span>
                                     </div>
+                                    <ul id="bilibili-search-history"
+                                        class="bilibili-search-history report-wrap-module history">
+                                    </ul>
+                                    <ul id="bilibili-search-suggest"
+                                        class="bilibili-search-suggest report-wrap-module suggest">
+                                    </ul>
                                 </div>
                                 <ul class="navbar-default navbar-nav navbar-right">
                                     <li><img id="imgcircle" style="margin-top:-10px;
@@ -326,34 +332,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(function () {
-            $(".btn-search").click(function () {
-                goSearch()
-            })
-            goSearch = function () {
-                var videoTitle = $("input[type=text]").val();
-                if (videoTitle == "") {
-                    videoTitle = $("input[type=text]").attr("placeholder");
-                }
-                location.href = "/search/goSearch?videoTitle=" + videoTitle;
-            }
-        })
-
-        function onKeyDown(event) {
-            var e = event || window.event || arguments.callee.caller.arguments[0];
-            if (e && e.keyCode == 27) { // 按 Esc
-                //要做的事情
-            }
-            if (e && e.keyCode == 113) { // 按 F2
-                //要做的事情
-            }
-            if (e && e.keyCode == 13) { // enter 键
-                goSearch()
-            }
-        }
-    </script>
 </div>
 </body>
 </html>

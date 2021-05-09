@@ -186,7 +186,7 @@ VALUES
                 up_spaceNotice = #{upSpaceNotice},
             </if>
             <if test="loginDate != null">
-                loginDate = #{loginDate},
+                loginDate = now(),
             </if>
         </set>
         where user_id = #{userId}

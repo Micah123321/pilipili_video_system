@@ -1,4 +1,88 @@
 $(function () {
+    $(".btn-search").click(function () {
+        goSearch()
+    })
+    $("input[type=text].form-control").focus(function () {
+        if ($(this).val().length>0){
+            ajaxSearchSuggest($(this).val())
+        }else{
+            ajaxSearchHistory()
+        }
+    }).bind('input propertychange', 'textarea', function () {
+        $("#bilibili-search-history").hide()
+        $("#bilibili-search-suggest").hide()
+        if ($(this).val().length>0){
+            ajaxSearchSuggest($(this).val())
+        }else{
+            ajaxSearchHistory()
+        }
+    });
+
+    ajaxSearchSuggest=(title)=>{
+        $.ajax({
+            url: "/search/getKeyWord",
+            type: "get",
+            dataType: "json",
+            data:{
+                title
+            },
+            success: function (data) {
+                $(".bilibili-search-suggest").empty()
+                for (var i = 0; i < data.length; i++) {
+                    $(".bilibili-search-suggest").append(`<li class="suggest-item"><a href="/search/goSearch?videoTitle=${data[i].videoTitle}" title="${data[i].videoTitle}" target="_blank">${data[i].videoTitle}</a></li>`)
+                }
+                $(".suggest-item a").each(function () {
+                    $(this).html(setHighLight($(this).html(), title));
+                });
+                if (data.length>0){
+                    $("#bilibili-search-suggest").fadeIn()
+                }else{
+                    $("#bilibili-search-suggest").fadeOut()
+                }
+            }
+        })
+    }
+
+    ajaxSearchHistory=()=>{
+        $.ajax({
+            url: "/search/searchHistory",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $(".bilibili-search-history").empty()
+                for (var i = 0; i < data.length; i++) {
+                    $(".bilibili-search-history").append(`<li class="history-item"><a
+                                                href="/search/goSearch?videoTitle=${data[i].title}"
+                                                target="_blank">${data[i].title}</a><i onclick="delSearchHistory('${data[i].title}')"
+                                                class="bilifont bili-icon_sousuo_yichu cancel-icon"></i></li>`)
+                }
+                if (data.length>0){
+                    $("#bilibili-search-history").fadeIn()
+                }else{
+                    $("#bilibili-search-history").fadeOut()
+                }
+            }
+        })
+    }
+
+    goSearch = function () {
+        var videoTitle = $("input[type=text]").val();
+        if (videoTitle == "") {
+            videoTitle = $("input[type=text]").attr("placeholder");
+        }
+        $.ajax({
+            url: "/search/searchHistory",
+            type: "post",
+            data: {
+                title: videoTitle
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data.message)
+            }
+        })
+        location.href = "/search/goSearch?videoTitle=" + videoTitle;
+    }
     ajaxRandTitle = () => {
         $.ajax({
             url: "/index/randTitle",
@@ -79,6 +163,8 @@ $(function () {
 
     ajaxUserInfo();
     ajaxRandTitle();
+    $("#bilibili-search-history").hide()
+    $("#bilibili-search-suggest").hide()
     $("#van-popover-9985").hide();
     $(".img-circle").hover(function () {
         $("#van-popover-9985").fadeIn("slow")
@@ -111,6 +197,21 @@ $(function () {
             'moz-transform': "translateX(0px)"
         });
     });
+     delSearchHistory=title=>{
+        $.ajax({
+            url: "/search/delHistory",
+            type: "post",
+            data: {
+                title
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.message=="true"){
+                    ajaxSearchHistory()
+                }
+            }
+        })
+    }
 })
 
 function getNowFormatDate() {
@@ -127,4 +228,34 @@ function getNowFormatDate() {
     }
     var currentdate = year + seperator1 + month + seperator1 + strDate;
     return currentdate;
+}
+
+function onKeyDown(event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode == 27) { // 按 Esc
+        //要做的事情
+    }
+    if (e && e.keyCode == 113) { // 按 F2
+        //要做的事情
+    }
+    if (e && e.keyCode == 13) { // enter 键
+        goSearch()
+    }
+}
+$(document).bind('click', function (e) {
+    var e = e || window.event; //浏览器兼容性
+    var elem = e.target || e.srcElement;
+    while (elem) { //循环判断至跟节点，防止点击的是div子元素
+        if (elem.id && elem.id == 'test') {
+            return;
+        }
+        elem = elem.parentNode;
+    }
+    $("#bilibili-search-history").fadeOut()
+    $("#bilibili-search-suggest").fadeOut()
+});
+function setHighLight(itemDOM, keyWord) {
+    var regExp = new RegExp(keyWord, 'g');
+    var newDOM = itemDOM.replace(regExp, '<em class="suggest_high_light" >' + keyWord + '</em>');
+    return newDOM;
 }
