@@ -1,11 +1,10 @@
 package com.shield.pilipili.user;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.shield.pilipili.DateUtil;
-import com.shield.pilipili.OrderUtil;
-import com.shield.pilipili.PCategoryService;
-import com.shield.pilipili.PVideosService;
+import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.PCategory;
+import com.shield.pilipili.pojo.PSearchHot;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.vo.MessageVo;
@@ -36,6 +35,8 @@ public class SearchController {
     private PVideosService pVideosService;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Resource
+    private PSearchHotService pSearchHotService;
 
     @RequestMapping("/goSearch")
     public String goSearch(@RequestParam(defaultValue = "",required = false) String videoTitle, Model model){
@@ -60,6 +61,7 @@ public class SearchController {
     @ResponseBody
     @GetMapping("/searchHistory")
     public Object getSearchHistory(HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
         List<SearchVo> list=new ArrayList<>();
         PUserInfo pUserInfo=(PUserInfo)session.getAttribute("userSession");
         String key = pUserInfo.getUserId().toString();
@@ -73,8 +75,10 @@ public class SearchController {
             bigDecimal = BigDecimal.valueOf(next.getScore());
             list.add(new SearchVo(DateUtil.StringToDate(DateUtil.secondToTime(bigDecimal.toPlainString())),next.getValue().toString(),pUserInfo.getUserId()));
         }
-
-        return list;
+        List<PSearchHot> pSearchHots = pSearchHotService.selectHotKeyWordByDate();
+        jsonObject.put("historyList",list);
+        jsonObject.put("hot",pSearchHots);
+        return jsonObject;
     }
     @ResponseBody
     @PostMapping("/searchHistory")
@@ -95,7 +99,12 @@ public class SearchController {
             redisTemplate.opsForZSet().remove(key,value);
         }
         //加入新的记录，设置当前时间戳为分数score
-        if (redisTemplate.opsForZSet().add(key,value,System.currentTimeMillis()))flag=true;
+        if (redisTemplate.opsForZSet().add(key,value,System.currentTimeMillis())){
+            flag=true;
+            PSearchHot pSearchHot = new PSearchHot();
+            pSearchHot.setTitle(value);
+            pSearchHotService.insert(pSearchHot);
+        }
         //获取总记录数
         Long aLong = redisTemplate.opsForZSet().zCard(key);
         if(aLong > top){
@@ -106,7 +115,7 @@ public class SearchController {
     }
     @ResponseBody
     @PostMapping("/delHistory")
-    public Object delSearchHistory(@RequestParam(defaultValue = "0",required = false) String userId,@RequestParam String title,HttpSession session){
+    public Object delSearchHistory(@RequestParam(defaultValue = "0",required = false) String userId,@RequestParam String[] title,HttpSession session){
         boolean flag=false;
         String key="";
         PUserInfo pUserInfo=(PUserInfo)session.getAttribute("userSession");
@@ -114,13 +123,15 @@ public class SearchController {
         else key= pUserInfo.getUserId().toString();
         //阈值
         //新访问记录ID
-        String value  = title;
-        Double score = redisTemplate.opsForZSet().score(key, value);
-        //检索是否有旧记录  1.无则插入记录值  2.有则删除 再次插入
-        if(null != score){
-            //删除旧的
-            redisTemplate.opsForZSet().remove(key,value);
-            flag=true;
+        for (int i=0;i<title.length;i++){
+            String value  = title[i];
+            Double score = redisTemplate.opsForZSet().score(key, value);
+            //检索是否存在
+            if(null != score){
+                //删除旧的
+                redisTemplate.opsForZSet().remove(key,value);
+                flag=true;
+            }
         }
         return new MessageVo(0,""+flag);
     }

@@ -178,7 +178,9 @@ window.onscroll = function () {
     if (scrollT > 300) {
         $("ul.nav-pills").css("transform", "translateY(10%)")
     } else {
-        $("ul.nav-pills").css("transform", "translateY("+(60-scrollT/5)+"%)")
+        var score=(60-scrollT/5)
+        if (score<=10)score=10
+        $("ul.nav-pills").css("transform", "translateY("+score+"%)")
     }
     if (scrollT == scrollH - clientH) {
         console.log("到底部了");

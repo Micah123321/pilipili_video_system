@@ -18,6 +18,16 @@ $(function () {
         }
     });
 
+    loadTitleVideo=()=>{
+        var local1=document.getElementById('video');  //获取，函数执行完成后local内存释放
+        local1.autoplay = true; // 自动播放
+        local1.loop = true; // 循环播放
+        local1.muted=true; // 关闭声音，如果为false,视频无法自动播放
+        if(local1.paused){  //判断是否处于暂停状态
+            local1.play();  //开启播放
+        }
+    }
+
     ajaxSearchSuggest=(title)=>{
         $.ajax({
             url: "/search/getKeyWord",
@@ -50,13 +60,13 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 $(".bilibili-search-history").empty()
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.historyList.length; i++) {
                     $(".bilibili-search-history").append(`<li class="history-item"><a
-                                                href="/search/goSearch?videoTitle=${data[i].title}"
-                                                target="_blank">${data[i].title}</a><i onclick="delSearchHistory('${data[i].title}')"
+                                                href="/search/goSearch?videoTitle=${data.historyList[i].title}"
+                                                target="_blank">${data.historyList[i].title}</a><i onclick="delSearchHistory('${data.historyList[i].title}')"
                                                 class="bilifont bili-icon_sousuo_yichu cancel-icon"></i></li>`)
                 }
-                if (data.length>0){
+                if (data.historyList.length>0){
                     $("#bilibili-search-history").fadeIn()
                 }else{
                     $("#bilibili-search-history").fadeOut()
@@ -154,8 +164,10 @@ $(function () {
         success: function (data) {
             var menu = $("#primaryChannelMenu")
             menu.empty();
+            var isOn=""
             for (var i = 0; i < data.length; i++) {
-                menu.append(`<span> <div class="item van-popover__reference" aria-describedby="van-popover-4031" tabindex="0"><a href="/categoryinfo/${data[i].id}" class="name"><span>${data[i].categoryName}<em>${data[i].count}</em></span>
+                if (data[i].id==$('#cateId').val()||data[i].id==$('#cateParentId').val())isOn="on"; else isOn="";
+                menu.append(`<span> <div class="item van-popover__reference" aria-describedby="van-popover-4031" tabindex="0"><a href="/categoryinfo/${data[i].id}" class="name ${isOn}"><span>${data[i].categoryName}<em>${data[i].count}</em></span>
                         <!----></a></div></span>`)
             }
         }
@@ -166,6 +178,7 @@ $(function () {
     $("#bilibili-search-history").hide()
     $("#bilibili-search-suggest").hide()
     $("#van-popover-9985").hide();
+    loadTitleVideo();
     $(".img-circle").hover(function () {
         $("#van-popover-9985").fadeIn("slow")
         ajaxUserInfo()

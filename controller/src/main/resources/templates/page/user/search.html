@@ -99,7 +99,6 @@
         .video-item.matrix .hide {
             display: none;
         }
-
         .fixed-top {
             animation: fadeIn .5s;
             width: 100%;
@@ -111,21 +110,23 @@
             box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
             height: 50px
         }
-        .fixed-top div{
+        .fixed-top #test {
             position: absolute;
             height: 30px;
             bottom: -10px;
             border-radius: 4px;
         }
-        .fixed-top .search-logo{
+
+        .fixed-top .search-logo {
             margin-top: 14px;
         }
+
         body a {
             transition: none;
             -webkit-transition: none;
             -moz-transition: none;
             -o-transition: none;
-            -ms-transition:none;
+            -ms-transition: none;
         }
     </style>
 </head>
@@ -134,12 +135,46 @@
 <div class="container">
     <div class="search m-auto">
         <a href="" class="search-logo m-auto"></a>
-        <div style="margin-top: 3em;margin-left: 35%" class="input-group col-xs-4 col-sm-4 col-lg-4 col-md-4 m-auto">
+        <div id="test" style="margin-top: 3em;margin-left: 35%" class="input-group col-xs-4 col-sm-4 col-lg-4 col-md-4 m-auto">
             <input maxlength="100" autocomplete="off" type="text" class="form-control" onkeydown="onKeyDown(event)"
                    th:value="${videoTitle}"/>
             <span class="input-group-btn">
                 <button class="btn btn-info btn-search">搜索</button>
             </span>
+            <div class="suggest-wrap" style="">
+                <div class="hotword-wrap" style="">
+                    <ul class="horizontal">
+                        <li><a href="javascript:;" class="hz-text">
+                            MSI
+                        </a></li>
+                        <li><a href="javascript:;" class="hz-text">
+                            小虎中单
+                        </a></li>
+
+                    </ul>
+                </div>
+                <ul class="keyword-wrap" style="display: none;">
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>DDAMS FAMILY VALUES</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em> BEAUTIFUL MIND</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>CCA13区監察課</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>MNESIA</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>CCA13区监察课</a></li>
+                    <li><a class="vt-text keyword">奥特曼</a></li>
+                    <li><a class="vt-text keyword">奥特曼男孩</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>RGO</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>RRIVAL</a></li>
+                    <li><a class="vt-text keyword"><em class="suggest_high_light">A</em>LDNOAH.ZERO</a></li>
+                </ul>
+                <ul class="history-wrap" style="">
+                    <li class="title"><span>搜索历史</span></li>
+                    <li class="history-li"><a class="vt-text history">太对了</a><i class="clear"></i></li>
+                    <li class="history-li"><a class="vt-text history">六小龄童</a><i class="clear"></i></li>
+                    <li class="history-li"><a class="vt-text history">两只老虎</a><i class="clear"></i></li>
+                    <li class="history-li"><a class="vt-text history">aa</a><i class="clear"></i></li>
+                    <li class="history-li"><a class="vt-text history">aaa</a><i class="clear"></i></li>
+                    <li class="clearall"><a>清空搜索历史</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="v-switcher-header-tabs">

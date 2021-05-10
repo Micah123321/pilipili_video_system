@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.shield.pilipili.*;
 import com.shield.pilipili.pojo.*;
 import com.shield.pilipili.pojo.vo.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

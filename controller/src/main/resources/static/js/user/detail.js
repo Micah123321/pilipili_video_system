@@ -207,6 +207,7 @@ $(function () {
     ajaxGetVideoInfo()
     ajaxVideoInfo()
     ajaxThumbsup()
+    $(".player-auxiliary-bscrollbar").mCustomScrollbar();
 })
 var time_to_sec = function (time) {
     var s = '';

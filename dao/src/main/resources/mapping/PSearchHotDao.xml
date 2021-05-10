@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shield.pilipili.dao.PSearchHotDao">
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PSearchHot">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="searchDate" jdbcType="DATE" property="searchdate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, searchDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_search_hot
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectHotKeyWordByDate" resultType="com.shield.pilipili.pojo.PSearchHot">
+        SELECT COUNT(id) num,
+               `title`,
+               `searchDate`
+        FROM `pili`.`p_search_hot`
+        GROUP BY searchDate, title
+        ORDER BY COUNT(id) DESC
+        LIMIT 0,5
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from p_search_hot
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PSearchHot"
+            useGeneratedKeys="true">
+        insert into p_search_hot (title, searchDate)
+        values (#{title,jdbcType=VARCHAR}, now())
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PSearchHot"
+            useGeneratedKeys="true">
+        insert into p_search_hot
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                title,
+            </if>
+            <if test="searchdate != null">
+                searchDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="searchdate != null">
+                #{searchdate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PSearchHot">
+        update p_search_hot
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="searchdate != null">
+                searchDate = #{searchdate,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PSearchHot">
+        update p_search_hot
+        set title      = #{title,jdbcType=VARCHAR},
+            searchDate = #{searchdate,jdbcType=DATE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
