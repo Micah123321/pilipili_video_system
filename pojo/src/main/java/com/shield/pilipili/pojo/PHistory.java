@@ -1,5 +1,7 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.shield.pilipili.DateUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -29,7 +31,21 @@ public class PHistory implements Serializable {
     /**
      * 观看时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date viewTime;
+
+    private String viewSecond;
+
+    private String viewTimeString;
+
+    public String getViewTimeString() {
+        return viewTimeString;
+    }
+
+    public void setViewTimeString() {
+        String str=DateUtil.format(getViewTime());
+        this.viewTimeString = str;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -63,6 +79,7 @@ public class PHistory implements Serializable {
 
     public void setViewTime(Date viewTime) {
         this.viewTime = viewTime;
+        setViewTimeString();
     }
 
     public static long getSerialVersionUID() {

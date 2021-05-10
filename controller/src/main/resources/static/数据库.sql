@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.17 : Database - pili
+SQLyog Professional v12.08 (64 bit)
+MySQL - 5.7.24 : Database - pili
 *********************************************************************
 */
 
@@ -155,16 +155,17 @@ CREATE TABLE `p_history` (
   `video_id` int(11) DEFAULT NULL COMMENT '视频（来源于p_video视频表的视频id）',
   `user_id` int(11) DEFAULT NULL COMMENT '观看者（来源于pili_user用户表的用户id）',
   `viewTime` datetime DEFAULT NULL COMMENT '观看时间',
+  `viewSecond` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `video_id` (`video_id`),
   CONSTRAINT `p_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `p_user` (`uid`),
   CONSTRAINT `p_history_ibfk_2` FOREIGN KEY (`video_id`) REFERENCES `p_videos` (`video_pv`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='浏览历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='浏览历史表';
 
 /*Data for the table `p_history` */
 
-insert  into `p_history`(`id`,`video_id`,`user_id`,`viewTime`) values (1,10000,1,'2021-04-09 10:31:25');
+insert  into `p_history`(`id`,`video_id`,`user_id`,`viewTime`,`viewSecond`) values (5,10003,1,'2021-05-06 18:59:30','00:00:10'),(7,10001,1,'2021-05-10 18:59:30','00:00:10'),(8,10002,1,'2021-05-09 18:59:16','00:06:10'),(11,10002,1,'2021-05-09 18:59:30','00:06:10'),(12,10005,1,'2021-05-10 18:59:30','00:00:10'),(13,10004,1,'2021-05-10 18:00:30','00:00:10'),(14,10006,1,'2021-05-06 18:59:30','00:00:10'),(15,10003,1,'2021-05-08 18:59:30','00:00:10');
 
 /*Table structure for table `p_postip` */
 
@@ -262,7 +263,7 @@ CREATE TABLE `p_user_info` (
 
 /*Data for the table `p_user_info` */
 
-insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`,`loginDate`) values (1,1,3,3,3,1050,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','Micah','这是本站第一个用户','2021-04-20 10:44:49','2021-04-20 10:44:52','2021-05-10'),(2,2,1,1,1,260,'/uploads/defaultpic.png','你好，我是张三','张三',NULL,NULL,NULL,'2021-05-08'),(3,3,1,1,3,350,'/uploads/defaultpic.png','你好，我是李四','李四',NULL,NULL,NULL,'2021-05-07'),(4,4,1,1,4,750,'/uploads/defaultpic.png','这个人没有填简介啊~~~','王五',NULL,NULL,NULL,'2021-05-07');
+insert  into `p_user_info`(`id`,`user_id`,`subscribeNum`,`fansNum`,`level`,`experience`,`user_pic`,`up_desc`,`nickName`,`up_spaceNotice`,`createTime`,`birthday`,`loginDate`) values (1,1,3,3,5,10110,'/uploads/877514110aa3427f943ddc7dd55ef48aa7bf8942.jpg@96w_96h_1c.webp','这是本站第一个用户','Micah','这是本站第一个用户','2021-04-20 10:44:49','2021-04-20 10:44:52','2021-05-10'),(2,2,1,1,1,260,'/uploads/defaultpic.png','你好，我是张三','张三',NULL,NULL,NULL,'2021-05-08'),(3,3,1,1,3,350,'/uploads/defaultpic.png','你好，我是李四','李四',NULL,NULL,NULL,'2021-05-07'),(4,4,1,1,4,750,'/uploads/defaultpic.png','这个人没有填简介啊~~~','王五',NULL,NULL,NULL,'2021-05-07');
 
 /*Table structure for table `p_videos` */
 
