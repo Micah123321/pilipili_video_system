@@ -103,6 +103,26 @@ $(function () {
             }
         })
     }
+    ajaxSetHistory=()=>{
+        var viewSecond=$(".yzmplayer-ptime").text()
+        if (viewSecond==""||viewSecond==null){
+            viewSecond="00:00:00"
+        }
+        $.ajax({
+            url: "/history/post",
+            type: "post",
+            data: {
+                videoId: $("#pv").val(),
+                viewSecond
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 0)
+                    console.log("记录历史")
+            }
+        })
+    }
+
     ajaxUpdatePlay = () => {
         var second = $(".yzmplayer-dtime").text()
         var videoTimeSecond = time_to_sec(second)
@@ -209,6 +229,7 @@ $(function () {
     ajaxThumbsup()
     $(".player-auxiliary-bscrollbar").mCustomScrollbar();
 })
+
 var time_to_sec = function (time) {
     var s = '';
     var timearr = time.split(':');
@@ -238,3 +259,4 @@ function count(o){
     }
     return false;
 }
+setInterval(ajaxSetHistory,150000)

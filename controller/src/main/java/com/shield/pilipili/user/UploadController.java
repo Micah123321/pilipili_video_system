@@ -19,9 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class UploadController {
@@ -82,14 +80,14 @@ public class UploadController {
     @PostMapping(value = "/video/change", produces = "application/json;charset=utf-8")
     @ResponseBody
     public Object insertVideo(PVideos pVideos, String videoReleasetimeSecond, String videoTimeSecond, HttpSession session) throws ParseException {
+
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession == null) {
             return "error";
         }
-        SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat ftb = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Long b = new Double(Double.parseDouble(videoTimeSecond)).longValue();
-        Date date = ft.parse(DateUtil.secondToDate(b, "hh:mm:ss"));
+        Date date =DateUtil.dayAddAndSub(Calendar.HOUR,-8, DateUtil.toDate(DateUtil.secondToDate(b, "HH:mm:ss"),"HH:mm:ss")) ;
 
         Integer userId = userSession.getUserId();
         pVideos.setVideoUserid(userId);

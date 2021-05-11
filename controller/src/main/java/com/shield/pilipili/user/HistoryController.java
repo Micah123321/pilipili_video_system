@@ -1,15 +1,16 @@
 package com.shield.pilipili.user;
 
 import com.shield.pilipili.PHistoryService;
+import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.Pagen;
 import com.shield.pilipili.pojo.page.PHistoryPage;
+import com.shield.pilipili.pojo.vo.MessageVo;
+import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HistoryController {
@@ -32,5 +33,39 @@ public class HistoryController {
     @RequestMapping("/history")
     public String toHistory(){
         return "/page/user/history";
+    }
+
+    @ResponseBody
+    @GetMapping("/history/del")
+    public Object delHistoryByUid(HttpSession session,PHistoryPage pHistoryPage){
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            return new MessageVo(false);
+        }
+        pHistoryPage.setUserId(userSession.getUserId());
+        if (pHistoryService.selectByPHistory(pHistoryPage)!=null){
+            if(pHistoryService.deleteByPHistory(pHistoryPage)>0)return new MessageVo(true);
+        }
+        return new MessageVo(false);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/history/post", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public Object setHistoryByUid(PHistoryPage pHistoryPage, HttpSession session){
+        PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
+        if (userSession==null){
+            return new MessageVo(false);
+        }
+        pHistoryPage.setUserId(userSession.getUserId());
+        if (pHistoryService.selectByPHistory(pHistoryPage)!=null){
+            pHistoryService.updateByPHistory(pHistoryPage);
+            return new MessageVo(true);
+        }else{
+            if(pHistoryService.insert(pHistoryPage)>0){
+                return new MessageVo(true);
+            }else{
+                return new MessageVo(false);
+            }
+        }
     }
 }

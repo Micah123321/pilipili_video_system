@@ -127,7 +127,7 @@
             e = e || {};
             var t = "", n = e.enableSubtitle, a = e.subtitle, o = e.current, s = e.pic, r = i.$escape, l = e.screenshot,
                 c = e.preload, u = e.url, n = a && "webvtt" === a.type;
-            return t += '\n<video\n    class="yzmplayer-video ', o && (t += "yzmplayer-video-current"), t += '"\n    webkit-playsinline\n    playsinline\n    ', s && (t += 'poster="', t += r(s), t += '"'), t += "\n    ", (l || n) && (t += 'crossorigin="anonymous"'), t += "\n    ", c && (t += 'preload="', t += r(c), t += '"'), t += "\n    ", u && (t += 'src="', t += r(u), t += '"'), t += "\n    >\n    ", n && (t += '\n    <track kind="metadata" default src="', t += r(a.url), t += '"></track>\n    '), t += "\n</video>"
+            return t += '\n<video\n     class="yzmplayer-video ', o && (t += "yzmplayer-video-current"), t += '"\n    webkit-playsinline\n    playsinline\n    ', s && (t += 'poster="', t += r(s), t += '"'), t += "\n    ", (l || n) && (t += 'crossorigin="anonymous"'), t += "\n    ", c && (t += 'preload="', t += r(c), t += '"'), t += "\n    ", u && (t += 'src="', t += r(u), t += '"'), t += "\n    >\n    ", n && (t += '\n    <track kind="metadata" default src="', t += r(a.url), t += '"></track>\n    '), t += "\n</video>"
         }
     }, function (e, t, n) {
         "use strict";

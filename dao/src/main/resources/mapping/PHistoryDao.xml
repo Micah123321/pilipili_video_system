@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PHistoryDao">
-    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PHistory">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="viewTime" jdbcType="TIMESTAMP" property="viewTime"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id
-        , video_id, user_id, viewTime
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from p_history
-        where id = #{id,jdbcType=BIGINT}
+    <select id="selectByPHistory" resultType="com.shield.pilipili.pojo.PHistory">
+        SELECT `id`,
+               `video_id`,
+               `user_id`,
+               `viewTime`,
+               `viewSecond`
+        FROM `pili`.`p_history`
+        WHERE video_id = #{videoId}
+          AND user_id = #{userId}
+        limit 0,1
+
     </select>
     <select id="selectHistoryByUid" resultType="com.shield.pilipili.pojo.page.PHistoryPage">
         SELECT
+        h.id,
         h.`video_id` videoId,
         h.`user_id` userId,
         `viewTime` ,
@@ -38,7 +35,8 @@
             AND c.`id`=v.`video_type`
             AND h.`user_id`=#{userId}
             <if test="videoTitle !=null and videoTitle!=''">
-                and video_title like concat('%',#{videoTitle},'%')
+                and (video_title like concat('%',#{videoTitle},'%')
+                OR to_pinyin(video_title) LIKE CONCAT('%', #{videoTitle}, '%'))
             </if>
         </where>
         ORDER BY viewTime DESC
@@ -47,62 +45,24 @@
         </if>
 
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPHistory">
         delete
         from p_history
-        where id = #{id,jdbcType=BIGINT}
+        where video_id = #{videoId}
+          and user_id = #{userId}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PHistory"
             useGeneratedKeys="true">
-        insert into p_history (video_id, user_id, viewTime)
-        values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{viewtime,jdbcType=TIMESTAMP})
+        insert into p_history (video_id, user_id, viewTime, viewSecond)
+        values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, now(), #{viewSecond})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PHistory"
-            useGeneratedKeys="true">
-        insert into p_history
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="videoId != null">
-                video_id,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="viewtime != null">
-                viewTime,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="videoId != null">
-                #{videoId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="viewtime != null">
-                #{viewtime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PHistory">
+    <update id="updateByPHistory" parameterType="com.shield.pilipili.pojo.PHistory">
         update p_history
         <set>
-            <if test="videoId != null">
-                video_id = #{videoId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="viewtime != null">
-                viewTime = #{viewtime,jdbcType=TIMESTAMP},
-            </if>
+            viewTime = now(),
+            viewSecond=#{viewSecond}
         </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PHistory">
-        update p_history
-        set video_id = #{videoId,jdbcType=INTEGER},
-            user_id  = #{userId,jdbcType=INTEGER},
-            viewTime = #{viewtime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
+        WHERE video_id=#{videoId}
+        AND user_id=#{userId}
     </update>
 </mapper>

@@ -34,7 +34,7 @@ public class PHistory implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date viewTime;
 
-    private String viewSecond;
+    private String viewSecond="00:00:00";
 
     private String viewTimeString;
 

@@ -32,18 +32,22 @@ public class PHistoryVo extends PHistory {
 
         String[] videoTimeArr = getVideoTime().split(":");
         String[] viewSecondArr = getViewSecond().split(":");
-        double integer = mathArrString(viewSecondArr);
-        double integer1 = mathArrString(videoTimeArr);
-        double d=integer/integer1*100;
+        double d=mathArrString(viewSecondArr)/mathArrString(videoTimeArr)*100;
         this.loadBar = d;
     }
 
     private double mathArrString(String[] arr){
         double integer=0;
-        int i = Integer.parseInt(arr[2]);
-        int i1 = Integer.parseInt(arr[1]) * 60;
-        int i2 = Integer.parseInt(arr[0]) * 3600;
-        integer=i+i1+i2;
+        if (arr.length==3){
+            int i = Integer.parseInt(arr[2]);
+            int i1 = Integer.parseInt(arr[1]) * 60;
+            int i2 = Integer.parseInt(arr[0]) * 3600;
+            integer=i+i1+i2;
+        }else{
+            int i1 = Integer.parseInt(arr[1]);
+            int i2 = Integer.parseInt(arr[0]) * 60;
+            integer=i1+i2;
+        }
         return integer;
     }
 }

@@ -8424,7 +8424,7 @@
     <script src="/js/hls.min.js"></script>
     <script type="text/javascript" src="/js/fore/jquery.mCustomScrollbar.concat.min.js"></script>
 </head>
-<body>
+<body onbeforeunload="ajaxSetHistory()">
 <div th:replace="/page/user/header :: html"></div>
 <input type="hidden" th:value="${pv}" id="pv">
 <input type="hidden" id="userId">

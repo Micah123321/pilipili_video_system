@@ -14,4 +14,15 @@ public class MessageVo {
         this.code = code;
         this.message = message;
     }
+    public MessageVo(boolean flag) {
+        if (flag){
+            this.code = 0;
+            this.message = "ok";
+        }else {
+            this.code = -1;
+            this.message = "error";
+        }
+    }
+
+
 }

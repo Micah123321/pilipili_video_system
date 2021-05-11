@@ -7,8 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class DateUtil {
+
     public static final String PATTEN_DEFAULT_YMD = "yyyy-MM-dd";
 
     /**
@@ -20,7 +22,7 @@ public class DateUtil {
      * @return
      */
     public static String secondToTime(String time) {
-        String dateStr = "1970-1-1 08:00:00";
+        String dateStr = "1970-1-1 00:00:00";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (time.equals("0")) {
             return "";
@@ -39,7 +41,7 @@ public class DateUtil {
     }
 
     public static String secondToTimeEight(String time) {
-        String dateStr = "1970-1-1 08:00:00";
+        String dateStr = "1970-1-1 00:00:00";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (time.equals("0")) {
             return "";
@@ -66,6 +68,7 @@ public class DateUtil {
      * @return
      */
     public static String secondToDate(long second, String patten) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(second * 1000);//转换为毫秒
         Date date = calendar.getTime();
@@ -121,6 +124,7 @@ public class DateUtil {
      */
     public static Date toDate(String str, String pattern) {
         DateFormat format = new SimpleDateFormat(pattern);
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         try {
             Date date = format.parse(str);
             return date;
@@ -138,6 +142,7 @@ public class DateUtil {
      */
     public static String d2String(Date date, String pattern) {
         DateFormat format = new SimpleDateFormat(pattern);
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return format.format(date);
     }
 
@@ -161,6 +166,22 @@ public class DateUtil {
 
         return new DateTime(date).toString("yyyy-MM-dd HH:mm");
     }
-
+    /**
+     * 日期的加减方法
+     * 用于在当前的天或者小时或者分钟或者月份的基础上加上或者减去若干小时，分钟，日，月
+     * @param currentDay 当前月份的某一天
+     * @param day (Calendar.DATE 天 Calendar.HOUR 小时 Calendar.MINUTE 分钟 Calendar.MONTH 月)需要加上的天数或者需要减去的天数，
+     * 例如：加上10天：(Calendar.DATE,10）减去十天：(Calendar.DATE,-10)
+     * @return 返回加上或者减去的那个日期
+     * @author 程熙
+     * ${2013-11-19}
+     */
+    public static Date dayAddAndSub(int currentDay,int day,Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(currentDay, day);
+        Date startDate = calendar.getTime();
+        return startDate;
+    }
 
 }

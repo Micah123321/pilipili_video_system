@@ -8,15 +8,12 @@ import java.util.List;
 public interface PHistoryDao {
     List<PHistoryPage> selectHistoryByUid(PHistoryPage pHistoryPage);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPHistory(PHistory record);
 
     int insert(PHistory record);
 
-    int insertSelective(PHistory record);
+    int updateByPHistory(PHistory record);
 
-    PHistory selectByPrimaryKey(Long id);
+    PHistory selectByPHistory(PHistory record);
 
-    int updateByPrimaryKeySelective(PHistory record);
-
-    int updateByPrimaryKey(PHistory record);
 }

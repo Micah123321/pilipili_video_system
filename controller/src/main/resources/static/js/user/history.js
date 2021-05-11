@@ -3,6 +3,25 @@ $(function () {
         $(".history-list").empty()
         ajaxHistory()
     })
+    ajaxDelHistory=(videoId)=>{
+
+        var userId=$("#userId").val();
+        $.ajax({
+            url: "/history/del",
+            type: "get",
+            dataType: "json",
+            data: {
+                userId,
+                videoId
+            },
+            success: function (data) {
+                if (data.code==0){
+                    $(".history-list").empty()
+                    ajaxHistory()
+                }
+            }
+        })
+    }
     ajaxHistory = () => {
         var userId=$("#userId").val();
         var videoTitle=$(".b-head-search_input").val();
@@ -32,7 +51,7 @@ $(function () {
                     </a>
                         <div class="info"></div>
                         <div class="progress-c">
-                            <div class="progress" style="width: ${obj.loadBar}px;"></div>
+                            <div class="progress" style="width: ${obj.loadBar}%;"></div>
                         </div>
                     </div>
                     <div class="r-txt"><a class="title" target="_blank" href="/pv${obj.videoId}">${obj.videoTitle}</a>
@@ -40,7 +59,7 @@ $(function () {
                         <div class="w-info">
                             <div class="time-wrap"><i class="device bilifont bili-PC"></i> <span class="pro-txt progress"><span>${obj.viewSecond}</span>&nbsp;&nbsp;</span></div>
                             <span> <a href="/user/space/${obj.videoUserId}"> <div class="lazy-img userpic"> <img alt="" src="${obj.videoUserImage}"> </div> <span class="username">${obj.videoUserName}</span> </a> <span class="name">${obj.categoryName}</span> </span></div>
-                        <i class="history-delete bilifont bili-shanchu"></i></div>
+                        <i onclick="ajaxDelHistory(${obj.videoId})" class="history-delete bilifont bili-shanchu"></i></div>
                 </div>
             </li>`)
                 }
