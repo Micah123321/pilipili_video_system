@@ -32,7 +32,7 @@
                                                                src="//s1.hdslb.com/bfs/static/history-record/./img/cancel.png">
                 </div>
             </div>
-            <div class="history-btn" _v-0a0880cb=""><a href="#" class="btn cleanhsbtn">清空历史</a></div>
+            <div class="history-btn" _v-0a0880cb=""><a href="javascript:void (0)" id="cleanHistory"  class="btn cleanhsbtn">清空历史</a></div>
         </div>
     </div>
     <div style="display: none;">
@@ -56,10 +56,10 @@
             <div class="txt" _v-9e5d51c4=""><p _v-9e5d51c4=""></p></div>
         </div>
     </div>
-    <div class="dlg-contain" style="display: none;">
+    <div  class="dlg-contain" style="display: none;">
         <div class="hsmask"></div>
-        <div class="history-dlg"><p class="dlg-txt">啊叻？你要暂停历史记录功能吗？</p>
-            <div class="hsbtn clearfix"><a href="#" class="sure">确定暂停</a> <a href="#" class="cancel">取消</a></div>
+        <div id="delAll" class="history-dlg"><p class="dlg-txt">啊叻？你确定要删除所有历史吗？</p>
+            <div class="hsbtn clearfix"><a onclick="ajaxDelHistory(null,1)" href="#" class="sure">确定删除</a> <a href="#"  class="cancel">取消</a></div>
         </div>
     </div>
     <div class="go-top-m" _v-7ed6730a="" style="display: none;">

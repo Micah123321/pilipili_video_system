@@ -3,16 +3,25 @@ $(function () {
         $(".history-list").empty()
         ajaxHistory()
     })
-    ajaxDelHistory=(videoId)=>{
-
+    $(".cleanhsbtn").click(function () {
+        $(".dlg-contain").show()
+    })
+    $(".history-dlg .cancel").click(function () {
+        $(".dlg-contain").hide()
+    })
+    ajaxDelHistory=(videoId,isDelAll)=>{
         var userId=$("#userId").val();
+        if (isDelAll){
+            $(".dlg-contain").hide()
+        }
         $.ajax({
             url: "/history/del",
             type: "get",
             dataType: "json",
             data: {
                 userId,
-                videoId
+                videoId,
+                isDelAll
             },
             success: function (data) {
                 if (data.code==0){
@@ -59,7 +68,7 @@ $(function () {
                         <div class="w-info">
                             <div class="time-wrap"><i class="device bilifont bili-PC"></i> <span class="pro-txt progress"><span>${obj.viewSecond}</span>&nbsp;&nbsp;</span></div>
                             <span> <a href="/user/space/${obj.videoUserId}"> <div class="lazy-img userpic"> <img alt="" src="${obj.videoUserImage}"> </div> <span class="username">${obj.videoUserName}</span> </a> <span class="name">${obj.categoryName}</span> </span></div>
-                        <i onclick="ajaxDelHistory(${obj.videoId})" class="history-delete bilifont bili-shanchu"></i></div>
+                        <i onclick="ajaxDelHistory(${obj.videoId},0)" class="history-delete bilifont bili-shanchu"></i></div>
                 </div>
             </li>`)
                 }
@@ -98,3 +107,14 @@ function setHighLight(itemDOM, keyWord,css) {
     var newDOM = itemDOM.replace(regExp, '<em class="'+css+'" >' + keyWord + '</em>');
     return newDOM;
 }
+$(document).bind('click', function (e) {
+    var e = e || window.event; //浏览器兼容性
+    var elem = e.target || e.srcElement;
+    while (elem) { //循环判断至跟节点，防止点击的是div子元素
+        if (elem.id && elem.id == 'delAll' || elem.id=="cleanHistory") {
+            return;
+        }
+        elem = elem.parentNode;
+    }
+    $(".dlg-contain").hide()
+});

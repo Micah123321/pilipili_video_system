@@ -37,13 +37,15 @@ public class HistoryController {
 
     @ResponseBody
     @GetMapping("/history/del")
-    public Object delHistoryByUid(HttpSession session,PHistoryPage pHistoryPage){
+    public Object delHistoryByUid(HttpSession session,PHistoryPage pHistoryPage,Integer isDelAll){
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession==null){
             return new MessageVo(false);
         }
         pHistoryPage.setUserId(userSession.getUserId());
-        if (pHistoryService.selectByPHistory(pHistoryPage)!=null){
+        if (isDelAll>0){
+            if(pHistoryService.deleteByUserId(pHistoryPage.getUserId())>0)return new MessageVo(true);
+        }else if (pHistoryService.selectByPHistory(pHistoryPage)!=null){
             if(pHistoryService.deleteByPHistory(pHistoryPage)>0)return new MessageVo(true);
         }
         return new MessageVo(false);

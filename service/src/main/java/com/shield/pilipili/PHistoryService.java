@@ -8,6 +8,8 @@ import java.util.List;
 public interface PHistoryService {
     List<PHistoryPage> selectHistoryByUid(PHistoryPage pHistoryPage);
 
+    int deleteByUserId(Integer userId );
+
     int deleteByPHistory(PHistory record);
 
     int insert(PHistory record);

@@ -19,6 +19,11 @@ public class PHistoryServiceImpl implements PHistoryService{
     }
 
     @Override
+    public int deleteByUserId(Integer userId) {
+        return pHistoryDao.deleteByUserId(userId);
+    }
+
+    @Override
     public int deleteByPHistory(PHistory record) {
         return pHistoryDao.deleteByPHistory(record);
     }

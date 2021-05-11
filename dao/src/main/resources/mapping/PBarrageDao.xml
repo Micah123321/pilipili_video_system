@@ -10,7 +10,8 @@
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, video_id, content, videotime, createTime
+        id
+        , user_id, video_id, content, videotime, createTime
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -50,26 +51,35 @@
         FROM `pili`.`p_barrage`
         WHERE video_id = #{pv}
     </select>
-    <select id="getBarrByUserId" resultType="com.shield.pilipili.pojo.vo.PBarrageVo">
+    <select id="getBarrByUserId" resultType="com.shield.pilipili.pojo.page.PBarragePage">
         SELECT u.`nickName`,
-               b.id id,
-               video_title videoTitle,
-               b.video_id  videoId,
-               b.user_id   userId,
-               `content`,
-               `videotime`,
-               `videotime` barrageTime,
-               b.`createTime`,
-               b.`createTime` barrageCreateTime,
-               b.`type`,
-               `color`
+        b.id id,
+        video_title videoTitle,
+        b.video_id videoId,
+        b.user_id userId,
+        `content`,
+        `videotime`,
+        `videotime` barrageTime,
+        b.`createTime`,
+        b.`createTime` barrageCreateTime,
+        b.`type`,
+        `color`
         FROM `pili`.`p_barrage` b,
-             p_videos v,
-             p_user_info u
-        WHERE b.user_id = u.user_id
-          AND v.video_pv = b.video_id
-          AND v.video_userid = #{userId}
-
+        p_videos v,
+        p_user_info u
+        <where>b.user_id = u.user_id
+            AND v.video_pv = b.video_id
+            AND v.video_userid = #{userId}
+            <if test="videoId > 0 ">
+                and b.video_id=#{videoId}
+            </if>
+            <if test="content != null and content != ''">
+                and content like concat('%',#{content},'%')
+            </if>
+        </where>
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete

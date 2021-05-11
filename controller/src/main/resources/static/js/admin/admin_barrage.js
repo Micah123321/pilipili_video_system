@@ -1,14 +1,29 @@
 $(function () {
+    $("#videoId").click(function () {
+        $("#videoTitleList").slideDown()
+    })
     ajaxbarrageList=()=>{
+        var currPage=$("#currPage").val();
+        var videoId=$("#videoId").val();
+        var title=$("#content").val();
+        if (videoId==null||videoId==""){
+            videoId=0
+        }
         $.ajax({
             url: "/admin/barrage/get",
             type: "get",
             dataType: "json",
+            data:{
+                currPage,
+                videoId,
+                "content":title
+            },
             success: function (data) {
                 var tbody=$(".bcc-table__align-left tbody")
-                tbody.empty()
-                for (var i = 0; i < data.length; i++){
-                    var dx=data[i]
+                $("#currPage").val(data.currPageNo)
+                $("#totalPageCount").val(data.totalPageCount)
+                for (var i = 0; i < data.dataList.length; i++){
+                    var dx=data.dataList[i]
                     tbody.append(`<tr class="bcc-table__tr-hover">
                     <td class="bcc-table__row-selection">
                         <div class="bcc-table__cell"><label class="bcc-checkbox"><span class="bcc-checkbox-checkbox"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i><input type="checkbox" name="默认" aria-hidden="true" value=""></span><span class="bcc-checkbox-label"></span></label></div>
@@ -43,8 +58,34 @@ $(function () {
             }
         })
     }
-    $(".cancel.refresh").click(function () {
+    $(".cancel.refresh,.bcc-iconfont.bcc-icon-ic_search_.search").click(function () {
+        $(".bcc-table__align-left tbody").empty()
+        $("#currPage").val(1)
         ajaxbarrageList()
     })
     ajaxbarrageList()
 })
+window.onscroll = function () {
+    var scrollT = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrollH = document.documentElement.scrollHeight || document.body.scrollHeight;
+    var clientH = document.documentElement.clientHeight || document.body.clientHeight
+    if (scrollT == scrollH - clientH) {
+        if ($("#currPage").val()<$("#totalPageCount").val()){
+            $("#currPage").val(Number($("#currPage").val())+1)
+            ajaxbarrageList()
+        }
+    } else if (scrollT == 0) {
+        console.log("到顶部了");
+    }
+}
+$(document).bind('click', function (e) {
+    var e = e || window.event; //浏览器兼容性
+    var elem = e.target || e.srcElement;
+    while (elem) { //循环判断至跟节点，防止点击的是div子元素
+        if (elem.id && elem.id == 'videoTitleList'||elem.id == 'videoId') {
+            return;
+        }
+        elem = elem.parentNode;
+    }
+    $("#videoTitleList").slideUp()
+});

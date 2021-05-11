@@ -40,10 +40,9 @@ $(function () {
         if (cateId=="自增长"){
             cateId="0"
         }
+
         var parentId=$("#catelv1").val()
-        if (parentId==""||parentId==null){
-            parentId=1
-        }
+
         $.ajax({
             url: "admin/categoryinfo/edit",
             type: "post",

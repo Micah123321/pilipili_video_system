@@ -1,6 +1,7 @@
 package com.shield.pilipili;
 
 import com.shield.pilipili.pojo.PBarrage;
+import com.shield.pilipili.pojo.page.PBarragePage;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +14,7 @@ public interface PBarrageService {
      * @param userId
      * @return
      */
-    List<PBarrageVo> getBarrByUserId(int userId);
+    List<PBarragePage> getBarrByUserId(PBarragePage pBarragePage);
     /**
      * 根据用户id获得该用户名下视频的所有弹幕数
      * @param id

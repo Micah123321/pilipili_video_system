@@ -2,6 +2,7 @@ package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PBarrage;
 import com.shield.pilipili.pojo.PComment;
+import com.shield.pilipili.pojo.page.PBarragePage;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +26,7 @@ public interface PBarrageDao {
      * @param userId
      * @return
      */
-    List<PBarrageVo> getBarrByUserId(int userId);
+    List<PBarragePage> getBarrByUserId(PBarragePage pBarragePage);
     /**
      *
      * @param id

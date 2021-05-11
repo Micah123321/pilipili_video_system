@@ -3,6 +3,7 @@ package com.shield.pilipili.impl;
 import com.shield.pilipili.PBarrageService;
 import com.shield.pilipili.dao.PBarrageDao;
 import com.shield.pilipili.pojo.PBarrage;
+import com.shield.pilipili.pojo.page.PBarragePage;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ public class PBarrageServiceImpl implements PBarrageService {
     private PBarrageDao pBarrageDao;
 
     @Override
-    public List<PBarrageVo> getBarrByUserId(int userId) {
-        return pBarrageDao.getBarrByUserId(userId);
+    public List<PBarragePage> getBarrByUserId(PBarragePage pBarragePage) {
+        return pBarrageDao.getBarrByUserId(pBarragePage);
     }
 
     @Override

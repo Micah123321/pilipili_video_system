@@ -10,6 +10,8 @@ public interface PHistoryDao {
 
     int deleteByPHistory(PHistory record);
 
+    int deleteByUserId(Integer userId );
+
     int insert(PHistory record);
 
     int updateByPHistory(PHistory record);

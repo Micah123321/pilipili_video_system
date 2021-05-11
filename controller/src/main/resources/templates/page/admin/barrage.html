@@ -7,6 +7,8 @@
 </head>
 <body>
 <script src="/js/admin/admin_barrage.js"></script>
+<input type="hidden" id="currPage" value="1">
+<input type="hidden" id="totalPageCount">
 <div data-v-ce960b12="" class="interActive-wrap cc-content-body">
     <div data-v-ce960b12="" class="new-link-top-wrap">
         <div id="tab-container" class="new-link-top-container"><a href="/platform/inter-active/danmu"
@@ -145,10 +147,10 @@
                 </div> <!----></div>
             <div data-v-716b6222="" class="right_wrap">
                 <div data-v-6c40e918="" data-v-716b6222="" class="bcc-select" style="width: 208px;">
-                    <div class="bcc-select-input-wrap"><input type="text" readonly="readonly" placeholder="请选择内容"
+                    <div class="bcc-select-input-wrap"><input id="videoId" type="text" readonly="readonly" placeholder="请选择内容"
                                                               class="bcc-select-input-inner"><i
                             class="bcc-iconfont bcc-icon-ic_drop-down"></i></div>
-                    <div class="bcc-select-list-wrap" style="display: none;">
+                    <div id="videoTitleList" class="bcc-select-list-wrap" style="display: none;">
                         <ul class="bcc-select-option-list">
                             <div data-v-6c40e918="" class="search-input">
                                 <div data-v-6c40e918="" class="bcc-input  "><input placeholder="输入视频搜索关键字"
@@ -231,7 +233,7 @@
         <div data-v-716b6222="" class="dm-log_wrap"><!----></div>
         <div data-v-716b6222="" class="tab-operate">
             <div data-v-716b6222="" class="input_wrap">
-                <div data-v-716b6222="" class="bcc-input  "><input placeholder="搜索弹幕关键字" spellcheck="false"
+                <div data-v-716b6222="" class="bcc-input  "><input id="content" placeholder="搜索弹幕关键字" spellcheck="false"
                                                                    maxlength="999" minlength="0" type="text"
                                                                    class="bcc-input-inner input"><!----></div>
                 <i data-v-716b6222="" class="bcc-iconfont bcc-icon-ic_search_ search"></i></div> <!----></div>

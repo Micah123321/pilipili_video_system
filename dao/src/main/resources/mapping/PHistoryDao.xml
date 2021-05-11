@@ -51,6 +51,11 @@
         where video_id = #{videoId}
           and user_id = #{userId}
     </delete>
+    <delete id="deleteByUserId">
+        delete
+        from p_history
+        where user_id = #{userId}
+    </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PHistory"
             useGeneratedKeys="true">
         insert into p_history (video_id, user_id, viewTime, viewSecond)
