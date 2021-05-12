@@ -6,9 +6,12 @@
     <link href="/css/barrage.css" type="text/css" rel="stylesheet" media="all">
 </head>
 <body>
+<script src="/js/plugins/model.js"></script>
 <script src="/js/admin/admin_barrage.js"></script>
 <input type="hidden" id="currPage" value="1">
 <input type="hidden" id="totalPageCount">
+<input type="hidden" id="titleCurrPage" value="1">
+<input type="hidden" id="titleTotalPageCount">
 <div data-v-ce960b12="" class="interActive-wrap cc-content-body">
     <div data-v-ce960b12="" class="new-link-top-wrap">
         <div id="tab-container" class="new-link-top-container"><a href="/platform/inter-active/danmu"
@@ -147,18 +150,18 @@
                 </div> <!----></div>
             <div data-v-716b6222="" class="right_wrap">
                 <div data-v-6c40e918="" data-v-716b6222="" class="bcc-select" style="width: 208px;">
-                    <div class="bcc-select-input-wrap"><input id="videoId" type="text" readonly="readonly" placeholder="请选择内容"
+                    <div class="bcc-select-input-wrap"><input title="0" id="videoId" type="text" readonly="readonly" placeholder="请选择内容"
                                                               class="bcc-select-input-inner"><i
                             class="bcc-iconfont bcc-icon-ic_drop-down"></i></div>
                     <div id="videoTitleList" class="bcc-select-list-wrap" style="display: none;">
                         <ul class="bcc-select-option-list">
                             <div data-v-6c40e918="" class="search-input">
-                                <div data-v-6c40e918="" class="bcc-input  "><input placeholder="输入视频搜索关键字"
+                                <div data-v-6c40e918="" class="bcc-input  "><input id="titleSearch" placeholder="输入视频搜索关键字"
                                                                                    spellcheck="false" maxlength="999"
                                                                                    minlength="0" type="text"
                                                                                    class="bcc-input-inner input"><!---->
                                 </div>
-                                <i data-v-6c40e918="" class="bcc-iconfont bcc-icon-ic_search_ search"></i></div>
+                                <i id="titleSearchIcon" data-v-6c40e918="" class="bcc-iconfont bcc-icon-ic_search_ search"></i></div>
                             <div data-v-6c40e918="" class="search-list">
                                 <div data-v-6c40e918="" style="overflow: hidden;">
                                     <li data-v-6c40e918="" class="bcc-option selected" data-reporter-id="353">
@@ -202,32 +205,6 @@
                         </ul>
                     </div>
                 </div>
-                <div data-v-262a8c1b="" data-v-716b6222="" class="dm-transform_wrapper last">
-                    <div data-v-262a8c1b="" class="select_wrap disabled"><span data-v-262a8c1b="">全部视频</span> <i
-                            data-v-262a8c1b="" class="bcc-iconfont bcc-icon-ic_drop-down"></i></div>
-                    <div data-v-262a8c1b="" class="table_wrap" style="display: none;">
-                        <div data-v-262a8c1b="" class="head_wrap">
-                            <div data-v-262a8c1b="" class="btn_wrap">
-                                <div data-v-016fc23b="" data-v-262a8c1b="" class="text-split_wrap">
-                                    <div data-v-016fc23b="" class="split-item operate-txt active">
-                                        <div data-v-262a8c1b="" data-v-016fc23b="">按分p排序</div>
-                                    </div>
-                                    <div data-v-016fc23b="" class="split-item operate-txt">
-                                        <div data-v-262a8c1b="" data-v-016fc23b="">按时间排序</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-v-262a8c1b="" class="bcc-search-input-wrapper"><input type="text"
-                                                                                            placeholder="请输入搜索关键字"
-                                                                                            spellcheck="false"
-                                                                                            class="bcc-search-input"><i
-                                    class="search-input bcc-iconfont bcc-icon-ic_search_"></i></div>
-                        </div>
-                        <div data-v-262a8c1b="" class="body_wrap">
-                            <div data-v-262a8c1b="" class="content_wrap"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div data-v-716b6222="" class="dm-log_wrap"><!----></div>
@@ -236,14 +213,14 @@
                 <div data-v-716b6222="" class="bcc-input  "><input id="content" placeholder="搜索弹幕关键字" spellcheck="false"
                                                                    maxlength="999" minlength="0" type="text"
                                                                    class="bcc-input-inner input"><!----></div>
-                <i data-v-716b6222="" class="bcc-iconfont bcc-icon-ic_search_ search"></i></div> <!----></div>
+                <i data-v-716b6222="" id="contentSearch" class="bcc-iconfont bcc-icon-ic_search_ search"></i></div> <!----></div>
         <div data-v-716b6222="" class="bcc-table__wrap"><!---->
             <table cellspacing="0" cellpadding="0" border="0" class="bcc-table__align-left">
                 <thead>
                 <tr>
                     <th class="bcc-table__row-selection">
-                        <div class="bcc-table__cell"><label class="bcc-checkbox"><span class="bcc-checkbox-checkbox"><i
-                                class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i><input type="checkbox" name="默认"
+                        <div class="bcc-table__cell"><label id="allCheck" class="bcc-checkbox"><span class="bcc-checkbox-checkbox"><i
+                                class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i><input  onclick="allCheckboxCheck(this)" type="checkbox" name="默认"
                                                                                             aria-hidden="true" value=""></span><span
                                 class="bcc-checkbox-label"></span></label></div>
                     </th>
@@ -269,49 +246,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="bcc-table__tr-hover">
-                    <td class="bcc-table__row-selection">
-                        <div class="bcc-table__cell"><label class="bcc-checkbox"><span class="bcc-checkbox-checkbox"><i
-                                class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i><input type="checkbox" name="默认"
-                                                                                            aria-hidden="true" value=""></span><span
-                                class="bcc-checkbox-label"></span></label></div>
-                    </td>
-                    <td style="font-size: 14px; color: rgb(117, 117, 117); line-height: 18px; font-weight: normal; width: 9.375%;">
-                        <div class="bcc-table__cell"><a data-v-716b6222="" href="//space.bilibili.com/91801122"
-                                                        target="_blank" class="colum-content ellipsis">叫Micah吖</a></div>
-                    </td>
-                    <td style="font-size: 14px; color: rgb(117, 117, 117); line-height: 18px; font-weight: normal; text-align: center; width: 10.4167%;">
-                        <div class="bcc-table__cell">
-                            <div data-v-716b6222="" class="colum-content">00:00</div>
-                        </div>
-                    </td>
-                    <td style="font-size: 14px; color: rgb(117, 117, 117); line-height: 18px; font-weight: normal; width: 12.5%;">
-                        <div class="bcc-table__cell"><span data-v-716b6222="" class="danmu-rencent"><a
-                                data-v-716b6222="" target="_blank" href="//www.bilibili.com/video/BV1j4411x73B/"
-                                class="colum-content ellipsis danmu-content">测试</a></span> <a data-v-716b6222=""
-                                                                                              class="video-title ellipsis"><span
-                                data-v-716b6222="" class="no-hover">视频：孙策利用伽罗练习篮球？？ </span><span data-v-716b6222=""
-                                                                                                 class="hover">该视频全部弹幕</span></a>
-                        </div>
-                    </td>
-                    <td style="font-size: 14px; color: rgb(117, 117, 117); line-height: 18px; font-weight: normal; width: 11.4583%;">
-                        <div class="bcc-table__cell">
-                            <div data-v-716b6222="" class="colum-content"><span data-v-716b6222=""
-                                                                                style="margin-right: 5px; word-break: keep-all; display: inline-block; min-width: 80px;">2021-04-23</span><span
-                                    data-v-716b6222=""
-                                    style="word-break: keep-all; display: inline-block; min-width: 60px;">11:24:29</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td style="font-size: 14px; color: rgb(117, 117, 117); line-height: 18px; font-weight: normal; width: 10.4167%; text-align: center;">
-                        <div class="bcc-table__cell">
-                            <div data-v-716b6222="" class="operate">
-                                <div data-v-716b6222="" class="colum-content table-operate"><i data-v-716b6222=""
-                                                                                               class="bcc-iconfont bcc-icon-icon_list_more_x"></i>
-                                </div> <!----></div>
-                        </div>
-                    </td>
-                </tr>
                 </tbody>
             </table><!----></div>
         <div data-v-716b6222="" class="tips">

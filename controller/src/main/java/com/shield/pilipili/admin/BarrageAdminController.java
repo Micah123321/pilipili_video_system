@@ -5,6 +5,8 @@ import com.shield.pilipili.PBarrageService;
 import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.Pagen;
 import com.shield.pilipili.pojo.page.PBarragePage;
+import com.shield.pilipili.pojo.vo.MessageVo;
+import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,5 +37,15 @@ public class BarrageAdminController {
         return page;
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/admin/barrage/del", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    public Object categoryInfo(HttpSession session, PBarrageVo pBarrageVo) {
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        pBarrageVo.setUserId(pUserInfo.getUserId());
+        if (pBarrageVo.getBarrageArr().length==pBarrageService.deleteByPBarrage(pBarrageVo)){
+            return new MessageVo(true);
+        }else{
+            return new MessageVo(false);
+        }
+    }
 }

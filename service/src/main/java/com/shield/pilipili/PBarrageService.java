@@ -11,7 +11,7 @@ import java.util.List;
 public interface PBarrageService {
     /**
      * 根据用户id获得该账号名下所有视频的弹幕
-     * @param userId
+     * @param pBarragePage
      * @return
      */
     List<PBarragePage> getBarrByUserId(PBarragePage pBarragePage);
@@ -21,6 +21,12 @@ public interface PBarrageService {
      * @return
      */
     int getBarrCountByUserId(int id);
+    /**
+     * 删除弹幕
+     * @param pBarrage
+     * @return
+     */
+    int deleteByPBarrage(PBarrageVo pBarrage);
     List<PBarrage> getBarrCountByDate( Date beginDate, Date endDate,int userId);
     List<PBarrage> getBarrByPv(int pv);
     int insert(PBarrage record);

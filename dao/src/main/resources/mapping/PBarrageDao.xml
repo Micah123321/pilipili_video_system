@@ -81,10 +81,20 @@
             limit #{index},#{count}
         </if>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete
-        from p_barrage
-        where id = #{id,jdbcType=BIGINT}
+    <delete id="deleteByPBarrage">
+        DELETE
+        FROM `pili`.`p_barrage`
+        WHERE `id` IN (SELECT id
+        FROM (SELECT id
+        FROM p_barrage b,
+        p_videos v
+        WHERE b.id
+        in
+        <foreach item="item" collection="barrageArr" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+        AND b.`video_id` = v.`video_pv`
+        AND v.`video_userid` = #{userId}) t1);
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PBarrage"
             useGeneratedKeys="true">

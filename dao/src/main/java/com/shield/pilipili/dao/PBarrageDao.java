@@ -23,16 +23,16 @@ public interface PBarrageDao {
 
     /**
      * 根据用户id获得该账号名下所有视频的弹幕
-     * @param userId
+     * @param pBarragePage
      * @return
      */
     List<PBarragePage> getBarrByUserId(PBarragePage pBarragePage);
     /**
-     *
-     * @param id
+     * 删除弹幕
+     * @param pBarrage
      * @return
      */
-    int deleteByPrimaryKey(Long id);
+    int deleteByPBarrage(PBarrageVo pBarrage);
 
     int insert(PBarrage record);
 

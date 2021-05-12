@@ -59,7 +59,7 @@
           AND v.`video_userid` = #{userId}
         GROUP BY DATE_FORMAT(`createTime`, '%Y-%m-%d')
     </select>
-    <select id="getVideosListByType" resultType="com.shield.pilipili.pojo.PVideos">
+    <select id="getVideosListByType" resultType="com.shield.pilipili.pojo.page.PVideosPage">
         SELECT
         `video_pv` videoPv,
         `video_userid` videoUserid,

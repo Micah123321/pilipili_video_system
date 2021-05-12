@@ -9,6 +9,7 @@ public class PBarrageVo extends PBarrage {
     private String videoTitle;
     private String barrageTime;
     private String barrageCreateTime;
+    private Integer[] barrageArr;
     private int code;
     private Object[] danmaku;
 

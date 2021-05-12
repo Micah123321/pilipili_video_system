@@ -28,6 +28,11 @@ public class PBarrageServiceImpl implements PBarrageService {
     }
 
     @Override
+    public int deleteByPBarrage(PBarrageVo pBarrage) {
+        return pBarrageDao.deleteByPBarrage(pBarrage);
+    }
+
+    @Override
     public List<PBarrage> getBarrCountByDate(Date beginDate, Date endDate, int userId) {
         return pBarrageDao.getBarrCountByDate(beginDate, endDate, userId);
     }
