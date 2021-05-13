@@ -2,6 +2,7 @@ package com.shield.pilipili.dao;
 
 import com.shield.pilipili.pojo.PComment;
 import com.shield.pilipili.pojo.PSubscribe;
+import com.shield.pilipili.pojo.page.PCommentPage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -16,6 +17,8 @@ public interface PCommentDao {
     int getComCountByUserId(int userId);
 
     List<PComment> getCommentCountByDate(@Param("beginDate") Date beginDate, @Param("endDate") Date endDate, @Param("userId")int userId);
+
+    List<PCommentPage> getCommentByPCommentPage(PCommentPage pCommentPage);
 
     /**
      *

@@ -16,5 +16,6 @@ mybatis:
   type-aliases-package: com.shield.pilipili.pojo
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 server:
   port: 80

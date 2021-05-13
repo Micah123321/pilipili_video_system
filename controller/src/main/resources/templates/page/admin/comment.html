@@ -6,6 +6,12 @@
     <link href="/css/comment.css" type="text/css" rel="stylesheet" media="all">
 </head>
 <body>
+<script src="/js/plugins/model.js"></script>
+<script src="/js/admin/admin_comment.js"></script>
+<input type="hidden" id="currPage" value="1">
+<input type="hidden" id="totalPageCount">
+<input type="hidden" id="titleCurrPage" value="1">
+<input type="hidden" id="titleTotalPageCount">
 <div data-v-76b62926="" class="comment_wrap cc-content-body pos-center">
     <div data-v-76b62926="" class="new-link-top-wrap">
         <div id="tab-container" class="new-link-top-container"><a href="/platform/comment/article"
@@ -14,7 +20,7 @@
     </div>
     <div data-v-76b62926="" class="comment_content">
         <div data-v-76b62926="" class="bar-search_wrap">
-            <div data-v-76b62926="" class="bcc-input  "><input placeholder="搜索视频评论" spellcheck="false" maxlength="999"
+            <div data-v-76b62926="" class="bcc-input  "><input id="context" placeholder="搜索视频评论" spellcheck="false" maxlength="999"
                                                                minlength="0" type="text" class="bcc-input-inner input">
                 <!----></div>
             <i data-v-76b62926="" class="bcc-iconfont bcc-icon-ic_search_ search" data-reporter-id="29"></i></div>
@@ -40,13 +46,15 @@
                     </div>
                 </div>
                 <div data-v-76b62926="" class="bcc-select" style="width: 208px;">
-                    <div class="bcc-select-input-wrap"><input type="text" readonly="readonly" placeholder="请选择内容"
+                    <div class="bcc-select-input-wrap"><input title="0" id="videoId" type="text" readonly="readonly"
+                                                              placeholder="全部视频"
                                                               class="bcc-select-input-inner"><i
                             class="bcc-iconfont bcc-icon-ic_drop-down"></i></div>
-                    <div class="bcc-select-list-wrap" style="display: none;">
+                    <div id="videoTitleList" class="bcc-select-list-wrap" style="display: none;">
                         <ul class="bcc-select-option-list">
                             <div data-v-76b62926="" class="search-input" style="">
-                                <div data-v-76b62926="" class="bcc-input  "><input placeholder="输入视频搜索关键字"
+                                <div data-v-76b62926="" class="bcc-input  "><input id="titleSearch"
+                                                                                   placeholder="输入视频搜索关键字"
                                                                                    spellcheck="false" maxlength="999"
                                                                                    minlength="0" type="text"
                                                                                    class="bcc-input-inner input"><!---->
@@ -67,7 +75,7 @@
                                                             <li data-v-76b62926="" class="bcc-option selected">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="36">
+                                                                     data-reporter-id="195">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active active-item">
                                                                         全部视频
@@ -78,7 +86,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="390">
+                                                                     data-reporter-id="196">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">孙策利用伽罗练习篮球？？
                                                                     </div>
@@ -88,7 +96,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="391">
+                                                                     data-reporter-id="197">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         这是迷你世界做不到的操作，我的世界vape蒙太奇 ① 超热血！！
@@ -99,7 +107,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="392">
+                                                                     data-reporter-id="198">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         这是最好的pvp作弊端！！！！(露脸)
@@ -110,7 +118,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="393">
+                                                                     data-reporter-id="199">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         等等等等！！！你们在干什么？？？我的世界五佳短动画
@@ -121,7 +129,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="394">
+                                                                     data-reporter-id="200">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">MC 手机版
                                                                         最好的MOD菜单客户2018年Minecraft PE三大最佳做弊端[micah搬运]
@@ -132,7 +140,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="395">
+                                                                     data-reporter-id="201">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         了解一下，刺激战场神仙第三视角！！素材源于网络，你永远不知道你的对手是什么人
@@ -143,7 +151,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="396">
+                                                                     data-reporter-id="202">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         为什么迷你世界没有黑客，而我的世界却有，这说明什么？
@@ -154,7 +162,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="397">
+                                                                     data-reporter-id="203">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">pvp ！！！
                                                                         600fps和60fps的差距是什么？？？？
@@ -165,7 +173,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="398">
+                                                                     data-reporter-id="204">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         他又开始了....micah pvp ②
@@ -176,7 +184,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="399">
+                                                                     data-reporter-id="205">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         哈哈哈哈哈[斜眼笑][斜眼笑]某网站被我
@@ -187,7 +195,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="400">
+                                                                     data-reporter-id="206">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">新片头（60帧）真的帅
                                                                     </div>
@@ -197,7 +205,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="401">
+                                                                     data-reporter-id="207">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         我是不是个pvp大佬？还行不是的，但是我也不是残疾人，micah pvp ①（补）
@@ -208,7 +216,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="402">
+                                                                     data-reporter-id="208">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         如果你的vape会崩溃请点我，vape是什么？？教学项 vape no hack ① by
@@ -220,7 +228,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="403">
+                                                                     data-reporter-id="209">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         Micah的片头【60帧】重投
@@ -231,7 +239,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="404">
+                                                                     data-reporter-id="210">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">【micah】
                                                                         getting over it 安卓版试玩 哇，真的有毒
@@ -242,7 +250,7 @@
                                                             <li data-v-76b62926="" class="bcc-option">
                                                                 <div data-v-76b62926=""
                                                                      class="ellipsis select-article_wrap"
-                                                                     data-reporter-id="405">
+                                                                     data-reporter-id="211">
                                                                     <div data-v-76b62926=""
                                                                          class="ac-link ellipsis no-active">
                                                                         看看mc玩家到底爱着mc的什么
@@ -254,7 +262,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                                            <div class="simplebar-placeholder"
+                                                 style="width: auto; height: 612px;"></div>
                                         </div>
                                         <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
                                             <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>

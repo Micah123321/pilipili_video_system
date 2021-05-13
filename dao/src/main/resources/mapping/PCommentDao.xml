@@ -1,127 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PCommentDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PComment">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="thumbs_up_num" jdbcType="INTEGER" property="thumbsUpNum" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, video_id, user_id, parent_id, thumbs_up_num, content, createTime
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_comment
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="getComCountByUserId" resultType="java.lang.Integer">
-    SELECT
-      COUNT(content)
-    FROM
-      `pili`.`p_comment` c ,p_videos v
-    WHERE v.video_userid=#{userId} and v.video_pv=c.video_id
-    GROUP BY v.`video_userid`
-  </select>
-  <select id="getCommentCountByDate" resultType="com.shield.pilipili.pojo.PComment">
-    SELECT
-      c.createTime,COUNT(content) commentCount
-    FROM
-      pili.p_comment c ,p_videos v
-    WHERE v.video_pv=c.video_id AND v.`video_userid`=#{userId}
-    GROUP BY v.`video_userid`,DATE_FORMAT(c.createTime,'%Y-%m-%d')
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from p_comment
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment" useGeneratedKeys="true">
-    insert into p_comment (video_id, user_id, parent_id, 
-      thumbs_up_num, content, createTime
-      )
-    values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT}, 
-      #{thumbsUpNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment" useGeneratedKeys="true">
-    insert into p_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="videoId != null">
-        video_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="thumbsUpNum != null">
-        thumbs_up_num,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="createtime != null">
-        createTime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="videoId != null">
-        #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="thumbsUpNum != null">
-        #{thumbsUpNum,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PComment">
-    update p_comment
-    <set>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=BIGINT},
-      </if>
-      <if test="thumbsUpNum != null">
-        thumbs_up_num = #{thumbsUpNum,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PComment">
-    update p_comment
-    set video_id = #{videoId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      thumbs_up_num = #{thumbsUpNum,jdbcType=INTEGER},
-      content = #{content,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PComment">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="thumbs_up_num" jdbcType="INTEGER" property="thumbsUpNum"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , video_id, user_id, parent_id, thumbs_up_num, content, createTime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_comment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="getComCountByUserId" resultType="java.lang.Integer">
+        SELECT COUNT(content)
+        FROM `pili`.`p_comment` c,
+             p_videos v
+        WHERE v.video_userid = #{userId}
+          and v.video_pv = c.video_id
+        GROUP BY v.`video_userid`
+    </select>
+    <select id="getCommentCountByDate" resultType="com.shield.pilipili.pojo.PComment">
+        SELECT c.createTime,
+               COUNT(content) commentCount
+        FROM pili.p_comment c,
+             p_videos v
+        WHERE v.video_pv = c.video_id
+          AND v.`video_userid` = #{userId}
+        GROUP BY v.`video_userid`, DATE_FORMAT(c.createTime, '%Y-%m-%d')
+    </select>
+    <select id="getCommentByPCommentPage" resultType="com.shield.pilipili.pojo.page.PCommentPage">
+        SELECT c.`id`,
+        c.`video_id`,
+        c.`user_id`,
+        c.`parent_id`,
+        c.`thumbs_up_num`,
+        c.`content`,
+        c.`createTime`,
+        i.`nickName`,
+        i.`user_pic`,
+        v.`video_image`,
+        v.`video_title`,
+        (SELECT COUNT(id) FROM p_comment_thumbsup WHERE user_id = #{userId} AND comment_id = c.`id`) isthumbsup,
+        (SELECT COUNT(id) FROM p_subscribe WHERE subscribed_id = #{userId} AND subscribe_id = c.`user_id`) isfans,
+        (SELECT COUNT(id) FROM p_comment WHERE parent_id=c.id) replyCount
+        FROM `pili`.`p_comment` c,
+        p_user_info i,
+        p_videos v
+        <where>c.`video_id` = v.`video_pv`
+            AND c.`user_id` = i.`user_id`
+            AND v.`video_userid` = #{userId}
+            <if test="videoId > 0 ">
+                and c.video_id=#{videoId}
+            </if>
+            <if test="content != '' and content!=null">
+                and content like CONCAT('%',#{content},'%')
+            </if>
+            <if test="selectDay >0">
+                and datediff(NOW(), c.`createTime`) &lt;= #{selectDay}
+            </if>
+        </where>
+        order by
+        <choose>
+            <when test="orderBy == 0 ">
+                c.createTime
+            </when>
+            <when test="orderBy == 1 ">
+                c.thumbs_up_num
+            </when>
+            <when test="orderBy == 2 ">
+                replyCount
+            </when>
+        </choose>
+        desc
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from p_comment
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment"
+            useGeneratedKeys="true">
+        insert into p_comment (video_id, user_id, parent_id,
+                               thumbs_up_num, content, createTime)
+        values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT},
+                #{thumbsUpNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment"
+            useGeneratedKeys="true">
+        insert into p_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">
+                video_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="thumbsUpNum != null">
+                thumbs_up_num,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">
+                #{videoId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="thumbsUpNum != null">
+                #{thumbsUpNum,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PComment">
+        update p_comment
+        <set>
+            <if test="videoId != null">
+                video_id = #{videoId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="thumbsUpNum != null">
+                thumbs_up_num = #{thumbsUpNum,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PComment">
+        update p_comment
+        set video_id      = #{videoId,jdbcType=INTEGER},
+            user_id       = #{userId,jdbcType=INTEGER},
+            parent_id     = #{parentId,jdbcType=BIGINT},
+            thumbs_up_num = #{thumbsUpNum,jdbcType=INTEGER},
+            content       = #{content,jdbcType=VARCHAR},
+            createTime    = #{createtime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

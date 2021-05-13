@@ -4,3 +4,6 @@ mvnw.cmd
 .idea
 .mvn
 *.iml
+*.png
+*.mp4
+*.webp
