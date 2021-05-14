@@ -3,7 +3,7 @@ package com.shield.pilipili.dao;
 import com.shield.pilipili.pojo.PCommentThumbsup;
 
 public interface PCommentThumbsupDao {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPCommentThumsup(PCommentThumbsup pCommentThumbsup);
 
     int insert(PCommentThumbsup record);
 

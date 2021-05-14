@@ -50,6 +50,8 @@ public class PComment implements Serializable {
 
     private Integer commentCount;
 
+    private Integer[] commentArr;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

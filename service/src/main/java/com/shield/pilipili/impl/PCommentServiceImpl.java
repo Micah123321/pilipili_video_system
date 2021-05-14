@@ -29,4 +29,19 @@ public class PCommentServiceImpl implements PCommentService {
     public List<PCommentPage> getCommentByPCommentPage(PCommentPage pCommentPage) {
         return pCommentDao.getCommentByPCommentPage(pCommentPage);
     }
+
+    @Override
+    public int deleteByPComment(PComment pComment) {
+        return pCommentDao.deleteByPComment(pComment);
+    }
+
+    @Override
+    public int updateThumb(Long comId) {
+        return pCommentDao.updateThumb(comId);
+    }
+
+    @Override
+    public PComment selectByPrimaryKey(Long id) {
+        return pCommentDao.selectByPrimaryKey(id);
+    }
 }

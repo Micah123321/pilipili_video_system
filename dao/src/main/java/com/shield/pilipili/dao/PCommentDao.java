@@ -20,12 +20,8 @@ public interface PCommentDao {
 
     List<PCommentPage> getCommentByPCommentPage(PCommentPage pCommentPage);
 
-    /**
-     *
-     * @param id
-     * @return
-     */
-    int deleteByPrimaryKey(Long id);
+
+    int deleteByPComment(PComment pComment);
 
     int insert(PComment record);
 
@@ -35,5 +31,5 @@ public interface PCommentDao {
 
     int updateByPrimaryKeySelective(PComment record);
 
-    int updateByPrimaryKey(PComment record);
+    int updateThumb(Long comId);
 }

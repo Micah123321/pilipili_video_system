@@ -6,4 +6,5 @@ import lombok.Data;
 public class PVideosThumbsupVo {
     private Integer num;
     private Boolean isThumbsup;
+
 }

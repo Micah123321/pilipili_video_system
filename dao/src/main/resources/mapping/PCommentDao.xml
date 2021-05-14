@@ -18,7 +18,7 @@
         select
         <include refid="Base_Column_List"/>
         from p_comment
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </select>
     <select id="getComCountByUserId" resultType="java.lang.Integer">
         SELECT COUNT(content)
@@ -85,10 +85,21 @@
             limit #{index},#{count}
         </if>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete
-        from p_comment
-        where id = #{id,jdbcType=BIGINT}
+    <delete id="deleteByPComment">
+        DELETE
+        t,com
+        FROM p_comment_thumbsup t
+        LEFT JOIN `pili`.`p_comment` com
+        ON com.`id`=t.`comment_id`
+        WHERE t.comment_id IN (SELECT id
+        FROM (SELECT id
+        FROM p_comment c, p_videos v
+        WHERE c.id IN
+        <foreach item="item" collection="commentArr" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+        AND c.`video_id` = v.`video_pv`
+        AND v.`video_userid` = #{userId}) t1)
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment"
             useGeneratedKeys="true">
@@ -165,14 +176,10 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PComment">
-        update p_comment
-        set video_id      = #{videoId,jdbcType=INTEGER},
-            user_id       = #{userId,jdbcType=INTEGER},
-            parent_id     = #{parentId,jdbcType=BIGINT},
-            thumbs_up_num = #{thumbsUpNum,jdbcType=INTEGER},
-            content       = #{content,jdbcType=VARCHAR},
-            createTime    = #{createtime,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
+    <update id="updateThumb">
+        UPDATE
+            `pili`.`p_comment`
+        SET `thumbs_up_num` = (SELECT COUNT(id) FROM p_comment_thumbsup WHERE comment_id = #{comId})
+        WHERE `id` = #{comId};
     </update>
 </mapper>

@@ -11,4 +11,7 @@ public interface PCommentService {
     int getComCountByUserId(int userId);
     List<PComment> getCommentCountByDate(Date beginDate, Date endDate, int userId);
     List<PCommentPage> getCommentByPCommentPage(PCommentPage pCommentPage);
+    int deleteByPComment(PComment pComment);
+    int updateThumb(Long comId);
+    PComment selectByPrimaryKey(Long id);
 }

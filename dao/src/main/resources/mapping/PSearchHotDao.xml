@@ -20,6 +20,7 @@
                `title`,
                `searchDate`
         FROM `pili`.`p_search_hot`
+        where datediff(NOW(), searchDate) &lt;= 2
         GROUP BY searchDate, title
         ORDER BY COUNT(id) DESC
         LIMIT 0,5

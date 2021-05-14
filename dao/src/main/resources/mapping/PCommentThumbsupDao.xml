@@ -1,63 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shield.pilipili.dao.PCommentThumbsupDao">
-  <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCommentThumbsup">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, user_id, comment_id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from p_comment_thumbsup
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from p_comment_thumbsup
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCommentThumbsup" useGeneratedKeys="true">
-    insert into p_comment_thumbsup (user_id, comment_id)
-    values (#{userId,jdbcType=INTEGER}, #{commentId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCommentThumbsup" useGeneratedKeys="true">
-    insert into p_comment_thumbsup
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="commentId != null">
-        comment_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="commentId != null">
-        #{commentId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCommentThumbsup">
-    update p_comment_thumbsup
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="commentId != null">
-        comment_id = #{commentId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCommentThumbsup">
-    update p_comment_thumbsup
-    set user_id = #{userId,jdbcType=INTEGER},
-      comment_id = #{commentId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PCommentThumbsup">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="comment_id" jdbcType="BIGINT" property="commentId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, comment_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_comment_thumbsup
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPCommentThumsup">
+        DELETE
+        FROM `pili`.`p_comment_thumbsup`
+        WHERE user_id = #{userId}
+          AND comment_id = #{commentId};
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PCommentThumbsup"
+            useGeneratedKeys="true">
+        INSERT INTO `pili`.`p_comment_thumbsup` (`user_id`, `comment_id`)
+        SELECT #{userId}, #{commentId}
+        FROM p_comment_thumbsup
+        WHERE NOT EXISTS(SELECT user_id, comment_id
+                         FROM p_comment_thumbsup
+                         WHERE user_id = #{userId} AND comment_id = #{commentId})
+        LIMIT 0,1
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.shield.pilipili.pojo.PCommentThumbsup" useGeneratedKeys="true">
+        insert into p_comment_thumbsup
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="commentId != null">
+                comment_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="commentId != null">
+                #{commentId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shield.pilipili.pojo.PCommentThumbsup">
+        update p_comment_thumbsup
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="commentId != null">
+                comment_id = #{commentId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shield.pilipili.pojo.PCommentThumbsup">
+        update p_comment_thumbsup
+        set user_id    = #{userId,jdbcType=INTEGER},
+            comment_id = #{commentId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

@@ -1,5 +1,8 @@
 package com.shield.pilipili;
 
-public interface PCommentThumbsupService {
+import com.shield.pilipili.pojo.PCommentThumbsup;
 
+public interface PCommentThumbsupService {
+    int insert(PCommentThumbsup record);
+    int deleteByPCommentThumsup(PCommentThumbsup pCommentThumbsup);
 }

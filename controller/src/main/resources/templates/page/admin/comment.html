@@ -29,18 +29,18 @@
                     data-v-76b62926="" class="num">(1853)</span></div>
             <div data-v-76b62926="" class="select_wrap">
                 <div data-v-76b62926="" class="bcc-select" style="width: 112px;">
-                    <div class="bcc-select-input-wrap"><input type="text" readonly="readonly" placeholder="请选择内容"
+                    <div class="bcc-select-input-wrap"><input title="0" id="day" type="text" readonly="readonly" placeholder="全部时间"
                                                               class="bcc-select-input-inner"><i
                             class="bcc-iconfont bcc-icon-ic_drop-down"></i></div>
-                    <div class="bcc-select-list-wrap" style="display: none;">
+                    <div id="dayList" class="bcc-select-list-wrap" style="display: none;">
                         <ul class="bcc-select-option-list">
-                            <li data-v-76b62926="" class="bcc-option selected" data-reporter-id="30"><span>全部时间</span><i
+                            <li value="0" data-v-76b62926="" class="bcc-option selected" data-reporter-id="30"><span>全部时间</span><i
                                     class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></li>
-                            <li data-v-76b62926="" class="bcc-option" data-reporter-id="31"><span>最近1天</span><i
+                            <li value="1" data-v-76b62926="" class="bcc-option" data-reporter-id="31"><span>最近1天</span><i
                                     class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></li>
-                            <li data-v-76b62926="" class="bcc-option" data-reporter-id="32"><span>最近7天</span><i
+                            <li value="7" data-v-76b62926="" class="bcc-option" data-reporter-id="32"><span>最近7天</span><i
                                     class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></li>
-                            <li data-v-76b62926="" class="bcc-option" data-reporter-id="33"><span>最近1年</span><i
+                            <li value="360" data-v-76b62926="" class="bcc-option" data-reporter-id="33"><span>最近1年</span><i
                                     class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></li>
                         </ul>
                     </div>
@@ -280,7 +280,7 @@
             </div>
         </header>
         <div data-v-76b62926="" class="operate_wrap">
-            <div data-v-76b62926="" class="operate_left"><label data-v-76b62926="" class="bcc-checkbox"><span
+            <div data-v-76b62926="" class="operate_left"><label data-v-76b62926="" id="allCheck" class="bcc-checkbox"><span
                     class="bcc-checkbox-checkbox"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i><input
                     type="checkbox" name="默认" aria-hidden="true" value="false"></span><span class="bcc-checkbox-label">全选
                 <!----></span></label>
@@ -290,9 +290,9 @@
                         data-reporter-id="35" disabled="disabled"><!----><span>删除</span></button>
             </div>
             <div data-v-76b62926="" class="operate_right">
-                <div data-v-76b62926="" class="operate-txt active">最近发布</div>
-                <div data-v-76b62926="" class="operate-txt">点赞最多</div>
-                <div data-v-76b62926="" class="operate-txt">回复最多</div>
+                <div value="0" data-v-76b62926="" class="operate-txt active">最近发布</div>
+                <div value="1" data-v-76b62926="" class="operate-txt">点赞最多</div>
+                <div value="2" data-v-76b62926="" class="operate-txt">回复最多</div>
             </div>
         </div>
         <section data-v-76b62926="" class="section-list_wrap">

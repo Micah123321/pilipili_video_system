@@ -27,13 +27,149 @@ $(function () {
             }
         })
     }
+    $(".bcc-iconfont.bcc-icon-ic_search_.search").click(function () {
+        ajaxComment()
+    })
 
+    $(".bcc-checkbox-checkbox input").click(function () {
+        if ($(this).parent().parent().hasClass("bcc-checkbox-checked")) {
+            $(this).parent().parent().removeClass("bcc-checkbox-checked");
+            $(".check-box").each(function () {
+                $(this).removeClass("checked")
+            });
+        } else {
+            $(this).parent().parent().addClass("bcc-checkbox-checked");
+            $(".check-box").each(function () {
+                $(this).addClass("checked")
+            });
+        }
+        pdcheck()
+    })
+    addDelModel = (delArr) => {
+        piliModel("删除提醒", "删除后无法恢复，确认删除评论吗？", "comment_content", ajaxDelBarrage, delArr)
+    }
+
+    $(".bcc-button.del").click(function () {
+        var delArr = []
+        $(".check-box.checked").each(function () {
+            delArr.push($(this).attr("comId"))
+        });
+        piliModel("删除提醒", "删除后无法恢复，确认删除选中的评论吗？", "comment_content", ajaxDelBarrage, delArr)
+    })
+
+    ajaxDelBarrage = (delArr) => {
+        $.ajax({
+            url: "/admin/comment/del",
+            type: "get",
+            dataType: "json",
+            data: {
+                commentArr: delArr
+            },
+            success: function (data) {
+                if (data.code == 0) {
+                    ajaxComment()
+                }
+            }
+        })
+    }
+
+    checkbox = (obj) => {
+        if ($(obj).hasClass("checked")) {
+            $(obj).removeClass("checked")
+        } else {
+            $(obj).addClass("checked")
+        }
+        var count = 0
+        var checkcount = 0
+        $(".check-box").each(function () {
+            count++
+            if ($(this).hasClass("checked")) {
+                checkcount++
+            }
+        });
+        if (checkcount == count) {
+            $("#allCheck").addClass("bcc-checkbox-checked")
+        } else {
+            $("#allCheck").removeClass("bcc-checkbox-checked")
+        }
+        pdcheck()
+    }
+    pdcheck = () => {
+        var checkcount = 0
+        $(".check-box").each(function () {
+            if ($(this).hasClass("checked")) {
+                checkcount++
+            }
+        })
+        if (checkcount > 0) {
+            $(".bcc-button.bcc-button--default").removeClass("is-disabled")
+            $(".bcc-button.bcc-button--default").removeAttr("disabled")
+        } else {
+            $(".bcc-button.bcc-button--default").addClass("is-disabled")
+            $(".bcc-button.bcc-button--default").attr("disabled", "disabled")
+        }
+    }
+    $(".operate-txt").click(function () {
+        $(".operate-txt").removeClass("active")
+        $(this).addClass("active")
+        ajaxComment()
+    })
+
+    $("#day").click(function () {
+        $("#dayList").slideToggle()
+    })
+    $("#dayList .bcc-option").click(function () {
+        $("#dayList .bcc-option").removeClass("selected")
+        $(this).addClass("selected")
+        $("#day").attr("title", $(this).val())
+        $("#day").val($(this).find("span").text())
+        ajaxComment()
+        $("#dayList").slideToggle()
+    })
+    ajaxThumbsup = (obj, commentId) => {
+        $.ajax({
+            url: "/admin/comment/thumbs",
+            type: "get",
+            dataType: "json",
+            data: {
+                commentId
+            },
+            success: function (data) {
+                if (data.isThumbsup) {
+                    $(obj).css("color", "rgb(0, 161, 214)")
+                } else {
+                    $(obj).css("color", "#999")
+                }
+                $(obj).find(".num").text(data.num)
+            }
+        })
+    }
+
+    addReplyContent = (obj) => {
+        if ($(obj).parent().parent().parent().find(".reply-wrap").length>0) {
+            $(obj).parent().parent().parent().find(".reply-wrap").remove()
+        } else {
+            $(obj).parent().parent().parent().append(`<div class="reply-wrap clearfix"><!----> <textarea placeholder="回复 @VapeMeaks: "></textarea> <div class="emoji-wrap left"><a class="trigger">・ω・颜文字</a> <ul class="emoji-box" style="display: none;"><a>(⌒▽⌒)</a><a>（￣▽￣）</a><a>(=・ω・=)</a><a>(｀・ω・´)</a><a>(〜￣△￣)〜</a><a>(･∀･)</a><a>(°∀°)ﾉ</a><a>(￣3￣)</a> <a>╮(￣▽￣)╭</a><a>( ´_ゝ｀)</a><a>←_←</a><a>→_→</a><a>(&lt;_&lt;)</a><a>(&gt;_&gt;)</a><a>(;¬_¬)</a><a>("▔□▔)/</a><a>(ﾟДﾟ≡ﾟдﾟ)!?</a> <a>Σ(ﾟдﾟ;)</a><a>Σ( ￣□￣||)</a><a>(´；ω；\`)</a><a>（/TДT)/</a><a>(^・ω・^ )</a><a>(｡･ω･｡)</a><a>(●￣(ｴ)￣●)</a> <a>ε=ε=(ノ≧∇≦)ノ</a><a>(´･_･\`)</a><a>(-_-#)</a><a>（￣へ￣）</a><a>(￣ε(#￣) Σ</a><a>ヽ(\`Д´)ﾉ</a><a>(╯°口°)╯(┴—┴</a><a>（#-_-)┯━┯</a><a>_(:3」∠)_</a> <a>(笑)</a><a>(汗)</a><a>(泣)</a><a>(苦笑)</a></ul></div> <!----> <button class="bcc-button right bcc-button--primary large"><!----><span>发表回复</span></button></div>`)
+        }
+
+    }
+
+    $(".section-list_wrap").on('click', '.trigger', function () {
+        $(this).parent().find(".emoji-box").toggle()
+        $("a").off("click");
+        $(".emoji-box a").click(function () {
+            var obj=$(this).parent().parent().parent().find("textarea");
+            var content=obj.val()
+            obj.val(content+$(this).text())
+            return false;
+        })
+    })
     ajaxComment = () => {
         var currPage = $("#currPage").val();
         var videoId = $("#videoId").attr("title");
         var content = $("#context").val();
-        var orderBy = 0;
-        var selectDay = 0;
+        var orderBy = $(".operate-txt.active").attr("value");
+        var selectDay = $("#day").attr("title");
         $.ajax({
             url: "/admin/comment/getList",
             type: "get",
@@ -52,8 +188,8 @@ $(function () {
                 for (var i = 0; i < data.dataList.length; i++) {
                     var obj = data.dataList[i];
 
-                    var content=`<div data-v-76b62926="" class="comment-list-item">
-                    <div class="check-box"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></div> 
+                    var content = `<div data-v-76b62926="" class="comment-list-item">
+                    <div onclick="checkbox(this)" comId="${obj.id}" class="check-box"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></div> 
                     <a href="/user/space/${obj.userId}" mid="527603216" target="_blank" card="GTnb233" class="user-avatar" data-reporter-id="171">
                     <img src="${obj.userPic}"></a> 
                     <div class="article-wrap"><a href="/pv${obj.videoId}" target="_blank" class="pic" data-reporter-id="172">
@@ -61,20 +197,20 @@ $(function () {
                     <!----> <!----> <a href="/pv${obj.videoId}" class="title ellipsis">
                     <span class="name">${obj.videoTitle}</span><span class="show-all">该视频全部评论</span></a> <!----> <!----></div> <div class="ci-title"><span class="relation-label" style="display: none;">已充电</span>
                      <span `
-                    if (!obj.isfans){
-                        content+=`style="display: none;"`
+                    if (!obj.isfans) {
+                        content += `style="display: none;"`
                     }
-                    content+=`class="relation-label">粉丝</span>
+                    content += `class="relation-label">粉丝</span>
                       <a href="/user/space/${obj.userId}" mid="527603216" card="GTnb233" target="_blank">${obj.nickName}</a>
                       <!----> <!----> <!----> <!----></div>
                      <!----> <a href="/pv${obj.videoId}" target="_blank"><div class="ci-content">${obj.content}</div></a> 
                      <!----> <!----> <div class="ci-action"><span class="date">${obj.createTime}</span> 
-                     <span class="like action"><a data-reporter-id="173"`
-                        if(obj.isthumbsup>0){
-                            content+=`style="color: rgb(0, 161, 214);"`
-                        }
-                        content+=`><i class="bcc-iconfont bcc-icon-icon_action_recommend_line_n_"></i><span class="num"></span></a></span> <span class="reply action"><a data-reporter-id="174">回复</a></span>
-                      <span class="report action"><a data-reporter-id="175">举报</a></span> <span class="delete action"><a data-reporter-id="176">删除</a></span></div> <!----> <!----></div>`
+                     <span class="like action"><a onclick="ajaxThumbsup(this,${obj.id})" data-reporter-id="173"`
+                    if (obj.isthumbsup > 0) {
+                        content += `style="color: rgb(0, 161, 214);"`
+                    }
+                    content += `><i class="bcc-iconfont bcc-icon-icon_action_recommend_line_n_"></i><span class="num">${obj.thumbsUpNum}</span></a></span> <span class="reply action"><a onclick="addReplyContent(this)" data-reporter-id="174">回复</a></span>
+                      <span class="report action"><a data-reporter-id="175">举报</a></span> <span class="delete action"><a onclick="addDelModel(${obj.id})" data-reporter-id="176">删除</a></span></div> <!----> <!----></div>`
 
                     $(".section-list_wrap").append(content)
                 }
@@ -121,7 +257,7 @@ $(function () {
         ajaxComment()
     }
 
-    goto=curr=> {
+    goto = curr => {
         if (curr <= 0) return;
         $("#currPage").val(curr)
         ajaxComment()
