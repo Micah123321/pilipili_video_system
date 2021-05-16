@@ -44,4 +44,9 @@ public class PCommentServiceImpl implements PCommentService {
     public PComment selectByPrimaryKey(Long id) {
         return pCommentDao.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int insert(PComment record) {
+        return pCommentDao.insert(record);
+    }
 }

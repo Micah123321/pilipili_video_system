@@ -47,6 +47,18 @@ public class PComment implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    /**
+     * 评论等级
+     */
+    private Integer level;
+    /**
+     * 回复id
+     */
+    private Integer replyId;
+    /**
+     * 分组id
+     */
+    private Integer groupBy;
 
     private Integer commentCount;
 

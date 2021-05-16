@@ -145,25 +145,47 @@ $(function () {
         })
     }
 
-    addReplyContent = (obj) => {
-        if ($(obj).parent().parent().parent().find(".reply-wrap").length>0) {
+    addReplyContent = (obj,json) => {
+        var com=json
+        if ($(obj).parent().parent().parent().find(".reply-wrap").length > 0) {
             $(obj).parent().parent().parent().find(".reply-wrap").remove()
         } else {
-            $(obj).parent().parent().parent().append(`<div class="reply-wrap clearfix"><!----> <textarea placeholder="回复 @VapeMeaks: "></textarea> <div class="emoji-wrap left"><a class="trigger">・ω・颜文字</a> <ul class="emoji-box" style="display: none;"><a>(⌒▽⌒)</a><a>（￣▽￣）</a><a>(=・ω・=)</a><a>(｀・ω・´)</a><a>(〜￣△￣)〜</a><a>(･∀･)</a><a>(°∀°)ﾉ</a><a>(￣3￣)</a> <a>╮(￣▽￣)╭</a><a>( ´_ゝ｀)</a><a>←_←</a><a>→_→</a><a>(&lt;_&lt;)</a><a>(&gt;_&gt;)</a><a>(;¬_¬)</a><a>("▔□▔)/</a><a>(ﾟДﾟ≡ﾟдﾟ)!?</a> <a>Σ(ﾟдﾟ;)</a><a>Σ( ￣□￣||)</a><a>(´；ω；\`)</a><a>（/TДT)/</a><a>(^・ω・^ )</a><a>(｡･ω･｡)</a><a>(●￣(ｴ)￣●)</a> <a>ε=ε=(ノ≧∇≦)ノ</a><a>(´･_･\`)</a><a>(-_-#)</a><a>（￣へ￣）</a><a>(￣ε(#￣) Σ</a><a>ヽ(\`Д´)ﾉ</a><a>(╯°口°)╯(┴—┴</a><a>（#-_-)┯━┯</a><a>_(:3」∠)_</a> <a>(笑)</a><a>(汗)</a><a>(泣)</a><a>(苦笑)</a></ul></div> <!----> <button class="bcc-button right bcc-button--primary large"><!----><span>发表回复</span></button></div>`)
+            $(obj).parent().parent().parent().append(`<div class="reply-wrap clearfix"><!----> <textarea placeholder="回复 @${com.nickName}: "></textarea> <div class="emoji-wrap left"><a class="trigger">・ω・颜文字</a> <ul class="emoji-box" style="display: none;"><a>(⌒▽⌒)</a><a>（￣▽￣）</a><a>(=・ω・=)</a><a>(｀・ω・´)</a><a>(〜￣△￣)〜</a><a>(･∀･)</a><a>(°∀°)ﾉ</a><a>(￣3￣)</a> <a>╮(￣▽￣)╭</a><a>( ´_ゝ｀)</a><a>←_←</a><a>→_→</a><a>(&lt;_&lt;)</a><a>(&gt;_&gt;)</a><a>(;¬_¬)</a><a>("▔□▔)/</a><a>(ﾟДﾟ≡ﾟдﾟ)!?</a> <a>Σ(ﾟдﾟ;)</a><a>Σ( ￣□￣||)</a><a>(´；ω；\`)</a><a>（/TДT)/</a><a>(^・ω・^ )</a><a>(｡･ω･｡)</a><a>(●￣(ｴ)￣●)</a> <a>ε=ε=(ノ≧∇≦)ノ</a><a>(´･_･\`)</a><a>(-_-#)</a><a>（￣へ￣）</a><a>(￣ε(#￣) Σ</a><a>ヽ(\`Д´)ﾉ</a><a>(╯°口°)╯(┴—┴</a><a>（#-_-)┯━┯</a><a>_(:3」∠)_</a> <a>(笑)</a><a>(汗)</a><a>(泣)</a><a>(苦笑)</a></ul></div> <!----> <button onclick="ajaxReply(this,${com.videoId},${com.id},${com.userId})" class="bcc-button right bcc-button--primary large"><!----><span>发表回复</span></button></div>`)
         }
+    }
 
+    ajaxReply=(obj,videoId,parentId,replyId)=>{
+        $.ajax({
+            url: "/admin/comment/add",
+            type: "post",
+            dataType: "json",
+            data: {
+                parentId,
+                replyId,
+                level:3,
+                videoId,
+                content:$(obj).parent().find("textarea").val()
+            },
+            success: function (data) {
+                if (data.code==0)ajaxComment()
+            }
+        })
     }
 
     $(".section-list_wrap").on('click', '.trigger', function () {
         $(this).parent().find(".emoji-box").toggle()
         $("a").off("click");
         $(".emoji-box a").click(function () {
-            var obj=$(this).parent().parent().parent().find("textarea");
-            var content=obj.val()
-            obj.val(content+$(this).text())
+            var obj = $(this).parent().parent().parent().find("textarea");
+            var content = obj.val()
+            obj.val(content + $(this).text())
             return false;
         })
     })
+    addDetailContent=(obj)=>{
+        var dx = $(obj).parent().parent().parent().find(".ci-parent-reply");
+        if (dx.toggle())$(obj).text("查看评论");else $(obj).text("收起评论");
+    }
     ajaxComment = () => {
         var currPage = $("#currPage").val();
         var videoId = $("#videoId").attr("title");
@@ -187,8 +209,10 @@ $(function () {
                 $(".section-list_wrap").empty()
                 for (var i = 0; i < data.dataList.length; i++) {
                     var obj = data.dataList[i];
-
-                    var content = `<div data-v-76b62926="" class="comment-list-item">
+                    var content;
+                    var jsonString=JSON.stringify(obj);
+                    if (obj.pcomment == null && obj.puserInfo == null) {
+                        content = `<div data-v-76b62926="" class="comment-list-item">
                     <div onclick="checkbox(this)" comId="${obj.id}" class="check-box"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></div> 
                     <a href="/user/space/${obj.userId}" mid="527603216" target="_blank" card="GTnb233" class="user-avatar" data-reporter-id="171">
                     <img src="${obj.userPic}"></a> 
@@ -197,20 +221,46 @@ $(function () {
                     <!----> <!----> <a href="/pv${obj.videoId}" class="title ellipsis">
                     <span class="name">${obj.videoTitle}</span><span class="show-all">该视频全部评论</span></a> <!----> <!----></div> <div class="ci-title"><span class="relation-label" style="display: none;">已充电</span>
                      <span `
-                    if (!obj.isfans) {
-                        content += `style="display: none;"`
-                    }
-                    content += `class="relation-label">粉丝</span>
+                        if (!obj.isfans) {
+                            content += `style="display: none;"`
+                        }
+                        content += `class="relation-label">粉丝</span>
                       <a href="/user/space/${obj.userId}" mid="527603216" card="GTnb233" target="_blank">${obj.nickName}</a>
                       <!----> <!----> <!----> <!----></div>
                      <!----> <a href="/pv${obj.videoId}" target="_blank"><div class="ci-content">${obj.content}</div></a> 
                      <!----> <!----> <div class="ci-action"><span class="date">${obj.createTime}</span> 
                      <span class="like action"><a onclick="ajaxThumbsup(this,${obj.id})" data-reporter-id="173"`
-                    if (obj.isthumbsup > 0) {
-                        content += `style="color: rgb(0, 161, 214);"`
-                    }
-                    content += `><i class="bcc-iconfont bcc-icon-icon_action_recommend_line_n_"></i><span class="num">${obj.thumbsUpNum}</span></a></span> <span class="reply action"><a onclick="addReplyContent(this)" data-reporter-id="174">回复</a></span>
+                        if (obj.isthumbsup > 0) {
+                            content += `style="color: rgb(0, 161, 214);"`
+                        }
+                        content += `><i class="bcc-iconfont bcc-icon-icon_action_recommend_line_n_"></i><span class="num">${obj.thumbsUpNum}</span></a></span> <span class="reply action"><a onclick='addReplyContent(this,${jsonString})' data-reporter-id="174">回复</a></span>
                       <span class="report action"><a data-reporter-id="175">举报</a></span> <span class="delete action"><a onclick="addDelModel(${obj.id})" data-reporter-id="176">删除</a></span></div> <!----> <!----></div>`
+                    }else{
+                        content = `<div data-v-76b62926="" class="comment-list-item">
+                    <div onclick="checkbox(this)" comId="${obj.id}" class="check-box"><i class="bcc-iconfont bcc-icon-ic_MenuButton-tick"></i></div> 
+                    <a href="/user/space/${obj.userId}" mid="527603216" target="_blank" card="GTnb233" class="user-avatar" data-reporter-id="171">
+                    <img src="${obj.userPic}"></a> 
+                    <div class="article-wrap"><a href="/pv${obj.videoId}" target="_blank" class="pic" data-reporter-id="172">
+                    <img src="${obj.videoImage}"></a> 
+                    <!----> <!----> <a href="/pv${obj.videoId}" class="title ellipsis">
+                    <span class="name">${obj.videoTitle}</span><span class="show-all">该视频全部评论</span></a> <!----> <!----></div> <div class="ci-title"><span class="relation-label" style="display: none;">已充电</span>
+                     <span `
+                        if (!obj.isfans) {
+                            content += `style="display: none;"`
+                        }
+                        content += `class="relation-label">粉丝</span>
+                      <a href="/user/space/${obj.userId}" mid="527603216" card="GTnb233" target="_blank">${obj.nickName}</a>
+                      <span class="ci-title-split">回复</span> <a href="/user/space/${obj.puserInfo.userId}" target="_blank" card="${obj.puserInfo.nickName}" mid="299125409" class="parent-user">@${obj.puserInfo.nickName}</a> <span class="show-parent"><span style="" onclick="addDetailContent(this)">查看评论</span><span style="display: none;">收起评论</span></span></div>
+                      <div class="ci-parent-reply" style="display: none"><a href="/user/space/${obj.puserInfo.userId}" target="_blank" card="${obj.puserInfo.nickName}" mid="299125409" class="cipr-avatar"><img src="${obj.puserInfo.userPic}"></a> <div class="cipr-head"><a href="/user/space/${obj.puserInfo.userId}" target="_blank" card="梦沉于海" mid="299125409">${obj.puserInfo.nickName}</a></div> <div class="cipr-content">${obj.pcomment.content}</div> <div class="cipr-footer">${obj.pcomment.createTime}</div></div>
+                     <!----> <a href="/pv${obj.videoId}" target="_blank"><div class="ci-content">${obj.content}</div></a> 
+                     <!----> <!----> <div class="ci-action"><span class="date">${obj.createTime}</span> 
+                     <span class="like action"><a onclick="ajaxThumbsup(this,${obj.id})" data-reporter-id="173"`
+                        if (obj.isthumbsup > 0) {
+                            content += `style="color: rgb(0, 161, 214);"`
+                        }
+                        content += `><i class="bcc-iconfont bcc-icon-icon_action_recommend_line_n_"></i><span class="num">${obj.thumbsUpNum}</span></a></span> <span class="reply action"><a onclick='addReplyContent(this,${jsonString})' data-reporter-id="174">回复</a></span>
+                      <span class="report action"><a data-reporter-id="175">举报</a></span> <span class="delete action"><a onclick="addDelModel(${obj.id})" data-reporter-id="176">删除</a></span></div> <!----> <!----></div>`
+                    }
 
                     $(".section-list_wrap").append(content)
                 }

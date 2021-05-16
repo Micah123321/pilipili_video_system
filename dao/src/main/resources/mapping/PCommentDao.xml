@@ -37,7 +37,35 @@
           AND v.`video_userid` = #{userId}
         GROUP BY v.`video_userid`, DATE_FORMAT(c.createTime, '%Y-%m-%d')
     </select>
-    <select id="getCommentByPCommentPage" resultType="com.shield.pilipili.pojo.page.PCommentPage">
+    <resultMap id="getCommentByPCommentPage" type="com.shield.pilipili.pojo.page.PCommentPage">
+        <id property="id" column="id"/>
+        <result property="videoId" column="video_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="thumbsUpNum" column="thumbs_up_num"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="createTime"/>
+        <result property="level" column="level"/>
+        <result property="replyId" column="replyId"/>
+        <result property="nickName" column="nickName"/>
+        <result property="userPic" column="user_pic"/>
+        <result property="videoImage" column="video_image"/>
+        <result property="isfans" column="isfans"/>
+        <result property="isthumbsup" column="isthumbsup"/>
+        <result property="videoTitle" column="video_title"/>
+        <association property="pUserInfo">
+            <result column="replyId" property="userId"/>
+            <result column="replyName" property="nickName"/>
+            <result column="replyUserPic" property="userPic"/>
+        </association>
+        <association property="pComment">
+            <result column="parentId" property="id"/>
+            <result column="replyContent" property="content"/>
+            <result column="replyCreateTime" property="createTime"/>
+        </association>
+    </resultMap>
+
+    <select id="getCommentByPCommentPage" resultMap="getCommentByPCommentPage">
         SELECT c.`id`,
         c.`video_id`,
         c.`user_id`,
@@ -45,13 +73,19 @@
         c.`thumbs_up_num`,
         c.`content`,
         c.`createTime`,
+        c.level,
+        c.replyId,
         i.`nickName`,
         i.`user_pic`,
         v.`video_image`,
         v.`video_title`,
         (SELECT COUNT(id) FROM p_comment_thumbsup WHERE user_id = #{userId} AND comment_id = c.`id`) isthumbsup,
         (SELECT COUNT(id) FROM p_subscribe WHERE subscribed_id = #{userId} AND subscribe_id = c.`user_id`) isfans,
-        (SELECT COUNT(id) FROM p_comment WHERE parent_id=c.id) replyCount
+        (SELECT COUNT(id) FROM p_comment WHERE parent_id=c.id) replyCount,
+        (SELECT nickName FROM p_user_info WHERE user_id=c.replyId) replyName,
+        (SELECT user_pic FROM p_user_info WHERE user_id=c.replyId) replyUserPic,
+        (select content from p_comment where id=c.parent_id) replyContent,
+        (select createTime from p_comment where id=c.parent_id) replyCreateTime
         FROM `pili`.`p_comment` c,
         p_user_info i,
         p_videos v
@@ -88,10 +122,19 @@
     <delete id="deleteByPComment">
         DELETE
         t,com
-        FROM p_comment_thumbsup t
-        LEFT JOIN `pili`.`p_comment` com
+        FROM `pili`.`p_comment` com
+        LEFT JOIN p_comment_thumbsup t
         ON com.`id`=t.`comment_id`
-        WHERE t.comment_id IN (SELECT id
+        WHERE com.`id` IN (SELECT id
+        FROM (SELECT id
+        FROM p_comment c, p_videos v
+        WHERE c.id IN
+        <foreach item="item" collection="commentArr" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+        AND c.`video_id` = v.`video_pv`
+        AND v.`video_userid` = #{userId}) t1)
+        or  t.comment_id IN(SELECT id
         FROM (SELECT id
         FROM p_comment c, p_videos v
         WHERE c.id IN
@@ -103,10 +146,26 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment"
             useGeneratedKeys="true">
-        insert into p_comment (video_id, user_id, parent_id,
-                               thumbs_up_num, content, createTime)
-        values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{parentId,jdbcType=BIGINT},
-                #{thumbsUpNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+        INSERT INTO `pili`.`p_comment` (
+            `video_id`,
+            `user_id`,
+            `parent_id`,
+            `content`,
+            `createTime`,
+            `level`,
+            `replyId`
+        )
+        VALUES
+        (
+            #{videoId},
+            #{userId},
+            #{parentId},
+            #{content},
+            now(),
+            #{level},
+            #{replyId}
+        ) ;
+
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.shield.pilipili.pojo.PComment"
             useGeneratedKeys="true">

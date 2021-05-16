@@ -71,4 +71,16 @@ public class CommentController {
             return new PCommentThumbsupVo(pComment.getThumbsUpNum(),false);
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/admin/comment/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public Object addComment(HttpSession session, PComment pComment) {
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        pComment.setUserId(pUserInfo.getUserId());
+        if (pCommentService.insert(pComment)>0){
+            return new MessageVo(true);
+        }else {
+            return new MessageVo(false);
+        }
+    }
 }

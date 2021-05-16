@@ -1,6 +1,7 @@
 package com.shield.pilipili.pojo.page;
 
 import com.shield.pilipili.pojo.PComment;
+import com.shield.pilipili.pojo.PUserInfo;
 import lombok.Data;
 
 @Data
@@ -15,4 +16,6 @@ public class PCommentPage extends PComment {
     private Integer isfans;
     private Integer selectDay=0;
     private Integer orderBy=0;
+    private PUserInfo pUserInfo;
+    private PComment pComment;
 }

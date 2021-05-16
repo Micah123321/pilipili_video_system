@@ -14,4 +14,5 @@ public interface PCommentService {
     int deleteByPComment(PComment pComment);
     int updateThumb(Long comId);
     PComment selectByPrimaryKey(Long id);
+    int insert(PComment record);
 }

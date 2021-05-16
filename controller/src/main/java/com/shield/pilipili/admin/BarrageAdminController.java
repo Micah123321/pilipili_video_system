@@ -39,7 +39,7 @@ public class BarrageAdminController {
 
     @ResponseBody
     @RequestMapping(value = "/admin/barrage/del", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object categoryInfo(HttpSession session, PBarrageVo pBarrageVo) {
+    public Object delBarrage(HttpSession session, PBarrageVo pBarrageVo) {
         PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
         pBarrageVo.setUserId(pUserInfo.getUserId());
         if (pBarrageVo.getBarrageArr().length==pBarrageService.deleteByPBarrage(pBarrageVo)){
@@ -48,4 +48,5 @@ public class BarrageAdminController {
             return new MessageVo(false);
         }
     }
+
 }
