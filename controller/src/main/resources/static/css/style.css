@@ -3309,7 +3309,29 @@ ul.nav-pills {
     .container {
         width: 1370px;
     }
+    #van-popover-9985{
+        width: 280px;
+        margin-top: -20px;
+        margin-left: 350px;
+        transform-origin: center top;
+        z-index: 2037;
+        display: none;
+    }
 }
+@media (min-width: 1400px){
+    .container {
+        width: 1570px;
+    }
+    #van-popover-9985{
+        width: 280px;
+        margin-top: -20px;
+        margin-left: 550px;
+        transform-origin: center top;
+        z-index: 2037;
+        display: none;
+    }
+}
+
 
 .item.van-popover__reference a ,#primaryPageTab .con a{
     text-decoration: none;

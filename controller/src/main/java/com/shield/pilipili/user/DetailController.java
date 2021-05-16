@@ -30,11 +30,17 @@ public class DetailController {
     @Resource
     private PPostipService pPostipService;
 
+    @GetMapping("/pv404")
+    public String toPv404() {
+        return "pv404";
+    }
+
     @RequestMapping("/pv{pv}")
     public String toVideoDetail(@PathVariable Integer pv, Model model) {
         model.addAttribute("pv", pv);
         PVideos video = pVideosService.getVideoByPv(pv);
-        model.addAttribute("url", "/file/video/?url=" + video.getVideoUrl());
+        if (video!=null)model.addAttribute("url", "/file/video/?url=" + video.getVideoUrl());
+        else model.addAttribute("url", null);
         return "/page/user/detail";
     }
 

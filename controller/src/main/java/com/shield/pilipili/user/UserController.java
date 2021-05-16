@@ -48,6 +48,8 @@ public class UserController {
         return "page/user/index";
     }
 
+
+
     @ResponseBody
     @RequestMapping("/log")
     public PUser login(@RequestParam String userName, @RequestParam String upwd, HttpSession session) {

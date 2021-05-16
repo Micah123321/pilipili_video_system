@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/creative.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/creative2.css" type="text/css" rel="stylesheet" media="all">
+    <style>
+        #videoType {
+            width: 100%;
+            border: 1px solid #e7e7e7;
+            border-radius: 4px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-size: 14px;
+            color: #212121;
+            height: 100%;
+            outline: none;
+            padding-left: 12px;
+            padding-right: 25px;
+            background: transparent;
+            cursor: pointer;
+            display: block;
+        }
+
+        #orderBy {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            padding-left: 12px;
+            padding-right: 25px;
+            background: transparent;
+            cursor: pointer;
+            display: block;
+            border: 1px solid #e7e7e7;
+            border-radius: 4px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-size: 14px;
+            color: #212121;
+        }
+    </style>
+</head>
+<body>
+<script src="/js/plugins/model.js"></script>
+<script src="/js/admin/admin_check.js"></script>
+<div data-v-a9d43656="" class="upload-manage cc-content-body">
+    <input type="hidden" id="currPage" value="1">
+    <div data-v-a9d43656="" class="new-link-top-wrap">
+        <div id="tab-container" class="new-link-top-container"><a href="/platform/upload-manager/article"
+                                                                  class="link-top-item router-link-exact-active active"><span>视频管理</span>
+            <!----></a><a href="/platform/upload-manager/ep" class="link-top-item"
+                          style="display: none;"><span>合集管理</span> <!----></a> <!----></div>
+    </div>
+    <div data-v-70ed43e6="" data-v-a9d43656="" class="article-v2-wrap content">
+        <div data-v-70ed43e6="" class="bcc-search-input-wrapper article-header_search"><input type="text"
+                                                                                              placeholder="搜索稿件"
+                                                                                              spellcheck="false"
+                                                                                              class="bcc-search-input">
+            <i onclick="getVideoData(true)" class="search-input bcc-iconfont bcc-icon-ic_search_"></i></div> <!---->
+        <div data-v-70ed43e6="" class=" is-article cc-article-wrp">
+            <div data-v-70ed43e6="">
+                <div data-v-295d2c4a="" data-v-70ed43e6="" class="article-header">
+                    <div data-v-016fc23b="" data-v-295d2c4a="" class="text-split_wrap">
+                        <input type="hidden" id="videoState" value="-1">
+                        <div data-v-016fc23b="" class="split-item operate-txt active"><a data-v-295d2c4a=""
+                                                                                         data-v-016fc23b=""
+                                                                                         class="txt-item current"
+                                                                                         state="0">待审核稿件
+                            <span id="videosCount">34</span> </a></div>
+                    </div>
+                    <div data-v-295d2c4a="" class="header-operate">
+                        <div data-v-295d2c4a="" class="bcc-select" style="width: 112px;">
+                            <select id="videoType" onchange="getVideoTypeData(true)">
+                                <option selected value="0">全部</option>
+                            </select>
+                        </div>
+                        <div data-v-295d2c4a="" class="bcc-select" style="width: 154px;">
+                            <select id="orderBy" onchange="getVideoData(true)">
+                                <option selected value="0">投稿时间排序</option>
+                                <option value="1">播放数排序</option>
+                                <option value="2">评论数排序</option>
+                                <option value="3">收藏数排序</option>
+                                <option value="4">弹幕数排序</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-70ed43e6="" class="article-list_wrap">
+                    <div data-v-70ed43e6="">
+                        <div data-v-70ed43e6="">
+                            <div class="article-card clearfix v2"><a target="_blank"
+                                                                     href="//www.bilibili.com/video/BV1cs411J7jN/"
+                                                                     class="cover-wrp"><img
+                                    src="//i1.hdslb.com/bfs/archive/34f9e5f68be36596e7f956c6c09634cd470507ee.png@320w_200h"
+                                    alt="这是最好的免费MinePleX黑客作弊!!!【micah搬运】" class="">
+                                <div class="duration">02:21</div>
+                                <div class="tag-wrapper"><!----> <!----></div>
+                            </a>
+                                <div class="meta-wrp">
+                                    <div class="meta-title"><!----> <a target="_blank"
+                                                                       href="//www.bilibili.com/video/BV1cs411J7jN/"
+                                                                       class="name ellipsis">这是最好的免费MinePleX黑客作弊!!!【micah搬运】</a>
+                                    </div>
+                                    <div class="meta-status">
+                                        <div><span class="pubdate">18-07-19 21:59:30</span></div>
+                                        <div data-hint=""
+                                             class="status hint--rounded hint--bottom v2 is-error is-pubdate">
+                                            <div class="icon-wrap"><i class="bcc-iconfont bcc-icon-ic_warning"></i>
+                                            </div>
+                                            <div><span class="icon-text">已锁定</span> <span class="icon-text">
+                该视频违反运营规则，不予审核通过。
+              </span> <span class="treaty">
+                查阅 <a href="//member.bilibili.com/studio/creative-treaty" target="_blank">哔哩哔哩创作公约</a> 了解更多
+              </span> <!----></div>
+                                        </div>
+                                    </div>
+                                    <div class="meta-view"><!----> <!----> <a class="bili-btn"><i
+                                            class="bcc-iconfont bcc-icon-Mediumx1"
+                                            style="font-size: 16px; color: rgb(80, 80, 80);"></i>
+                                        申诉
+                                    </a> <!----> <a class="bili-btn"><i
+                                            class="bcc-iconfont bcc-icon-icon_tasklist_delete_"
+                                            style="font-size: 16px; color: rgb(80, 80, 80);"></i>
+                                        删除
+                                    </a> <a class="more-btn disabled"><i class="bcc-iconfont bcc-icon-icon_list_more_x"
+                                                                         style="font-size: 16px; color: rgb(80, 80, 80);"></i></a>
+                                    </div>
+                                    <div class="meta-footer clearfix">
+                                        <div title="播放" class="click view-stat"><i
+                                                class="bcc-iconfont bcc-icon-ic_Playbackx"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text click-text">321</span></div>
+                                        <div title="弹幕" class="danmu view-stat"><i
+                                                class="bcc-iconfont bcc-icon-ic_Barragex"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">0</span></div>
+                                        <div title="评论" class="comment view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_commentx"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">5</span></div>
+                                        <div title="收藏" class="favorite view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_action_collection_n_x"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">5</span></div>
+                                        <div title="点赞" class="like view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_action_recommend_p_"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">3</span></div>
+                                    </div>
+                                </div> <!----> <!----></div> <!----> <!----> <!----></div>
+                    </div>
+                    <div data-v-70ed43e6="">
+                        <div data-v-70ed43e6="">
+                            <div class="article-card clearfix v2"><a target="_blank"
+                                                                     href="//www.bilibili.com/video/BV1cs411E72G/"
+                                                                     class="cover-wrp"><img
+                                    src="//i2.hdslb.com/bfs/archive/c7029540b64349775a8c4ea263eef8f4ff617e5a.png@320w_200h"
+                                    alt="了解一下，刺激战场神仙第三视角！！素材源于网络，你永远不知道你的对手是什么人" class="">
+                                <div class="duration">02:05</div>
+                                <div class="tag-wrapper"><!----> <!----></div>
+                            </a>
+                                <div class="meta-wrp">
+                                    <div class="meta-title"><!----> <a target="_blank"
+                                                                       href="//www.bilibili.com/video/BV1cs411E72G/"
+                                                                       class="name ellipsis">了解一下，刺激战场神仙第三视角！！素材源于网络，你永远不知道你的对手是什么人</a>
+                                    </div>
+                                    <div class="meta-status">
+                                        <div><span class="pubdate is-success">18-07-17 20:48:38</span></div> <!---->
+                                    </div>
+                                    <div class="meta-view"><a class="bili-btn"><i class="bcc-iconfont bcc-icon-Mediumx"
+                                                                                  style="font-size: 16px; color: rgb(80, 80, 80);"></i>
+                                        编辑
+                                    </a> <a href="/platform/upload-manager/article/data/BV1cs411E72G"
+                                            class="bili-btn"><i class="bcc-iconfont bcc-icon-icon_list_ranking_x1"
+                                                                style="font-size: 16px; color: rgb(80, 80, 80);"></i>
+                                        数据
+                                    </a> <!----> <!----> <!----> <a class="more-btn"><i
+                                            class="bcc-iconfont bcc-icon-icon_list_more_x"
+                                            style="font-size: 16px; color: rgb(80, 80, 80);"></i></a></div>
+                                    <div class="meta-footer clearfix">
+                                        <div title="播放" class="click view-stat"><i
+                                                class="bcc-iconfont bcc-icon-ic_Playbackx"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text click-text">980</span></div>
+                                        <div title="弹幕" class="danmu view-stat"><i
+                                                class="bcc-iconfont bcc-icon-ic_Barragex"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">0</span></div>
+                                        <div title="评论" class="comment view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_commentx"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">9</span></div>
+                                        <div title="收藏" class="favorite view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_action_collection_n_x"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">1</span></div>
+                                        <div title="点赞" class="like view-stat"><i
+                                                class="bcc-iconfont bcc-icon-icon_action_recommend_p_"
+                                                style="font-size: 16px; color: rgb(153, 153, 153);"></i> <span
+                                                class="icon-text">2</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-v-70ed43e6="" class="bcc-pagination-container">
+                    <ul class="bcc-pagination">
+                        <li class="bcc-pagination-item bcc-pagination-previous">上一页</li>
+                        <li class="bcc-pagination-item selected"><a>1</a></li>
+                        <li class="bcc-pagination-item"><a>2</a></li>
+                        <li class="bcc-pagination-item"><a>3</a></li>
+                        <li class="bcc-pagination-item"><a>4</a></li>
+                        <li class="bcc-pagination-item bcc-pagination-next">下一页</li>
+                        <li class="bcc-pagination-extra">
+                            <div class="bcc-pagination-total"> 共 <span id="totalPageCount">4</span> 页 / <span
+                                    id="totalCount"></span>个，
+                            </div>
+                            <div class="bcc-pagination-elevator"> 跳转至 <input type="text" autocomplete="off"
+                                                                             spellcheck="false"> 页
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

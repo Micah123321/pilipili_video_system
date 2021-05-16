@@ -203,9 +203,9 @@ to{opacity:.25;-webkit-transform:scale(.85);transform:scale(.85)}}.yzmplayer-con
 .yzmplayer-controller .yzmplayer-icons{height: 40px;position:absolute;}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box{display:none;position:absolute;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;z-index:2;height: 33px;bottom:0;left:20px;right:20px;color:#fff;}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-icon{padding:7px;height: 38px;margin-left: 0;}
-.yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-icon{position:absolute;left:0;top:0;/* padding: 5px 5px; */position: relative;float: left;}
+.yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-icon{left: -50px;top:0;position: relative;float: left;}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-send-icon{position:absolute;right:0;top:0}
-.yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-box{position:absolute;background:rgba(28,28,28,.9);bottom:41px;left:0;-webkit-box-shadow:0 0 25px rgba(0,0,0,.3);box-shadow:0 0 25px rgba(0,0,0,.3);border-radius:4px;padding:10px 10px 16px;font-size:14px;width: 172px;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;-webkit-transform:scale(0);transform:scale(0);z-index: 71;background: rgba(21,21,21,.9);border-radius: 2px;}
+.yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-box{position:absolute;background:rgba(28,28,28,.9);bottom:41px;left: -50px;-webkit-box-shadow:0 0 25px rgba(0,0,0,.3);box-shadow:0 0 25px rgba(0,0,0,.3);border-radius:4px;padding:10px 10px 16px;font-size:14px;width: 172px;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;-webkit-transform:scale(0);transform:scale(0);z-index: 71;background: rgba(21,21,21,.9);border-radius: 2px;}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-box.yzmplayer-comment-setting-open{-webkit-transform:scale(1);transform:scale(1)}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-box input[type=radio]{display:none}
 .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzmplayer-comment-setting-box label{cursor:pointer}
@@ -246,7 +246,7 @@ to{opacity:.25;-webkit-transform:scale(.85);transform:scale(.85)}}.yzmplayer-con
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-volume .yzmplayer-volume-bar-wrap .yzmplayer-volume-bar{position:relative;top: 19px;width: 0;height: 3px;background:#aaa;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;border-radius: 21px;}
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-volume .yzmplayer-volume-bar-wrap .yzmplayer-volume-bar .yzmplayer-volume-bar-inner{position:absolute;bottom:0;left:0;height:100%;-webkit-transition:all .1s ease;transition:all .1s ease;will-change:width;border-radius: 16px;}
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-volume .yzmplayer-volume-bar-wrap .yzmplayer-volume-bar .yzmplayer-volume-bar-inner .yzmplayer-thumb{position:absolute;top:0;right:5px;margin-top: -3px;margin-right:-10px;height: 9px;width: 9px;border-radius:50%;cursor:pointer;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;-webkit-transform:scale(0);transform:scale(0);}
-.yzmplayer-controller .yzmplayer-icons .yzmplayer-setting,.yzmplayer-controller .yzmplayer-icons .yzmplayer-subtitle-btn{display:inline-block;height:100%}
+.yzmplayer-controller .yzmplayer-icons .yzmplayer-setting,.yzmplayer-controller .yzmplayer-icons .yzmplayer-subtitle-btn{display:inline-block;}
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-setting .yzmplayer-setting-box{position:absolute;right:0;bottom: 60px;-webkit-transform:scale(0);transform:scale(0);width:150px;padding: 4px 0;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;overflow:hidden;z-index:1002;background: rgba(21,21,21,.9);border-radius: 2px;}
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-setting .yzmplayer-setting-box>div{display:none}
 .yzmplayer-controller .yzmplayer-icons .yzmplayer-setting .yzmplayer-setting-box>div.yzmplayer-setting-origin-panel{display:block}
@@ -357,8 +357,8 @@ ul::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 5px #ddd;border-radius
 .memory-play-wrap .memory-play .play-jump{color: #00c1de;padding: 5px;border-radius: 3px;cursor: pointer;}
 .close{padding: 0px 5px;font-size: 24px;vertical-align: -2.5px;color: #00c1de;}
 .yzmplayer-info-panel{animation: fastr-20 5.5s;-webkit-animation: fastr-20 0.5s;-moz-animation: fastr-20 0.5s;}
-.yzmplayer .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzm-yzmplayer-comment-input{outline: none;border: none;padding: 5px 5px;font-size: 14px;line-height: 26px;text-align: center;margin: 0 auto;-webkit-box-sizing: border-box;box-sizing: border-box;width: 65%;height: 26px;color: #fff;background: rgba(255,255,255,0.2);border-radius: 4px 0 0px 4px;bottom: 0px;position: relative;float: left;}
-.yzmplayer .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzm-yzmplayer-send-icon{position: relative;width: 40px;height: 26px;padding: 1px;border-radius: 0px 4px 4px 0;background-color: rgba(255, 255, 255, 0.26);color: hsla(0,0%,100%,.5);line-height: 26px;bottom: 0px;float: left;}
+.yzmplayer .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzm-yzmplayer-comment-input{right: 40px;outline: none;border: none;padding: 5px 5px;font-size: 14px;line-height: 26px;text-align: center;margin: 0 auto;-webkit-box-sizing: border-box;box-sizing: border-box;width: 65%;height: 26px;color: #fff;background: rgba(255,255,255,0.2);border-radius: 4px 0 0px 4px;bottom: 0px;position: relative;float: left;}
+.yzmplayer .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzm-yzmplayer-send-icon{right: 40px;position: relative;width: 40px;height: 26px;padding: 1px;border-radius: 0px 4px 4px 0;background-color: rgba(255, 255, 255, 0.26);color: hsla(0,0%,100%,.5);line-height: 26px;bottom: 0px;float: left;}
 .yzmplayer .yzmplayer-controller .yzmplayer-icons.yzmplayer-comment-box .yzm-yzmplayer-send-icon:active {background-color: hsl(195, 100%, 42%);}
 ::-webkit-input-placeholder{/* WebKit browsers*/color: #ddd;}
 ::-moz-placeholder{/* Mozilla Firefox 19+*/color: #ddd;}
@@ -401,7 +401,7 @@ to{background-position:0 -600px}
 .speed-stting{position: absolute;left: 0px;bottom: 45px;-webkit-transform: scale(0);transform: scale(0);width: 50px;padding: 7px 0;-webkit-transition: all .3s ease-in-out;transition: all .3s ease-in-out;overflow: hidden;z-index: 2;text-align: center;background: rgba(21,21,21,.9);border-radius: 2px;}
 .yzmplayer-setting-speed-item:active,.dpplayer-setting-speed-item:hover{background: rgba(255, 255, 255, 0.25);}
 .speed-stting-open,.yzmplayer-setting-speeds:hover .speed-stting{-webkit-transform: scale(1); transform: scale(1);}
-.showdan-setting{padding: 0px 5px;position: relative;float: left;display: block!important;}
+.showdan-setting{padding: 0px 5px;position: relative;float: left;display:block;right:60px;!important;}
 .showdan-setting .yzmplayer-toggle input:checked+label:before{content: "弹";width: 12px;margin: 2px 5px;}
 .showdan-setting .yzmplayer-toggle{top: 4px!important;right: 0px!important;}
 .showdan-setting .yzmplayer-toggle input+label{border: 1px solid #00a1d6!important;background: #00a1d6!important;}

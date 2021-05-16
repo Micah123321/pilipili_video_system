@@ -2,7 +2,9 @@ package com.shield.pilipili.pojo.page;
 
 import com.shield.pilipili.OrderUtil;
 import com.shield.pilipili.pojo.PVideos;
+import lombok.Data;
 
+@Data
 public class PVideosPage extends PVideos {
     public PVideosPage(Long videoType) {
         super(videoType);

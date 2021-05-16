@@ -41,6 +41,9 @@ $(function () {
             success: function (data) {
                 if (data.code == 0) ajaxThumbsup()
                 else alert(data.message)
+            },
+            error:function () {
+                alert("请先登录账号")
             }
         })
     }
@@ -190,6 +193,17 @@ $(function () {
                     "                    <!----><i class=\"van-icon-videodetails_collec\" style=\"color:;\"></i>" + data.video.videoCollect + "\n" +
                     "    </span>")
 
+            },
+            error:function () {
+                $.ajax({
+                    url: "/pv404",
+                    type: "get",
+                    contentType: "text/html;charset=UTF-8",
+                    success: function (data) {
+                            $(".container").html(data)
+                            $("body").css("background","#f4f5f7")
+                    }
+                })
             }
         })
     }
@@ -228,6 +242,7 @@ $(function () {
     ajaxVideoInfo()
     ajaxThumbsup()
     $(".player-auxiliary-bscrollbar").mCustomScrollbar();
+    setInterval("ajaxSetHistory()",30000)
 })
 
 var time_to_sec = function (time) {
@@ -259,4 +274,3 @@ function count(o){
     }
     return false;
 }
-setInterval(ajaxSetHistory,150000)

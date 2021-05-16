@@ -10,6 +10,7 @@ import com.shield.pilipili.PVideosService;
 import com.shield.pilipili.pojo.PBarrage;
 import com.shield.pilipili.pojo.PPostip;
 import com.shield.pilipili.pojo.PUserInfo;
+import com.shield.pilipili.pojo.vo.MessageVo;
 import com.shield.pilipili.pojo.vo.PBarrageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -57,11 +58,11 @@ public class BarrageController {
     public Object addBarrage(HttpServletRequest request, HttpSession session, PBarrage pBarrage, String videoTimeSeconds) throws ParseException {
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
         if (userSession==null){
-            return new PBarrageVo();
+            return new MessageVo(false);
         }
         if (videoTimeSeconds==null){
             PBarrageVo pBarrageVo=new PBarrageVo();
-            pBarrageVo.setCode(0);
+            pBarrageVo.setCode(2);
             Object[] obj={true};
             pBarrageVo.setDanmaku(obj);
             return pBarrageVo;
@@ -80,7 +81,7 @@ public class BarrageController {
 
         if (pPostipService.selectPostCount(pPostip)>5){
             PBarrageVo pBarrageVo=new PBarrageVo();
-            pBarrageVo.setCode(-1);
+            pBarrageVo.setCode(1);
             Object[] obj={false};
             pBarrageVo.setDanmaku(obj);
             return pBarrageVo;

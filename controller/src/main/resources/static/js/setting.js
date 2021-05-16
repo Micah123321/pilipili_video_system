@@ -83,12 +83,12 @@ function loadedmetadataHandler() {
     if (playtime > 0 && dp.video.currentTime < playtime) {
         setTimeout(function () {
             video_con_play()
-        }, 1 * 1000);
+        },  500);
     } else {
         dp.notice("视频已准备就绪，即将为您播放");
         setTimeout(function () {
             video_play()
-        }, 1 * 1000);
+        },  500);
     }
     dp.on("timeupdate", function () {
         timeupdateHandler();
@@ -182,13 +182,22 @@ $(".yzm-yzmplayer-send-icon").on("click", function () {
                 if (data.code==0){
                     dp.notice("发送成功！");
                     ajaxbarrageList()
+                    dp.danmaku.send({text: sendtext, color: sendcolor, type: sendtype,});
                 }
-                else dp.notice("发送频率过于频繁，请稍后再试！");
+                else if (data.code==1){
+                    dp.notice("发送频率过于频繁，请稍后再试！");
+                } else if (data.code==2){
 
+                }else{
+                    dp.notice("账号未登录，请稍后登录后再试")
+                }
+            },
+            error:function (){
+                dp.notice("账号未登录，请稍后登录后再试")
             }
         });
 
-        dp.danmaku.send({text: sendtext, color: sendcolor, type: sendtype,});
+
     }
     ;
     $(".yzm-yzmplayer-comment-input").val("");
@@ -247,12 +256,12 @@ function video_play() {
     setTimeout(function () {
         dp.play();
         $("#loading-box").remove();
-    }, 1 * 1500);
+    }, 500);
 };
 
 function video_con_play() {
     if (laoding > 0) {
-        var conplayer = ` <e>已播放至${ctime}，继续上次播放？</e><d class="conplay-jump">是 <i id="num">10</i>s</d><d class="conplaying">否</d>`
+        var conplayer = ` <e>已播放至${ctime}，继续上次播放？</e><d class="conplay-jump">是 <i id="num">5</i>s</d><d class="conplaying">否</d>`
         $("#link3").html(conplayer);
         //setTimeout(function () {$("#laoding-pic,.memory-play-wrap,#loading-box").remove();dp.play();}, 15 * 1000);
         var span = document.getElementById('num');
@@ -280,7 +289,7 @@ function video_con_play() {
     });
     setTimeout(function () {
         $(".memory-play-wrap").remove();
-    }, 20 * 1000);
+    }, 5 * 1000);
     $(".conplaying").on("click", function () {
         clearTimeout(timer);
         $("#laoding-pic,#loading-box").remove();
