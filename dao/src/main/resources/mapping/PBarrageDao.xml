@@ -20,12 +20,11 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <select id="getBarrCountByUserId" resultType="java.lang.Integer">
-        SELECT COUNT(content)
+        SELECT IFNULL(COUNT(content),0)
         FROM `pili`.`p_barrage` b,
              p_videos v
         WHERE v.video_pv = b.video_id
           and v.video_userid = #{id}
-        GROUP BY v.`video_userid`
     </select>
     <select id="getBarrCountByDate" resultType="com.shield.pilipili.pojo.PBarrage">
         SELECT b.createTime,

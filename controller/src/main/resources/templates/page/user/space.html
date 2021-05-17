@@ -51,6 +51,8 @@
                             $(".be-textarea_inner").val(data.upSpaceNotice);
                             $(".uid .text").text(data.id);
                             $(".birthday .text").text(data.birthday);
+                        }else{
+                            location.href="/"
                         }
                         //显示产品数据
                     },
@@ -191,7 +193,7 @@
             <div class="col-1">
                 <div class="section video full-rows host">
                     <h3 class="section-title"><a href="video" class="t">我的视频</a><span
-                            class="count">15</span><a th:href="'/user/space/'+${userId}+'/video'" class="more">更多</a>
+                            class="count">0</span><a th:href="'/user/space/'+${userId}+'/video'" class="more">更多</a>
                         <div id="spacetab" class="be-tab">
                             <ul class="be-tab-inner clearfix">
                                 <li value="0" class="be-tab-item is-active"><input type="radio" name="be-tab-0"
@@ -250,7 +252,7 @@
                     </div>
                 </div>
                 <div class="section fav"><h3 class="section-title"><a href="/collect/goCollect" class="t">我的收藏夹</a><span
-                        class="count">6</span><a href="/collect/goCollect" class="more">更多</a><span class="private-hint"
+                        class="count">0</span><a href="/collect/goCollect" class="more">更多</a><span class="private-hint"
                                                                                                    style="display: none;"><span
                         class="icon"></span><span>仅自己可见</span></span></h3>
                     <div class="content clearfix">

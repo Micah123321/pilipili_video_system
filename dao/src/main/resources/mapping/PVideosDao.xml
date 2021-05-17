@@ -24,22 +24,19 @@
     </sql>
 
     <select id="getPlayCountById" resultType="java.lang.Integer">
-        SELECT SUM(video_play) video_play
-        FROM `pili`.`p_videos`
+        SELECT IFNULL(SUM(video_play),0) video_play
+        FROM `pili`.`p_videos` v
         WHERE video_userid = #{id}
-        GROUP BY `video_userid`
     </select>
     <select id="getLikeCountById" resultType="java.lang.Integer">
-        SELECT SUM(video_like) video_like
+        SELECT IFNULL(SUM(video_like),0) video_like
         FROM `pili`.`p_videos`
         WHERE video_userid = #{id}
-        GROUP BY `video_userid`
     </select>
     <select id="getCollectCountById" resultType="java.lang.Integer">
-        SELECT SUM(video_collect) video_collect
+        SELECT IFNULL(SUM(video_collect),0) video_collect
         FROM `pili`.`p_videos`
         WHERE video_userid = #{id}
-        GROUP BY `video_userid`
     </select>
     <select id="getCollectByDate" resultType="com.shield.pilipili.pojo.PCollectInfo">
         SELECT `addTime`,

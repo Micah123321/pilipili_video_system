@@ -23,6 +23,15 @@ $(function () {
         var title = $(obj).children("span").text();
         $("#div_home_title").children("span").text(title);
         document.title = "pilipili 管理后台 - " + title;
+        $("#loadingScoll").css("transition", "none");
+        $("#loadingScoll").css("height", "500px");
+        $("#loadingScoll").css("width", "0px");
+        setTimeout(function () {
+            $('#div_home_context_main').removeClass('page-is-changing');
+            $("#loadingScoll").css("transition", "0.5s all");
+            $("#loadingScoll").css("height", "0");
+            $("#loadingScoll").css("width", "100%");
+        }, 500);
     }
 
     changeDocUrl = function (url) {
@@ -54,6 +63,9 @@ $(function () {
     $("#nav_tools_admin_logout").click(function () {
         location.href = "/admin/account/logout";
     });
+    $("#dropdownMenu1").click(function () {
+        $(".hideGroup").slideToggle()
+    })
     var url = $("#url").val();
     if (url != null && url != "") {
         changeDocUrl(url)

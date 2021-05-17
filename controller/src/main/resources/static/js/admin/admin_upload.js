@@ -135,6 +135,10 @@ $(function () {
         $(".remain-upload").text("(1/1)")
         var ref = $(this).attr("data-ref");
         $("input[name='" + ref + "']").val(data.response.url);
+        $("#myvideo")[0].addEventListener("loadedmetadata", function () {
+            var tol = this.duration; //获取总时长
+            $("input[name='videoTime']").val(tol)
+        });
     });
 
     $('#input-repl-3a').on('filesuccessremove', function (event, id) {

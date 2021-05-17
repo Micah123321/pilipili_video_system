@@ -21,12 +21,11 @@
         where id = #{id}
     </select>
     <select id="getComCountByUserId" resultType="java.lang.Integer">
-        SELECT COUNT(content)
+        SELECT IFNULL(COUNT(content),0)
         FROM `pili`.`p_comment` c,
              p_videos v
         WHERE v.video_userid = #{userId}
           and v.video_pv = c.video_id
-        GROUP BY v.`video_userid`
     </select>
     <select id="getCommentCountByDate" resultType="com.shield.pilipili.pojo.PComment">
         SELECT c.createTime,

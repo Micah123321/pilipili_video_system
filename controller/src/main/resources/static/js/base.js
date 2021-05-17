@@ -160,8 +160,14 @@ var ajaxUtil = {
                     },
                     beforeSend: function () {
                         $(".loader").css("display", "block");
+                        $("#loadingScoll").css("height", "500px");
+                        $("#loadingScoll").css("width", "0px");
+                        $('#div_home_context_main').addClass('page-is-changing');
                     },
                     error: function () {
+
+                    },
+                    complete:function () {
 
                     }
                 });

@@ -23,7 +23,57 @@ $(function () {
             }
         })
     }
-
+    var videoData;
+    loadVideoContent = (data) => {
+        var videoContent = "";
+        var phContent = "";
+        for (var j = 0; j < data.dataList.length; j++) {
+            var tx = "";
+            if (data.dataList[j].videoPlay >= 10000) {
+                tx = "silvery"
+            }
+            if (data.dataList[j].videoPlay >= 20000) {
+                tx = "golden"
+            }
+            videoContent = videoContent + `<div class="spread-module col-md-3 col-sm-6 col-xs-12"><a href="/pv${data.dataList[j].videoPv}" target="_blank"><div class="pic"><div class="lazy-img"><img alt="${data.dataList[j].videoTitle}" src="${data.dataList[j].videoImage}"></div><i class="icon medal ${tx}"></i><div class="cover-preview-module"><!----><div class="progress-bar"><span style="width: 0%;"></span></div></div><div class="mask-video"></div><div class="danmu-module"></div><span class="dur">${data.dataList[j].videoTime}</span><!----><!----><div class="watch-later-trigger w-later"></div></div><p title="${data.dataList[j].videoTitle}" class="t">${data.dataList[j].videoTitle}</p><p class="num"><span class="play"><i class="icon"></i>${data.dataList[j].videoPlayChar}</span><span class="danmu"><i class="icon"></i>${data.dataList[j].videoBarrage}</span></p></a></div>`
+            var array = ""
+            if (j < 3) {
+                array = "on";
+            }
+            if (j == 0) phContent = phContent + `<div onmouseleave="warpleave(this)" onmouseenter="warpenter(this)" class="rank-wrap"><span class="number on">${j + 1}</span><div class="preview"><div class="pic"><a href="/pv${data.dataList[j].videoPv}" target="_blank" class="link"><img src="${data.dataList[j].videoImage}" alt="${data.dataList[j].videoTitle}"></a><div class="watch-later-video van-watchlater black"><span class="wl-tips" style="left: -21px; display: none;"></span></div></div><div class="txt"><a href="/pv${data.dataList[j].videoPv}" target="_blank" class="link"><p title="${data.dataList[j].videoTitle}">${data.dataList[j].videoTitle}</p></a><span>综合评分：${(((data.dataList[j].videoPlay * 10) + (data.dataList[j].videoBarrage * 10)) / 10000).toFixed(2)}万分</span></div></div><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="${data.dataList[j].videoImage}" alt=""><div class="info"><p class="f-title">${data.dataList[j].videoTitle}</p><p class="subtitle"><span class="name">${data.dataList[j].videoUserName}</span><span class="point">·</span><span class="time">${data.dataList[j].videoReleasetime}</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>${data.dataList[j].videoPlayChar}</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>${data.dataList[j].videoBarrage}</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>${data.dataList[j].videoCollect}</span></li></ul></div></div></div>`
+            else phContent = phContent + "<div onmouseleave=\"warpleave(this)\" onmouseenter=\"warpenter(this)\" class=\"rank-wrap\"><span class=\"number " + array + "\">" + (j + 1) + "</span><a href=\"/pv" + data.dataList[j].videoPv + "\" target=\"_blank\" class=\"link\"><p title=\"" + data.dataList[j].videoTitle + " ~\" class=\"title\">" + data.dataList[j].videoTitle + "</p></a>\n" +
+                "                        <div class=\"popover-video-card pvc\" style=\"display: none;\">\n" +
+                "                            <div class=\"content\"><img src=\"" + data.dataList[j].videoImage + "\" alt=\"\">\n" +
+                "                                <div class=\"info\"><p class=\"f-title\">" + data.dataList[j].videoTitle + "</p>\n" +
+                "                                    <p class=\"subtitle\"><span class=\"name\">" + data.dataList[j].videoUserName + "</span><span class=\"point\">·</span><span class=\"time\">" + data.dataList[j].videoReleasetime + "</span></p></div>\n" +
+                "                            </div>\n" +
+                "                            <div class=\"count\">\n" +
+                "                                <ul>\n" +
+                "                                    <li><i class=\"bilifont bili-icon_shipin_bofangshu\"></i><span>" + data.dataList[j].videoPlayChar + "</span></li>\n" +
+                "                                    <li><i class=\"bilifont bili-icon_shipin_danmushu\"></i><span>" + data.dataList[j].videoBarrage + "</span></li>\n" +
+                "                                    <li><i class=\"bilifont bili-icon_shipin_shoucangshu\"></i><span>" + data.dataList[j].videoCollect + "</span></li>\n" +
+                "                                </ul>\n" +
+                "                            </div>\n" +
+                "                        </div>\n" +
+                "                    </div>"
+        }
+        if ($("#" + data.typeName).text().length == 17) {
+            $("#ph" + data.typeName).append(phContent)
+            $("#" + data.typeName).append(videoContent + "<div class=\"clearfix\"></div>\n")
+        }
+    }
+    $('#myScrollspy').on('activate.bs.scrollspy', function () {
+        var currentItem = $(".nav li.active > a").text();
+        var sj=0;
+        for (var i = 0; i < videoData.length; i++) {
+            if (videoData[i].typeName==currentItem)sj=i;
+        }
+        for (var i = 0; i < videoData.length; i++) {
+            if (i==sj||i==sj+1||i==sj-1||i==sj+2){
+                loadVideoContent(videoData[i])
+            }
+        }
+    })
     ajaxVideoInfo = function () {
         $.ajax({
             url: "/index/videoInfo",
@@ -95,52 +145,19 @@ $(function () {
                         "        </div>"
                     )
                 }
-                var videoContent = "";
-                var phContent = "";
-
                 for (var i = 0; i < data.length; i++) {
-                    for (var j = 0; j < data[i].dataList.length; j++) {
-                        var tx = "";
-                        if (data[i].dataList[j].videoPlay >= 10000) {
-                            tx = "silvery"
-                        }
-                        if (data[i].dataList[j].videoPlay >= 20000) {
-                            tx = "golden"
-                        }
-                        videoContent = videoContent + `<div class="spread-module col-md-3 col-sm-6 col-xs-12"><a href="/pv${data[i].dataList[j].videoPv}" target="_blank"><div class="pic"><div class="lazy-img"><img alt="${data[i].dataList[j].videoTitle}" src="${data[i].dataList[j].videoImage}"></div><i class="icon medal ${tx}"></i><div class="cover-preview-module"><!----><div class="progress-bar"><span style="width: 0%;"></span></div></div><div class="mask-video"></div><div class="danmu-module"></div><span class="dur">${data[i].dataList[j].videoTime}</span><!----><!----><div class="watch-later-trigger w-later"></div></div><p title="${data[i].dataList[j].videoTitle}" class="t">${data[i].dataList[j].videoTitle}</p><p class="num"><span class="play"><i class="icon"></i>${data[i].dataList[j].videoPlayChar}</span><span class="danmu"><i class="icon"></i>${data[i].dataList[j].videoBarrage}</span></p></a></div>`
-                        var array = ""
-                        if (j < 3) {
-                            array = "on";
-                        }
-                        if (j == 0) phContent = phContent + `<div onmouseleave="warpleave(this)" onmouseenter="warpenter(this)" class="rank-wrap"><span class="number on">${j + 1}</span><div class="preview"><div class="pic"><a href="/pv${data[i].dataList[j].videoPv}" target="_blank" class="link"><img src="${data[i].dataList[j].videoImage}" alt="${data[i].dataList[j].videoTitle}"></a><div class="watch-later-video van-watchlater black"><span class="wl-tips" style="left: -21px; display: none;"></span></div></div><div class="txt"><a href="/pv${data[i].dataList[j].videoPv}" target="_blank" class="link"><p title="${data[i].dataList[j].videoTitle}">${data[i].dataList[j].videoTitle}</p></a><span>综合评分：${(((data[i].dataList[j].videoPlay * 10) + (data[i].dataList[j].videoBarrage * 10)) / 10000).toFixed(2)}万分</span></div></div><div class="popover-video-card pvc" style="display: none;"><div class="content"><img src="${data[i].dataList[j].videoImage}" alt=""><div class="info"><p class="f-title">${data[i].dataList[j].videoTitle}</p><p class="subtitle"><span class="name">${data[i].dataList[j].videoUserName}</span><span class="point">·</span><span class="time">${data[i].dataList[j].videoReleasetime}</span></p></div></div><div class="count"><ul><li><i class="bilifont bili-icon_shipin_bofangshu"></i><span>${data[i].dataList[j].videoPlayChar}</span></li><li><i class="bilifont bili-icon_shipin_danmushu"></i><span>${data[i].dataList[j].videoBarrage}</span></li><li><i class="bilifont bili-icon_shipin_shoucangshu"></i><span>${data[i].dataList[j].videoCollect}</span></li></ul></div></div></div>`
-                        else phContent = phContent + "<div onmouseleave=\"warpleave(this)\" onmouseenter=\"warpenter(this)\" class=\"rank-wrap\"><span class=\"number " + array + "\">" + (j + 1) + "</span><a href=\"/pv" + data[i].dataList[j].videoPv + "\" target=\"_blank\" class=\"link\"><p title=\"" + data[i].dataList[j].videoTitle + " ~\" class=\"title\">" + data[i].dataList[j].videoTitle + "</p></a>\n" +
-                            "                        <div class=\"popover-video-card pvc\" style=\"display: none;\">\n" +
-                            "                            <div class=\"content\"><img src=\"" + data[i].dataList[j].videoImage + "\" alt=\"\">\n" +
-                            "                                <div class=\"info\"><p class=\"f-title\">" + data[i].dataList[j].videoTitle + "</p>\n" +
-                            "                                    <p class=\"subtitle\"><span class=\"name\">" + data[i].dataList[j].videoUserName + "</span><span class=\"point\">·</span><span class=\"time\">" + data[i].dataList[j].videoReleasetime + "</span></p></div>\n" +
-                            "                            </div>\n" +
-                            "                            <div class=\"count\">\n" +
-                            "                                <ul>\n" +
-                            "                                    <li><i class=\"bilifont bili-icon_shipin_bofangshu\"></i><span>" + data[i].dataList[j].videoPlayChar + "</span></li>\n" +
-                            "                                    <li><i class=\"bilifont bili-icon_shipin_danmushu\"></i><span>" + data[i].dataList[j].videoBarrage + "</span></li>\n" +
-                            "                                    <li><i class=\"bilifont bili-icon_shipin_shoucangshu\"></i><span>" + data[i].dataList[j].videoCollect + "</span></li>\n" +
-                            "                                </ul>\n" +
-                            "                            </div>\n" +
-                            "                        </div>\n" +
-                            "                    </div>"
+                    if (i < 3) {
+                        loadVideoContent(data[i])
                     }
-                    $("#ph" + data[i].typeName).append(phContent)
-                    $("#" + data[i].typeName).append(videoContent + "<div class=\"clearfix\"></div>\n")
-                    videoContent = "";
-                    phContent = "";
                     $(".flex-column").append("<li class=\"nav-item\">\n" +
                         "                <a class=\"nav-link\" onclick=\"changeHash('#t" + data[i].typeName + "');return false;\" href=\"#t" + data[i].typeName + "\">" + data[i].typeName + "</a>\n" +
                         "            </li>")
-
+                    videoData = data
                 }
                 $(".flex-column").append(`<li onclick="goScrollTZero()" class="nav-item">
                 <a class="nav-link" href="javascript:void(0)"><i class="bilifont bili-general_pullup_s"></i></a>
             </li>`)
+
             },
         });
     }
@@ -166,9 +183,9 @@ toCategory = (pid, id) => {
         location.href = "/categoryinfo/" + pid + "/" + id;
     }
 }
-goScrollTZero=()=>{
-    document.documentElement.scrollTop=0
-    document.body.scrollTop=0
+goScrollTZero = () => {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
 }
 //监听滚轮滚动事件
 window.onscroll = function () {
@@ -178,9 +195,9 @@ window.onscroll = function () {
     if (scrollT > 300) {
         $("ul.nav-pills").css("transform", "translateY(10%)")
     } else {
-        var score=(60-scrollT/5)
-        if (score<=10)score=10
-        $("ul.nav-pills").css("transform", "translateY("+score+"%)")
+        var score = (60 - scrollT / 5)
+        if (score <= 10) score = 10
+        $("ul.nav-pills").css("transform", "translateY(" + score + "%)")
     }
     if (scrollT == scrollH - clientH) {
         console.log("到底部了");
