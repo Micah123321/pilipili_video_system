@@ -87,6 +87,7 @@
             </if>
             and c.id=video_type
             AND u.`user_id`=v.`video_userid`
+            and v.video_state=1
         </where>
         order by
         <choose>

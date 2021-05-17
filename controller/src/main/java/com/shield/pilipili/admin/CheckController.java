@@ -6,6 +6,7 @@ import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.Pagen;
 import com.shield.pilipili.pojo.page.PVideosPage;
+import com.shield.pilipili.pojo.vo.MessageVo;
 import com.shield.pilipili.pojo.vo.PCategoryVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class CheckController {
     @Resource
     private PVideosService pVideosService;
+
+    @ResponseBody
+    @RequestMapping(value = "admin/check/post", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public Object checkVideo(PVideos pVideos,String videoReleasetimeString){
+        if (videoReleasetimeString==null){
+            pVideos.setVideoReleasetime(new Date());
+        }
+        if (pVideosService.updateByPrimaryKeySelective(pVideos)>0)return new MessageVo(true);
+        else return new MessageVo(false);
+    }
 
     @ResponseBody
     @RequestMapping(value = "admin/check/data", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
