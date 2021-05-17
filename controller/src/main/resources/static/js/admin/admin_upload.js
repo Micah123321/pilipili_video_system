@@ -32,6 +32,15 @@ function FileValue(val) {
 
 $(function () {
 
+    pdArrIsNull=arr=>{
+        for (var i=0;i<arr.length;i++){
+            if (arr[i].count==null||arr[i].count==""||arr[i].count.length==0){
+                return `${arr[i].name}为空,请稍后再试`;
+            }
+        }
+        return true;
+    }
+
     ajaxVideo = function (url) {
         var videoTitle = $(".input-box-v2-1-val").val();
         var videoUrl = $("input[name='videoUrl']").val();
@@ -44,33 +53,45 @@ $(function () {
         var videoTime = $("input[name='videoTime']").val();
         var videoImage = $("input[name='videoImage']").val();
         var pid=$("#pid").val()
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: {
-                "videoTitle": videoTitle,
-                "videoUrl": videoUrl,
-                "videoDesc": videoDesc,
-                "videoReleasetimeSecond": videoReleasetime,
-                "videoType": videoType,
-                "videoTimeSecond": videoTime,
-                "videoImage": videoImage,
-                "videoPv": pid
-            },
-            beforeSend: function () {
-                $(".loader").css("display", "block");
-            }
-        }).success(function (data) {
-            $(".loader").css("display", "none");
-            if (data.videoPv > 0) {
-                $(".upload-step-3-container-v2").show()
-                $(".upload-v2-step2-container").hide()
-                $("#objgj").text(data.videoTitle);
-            }
+        var flag=pdArrIsNull([
+            {"name":"视频标题","count":videoTitle},
+            {"name":"视频路径","count":videoUrl},
+            {"name":"视频类型","count":videoType},
+            {"name":"视频时长","count":videoTime},
+            {"name":"视频图片","count":videoImage}
+            ]);
+        if (flag==true){
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: {
+                    "videoTitle": videoTitle,
+                    "videoUrl": videoUrl,
+                    "videoDesc": videoDesc,
+                    "videoReleasetimeSecond": videoReleasetime,
+                    "videoType": videoType,
+                    "videoTimeSecond": videoTime,
+                    "videoImage": videoImage,
+                    "videoPv": pid
+                },
+                beforeSend: function () {
+                    $(".loader").css("display", "block");
+                }
+            }).success(function (data) {
+                $(".loader").css("display", "none");
+                if (data.videoPv > 0) {
+                    $(".upload-step-3-container-v2").show()
+                    $(".upload-v2-step2-container").hide()
+                    $("#objgj").text(data.videoTitle);
+                }
 
-        }).error(function () {
-            if (pid>0)alert("修改失败"); else alert("投稿失败");
-        });
+            }).error(function () {
+                if (pid>0)alert("修改失败"); else alert("投稿失败");
+            });
+        }else{
+            alert(flag)
+        }
+
     }
 
     uploadImageFun = function () {
