@@ -16,27 +16,44 @@
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="edittime" column="editTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, user_id, video_id, createTime, content, phone, email, source_material, check_uid, state, editTime
+        select id,
+               user_id,
+               video_id,
+               createTime,
+               content,
+               phone,
+               email,
+               source_material,
+               check_uid,
+               state,
+               editTime
         from pili.p_appeals
         where id = #{id}
     </select>
 
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, user_id, video_id, createTime, content, phone, email, source_material, check_uid, state, editTime
-        from pili.p_appeals
-        limit #{offset}, #{limit}
+        select id,
+               user_id,
+               video_id,
+               createTime,
+               content,
+               phone,
+               email,
+               source_material,
+               check_uid,
+               state,
+               editTime
+        from pili.p_appeals limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, user_id, video_id, createTime, content, phone, email, source_material, check_uid, state, editTime
+        id, user_id, video_id, createTime, content, phone, email, source_material, check_uid, state, editTime
         from pili.p_appeals
         <where>
             <if test="id != null">
@@ -74,11 +91,104 @@
             </if>
         </where>
     </select>
+    <resultMap id="getAppealsByPage" type="com.shield.pilipili.pojo.page.PAppealsPage">
+        <id property="id" column="id"/>
+        <result property="videoId" column="video_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createtime" column="createtime"/>
+        <result property="content" column="content"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="sourceMaterial" column="sourceMaterial"/>
+        <result property="checkUid" column="checkUid"/>
+        <result property="state" column="state"/>
+        <result property="edittime" column="edittime"/>
+        <association property="PVideos" javaType="com.shield.pilipili.pojo.PVideos">
+            <result column="video_image" property="videoImage"/>
+            <result column="video_title" property="videoTitle"/>
+            <result column="video_state" property="videoState"/>
+        </association>
+
+    </resultMap>
+    <select id="getAppealsByPage" resultMap="getAppealsByPage">
+        SELECT a.`id`,
+               `user_id`,
+               `video_id`,
+               a.`createTime`,
+               `content`,
+               `phone`,
+               `email`,
+               `source_material`,
+               a.`check_uid`,
+               a.`state`,
+               `editTime`,
+               v.`video_image`,
+               v.`video_title`,
+               v.`video_state`
+        FROM `pili`.`p_appeals` a
+                 LEFT JOIN p_videos v
+                           ON
+                               v.`video_pv` = a.`video_id`
+        <where>
+            a.`user_id`=#{userId}
+            <if test="state > -1 ">
+                and a.`state`=#{state}
+            </if>
+        </where>
+        <if test=" index >= 0 and count > 0">
+            limit #{index},#{count}
+        </if>
+    </select>
+    <resultMap id="queryById" type="com.shield.pilipili.pojo.page.PAppealsPage">
+        <id property="id" column="id"/>
+        <result property="videoId" column="video_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createtime" column="createtime"/>
+        <result property="content" column="content"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="sourceMaterial" column="sourceMaterial"/>
+        <result property="checkUid" column="checkUid"/>
+        <result property="state" column="state"/>
+        <result property="edittime" column="edittime"/>
+        <association property="PVideos" javaType="com.shield.pilipili.pojo.PVideos">
+            <result column="video_image" property="videoImage"/>
+            <result column="video_title" property="videoTitle"/>
+            <result column="video_state" property="videoState"/>
+        </association>
+
+    </resultMap>
+    <!--查询单个-->
+    <select id="getAppealsById" resultMap="queryById">
+        SELECT a.`id`,
+        `user_id`,
+        `video_id`,
+        a.`createTime`,
+        `content`,
+        `phone`,
+        `email`,
+        `source_material`,
+        a.`check_uid`,
+        a.`state`,
+        `editTime`,
+        v.`video_image`,
+        v.`video_title`,
+        v.`video_state`
+        FROM `pili`.`p_appeals` a
+        LEFT JOIN p_videos v
+        ON
+        v.`video_pv` = a.`video_id`
+        <where>
+            a.`user_id`=#{userId}
+            and a.id=#{id}
+        </where>
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into pili.p_appeals(user_id, video_id, createTime, content, phone, email, source_material, check_uid, state, editTime)
-        values (#{userId}, #{videoId}, now(), #{content}, #{phone}, #{email}, #{sourceMaterial}, 0,0, null)
+        insert into pili.p_appeals(user_id, video_id, createTime, content, phone, email, source_material, check_uid,
+                                   state, editTime)
+        values (#{userId}, #{videoId}, now(), #{content}, #{phone}, #{email}, #{sourceMaterial}, 0, 0, null)
     </insert>
 
     <!--通过主键修改数据-->
@@ -121,7 +231,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from pili.p_appeals where id = #{id}
+        delete
+        from pili.p_appeals
+        where id = #{id}
     </delete>
 
 </mapper>

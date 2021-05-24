@@ -1,17 +1,15 @@
 package com.shield.pilipili;
 
-import com.shield.pilipili.pojo.PAppeals;
-import com.shield.pilipili.pojo.page.PAppealsPage;
-
+import com.shield.pilipili.pojo.PAppealsReply;
 import java.util.List;
 
 /**
- * 申诉表(PAppeals)表服务接口
+ * 申诉回复表(PAppealsReply)表服务接口
  *
  * @author makejava
- * @since 2021-05-24 11:07:52
+ * @since 2021-05-25 00:11:07
  */
-public interface PAppealsService {
+public interface PAppealsReplyService {
 
     /**
      * 通过ID查询单条数据
@@ -19,9 +17,7 @@ public interface PAppealsService {
      * @param id 主键
      * @return 实例对象
      */
-    PAppeals queryById(Integer id);
-
-    PAppealsPage getAppealsById(PAppealsPage pAppealsPage);
+    PAppealsReply queryById(Integer id);
 
     /**
      * 查询多条数据
@@ -30,23 +26,23 @@ public interface PAppealsService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<PAppeals> queryAllByLimit(int offset, int limit);
+    List<PAppealsReply> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param pAppeals 实例对象
+     * @param pAppealsReply 实例对象
      * @return 实例对象
      */
-    PAppeals insert(PAppeals pAppeals);
+    PAppealsReply insert(PAppealsReply pAppealsReply);
 
     /**
      * 修改数据
      *
-     * @param pAppeals 实例对象
+     * @param pAppealsReply 实例对象
      * @return 实例对象
      */
-    PAppeals update(PAppeals pAppeals);
+    PAppealsReply update(PAppealsReply pAppealsReply);
 
     /**
      * 通过主键删除数据
@@ -56,5 +52,5 @@ public interface PAppealsService {
      */
     boolean deleteById(Integer id);
 
-    List<PAppealsPage> getAppealsByPage(PAppealsPage pAppealsPage);
+    List<PAppealsReply> getPAppealsReplyByAppealsId(Integer AppealsId);
 }

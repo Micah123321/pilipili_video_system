@@ -1,17 +1,16 @@
 package com.shield.pilipili.dao;
 
-import com.shield.pilipili.pojo.PAppeals;
-import com.shield.pilipili.pojo.page.PAppealsPage;
+import com.shield.pilipili.pojo.PAppealsReply;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 申诉表(PAppeals)表数据库访问层
+ * 申诉回复表(PAppealsReply)表数据库访问层
  *
  * @author makejava
- * @since 2021-05-24 11:05:24
+ * @since 2021-05-25 00:11:06
  */
-public interface PAppealsDao {
+public interface PAppealsReplyDao {
 
     /**
      * 通过ID查询单条数据
@@ -19,9 +18,8 @@ public interface PAppealsDao {
      * @param id 主键
      * @return 实例对象
      */
-    PAppeals queryById(Integer id);
+    PAppealsReply queryById(Integer id);
 
-    PAppealsPage getAppealsById(PAppealsPage pAppealsPage);
     /**
      * 查询指定行数据
      *
@@ -29,33 +27,34 @@ public interface PAppealsDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<PAppeals> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<PAppealsReply> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
-    List<PAppealsPage> getAppealsByPage(PAppealsPage pAppealsPage);
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param pAppeals 实例对象
+     * @param pAppealsReply 实例对象
      * @return 对象列表
      */
-    List<PAppeals> queryAll(PAppeals pAppeals);
+    List<PAppealsReply> queryAll(PAppealsReply pAppealsReply);
+
+    List<PAppealsReply> getPAppealsReplyByAppealsId(Integer AppealsId);
 
     /**
      * 新增数据
      *
-     * @param pAppeals 实例对象
+     * @param pAppealsReply 实例对象
      * @return 影响行数
      */
-    int insert(PAppeals pAppeals);
+    int insert(PAppealsReply pAppealsReply);
 
     /**
      * 修改数据
      *
-     * @param pAppeals 实例对象
+     * @param pAppealsReply 实例对象
      * @return 影响行数
      */
-    int update(PAppeals pAppeals);
+    int update(PAppealsReply pAppealsReply);
 
     /**
      * 通过主键删除数据
@@ -64,5 +63,6 @@ public interface PAppealsDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
+
 
 }

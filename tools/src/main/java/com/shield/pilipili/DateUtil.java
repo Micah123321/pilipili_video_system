@@ -166,6 +166,26 @@ public class DateUtil {
 
         return new DateTime(date).toString("yyyy-MM-dd HH:mm");
     }
+
+    /**
+     * 判断是否在三天之内
+     * @param date
+     * @return
+     */
+    public static String pAppeal(Date date) {
+        DateTime now = new DateTime();
+        DateTime today_start = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), 0, 0, 0);
+        DateTime today_end = today_start.plusDays(1);
+        DateTime yesterday_start = today_start.minusDays(1);
+
+        if (date.after(today_start.toDate()) && date.before(today_end.toDate())) {
+            return String.format("...2天后过期", new DateTime(date).toString("HH:mm"));
+        } else if (date.after(yesterday_start.toDate()) && date.before(today_start.toDate())) {
+            return String.format("...1天后过期", new DateTime(date).toString("HH:mm"));
+        }
+
+        return "...已过期";
+    }
     /**
      * 日期的加减方法
      * 用于在当前的天或者小时或者分钟或者月份的基础上加上或者减去若干小时，分钟，日，月

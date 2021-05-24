@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shield.pilipili.dao.PAppealsReplyDao">
+
+    <resultMap id="BaseResultMap" type="com.shield.pilipili.pojo.PAppealsReply">
+        <!--@Table p_appeals_reply-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="appealsid" column="appealsId" jdbcType="INTEGER"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="sourceMaterial" column="source_material" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, user_id, appealsId, createTime, content, source_material
+        from pili.p_appeals_reply
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, user_id, appealsId, createTime, content, source_material
+        from pili.p_appeals_reply
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, user_id, appealsId, createTime, content, source_material
+        from pili.p_appeals_reply
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="appealsid != null">
+                and appealsId = #{appealsid}
+            </if>
+            <if test="createtime != null">
+                and createTime = #{createtime}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="sourceMaterial != null and sourceMaterial != ''">
+                and source_material = #{sourceMaterial}
+            </if>
+        </where>
+    </select>
+    <select id="getPAppealsReplyByAppealsId" resultMap="BaseResultMap">
+        select
+        id, user_id, appealsId, createTime, content, source_material
+        from pili.p_appeals_reply
+        <where>
+                 appealsId = #{appealsId}
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into pili.p_appeals_reply(user_id, appealsId, createTime, content, source_material)
+        values (#{userId}, #{appealsid}, #{createtime}, #{content}, #{sourceMaterial})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update pili.p_appeals_reply
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="appealsid != null">
+                appealsId = #{appealsid},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="sourceMaterial != null and sourceMaterial != ''">
+                source_material = #{sourceMaterial},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from pili.p_appeals_reply where id = #{id}
+    </delete>
+
+</mapper>

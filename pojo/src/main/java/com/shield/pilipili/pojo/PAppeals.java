@@ -1,5 +1,7 @@
 package com.shield.pilipili.pojo;
 
+import com.shield.pilipili.DateUtil;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -54,6 +56,21 @@ public class PAppeals implements Serializable {
     */
     private Date edittime;
 
+    private String stateString;
+
+    public String getStateString() {
+        return stateString;
+    }
+
+    public void setStateString() {
+        StringBuffer stringBuffer=new StringBuffer();
+        if (getState()==0){
+            stringBuffer.append("处理中"+ DateUtil.pAppeal(getCreatetime()));
+        }else{
+            stringBuffer.append("申诉完成");
+        }
+        this.stateString = stringBuffer.toString();
+    }
 
     public Integer getId() {
         return id;
@@ -85,6 +102,7 @@ public class PAppeals implements Serializable {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+
     }
 
     public String getContent() {
@@ -133,6 +151,7 @@ public class PAppeals implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+        setStateString();
     }
 
     public Date getEdittime() {

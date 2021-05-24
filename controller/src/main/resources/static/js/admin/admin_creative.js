@@ -149,7 +149,7 @@ $(function () {
                 phone: $(this).parent().parent().find(".modal-body").find(".contact-wrp").find(".input-group.left").find("input").val(),
                 email: $(this).parent().parent().find(".modal-body").find(".contact-wrp").find(".input-group.right").find("input").val(),
             }
-            var flag = ajaxAddAppeal(dataArr, this)
+             ajaxAddAppeal(dataArr, this)
         }
     )
     $(".article-list_wrap").on('mouseenter', function () {
@@ -178,6 +178,7 @@ $(function () {
                 if (data.code == 0) {
                     $(obj).parent().parent().addClass("submit")
                     $(obj).parent().parent().html(`<div class="modal-header"><i class="iconfont icon-close appeal-close"></i></div><div class="submit-body"><div class="header success main">申诉成功!</div> <div class="header second">我们会尽快处理，请耐心等待申诉结果</div> <div class="success-img"><img src="//s1.hdslb.com/bfs/static/jinkela/studio/creativecenter-platform/assets/appeal-success.f1dce93.png" height="211" width="201"></div> <div style="display: block;" class="btn-group"><a href="/admin?url=appeal" class="cc-btn is-main">前往申诉管理</a> <a class="cc-btn closeModel is-secondary">返回视频管理</a></div></div>`)
+                    getVideoDataDontChange()
                 }
             }
         })

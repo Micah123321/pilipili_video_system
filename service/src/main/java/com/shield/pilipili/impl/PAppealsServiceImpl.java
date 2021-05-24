@@ -3,6 +3,7 @@ package com.shield.pilipili.impl;
 import com.shield.pilipili.PAppealsService;
 import com.shield.pilipili.dao.PAppealsDao;
 import com.shield.pilipili.pojo.PAppeals;
+import com.shield.pilipili.pojo.page.PAppealsPage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +29,11 @@ public class PAppealsServiceImpl implements PAppealsService {
     @Override
     public PAppeals queryById(Integer id) {
         return this.pAppealsDao.queryById(id);
+    }
+
+    @Override
+    public PAppealsPage getAppealsById(PAppealsPage pAppealsPage) {
+        return null;
     }
 
     /**
@@ -75,5 +81,10 @@ public class PAppealsServiceImpl implements PAppealsService {
     @Override
     public boolean deleteById(Integer id) {
         return this.pAppealsDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<PAppealsPage> getAppealsByPage(PAppealsPage pAppealsPage) {
+        return pAppealsDao.getAppealsByPage(pAppealsPage);
     }
 }
