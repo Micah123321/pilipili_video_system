@@ -31,7 +31,7 @@ $(function () {
             $("#loadingScoll").css("transition", "0.5s all");
             $("#loadingScoll").css("height", "0");
             $("#loadingScoll").css("width", "100%");
-        }, 500);
+        }, 500,);
     }
 
     changeDocUrl = function (url) {

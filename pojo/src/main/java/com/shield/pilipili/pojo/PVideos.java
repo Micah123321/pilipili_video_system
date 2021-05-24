@@ -32,6 +32,8 @@ public class PVideos implements Serializable {
      */
     private Integer videoUserid=0;
 
+    private String appealState;
+
     /**
      * 视频标题
      */

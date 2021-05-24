@@ -117,27 +117,28 @@
     </select>
     <select id="selectVideosListByUp" resultType="com.shield.pilipili.pojo.PVideos">
         SELECT
-        `video_pv` videoPv,
-        `video_userid` videoUserid,
-        `video_title` videoTitle,
-        `video_url` videoUrl,
-        `video_play` videoPlay,
-        `video_like`videoLike,
-        `video_collect` videoCollect,
-        `video_desc` videoDesc,
-        `video_state` videoState,
-        `video_updatetime` videoUpdatetime,
-        `video_checkuid` videoCheckuid,
-        `video_checktime` videoChecktime,
-        `video_releasetime` videoReleasetime,
-        `video_type` videoType,
-        `video_time` videoTime,
-        `video_image` videoImage,
-        `video_comment` videoComment,
-        `video_barrage` videoBarrage,
-        c.parentId videoParentType
+        v.`video_pv` videoPv,
+        v.`video_userid` videoUserid,
+        v.`video_title` videoTitle,
+        v.`video_url` videoUrl,
+        v.`video_play` videoPlay,
+        v.`video_like`videoLike,
+        v.`video_collect` videoCollect,
+        v.`video_desc` videoDesc,
+        v.`video_state` videoState,
+        v.`video_updatetime` videoUpdatetime,
+        v.`video_checkuid` videoCheckuid,
+        v.`video_checktime` videoChecktime,
+        v.`video_releasetime` videoReleasetime,
+        v.`video_type` videoType,
+        v.`video_time` videoTime,
+        v.`video_image` videoImage,
+        v.`video_comment` videoComment,
+        v.`video_barrage` videoBarrage,
+        c.parentId videoParentType,
+        (select id from p_appeals where user_id=v.video_userid and video_id=v.video_pv) appealState
         from
-        p_videos,p_category c
+        p_videos v,p_category c
         <where>
             <if test="videoTitle != '' and videoTitle!=null">
                 video_title like CONCAT('%',#{videoTitle},'%')
