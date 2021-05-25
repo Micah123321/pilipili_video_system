@@ -1,8 +1,11 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 import java.util.Date;
 import java.io.Serializable;
-
+@Data
 /**
  * 申诉回复表(PAppealsReply)实体类
  *
@@ -17,6 +20,8 @@ public class PAppealsReply implements Serializable {
     * 发表人（来源于pili_user用户表的用户id）
     */
     private Integer userId;
+
+    private PUserInfo pUserInfo;
     /**
     * 申诉id（来源于p_appeals视频表的申诉id）
     */
@@ -24,6 +29,7 @@ public class PAppealsReply implements Serializable {
     /**
     * 创建时间
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
     /**
     * 申诉内容
@@ -34,6 +40,7 @@ public class PAppealsReply implements Serializable {
     */
     private String sourceMaterial;
 
+    private Integer isU;
 
     public Integer getId() {
         return id;

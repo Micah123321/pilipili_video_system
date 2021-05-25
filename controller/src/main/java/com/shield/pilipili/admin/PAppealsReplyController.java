@@ -26,10 +26,14 @@ public class PAppealsReplyController {
     @Resource
     private PAppealsReplyService pAppealsReplyService;
 
+
+
     @ResponseBody
     @RequestMapping(value = "/admin/appealReply/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public Object getAppealsReply(Integer appealsId) {
-        List<PAppealsReply> pAppealsReplyByAppealsId = pAppealsReplyService.getPAppealsReplyByAppealsId(appealsId);
+    public Object getAppealsReply(PAppealsReply reply,HttpSession session) {
+        PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
+        reply.setUserId(pUserInfo.getUserId());
+        List<PAppealsReply> pAppealsReplyByAppealsId = pAppealsReplyService.getPAppealsReplyByAppealsId(reply);
         return pAppealsReplyByAppealsId;
     }
 

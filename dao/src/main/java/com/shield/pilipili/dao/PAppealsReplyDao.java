@@ -38,7 +38,7 @@ public interface PAppealsReplyDao {
      */
     List<PAppealsReply> queryAll(PAppealsReply pAppealsReply);
 
-    List<PAppealsReply> getPAppealsReplyByAppealsId(Integer AppealsId);
+    List<PAppealsReply> getPAppealsReplyByAppealsId(PAppealsReply reply);
 
     /**
      * 新增数据
@@ -48,6 +48,7 @@ public interface PAppealsReplyDao {
      */
     int insert(PAppealsReply pAppealsReply);
 
+    int addKefuMessage(Integer id);
     /**
      * 修改数据
      *

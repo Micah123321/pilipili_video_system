@@ -6,24 +6,37 @@
         <!--@Table p_appeals_reply-->
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="isU" column="isU" jdbcType="INTEGER"/>
         <result property="appealsid" column="appealsId" jdbcType="INTEGER"/>
         <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="sourceMaterial" column="source_material" jdbcType="VARCHAR"/>
+        <association property="PUserInfo" javaType="com.shield.pilipili.pojo.PUserInfo">
+            <result column="nickName" property="nickName"/>
+            <result column="user_pic" property="userPic"/>
+        </association>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
-        select
-          id, user_id, appealsId, createTime, content, source_material
+        select id,
+               user_id,
+               appealsId,
+               createTime,
+               content,
+               source_material
         from pili.p_appeals_reply
         where id = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
-        select
-          id, user_id, appealsId, createTime, content, source_material
+        select id,
+               user_id,
+               appealsId,
+               createTime,
+               content,
+               source_material
         from pili.p_appeals_reply
         limit #{offset}, #{limit}
     </select>
@@ -31,7 +44,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          id, user_id, appealsId, createTime, content, source_material
+        id, user_id, appealsId, createTime, content, source_material
         from pili.p_appeals_reply
         <where>
             <if test="id != null">
@@ -56,10 +69,12 @@
     </select>
     <select id="getPAppealsReplyByAppealsId" resultMap="BaseResultMap">
         select
-        id, user_id, appealsId, createTime, content, source_material
-        from pili.p_appeals_reply
+        r.id, r.user_id, appealsId, r.createTime, content, source_material,i.nickName,i.user_pic,
+        (select count(id) from p_appeals_reply where user_id=#{userId}  AND id=r.id) isU
+        from pili.p_appeals_reply r,p_user_info i
         <where>
-                 appealsId = #{appealsId}
+            appealsId = #{id}
+            and i.user_id=r.user_id
         </where>
     </select>
 
@@ -67,6 +82,21 @@
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into pili.p_appeals_reply(user_id, appealsId, createTime, content, source_material)
         values (#{userId}, #{appealsid}, #{createtime}, #{content}, #{sourceMaterial})
+    </insert>
+    <insert id="addKefuMessage">
+        INSERT INTO `pili`.`p_appeals_reply` (
+            `user_id`,
+            `appealsId`,
+            `createTime`,
+            `content`
+        )
+        VALUES
+        (
+            '9',
+            #{id},
+            NOW(),
+            '已收到申诉申请，正在为您申请客服介入'
+        ) ;
     </insert>
 
     <!--通过主键修改数据-->
@@ -94,7 +124,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from pili.p_appeals_reply where id = #{id}
+        delete
+        from pili.p_appeals_reply
+        where id = #{id}
     </delete>
 
 </mapper>

@@ -54,6 +54,11 @@ public class PAppealsReplyServiceImpl implements PAppealsReplyService {
         return pAppealsReply;
     }
 
+    @Override
+    public int addKefuMessage(Integer id) {
+        return pAppealsReplyDao.addKefuMessage(id);
+    }
+
     /**
      * 修改数据
      *
@@ -78,7 +83,7 @@ public class PAppealsReplyServiceImpl implements PAppealsReplyService {
     }
 
     @Override
-    public List<PAppealsReply> getPAppealsReplyByAppealsId(Integer AppealsId) {
-        return pAppealsReplyDao.getPAppealsReplyByAppealsId(AppealsId);
+    public List<PAppealsReply> getPAppealsReplyByAppealsId(PAppealsReply reply) {
+        return pAppealsReplyDao.getPAppealsReplyByAppealsId(reply);
     }
 }

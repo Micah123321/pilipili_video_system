@@ -35,7 +35,7 @@ public interface PAppealsReplyService {
      * @return 实例对象
      */
     PAppealsReply insert(PAppealsReply pAppealsReply);
-
+    int addKefuMessage(Integer id);
     /**
      * 修改数据
      *
@@ -52,5 +52,5 @@ public interface PAppealsReplyService {
      */
     boolean deleteById(Integer id);
 
-    List<PAppealsReply> getPAppealsReplyByAppealsId(Integer AppealsId);
+    List<PAppealsReply> getPAppealsReplyByAppealsId(PAppealsReply reply);
 }

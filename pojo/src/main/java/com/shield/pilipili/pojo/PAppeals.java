@@ -1,5 +1,6 @@
 package com.shield.pilipili.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.shield.pilipili.DateUtil;
 
 import java.util.Date;
@@ -26,6 +27,7 @@ public class PAppeals implements Serializable {
     /**
     * 创建时间
     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
     /**
     * 申诉内容

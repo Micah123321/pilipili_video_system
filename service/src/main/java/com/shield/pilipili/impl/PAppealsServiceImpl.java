@@ -33,7 +33,7 @@ public class PAppealsServiceImpl implements PAppealsService {
 
     @Override
     public PAppealsPage getAppealsById(PAppealsPage pAppealsPage) {
-        return null;
+        return pAppealsDao.getAppealsById(pAppealsPage);
     }
 
     /**

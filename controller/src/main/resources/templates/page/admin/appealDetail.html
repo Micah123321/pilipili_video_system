@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>申诉页面详情</title>
+    <link rel="stylesheet" href="/css/admin/admin_appealsDetail.css">
+    <script src="/js/admin/admin_appealsDetail.js"></script>
+</head>
+<body>
+<input type="hidden" th:value="${id}" id="id" >
+<div data-v-a9d43656="" class="upload-manage cc-content-body"><!---->
+    <div data-v-a9d43656="" id="appeal-detail" class="content">
+        <ul class="appeal-detail-crumb">
+            <li><a href="/admin?url=appeal" class="active">申诉管理</a></li>
+            <li><a  class="current" style="cursor: default;">申诉详情</a></li>
+        </ul>
+        <div>
+            <div class="appeal-top-con">
+                <div class="top-con-detail">
+                    <div class="det-info">
+                        <div class="info-sta"><p class="time">
+                            申诉时间：<span></span>
+                        </p>
+                            <p class="num">
+                                申诉编号：<span></span>
+                            </p>
+                            <p class="sta waiting"><span>受理状态：</span> <i class="iconfont"></i> <span class="text">等待处理...</span>
+                            </p></div>
+                        <div class="info-con"><p target="_blank" class="title"
+                                                 href="//www.bilibili.com/video/av24707612">如何使用vape 2.47在hypixel
+                            hacking，【micah搬运】首期wow</p>
+                            <p class="ar-sta">稿件状态：已锁定</p>
+                            <div class="info-pic"><img alt=""
+                                                       src="//i2.hdslb.com/bfs/archive/b435cace50c22f11f68bac5f5a623863d7bf726e.png@80w_50h"
+                                                       style="width: 100%; height: 100%; opacity: 1;"></div>
+                        </div>
+                    </div>
+                    <div div="" class="ap-reply det-reply no-radius-left no-radius-left"><p class="ap-reply-text">
+                        搬运视频，并没有违反视频条约<!----></p>
+                        <div class="ap-reply-pics"></div>
+                    </div>
+                </div>
+                <div class="top-con-wave-bg">
+                    <div class="white-bg"><span class="app-commit-time">
+						申诉工单已于 <span></span> 提交待审
+					</span> <a onclick="ajaxUpdateAppeal()" href="javascript:void (0);" class="appeal-solve-btn bili-btn ok">问题已解决</a> <a href="javascript:;"
+                                                                                                     class="close-appeal-btn bili-btn plain">关闭申诉</a>
+                    </div>
+                </div>
+            </div>
+            <div class="appeal-detail-reply">
+                <div class="ap-reply-dialog service"><a href="javascript:;" class="dialog-up"><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAADM0lEQVRYw+2YS2gTWxjHf5PMmSZtnk2oBhXF1tZLqqjFitCAit2J27u/F3yjO0Vc3dXVhSsfIIIrkRZ8XTcXteBCRKviohqx9Xq1rbFQqnk0jyaTSe6immqdaaZNeqvQb3WYc+Z/fuc73/zPzEgrrkWK/EBhWWiARaBFoAUHOhp0ca+zgYDdOuM4r2Lh1nY/f250zy/QQEJltVOmO+QzhPIoFq50+NjgVfg3qc0v0M3hDMefxVjpkOkK+Vg6DcotJmGCHsHpl+NcfJ2clb5cbkDQI9jqr0FMQw/HVFo9gq6Qj+536dL1XcvttHoEb5N5coUi+5sdpT61AA/HsoRjquF80kxOfSzo4kCLA2m2aZwhisD5/iSnwgndfsMt6wzYOFhlGAAJONjioDNg0+033LLfm+pK7ZdxlcNPogwk8nMGaXbJnNns5Re3KOnfHZkwn6H1XqXU3tdbGQzAQCLP3t6orr4pIIc8tVnvkpXB6Ol8rW8KaKaQgJV1Mm31+qsMugVNThnrHAqw7GP/JdZ7BbuX21nnEQQ9ApewMJjKE7o9+t3YE+tcdDTUkMoXeRVX6Yup/B3J8GgsVz2gJqfMnjVTnjKuFoikNWSLRL7wrXN8yhX4lCtQr1ho8ym0+RQiaa26QE8/5jjfn+RFXOV5VGUolcfIwA49nizeZbVWWj2CoFvwYDRrah7TQEMpjZMGZmYUkbRGJK1x+8OE6Xuq9vohV8lBKwJqcckE7FacwsLlDh9OYSFgt9LiMp347xdWCdC2JTZ+a6ojlS8iAX9t81MnS1z6J0V/YnanfFWALrxO8nAsi90q0TuWY4tfIaMV6Yuqc9Y0BJrQitg+O1ujU+bNuL5bfz15b5nHutEpf6OvF4Y1FI5PTXS23UtzBXUBk4fruXavrr6pDF15my4dDUG3oGdnQ0VAevqzytDVwTQ3hjNVhfgS14cyXB3UB5LKfdvvDNgINdRQa5X4dVUtAMMpjfsmnHeTT7DWNfn+c+t9ho/ZAvdHs/SMGBtl2cLoGZkoCdisEjuW1vBHX5w7I+Xdt92vcGFLPeGYypEnUTQTvzXKZuj/jp//y3URaKHjhwP6D2LjEJFT38ZrAAAAAElFTkSuQmCC"
+                        alt=""></a>
+                    <div class="dialog-info"><span class="name">
+			客服
+		</span> <span class="time">
+			2021-05-24 11:39:56
+		</span></div>
+                    <div div="" class="ap-reply no-radius-left"><p class="ap-reply-text">您好，您的反馈我们已收到，会尽快核实处理，请您稍等。
+                        <!----></p>
+                        <div class="ap-reply-pics"></div>
+                    </div>
+                </div> <!---->
+                <form class="appeal-reply-form"><textarea name="" id="" cols="30" rows="10" autocomplete="off"
+                                                          placeholder="请输入回复内容" class=""></textarea>
+                    <div class="upload-con"><span class="upload-btn"
+                                                  style="position: relative; overflow: hidden;"><input type="file"
+                                                                                                       class="file-input"></span>
+                        <div class="upload-err" style="display: none;"><p></p> <span class="normal-arr left-arr"></span>
+                        </div>
+                        <a href="javascript:;" class="confirm-btn bili-btn ok">发表回复</a>
+                        <div class="reply-err" style="display: none;"><p></p> <span class="normal-arr right-arr"></span>
+                        </div>
+                    </div>
+                </form>
+            </div> <!----></div> <!----></div>
+</div>
+</body>
+</html>
