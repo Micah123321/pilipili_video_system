@@ -1,51 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>噼哩噼哩弹幕视频网 - ( ゜- ゜)つロ 乾杯~ - pilipili</title>
     <link href="/css/style.css" type="text/css" rel="stylesheet" media="all">
     <link href="/css/login.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/css/toastr.min.css" type="text/css" rel="stylesheet" media="all">
     <script src="/js/jquery-2.2.3.min.js"></script>
-    <script>
-        function log() {
-            var userName=$("#login-username").val();
-            var upwd=$("#login-passwd").val();
-            if (userName==""){
-               alert("用户名不能为空")
-               return false;
-
-
-            }
-            if (upwd==""){
-                alert("密码不能为空")
-                return false;
-            }
-            else{
-                $.ajax({
-                        type:"post",
-                        url:"/user/log",
-                        dataType:"json",
-                        data:{
-                            "userName":userName,
-                            "upwd":upwd
-                        },
-                    async: true,
-                    success:function(data){
-                        if(upwd != data.upwd){
-                            alert("账号或密码错误");
-                        }else{
-                            window.location.href="/user/index";
-                    }
-                    }
-                });
-            }
-        }
-
-    </script>
-
-
+    <script src="/js/toastr.min.js"></script>
 </head>
 <body>
+<input type="hidden" id="msg" th:value="${msg}">
+<script>
+    function log() {
+        var userName=$("#login-username").val();
+        var upwd=$("#login-passwd").val();
+        if (userName==""){
+            alert("用户名不能为空")
+            return false;
+
+
+        }
+        if (upwd==""){
+            alert("密码不能为空")
+            return false;
+        }
+        else{
+            $.ajax({
+                type:"post",
+                url:"/user/log",
+                dataType:"json",
+                data:{
+                    "userName":userName,
+                    "upwd":upwd
+                },
+                async: true,
+                success:function(data){
+                    if(upwd != data.upwd){
+                        alert("账号或密码错误");
+                    }else{
+                        window.location.href="/user/index";
+                    }
+                }
+            });
+        }
+    }
+    var msg=$("#msg").val();
+    if (msg!=null&&msg!=""&&msg.length>0){
+        toastr.warning(msg);
+    }
+</script>
 <div class="">
     <div class="top-banner"><img src="/images/login_top.png"></div>
     <div class="title-line"><span class="tit" style="font-size: 38px;"  >登录</span></div>

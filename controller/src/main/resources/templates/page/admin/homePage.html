@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec=http://www.thymeleaf.org/extras/spring-security>
 <head>
-
     <title>pilipili 管理后台 - 首页</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/favicon1.ico"/>
+    <link rel="bookmark" href="/favicon1.ico"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../css/bootstrap-select.min.css"/>
     <script src="../js/jquery-1.11.3.min.js"></script>
@@ -78,14 +79,14 @@
             </svg>
             <span>申诉管理</span>
         </li>
-        <li class="menu_li" gotopage="category">
+        <li sec:authorize="hasAuthority('vip3')" class="menu_li" gotopage="category">
             <svg class="icon bi bi-bookmarks" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8003" width="16" height="16">
                     <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
                     <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
             </svg>
             <span>分类管理</span>
         </li>
-        <li  class="menu_li"  gotopage="check">
+        <li sec:authorize="hasAuthority('vip3')" class="menu_li"  gotopage="check">
             <svg  class="icon bi bi-camera-video" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4509" width="16" height="16">
                 <path d="M5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-2z"/>
                 <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 6h2A1.5 1.5 0 0 1 12 7.5v2a1.5 1.5 0 0 1-1.5 1.5h-.473l.447 1.342a.5.5 0 0 1-.948.316L8.973 11H8.5v1a.5.5 0 0 1-1 0v-1h-.473l-.553 1.658a.5.5 0 1 1-.948-.316L5.973 11H5.5A1.5 1.5 0 0 1 4 9.5v-2A1.5 1.5 0 0 1 5.5 6h2a.5.5 0 0 1 1 0z"/>

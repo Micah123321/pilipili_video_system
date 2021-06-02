@@ -61,6 +61,7 @@ $(function () {
         var orderBy = $(".be-tab-item.is-active").val();
         var videoType = $("#submit-video-type-filter a.active").attr("value");
         var currPage = $("#currPage").val();
+        var videoUserid=$("#uid").val();
         $.ajax({
             url: "/admin/creative/data",
             type: "get",
@@ -70,7 +71,8 @@ $(function () {
                 videoState,
                 orderBy,
                 currPage,
-                videoType
+                videoType,
+                videoUserid
             },
             success: function (data) {
                 var tbody = $(".cube-list");

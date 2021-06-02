@@ -1,5 +1,7 @@
 package com.shield.pilipili.admin;
 
+import com.alibaba.fastjson.JSONObject;
+import com.shield.pilipili.PAppealsService;
 import com.shield.pilipili.pojo.PAppealsReply;
 import com.shield.pilipili.PAppealsReplyService;
 import com.shield.pilipili.pojo.PUserInfo;
@@ -25,16 +27,25 @@ public class PAppealsReplyController {
      */
     @Resource
     private PAppealsReplyService pAppealsReplyService;
+    @Resource
+    private PAppealsService pAppealsService;
 
 
 
     @ResponseBody
     @RequestMapping(value = "/admin/appealReply/list", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public Object getAppealsReply(PAppealsReply reply,HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
         PUserInfo pUserInfo= (PUserInfo) session.getAttribute("userSession");
         reply.setUserId(pUserInfo.getUserId());
         List<PAppealsReply> pAppealsReplyByAppealsId = pAppealsReplyService.getPAppealsReplyByAppealsId(reply);
-        return pAppealsReplyByAppealsId;
+        jsonObject.put("list",pAppealsReplyByAppealsId);
+        PAppealsPage pAppealsPage=new PAppealsPage();
+        pAppealsPage.setUserId(pUserInfo.getUserId());
+        pAppealsPage.setId(reply.getId());
+        PAppealsPage appealsById = pAppealsService.getAppealsById(pAppealsPage);
+        jsonObject.put("state",appealsById.getState());
+        return jsonObject;
     }
 
     @ResponseBody

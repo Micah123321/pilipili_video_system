@@ -7,6 +7,11 @@ import com.shield.pilipili.pojo.PUserInfo;
 import com.shield.pilipili.pojo.PVideos;
 import com.shield.pilipili.pojo.page.PVideosPage;
 import com.shield.pilipili.pojo.vo.MessageVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +34,9 @@ public class UserController {
 
     @Resource
     private PVideosService pVideosService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Resource
     private PVideosThumbsupService pVideosThumbsupService;
@@ -56,6 +64,10 @@ public class UserController {
         PUser pUser = pUserService.login(userName, upwd);
         if (pUser != null) {
             PUserInfo pUserInfo = pUserInfoService.selectByUserId(pUser.getUid());
+            UsernamePasswordAuthenticationToken token =
+                    new UsernamePasswordAuthenticationToken(userName, upwd);
+            Authentication authentication = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             session.setAttribute("userSession", pUserInfo);
         } else {
             return new PUser();

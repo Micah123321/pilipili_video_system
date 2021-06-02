@@ -101,7 +101,7 @@ public class AdminController {
             pVideosPage.setVideoState(-1);
         }
         PUserInfo userSession = (PUserInfo) session.getAttribute("userSession");
-        pVideosPage.setVideoUserid(userSession.getUserId());
+        if (pVideosPage.getVideoUserid()==null||pVideosPage.getVideoUserid()==0)pVideosPage.setVideoUserid(userSession.getUserId());
         page.setTotalCount(pVideosService.selectVideosListByUp(pVideosPage).size());
         page.setAllDataList( pVideosService.selectVideosListByUp(pVideosPage));
         if (currPage>page.getTotalPageCount())currPage=page.getTotalPageCount();
@@ -283,7 +283,7 @@ public class AdminController {
     }
     @GetMapping("/admin/account/logout")
     public String logout(HttpSession session){
-        session.removeAttribute("userSession");
+        session.invalidate();
         return "redirect:/user/login";
     }
     @GetMapping("admin/creative")

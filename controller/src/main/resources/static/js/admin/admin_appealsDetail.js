@@ -18,17 +18,6 @@ $(function () {
                 $(".ap-reply-text").text(data.content)
                 $(".app-commit-time span").text(data.createtime)
                 ajaxAppealReply()
-                if (data.state==0){
-                    $(".appeal-detail-reply").append(`<form class="appeal-reply-form"><textarea name="" id="" cols="30" rows="10" autocomplete="off" placeholder="请输入回复内容" class=""></textarea>
-                    <div class="upload-con"><span class="upload-btn" style="position: relative; overflow: hidden;"><input type="file" class="file-input"></span>
-                        <div class="upload-err" style="display: none;"><p></p> <span class="normal-arr left-arr"></span>
-                        </div>
-                        <a href="javascript:;" class="confirm-btn bili-btn ok">发表回复</a>
-                        <div class="reply-err" style="display: none;"><p></p> <span class="normal-arr right-arr"></span>
-                        </div>
-                    </div>
-                </form>`)
-                }
             }
         })
     }
@@ -43,32 +32,30 @@ $(function () {
             },
             success: function (data) {
                 $(".appeal-detail-reply").empty()
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].isU) {
-                        $(".appeal-detail-reply").append(`<div class="ap-reply-dialog self"><a href="javascript:;" class="dialog-up"><img src="${data[i].puserInfo.userPic}" alt=""></a>
+                for (let i = 0; i < data.list.length; i++) {
+                    var obj=data.list[i]
+                    $(".appeal-detail-reply").append(`<div class="ap-reply-dialog ${obj.isU ? "self" : "service"}"><a href="javascript:;" class="dialog-up"><img src="${obj.puserInfo.userPic}" alt=""></a>
                     <div class="dialog-info"><span class="name">
-                    \t\t\t${data[i].puserInfo.nickName}
+                    \t\t\t${obj.puserInfo.nickName}
                     \t\t</span> <span class="time">
-                    \t\t\t${data[i].createtime}
+                    \t\t\t${obj.createtime}
                     \t\t</span></div>
-                    <div div="" class="ap-reply no-radius-left"><p class="ap-reply-text">${data[i].content}
+                    <div div="" class="ap-reply no-radius-left"><p class="ap-reply-text">${obj.content}
                         <!----></p>
                         <div class="ap-reply-pics"></div>
                     </div>
                 </div>`)
-                    } else {
-                        $(".appeal-detail-reply").append(`<div class="ap-reply-dialog service"><a href="javascript:;" class="dialog-up"><img src="${data[i].puserInfo.userPic}" alt=""></a>
-                    <div class="dialog-info"><span class="name">
-                    \t\t\t${data[i].puserInfo.nickName}
-                    \t\t</span> <span class="time">
-                    \t\t\t${data[i].createtime}
-                    \t\t</span></div>
-                    <div div="" class="ap-reply no-radius-left"><p class="ap-reply-text">${data[i].content}
-                        <!----></p>
-                        <div class="ap-reply-pics"></div>
+                }
+                if (data.state==0){
+                    $(".appeal-detail-reply").append(`<form class="appeal-reply-form"><textarea name="" id="" cols="30" rows="10" autocomplete="off" placeholder="请输入回复内容" class=""></textarea>
+                    <div class="upload-con"><span class="upload-btn" style="position: relative; overflow: hidden;"><input type="file" class="file-input"></span>
+                        <div class="upload-err" style="display: none;"><p></p> <span class="normal-arr left-arr"></span>
+                        </div>
+                        <a href="javascript:;" class="confirm-btn bili-btn ok">发表回复</a>
+                        <div class="reply-err" style="display: none;"><p></p> <span class="normal-arr right-arr"></span>
+                        </div>
                     </div>
-                </div>`)
-                    }
+                </form>`)
                 }
             }
         })
@@ -105,7 +92,7 @@ $(function () {
                 id
             },
             success: function (data) {
-                if (data.code==0){
+                if (data.code == 0) {
                     alert("成功")
                     ajaxAppealDetail()
                 }
